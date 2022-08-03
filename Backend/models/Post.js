@@ -24,5 +24,4 @@ const Post = db.define('post', {
     allowNull: false
   }
 })
-
 module.exports = Post;

@@ -2,10 +2,8 @@ const Beach = require('../models/Beach')
 
 exports.Beach = ('/', async (req, res) =>
   await Beach.findAll()
-  .then(beach => {
-     console.log(beach)
-     res.sendStatus(200)
-  }
+  .then(
+   res.status(200).send('Beaches Api')
      )
   .catch(err => console.error(err))
 )

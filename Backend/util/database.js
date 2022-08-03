@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize').Sequelize;
-// config from dotenv
+
+// loads environment variables from a .env file into the process.env object
 require('dotenv').config()
 
 const db = new Sequelize(
@@ -10,5 +11,4 @@ const db = new Sequelize(
         dialect: 'postgres'
     }
 )
-
 module.exports = db

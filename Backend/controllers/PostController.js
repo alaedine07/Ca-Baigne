@@ -2,10 +2,8 @@ const Post = require('../models/Post')
 
 exports.Post = ('/', async (req, res) =>
   await Post.findAll()
-  .then(post => {
-     console.log(post)
-     res.sendStatus(200)
-  }
+  .then(
+   res.status(200).send('Posts Api')
      )
   .catch(err => console.error(err))
 )
