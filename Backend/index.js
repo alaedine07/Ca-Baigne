@@ -1,13 +1,14 @@
 const express = require('express');
 const router = require('./routes/routes');
-const sequelize = require('./util/database');
 const app = express();
 
-// connect backend to the database
-// sequelize.authenticate()
-// .then(() => console.log('database connected'))
-// .catch(err => console.log('Error: ' + err))
+// database
+const db = require('./util/database');
 
+// connect backend to the database
+db.authenticate ()
+  .then(() => console.log('**Database connected**'))
+  .catch(err => console.log('Error: ' + err))
 
 // config from dotenv
 require('dotenv').config()
@@ -23,10 +24,12 @@ app.use((req, res, next) => {
 
 app.use('/routes', router);
 
+// synchronize Sequelize model with database tables.
+// test connection to server
 try {
-    sequelize.sync().then(() => {
+    db.sync().then(() => {
         app.listen(process.env.EXTERNAL_PORT);
-        console.log(`server running on port ${process.env.EXTERNAL_PORT}`);
+        console.log(`*server running on port ${process.env.EXTERNAL_PORT}*`);
     });
 } catch (error) {
     console.error(error);
