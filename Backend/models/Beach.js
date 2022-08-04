@@ -2,11 +2,6 @@ const Sequelize= require('sequelize');
 const db = require('../util/database');
 
 const Beach = db.define('beach', {
-  id: {
-    type: Sequelize.UUID,
-    allowNull: false,
-    primaryKey: true
-  },
   name: {
     type: Sequelize.STRING,
     allowNull: false

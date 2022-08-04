@@ -1,9 +1,6 @@
 const Post = require('../models/Post')
 
-exports.Post = ('/', async (req, res) =>
-  await Post.findAll()
-  .then(
-   res.status(200).send('Posts Api')
-     )
-  .catch(err => console.error(err))
-)
+exports.TestPostsRoutes = (req, res, next) =>
+{
+    return res.status(200).json("Hello from Posts route");
+}
