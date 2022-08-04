@@ -1,9 +1,12 @@
 const Sequelize = require('sequelize');
+const Post = require('../models/Post')
+const Beach = require('../models/Beach')
 const db = require('../util/database');
 
 const User = db.define('user', {
   id: {
     type: Sequelize.UUID,
+    defaultValue: Sequelize.UUIDV4,
     allowNull: false,
     primaryKey: true
   },
@@ -22,10 +25,7 @@ const User = db.define('user', {
       is: /^[0-9a-f]{64}$/i
     }
   },
-  favorites: {
-    type: Sequelize.JSON,
-    allowNull: true
-  }
 })
-
+User.hasMany(Post);
+User.belongsTo(Beach, {foreignKey: 'favorites', type: Sequelize.ENUM})
 module.exports = User;

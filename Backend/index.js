@@ -21,7 +21,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //Routes for different endpoints
 app.use('/api/v1/user', userRoute);
 app.use('/api/v1/beach', beachRoute);
-app.use('/api/v1/routes', postRoute)
+app.use('/api/v1/post', postRoute)
 
 // connect backend to the database
 db.authenticate ()

@@ -11,4 +11,5 @@ const db = new Sequelize(
         dialect: 'postgres'
     }
 )
+
 module.exports = db

@@ -11,4 +11,8 @@ router.get('/allbeaches', BeachController.GetAllBeaches);
 // Add new beach
 router.post('/newbeach', BeachController.AddNewBeach);
 
+// Delete Beach
+router.delete('/deletebeach', BeachController.DeleteNewBeach);
+
+
 module.exports = router;

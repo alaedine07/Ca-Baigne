@@ -1,4 +1,4 @@
-const Beach = require('../models/Beach')
+const Beach = require('../models/Beach');
 
 exports.BeachTest = (req, res, next) =>
 {
@@ -18,15 +18,16 @@ exports.GetAllBeaches = (req, res, next) =>
 
 exports.AddNewBeach = (req, res, next) =>
 {
-  // console.log('post request');
-  // console.log(req.body.name);
-  const beach = {
-    name: req.body.name,
-    governorate: req.body.governorate,
-    latitude: req.body.latitude,
-    longitude: req.body.longitude
-  }
+  const {name, governorate, latitude, longitude} = req.body
+  const beach = { name, governorate, latitude, longitude }
   Beach.create(beach)
   .then(data => console.log('beach created'))
   .catch(console.log('Some error occured'))
+}
+
+exports.DeleteNewBeach = (req, res) => {
+  const { id } = req.body
+  Beach.destroy({ where: { id }})
+  .then( console.log('Beach has been deleted !') )
+  .catch( err => console.log(err) )
 }
