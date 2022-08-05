@@ -3,8 +3,20 @@ const userRoute = require('./routes/userRoute');
 const beachRoute = require('./routes/beachRoute')
 const postRoute = require('./routes/postRoute')
 const bodyParser = require('body-parser');
+const User = require('./models/User');
+const Post = require('./models/Post');
+const Beach = require('./models/Beach');
 const db = require('./util/database');
 const app = express();
+
+// define the associations
+User.hasMany(Post, {foreignKey: 'post_id', onDelete: 'CASCADE'});
+Post.belongsTo(User);
+Post.belongsTo(Beach);
+Beach.hasMany(Post, {foreignKey: 'post_id', onDelete: 'CASCADE'});
+// create a juntion table
+Beach.belongsToMany(User, {through: 'favoritebeaches'});
+User.belongsToMany(Beach, {through: 'favoritebeaches'});
 
 // add middlewares
 app.use(express.json());

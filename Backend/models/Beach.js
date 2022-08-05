@@ -1,7 +1,5 @@
 const Sequelize= require('sequelize');
 const db = require('../util/database');
-const Post = require('../models/Post');
-const User = require('../models/User');
 
 const Beach = db.define('beach', {
   id: {
@@ -31,6 +29,5 @@ const Beach = db.define('beach', {
     allowNull: true
   }
 })
-Beach.hasMany(Post)
 
 module.exports = Beach;

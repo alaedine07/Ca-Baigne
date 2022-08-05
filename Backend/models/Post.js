@@ -1,6 +1,5 @@
 const Sequelize = require('sequelize');
 const db = require('../util/database');
-const User = require('../models/User')
 
 const Post = db.define('post', {
   id: {
@@ -17,7 +16,6 @@ const Post = db.define('post', {
     type: Sequelize.STRING,
     allowNull: false
   },
-  
 })
 
 module.exports = Post;
