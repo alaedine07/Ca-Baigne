@@ -3,8 +3,8 @@ const Beach = require('../models/Beach');
 exports.getAllBeaches = (req, res, next) =>
 {
   Beach.findAll()
-  .then(data => {
-    res.status(200).json(data);
+  .then(beaches => {
+    res.status(200).json({ beaches });
   })
   .catch(err => res.status(404).json('Error: ' + err));
 }
@@ -13,7 +13,7 @@ exports.getBeach = (req, res) => {
   const { id } = req.params
   Beach.findOne({ where: { id } })
   .then(
-    beach => res.status(200).json({beach})
+    beach => res.status(200).json({ beach })
   )
   .catch(err => res.status(404).json('Error: ' + err))
 }
@@ -24,7 +24,7 @@ exports.addNewBeach = (req, res, next) =>
   const beach = { name, governorate, latitude, longitude }
   Beach.create(beach)
   .then(
-    beach => res.status(200).json({beach})
+    newBeach => res.status(200).json({ newBeach })
   )
   .catch(err => res.status(404).json('Error: ' + err))
 }
