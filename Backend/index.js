@@ -48,7 +48,8 @@ require('dotenv').config()
 // synchronize Sequelize model with database tables.
 // test connection to server
 try {
-    db.sync({ force: true }).then(() => {
+    // i changed the force to false to not create new empty tables everytime the app restarts
+    db.sync({ force: false }).then(() => {
         app.listen(process.env.EXTERNAL_PORT || 3001);
         console.log(`*server running on port ${process.env.EXTERNAL_PORT}*`);
     });
