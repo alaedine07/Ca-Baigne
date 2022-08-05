@@ -25,7 +25,6 @@ exports.addNewUser = (req, res, next) =>
   User.create(user)
   .then(newUser => res.status(200).json({ newUser }))
   .catch(console.log('Some error occured'))
-  return newUser.save()
 }
 
 exports.updateUser = (req, res) => {
