@@ -1,33 +1,51 @@
 const Beach = require('../models/Beach');
 
-exports.BeachTest = (req, res, next) =>
-{
-    return res.status(200).json("Hello from beaches route");
-}
-
-exports.GetAllBeaches = (req, res, next) =>
+exports.getAllBeaches = (req, res, next) =>
 {
   Beach.findAll()
   .then(data => {
-    console.log(data);
-    // change this line later to return data as Json to the front end
-    res.status(200).json("data retrieved");
+    res.status(200).json(data);
   })
-  .catch(err => console.log(err));
+  .catch(err => res.status(404).json('Error: ' + err));
 }
 
-exports.AddNewBeach = (req, res, next) =>
+exports.getBeach = (req, res) => {
+  const { id } = req.params
+  Beach.findOne({ where: { id } })
+  .then(
+    beach => res.status(200).json({beach})
+  )
+  .catch(err => res.status(404).json('Error: ' + err))
+}
+
+exports.addNewBeach = async (req, res, next) =>
 {
   const {name, governorate, latitude, longitude} = req.body
   const beach = { name, governorate, latitude, longitude }
   Beach.create(beach)
-  .then(data => console.log('beach created'))
-  .catch(console.log('Some error occured'))
+  .then(
+    beach => res.status(200).json({beach})
+  )
+  .catch(err => res.status(404).json('Error: ' + err))
 }
 
-exports.DeleteNewBeach = (req, res) => {
-  const { id } = req.body
+exports.updateBeach = (req, res) => {
+  const { id } = req.params
+  const {name, governorate, latitude, longitude} = req.body
+  const beach = { name, governorate, latitude, longitude }
+  Beach.update({ ...beach},
+    { where: {id} })
+  .then(
+    res.status(200).json(`Beach with id: ${id} has been updated !`)
+  )
+  .catch(err => res.status(404).json('Error: ' + err))
+}
+
+exports.deleteBeach = (req, res) => {
+  const { id } = req.params
   Beach.destroy({ where: { id }})
-  .then( console.log('Beach has been deleted !') )
-  .catch( err => console.log(err) )
+  .then( 
+    res.status(200).json(`Beach with id: ${id} has been deleted !`) 
+  )
+  .catch( err => res.status(404).json('Error: ' + err) )
 }

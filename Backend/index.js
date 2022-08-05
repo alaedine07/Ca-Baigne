@@ -14,6 +14,7 @@ User.hasMany(Post, {foreignKey: 'post_id', onDelete: 'CASCADE'});
 Post.belongsTo(User);
 Post.belongsTo(Beach);
 Beach.hasMany(Post, {foreignKey: 'post_id', onDelete: 'CASCADE'});
+
 // create a juntion table
 Beach.belongsToMany(User, {through: 'favoritebeaches'});
 User.belongsToMany(Beach, {through: 'favoritebeaches'});
@@ -41,7 +42,7 @@ db.authenticate ()
   .catch(err => console.log('Error: ' + err))
 
 
-  // loads environment variables from a .env file into the process.env object
+// loads environment variables from a .env file into the process.env object
 require('dotenv').config()
 
 // synchronize Sequelize model with database tables.

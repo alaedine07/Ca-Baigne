@@ -1,6 +1,0 @@
-DELETE  http://localhost:3001/api/v1/beach/deletebeach
-content-type: application/json
-
-{
-    "id": "8b77ab87-804c-4162-ab5b-4eb69cfa8d59"
-}

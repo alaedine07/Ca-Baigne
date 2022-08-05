@@ -2,5 +2,5 @@ POST http://localhost:3001/api/v1/post/newpost
 content-type: application/json
 
 {
-    "content": "this is my first post"
+    "content": "this is my 2nd post"
 }

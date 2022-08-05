@@ -1,11 +1,24 @@
 const Post = require('../models/Post')
 
-exports.TestPostsRoutes = (req, res, next) =>
+exports.getAllPosts = (req, res, next) =>
 {
-    return res.status(200).json("Hello from Posts route");
+  Post.findAll()
+  .then(data => {
+    res.status(200).json(data);
+  })
+  .catch(err => res.status(404).json('Error: ' + err));
 }
 
-exports.AddNewPost = (req, res, next) =>
+exports.getPost = (req, res) => {
+  const { id } = req.params
+  Post.findOne({ where: { id } })
+  .then(
+    beach => res.status(200).json({beach})
+  )
+  .catch(err => res.status(404).json('Error: ' + err))
+}
+
+exports.addNewPost = (req, res, next) =>
 {
   const { content } = req.body
   const post = { content }
@@ -14,7 +27,18 @@ exports.AddNewPost = (req, res, next) =>
   .catch(console.log('Some error occured'))
 }
 
-exports.DeletePost = (req, res) => {
+exports.updatePost = (req, res) => {
+  const { id } = req.params
+  const { content } = req.body
+  Beach.update({ content },
+    { where: {id} })
+  .then(
+    res.status(200).json(`Post with id: ${id} has been updated !`)
+  )
+  .catch(err => res.status(404).json('Error: ' + err))
+}
+
+exports.deletePost = (req, res) => {
   const { id } = req.body
   Post.destroy({ where: { id }})
   .then( console.log('Post has been deleted !') )

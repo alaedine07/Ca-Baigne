@@ -2,17 +2,19 @@ const router = require('express').Router()
 const BeachController = require('../controllers/BeachController')
 
 
-// Test if the Beaches route is working
-router.get('/TestBeachesRoute', BeachController.BeachTest);
-
 // Retrieve all beaches from database
-router.get('/allbeaches', BeachController.GetAllBeaches);
+router.get('/allbeaches', BeachController.getAllBeaches);
+
+// Retrieve specific beach from database
+router.get('/:id', BeachController.getBeach);
 
 // Add new beach
-router.post('/newbeach', BeachController.AddNewBeach);
+router.post('/newbeach', BeachController.addNewBeach);
+
+// Update Beach
+router.put('/updatebeach/:id', BeachController.updateBeach)
 
 // Delete Beach
-router.delete('/deletebeach', BeachController.DeleteNewBeach);
-
+router.delete('/deletebeach/:id', BeachController.deleteBeach);
 
 module.exports = router;

@@ -1,6 +1,0 @@
-DELETE  http://localhost:3001/api/v1/post/deletepost
-content-type: application/json
-
-{
-    "id": "ff651db3-1a61-415c-8ca7-53697a8653a3"
-}
