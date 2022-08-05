@@ -18,7 +18,7 @@ exports.getBeach = (req, res) => {
   .catch(err => res.status(404).json('Error: ' + err))
 }
 
-exports.addNewBeach = async (req, res, next) =>
+exports.addNewBeach = (req, res, next) =>
 {
   const {name, governorate, latitude, longitude} = req.body
   const beach = { name, governorate, latitude, longitude }
