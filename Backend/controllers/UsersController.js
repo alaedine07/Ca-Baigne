@@ -19,11 +19,15 @@ exports.getUser = async (req, res) => {
 exports.addNewUser = async (req, res) =>
 {
   const { userName, email, hashedPassword } = req.body
-  const hashedPwd = await bcrypt.hash(hashedPassword, 10)
+  const newUser = await User.findOne({ where: { email: req.body.email } })
+  if (newUser) return res.status(409).send('User Already exists ')
+  else {
+    const hashedPwd = await bcrypt.hash(hashedPassword, 10)
   const user = { userName, email, hashedPassword: hashedPwd }
   User.create(user)
   .then(newUser => res.status(201).json({ newUser }))
   .catch( err => res.status(500).json({err}) )
+  }
 }
 
 exports.checkUserCredentials = async (req, res) => {
