@@ -40,7 +40,7 @@ exports.updateUser = (req, res) => {
 }
 
 exports.deleteUser = (req, res) => {
-  const { id } = req.body
+  const { id } = req.params
   User.destroy({ where: { id }})
   .then(
     res.status(200).json(`User with id: ${id} has been deleted !`)

@@ -11,9 +11,12 @@ const app = express();
 
 // define the associations
 User.hasMany(Post, {foreignKey: 'post_id', onDelete: 'CASCADE'});
+// User.hasMany(Post, {foreignKey: 'user_id', onDelete: 'CASCADE'});
+
 Post.belongsTo(User);
 Post.belongsTo(Beach);
 Beach.hasMany(Post, {foreignKey: 'post_id', onDelete: 'CASCADE'});
+// Beach.hasMany(Post, {foreignKey: 'beach_id', onDelete: 'CASCADE'});
 
 // create a juntion table
 Beach.belongsToMany(User, {through: 'favoritebeaches'});

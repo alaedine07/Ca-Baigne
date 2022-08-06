@@ -1,0 +1,6 @@
+PUT http://localhost:3001/api/v1/post/updatepost/ff418342-f0c3-4619-be3f-b596c6e8c8ba
+content-type: application/json
+
+{
+    "content": "modifying my post"
+}
