@@ -1,4 +1,7 @@
-const User = require('../models/User')
+const User = require('../models/User');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+
 
 exports.getAllUsers = (req, res, next) =>
 {
@@ -9,22 +12,47 @@ exports.getAllUsers = (req, res, next) =>
   .catch(err => res.status(404).json('Error: ' + err));
 }
 
-exports.getUser = (req, res) => {
-  const { id } = req.params
-  User.findOne({ where: { id } })
-  .then(
-    user => res.status(200).json({ user })
-  )
-  .catch(err => res.status(404).json('Error: ' + err))
+exports.getUser = async (req, res) => {
+  res.json(await User.findOne({ where: { id: req.user.id } }))
 }
 
-exports.addNewUser = (req, res, next) =>
+exports.addNewUser = async (req, res) =>
 {
-  const { userName, email, hashedPassword} = req.body
-  const user = { userName, email, hashedPassword }
+  const { userName, email, hashedPassword } = req.body
+  const hashedPwd = await bcrypt.hash(hashedPassword, 10)
+  const user = { userName, email, hashedPassword: hashedPwd }
   User.create(user)
-  .then(newUser => res.status(200).json({ newUser }))
-  .catch(console.log('Some error occured'))
+  .then(newUser => res.status(201).json({ newUser }))
+  .catch( err => res.status(500).json({err}) )
+}
+
+exports.checkUserCredentials = async (req, res) => {
+  const user = await User.findOne({ where: { userName: req.body.userName }})
+  if (user === null) {
+    return res.status(400).send('Cannot find user')
+  }
+  try {
+    if (await bcrypt.compare(req.body.hashedPassword, user.hashedPassword)) {
+      res.send(`Welcome ${user.userName}`)
+    }
+    return res.send('Not allowed')
+  } catch {
+    res.status(500).send()
+  }
+  const accessToken = jwt.sign(user.toJSON(), process.env.ACCESS_TOKEN_SECRET)
+  console.log({accessToken: accessToken})
+}
+
+exports.authenticateToken = (req, res, next) => {
+  const authHeader = req.headers['authorization']
+  const token = authHeader && authHeader.split(' ')[1]
+  if (token === null) return res.sendStatus(401)
+  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
+    if (err) console.log(err)
+    req.user = user
+    console.log(req.user)
+    next()
+  })
 }
 
 exports.updateUser = (req, res) => {
@@ -34,7 +62,7 @@ exports.updateUser = (req, res) => {
   User.update({ ...user },
     { where: {id} })
   .then(
-    updatedUser => res.status(200).json(`User with id: ${id} has been updated !`)
+    res.status(200).json(`User with id: ${id} has been updated !`)
   )
   .catch(err => res.status(404).json('Error: ' + err))
 }

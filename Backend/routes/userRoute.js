@@ -5,10 +5,13 @@ const UserController = require('../controllers/UsersController')
 router.get('/allusers', UserController.getAllUsers);
 
 // Retrieve specific user from database
-router.get('/:id', UserController.getUser);
+router.get('/', UserController.authenticateToken, UserController.getUser);
 
 // Add new user
 router.post('/newuser', UserController.addNewUser);
+
+// Authenticate user
+router.post('/login', UserController.checkUserCredentials)
 
 // Update User
 router.put('/updateuser/:id', UserController.updateUser)

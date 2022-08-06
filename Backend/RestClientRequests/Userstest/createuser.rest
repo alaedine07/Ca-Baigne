@@ -2,7 +2,18 @@ POST http://localhost:3001/api/v1/user/newuser
 content-type: application/json
 
 {
-    "userName": "alaedine",
+    "userName": "ala",
+    "email": "test@gmail.com",
+    "hashedPassword": "testpassword123"
+}
+
+###
+
+POST http://localhost:3001/api/v1/user/login
+content-type: application/json
+
+{
+    "userName": "ala",
     "email": "test@gmail.com",
     "hashedPassword": "testpassword123"
 }
