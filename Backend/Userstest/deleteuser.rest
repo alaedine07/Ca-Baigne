@@ -1,2 +1,0 @@
-DELETE http://localhost:3001/api/v1/user/deleteuser/24177821-6969-4a27-8c08-7ccab314df34
-
