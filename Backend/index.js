@@ -2,6 +2,7 @@ const express = require('express');
 const userRoute = require('./routes/userRoute');
 const beachRoute = require('./routes/beachRoute')
 const postRoute = require('./routes/postRoute')
+const authRoute = require('./routes/authRoute');
 const bodyParser = require('body-parser');
 const User = require('./models/User');
 const Post = require('./models/Post');
@@ -34,10 +35,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
-//Routes for different endpoints
+// Routes for different endpoints
 app.use('/api/v1/user', userRoute);
 app.use('/api/v1/beach', beachRoute);
-app.use('/api/v1/post', postRoute)
+app.use('/api/v1/post', postRoute);
+app.use('/api/v1/auth', authRoute);
 
 // connect backend to the database
 db.authenticate ()
