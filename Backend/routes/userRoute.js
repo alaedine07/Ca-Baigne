@@ -11,7 +11,7 @@ router.get('/', UserController.authenticateToken, UserController.getUser);
 router.post('/newuser', UserController.addNewUser);
 
 // Authenticate user
-router.post('/login', UserController.checkUserCredentials)
+router.post('/login', UserController.login)
 
 // Update User
 router.put('/updateuser/:id', UserController.updateUser)

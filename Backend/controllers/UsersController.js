@@ -30,7 +30,7 @@ exports.addNewUser = async (req, res) =>
   }
 }
 
-exports.checkUserCredentials = async (req, res) => {
+exports.login = async (req, res) => {
   const user = await User.findOne({ where: { userName: req.body.userName }})
   if (user === null) {
     return res.status(400).send('Cannot find user')
