@@ -33,13 +33,13 @@ exports.addNewUser = async (req, res) =>
 exports.login = async (req, res) => {
   const user = await User.findOne({ where: { userName: req.body.userName }})
   if (user === null) {
-    return res.status(400).send('Cannot find user')
+    return res.status(400).send('Username or password are incorrect');
   }
   try {
     if (await bcrypt.compare(req.body.hashedPassword, user.hashedPassword)) {
       res.send(`Welcome ${user.userName}`)
     }
-    return res.send('Not allowed')
+    return res.send('Username or password are incorrect');
   } catch {
     res.status(500).send()
   }
