@@ -1,6 +1,19 @@
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
 
+exports.verifyToken = (req, res, next) => {
+  const authHeader = req.headers['authorization']
+  console.log('working')
+  const token = authHeader && authHeader.split(' ')[1]
+  if (token === null) return res.sendStatus(401)
+  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
+    if (err) console.log('this is the ERROR: ' + err)
+    req.user = user
+    console.log('user authorized')
+    next()
+  })
+}
+
 exports.getAllUsers = (req, res, next) =>
 {
   User.findAll()
@@ -11,7 +24,9 @@ exports.getAllUsers = (req, res, next) =>
 }
 
 exports.getUser = async (req, res) => {
+  console.log('***********')
   res.json(await User.findOne({ where: { id: req.params.id } }))
+  console.log('***********')
 }
 
 exports.addNewUser = async (req, res) =>
