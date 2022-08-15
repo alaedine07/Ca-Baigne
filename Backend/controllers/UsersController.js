@@ -7,7 +7,7 @@ exports.verifyToken = (req, res, next) => {
   const token = authHeader && authHeader.split(' ')[1]
   if (token === null) return res.sendStatus(401)
   jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
-    if (err) console.log('this is the ERROR: ' + err)
+    if (err) console.log(err)
     req.user = user
     console.log('user authorized')
     next()
@@ -24,9 +24,7 @@ exports.getAllUsers = (req, res, next) =>
 }
 
 exports.getUser = async (req, res) => {
-  console.log('***********')
   res.json(await User.findOne({ where: { id: req.params.id } }))
-  console.log('***********')
 }
 
 exports.addNewUser = async (req, res) =>
@@ -36,10 +34,10 @@ exports.addNewUser = async (req, res) =>
   if (newUser) return res.status(409).send('User Already exists ')
   else {
     const hashedPwd = await bcrypt.hash(hashedPassword, 10)
-  const user = { userName, email, hashedPassword: hashedPwd }
-  User.create(user)
-  .then(newUser => res.status(201).json({ newUser }))
-  .catch( err => res.status(500).json({err}) )
+    const user = { userName, email, hashedPassword: hashedPwd }
+    User.create(user)
+    .then(newUser => res.status(201).json({ newUser }))
+    .catch( err => res.status(500).json({err}) )
   }
 }
 
