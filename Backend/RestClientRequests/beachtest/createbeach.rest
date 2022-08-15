@@ -1,0 +1,9 @@
+POST http://localhost:3001/api/v1/beach/newbeach
+content-type: application/json
+
+{
+    "name": "marsa",
+    "governorate": "tunis",
+    "latitude": 3.15,
+    "longitude": 24.65
+}
