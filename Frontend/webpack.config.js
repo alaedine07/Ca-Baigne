@@ -40,7 +40,7 @@ module.exports = {
         new HtmlWebpackPlugin({
             title: "Cabaigne",
             template: "./src/index.html",
-            
+
         }
         )
     ]
