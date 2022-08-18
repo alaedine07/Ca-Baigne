@@ -10,9 +10,16 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@headlessui/react": "^1.6.6",
+    "@heroicons/react": "^1.0.6",
+    "bootstrap": "^5.2.0",
+    "jquery": "^3.6.0",
     "react": "^18.2.0",
+    "react-bootstrap": "^2.5.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.3.0"
+    "react-multi-select-component": "^4.3.3",
+    "react-router-dom": "^6.3.0",
+    "react-select": "^5.4.0"
   },
   "devDependencies": {
     "@babel/core": "^7.18.10",
