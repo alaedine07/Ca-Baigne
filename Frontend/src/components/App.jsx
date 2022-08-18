@@ -8,7 +8,7 @@ export function App() {
         <React.StrictMode>
         <div>
             <h1>
-                Hello react app
+                Hello react app!!
             </h1>
             <SignInForm />
             <SignUpForm />
