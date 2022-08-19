@@ -1,7 +1,12 @@
 import React from "react";
+import { useState } from "react";
 import './sign_in.css';
 
 export function SignInForm() {
+
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
     return (
         <div
             className="
@@ -73,6 +78,8 @@ export function SignInForm() {
                     id="email"
                     type="email"
                     name="email"
+                    value={email}
+                    onChange={e => setEmail(e.target.value)}
                     className="
                     text-sm
                     placeholder-gray-500
@@ -121,6 +128,8 @@ export function SignInForm() {
                     id="password"
                     type="password"
                     name="password"
+                    value={password}
+                    onChange={e => setPassword(e.target.value)}
                     className="
                     text-sm
                     placeholder-gray-500
