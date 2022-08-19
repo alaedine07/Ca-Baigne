@@ -1,7 +1,34 @@
 import React from "react";
+import axios from "axios";
+import { useState } from "react";
 import './sign_up.css';
 
 export function SignUpForm() {
+
+    const [email, setEmail] = useState("");
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+
+    function createUser(event) {
+      event.preventDefault();
+      axios.post('http://localhost:3001/api/v1/user/newuser/', {
+        email: email,
+        userName: username,
+        hashedPassword: password
+      },
+      {
+        headers: {
+          "Content-type": "application/json"
+        }
+      }
+      )
+      .catch(function (error) {
+        if (error.response) {
+          console.log(error.response.data)
+        }
+      })
+    }
+
     return (
         <div
             className="
@@ -73,6 +100,8 @@ export function SignUpForm() {
                     id="email"
                     type="email"
                     name="email"
+                    value={email}
+                    onChange={e => setEmail(e.target.value)}
                     className="
                     text-sm
                     placeholder-gray-500
@@ -92,7 +121,7 @@ export function SignUpForm() {
                     for="firstName"
                     className="mb-1 text-xs tracking-wide text-gray-600"
                 >
-                First Name:
+                Username:
                 </label>
               <div className="relative">
                 <div
@@ -114,6 +143,8 @@ export function SignUpForm() {
                     id="firstName"
                     type="text"
                     name="firstName"
+                    value={username}
+                    onChange={e => setUsername(e.target.value)}
                     className="
                     text-sm
                     placeholder-gray-500
@@ -125,47 +156,6 @@ export function SignUpForm() {
                     py-2
                     focus:outline-none focus:border-blue-400"
                     placeholder="Enter your first name"
-                />
-              </div>
-            </div>
-            <div className="flex flex-col mb-5">
-                <label
-                    for="lastName"
-                    className="mb-1 text-xs tracking-wide text-gray-600"
-                >
-                Last Name:
-                </label>
-              <div className="relative">
-                <div
-                    className="
-                        inline-flex
-                        items-center
-                        justify-center
-                        absolute
-                        left-0
-                        top-0
-                        h-full
-                        w-10
-                        text-gray-400"
-                >
-                <i className="fas fa-user text-blue-500"></i>
-                </div>
-
-                <input
-                    id="lastName"
-                    type="text"
-                    name="lastName"
-                    className="
-                    text-sm
-                    placeholder-gray-500
-                    pl-10
-                    pr-4
-                    rounded-2xl
-                    border border-gray-400
-                    w-full
-                    py-2
-                    focus:outline-none focus:border-blue-400"
-                    placeholder="Enter your last name"
                 />
               </div>
             </div>
@@ -203,6 +193,8 @@ export function SignUpForm() {
                     id="password"
                     type="password"
                     name="password"
+                    value={password}
+                    onChange={e => setPassword(e.target.value)}
                     className="
                     text-sm
                     placeholder-gray-500
@@ -221,6 +213,7 @@ export function SignUpForm() {
             <div className="flex w-full">
               <button
                 type="submit"
+                onClick={createUser}
                 className="
                     flex
                     mt-2
