@@ -10,8 +10,9 @@ body, html{
 .contact-card {
     border-radius: 20px;
     width: 500px;
-    height: 500px;
+    height: 600px;
 }
+
 h1{
 	font-weight: normal;
 	font-size: 25px;
@@ -20,22 +21,6 @@ h1{
 	color: rgb(230, 151, 34);
 	text-align: center;
     padding-top: 10px;
-}
-
-/* Animation webkit */
-@-webkit-keyframes myfirst
-{
-	0% {margin-left: -235px}
-	90% {margin-left: 100%;}
-	100% {margin-left: 100%;}
-}
-
-/* Animation */
-@keyframes myfirst
-{
-	0% {margin-left: -235px}
-	70% {margin-left: 100%;}
-	100% {margin-left: 100%;}
 }
 
 #form{
