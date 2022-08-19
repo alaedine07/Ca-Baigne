@@ -1,0 +1,117 @@
+@import url(https://fonts.googleapis.com/css?family=Sniglet|Raleway:900);
+
+
+body, html{
+	max-height: 100%;
+	padding: 0;
+	margin: 0;
+	font-family: 'Sniglet', cursive;
+}
+.contact-card {
+    border-radius: 20px;
+    width: 500px;
+    height: 500px;
+}
+h1{
+	font-weight: normal;
+	font-size: 25px;
+	font-family: 'Raleway', sans-serif;
+	margin-top: 30px;
+	color: rgb(230, 151, 34);
+	text-align: center;
+    padding-top: 10px;
+}
+
+/* Animation webkit */
+@-webkit-keyframes myfirst
+{
+	0% {margin-left: -235px}
+	90% {margin-left: 100%;}
+	100% {margin-left: 100%;}
+}
+
+/* Animation */
+@keyframes myfirst
+{
+	0% {margin-left: -235px}
+	70% {margin-left: 100%;}
+	100% {margin-left: 100%;}
+}
+
+#form{
+	height: 90%;	
+	overflow: hidden;
+	position: relative;
+    border-radius: 16px;
+	
+}
+form{
+
+	width: 400px;
+	color: black;
+	position: relative;
+    margin: 16px;
+    padding-bottom: 10px;
+}
+
+label, input, textarea{
+	display: block;	
+}
+
+input, textarea{
+	width: 450px;	
+	border: none;
+	border-radius: 20px;
+	outline: none;
+	padding: 10px;
+	font-family: 'Sniglet', cursive;
+	font-size: 1em;
+	color: #000000;
+	transition: border 0.5s;
+	-webkit-transition: border 0.5s;
+	-moz-transition: border 0.5s;
+	-o-transition: border 0.5s;
+	border: solid 3px #083f5ad3;	
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	box-sizing:border-box;
+	
+}
+input:focus, textarea:focus{
+	border: solid 3px rgb(28, 95, 1);	
+}
+
+textarea{
+	height: 100px;	
+	resize: none; 
+	overflow: auto;
+}
+
+input[type="submit"]{
+	background-color: #F90;
+	color: white;
+	height: 54px;
+	cursor: pointer;
+	margin-top: 30px;
+	font-size: 20px;
+	font-family: 'Sniglet', cursive;
+
+}
+
+input[type="submit"]:hover{
+	background-color: #e58f0e;
+}
+
+label{
+	font-size: 16px;
+	margin-top: 20px;
+	padding-left: 20px;
+}
+
+.formgroup-error{
+	color: red;
+}
+
+.row {
+    padding: 10px;
+}

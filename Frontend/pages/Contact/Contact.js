@@ -1,13 +1,13 @@
 import React from 'react'
-const Contact = () => {
+import Contact from '../../src/components/Contact/Contact';
+import './Contact.css'
+const Contactpage = () => {
   return (
-    <div className="container">
-    
-      <h1 className="text-center" style={{paddingTop: "30%"}}>
-        Contact Us
-      </h1>
-      
-    </div>
+
+        <div className='con'>
+          <Contact />
+        </div>
+
   )
 }
-export default Contact;
+export default Contactpage;

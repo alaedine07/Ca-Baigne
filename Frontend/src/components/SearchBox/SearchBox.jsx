@@ -3,6 +3,7 @@ import { Container } from "react-bootstrap";
 
 function SearchBox() {
   const [locationName, setLocation]= useState('');
+  const [beachName, setBeach] = useState('');
 
   const Locations = [
     { id: 84 , name: 'Tunis', beaches: ['Marsa', 'Gammarth']},
@@ -12,21 +13,29 @@ function SearchBox() {
     { id: 17 , name: 'Mahdia', beaches: ['Salakta']},
     { id: 36 , name: 'Djerba', beaches: ['El Seguia', 'Sidi yeti']},
 ]
-  const handlegovernorate= (event) => {
+  const Handlelocation = (event) => {
     let getLocation = event.target.value;
     setLocation(getLocation);
     event.preventDefault();
   }
+
+  const Handlebeach = (event) => {
+    let getBeach = event.target.value;
+    setBeach(getBeach);
+    event.preventDefault();
+  }
+
   return (
+    <>
     <Container className="content">
-     <div className="row">
+     <div className="row justify-content-center ">
        <div className="col-sm-12">
-         <h5 className="mt-4 mb-4 fw-bold text-light">Select your beach</h5>
+         <h5 className="mt-4 mb-4 fw-bold text-black text-center">Time to swim</h5>
            
-             <div className="row mb-3">
+             <div className="row mb-3 align-items-end">
                  <div className="form-group col-md-4">
-                 <label className="mb-2 fw-bold text-light">Location</label>
-                 <select id="sel1" name="country" className="form-control" onChange={(e)=>handlegovernorate(e)}>
+                 <label className="mb-2 fw-bold text-black">Location</label>
+                 <select name="location" className="form-control" onChange={(e)=>Handlelocation(e)}>
                    <option>--Select Location--</option>
                    {
                     Locations.map( loc => ( 
@@ -35,8 +44,8 @@ function SearchBox() {
                  </select>
                </div>
                <div className="form-group col-md-4">
-               <label className="mb-2 fw-bold text-light">Beach</label>
-               <select id="sel2" name="state" className="form-control">
+               <label className="mb-2 fw-bold text-black">Beach</label>
+               <select name="beach" className="form-control" onChange={(eve)=> Handlebeach(eve)}>
                    <option>--Select Beach--</option>
                    {
                      Locations.map( (loc, index) => (
@@ -48,13 +57,16 @@ function SearchBox() {
                </div>
 
                <div className="form-group col-md-2 mt-4">              
-               <button className="btn btn-success mt-2" >Submit</button>               
+               <button type="submit" className="btn btn-success mt-2" onClick={console.log(beachName)}>Submit</button>               
                </div>
             </div>
-               
        </div>
      </div>
     </Container>
+    <div className="text-center pt-5">
+    <h3>No beach selected</h3>
+   </div>
+   </>
   );
 }
 export default SearchBox;

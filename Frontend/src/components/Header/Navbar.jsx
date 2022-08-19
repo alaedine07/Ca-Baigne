@@ -55,13 +55,13 @@ const Navbar = () => {
           setTimeout(function(){ animation(); });
         }}
         type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <i className="fas fa-bars text-white"></i>
+        <i className="fas fa-bars text-black"></i>
       </button>
  
       <div 
         className="collapse navbar-collapse" id="navbarSupportedContent">
         <ul className="navbar-nav ml-auto">
-            
+
             <div className="hori-selector">
               <div className="left"></div>
               <div className="right"></div>
@@ -74,15 +74,6 @@ const Navbar = () => {
                 </i>Home
               </NavLink>
             </li>
-
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/about" exact>
-                <i 
-                className="fa fa-users">
-                </i>About
-              </NavLink> 
-            </li>
-
             <li className="nav-item">
               <NavLink className="nav-link" to="/service" exact>
                 <i 
