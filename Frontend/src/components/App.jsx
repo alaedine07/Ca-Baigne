@@ -9,6 +9,9 @@ import Header from "./Header/Header";
 
 import './App.css';
 
+const loginContext = React.createContext('false');
+
+
 export function App() {
     const location = useLocation();
     const [ isLoggedIn, setIsLoggedIn ] = useState(false);
@@ -16,9 +19,19 @@ export function App() {
         <React.StrictMode>
         <div>
             <Routes>
-                <Route path="/" element={<><Header/><Home/></>} />
-                <Route path="/login" element={ <SignInForm /> } />
-                <Route path="/join" element={ <SignUpForm /> } />
+                <Route path="/" element={<>
+                    <Header isLoggedIn={isLoggedIn}/>
+                    <Home isLoggedIn={isLoggedIn}/>
+                    </>
+                } 
+                />
+                <Route path="/login" element={ 
+                    <SignInForm isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} /> 
+                } />
+                <Route path="/join" element={ 
+                    <SignUpForm isLoggedIn={isLoggedIn} /> 
+                } 
+                />
             </Routes>
         </div>
         </React.StrictMode>

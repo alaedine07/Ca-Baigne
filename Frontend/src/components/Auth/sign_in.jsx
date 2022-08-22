@@ -3,7 +3,7 @@ import { useState } from "react";
 import axios from "axios";
 import './sign_in.css';
 
-export function SignInForm() {
+export function SignInForm(props) {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -23,6 +23,7 @@ export function SignInForm() {
       ).then(res => {
         if (res.data.token) {
           localStorage.setItem("accessToken", res.data.token);
+          props.setIsLoggedIn(true);
         }
       })
       .catch(function (error) {
