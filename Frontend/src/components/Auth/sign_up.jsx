@@ -21,7 +21,11 @@ export function SignUpForm() {
           "Content-type": "application/json"
         }
       }
-      )
+      ).then(() => {
+        const Domain = window.location.origin;
+        const URL = Domain + '/login';
+        window.location.replace(URL);
+      })
       .catch(function (error) {
         if (error.response) {
           console.log(error.response.data)
