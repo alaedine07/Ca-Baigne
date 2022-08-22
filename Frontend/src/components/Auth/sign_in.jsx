@@ -1,11 +1,36 @@
 import React from "react";
 import { useState } from "react";
+import axios from "axios";
 import './sign_in.css';
 
 export function SignInForm() {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+
+    function loginUser(event) {
+      // console.log('sending request to backend');
+      event.preventDefault();
+      axios.post('http://localhost:3001/api/v1/auth/login', {
+        email: email,
+        hashedPassword: password
+      },
+      {
+        headers: {
+          "Content-type": "application/json"
+        }
+      }
+      ).then(res => {
+        if (res.data.token) {
+          localStorage.setItem("accessToken", res.data.token);
+        }
+      })
+      .catch(function (error) {
+        if (error.response) {
+          console.error(error);
+        }
+      })
+    }
 
     return (
         <div
@@ -148,6 +173,7 @@ export function SignInForm() {
             <div className="flex w-full">
               <button
                 type="submit"
+                onClick={loginUser}
                 className="
                     flex
                     mt-2
