@@ -267,7 +267,7 @@ export function SignUpForm() {
           <span className="ml-2"
             >Already have an account?
             <a
-              href="#"
+              href="/login"
               className="text-xs ml-2 text-blue-500 font-semibold"
               >Login now</a
             >
