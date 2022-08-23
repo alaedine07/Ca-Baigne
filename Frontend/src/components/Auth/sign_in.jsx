@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import axios from "axios";
+import { reactLocalStorage } from 'reactjs-localstorage';
 import './sign_in.css';
 
 export function SignInForm(props) {
@@ -24,6 +25,7 @@ export function SignInForm(props) {
         if (res.data.token) {
           localStorage.setItem("accessToken", res.data.token);
           props.setIsLoggedIn(true);
+          reactLocalStorage.set('IsLogedIn', true);
         }
       })
       .catch(function (error) {
