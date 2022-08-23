@@ -1,6 +1,6 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Navigate, Routes } from 'react-router-dom';
-import Header from "../Header/Header";
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Header from '../HomePage/Header/Header'
 import Home from './../../../pages/Home/Home'
 import About from '../../../pages/About/About'
 import Contactpage from "../../../pages/Contact/Contact";
@@ -18,7 +18,6 @@ export function App() {
              </Route>
              <Route path="/contact" exact element={<Contactpage />}>
              </Route>
-             
            </Routes>
          </main>
         </Router>
