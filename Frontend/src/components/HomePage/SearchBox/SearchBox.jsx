@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import { Container } from "react-bootstrap";
 import BeachCard from "../BeachCard";
+import { v4 as uuidv4 } from "uuid";
 
 const Locations = [
   { id: 84 , name: 'Tunis', beaches: ['Marsa', 'Gammarth']},
@@ -16,45 +17,69 @@ function SearchBox() {
   const [locationName, setLocation]= useState('');
   const [beachName, setBeach] = useState('');
   const [result, setResult] = useState(false);
+  const [results, setResults] = useState(false);
 
   const Handlelocation = (event) => {
     let getLocation = event.target.value;
     setLocation(getLocation);
     event.preventDefault();
+    setResults(false)
+    setResult(false)
+    setBeach('')
   }
 
-  const handleSubmit = (e) => {
-    const getBeach = $('#beach :selected').text()
-    setBeach(getBeach)
-    e.preventDefault();
-    setResult(true)
+  const Handlebeach = (event) => {
+    let getBeach = event.target.value;
+    setBeach(getBeach);
+    event.preventDefault();
   }
   
+  const handleSubmit = () => {
+    if (locationName) {
+      setResult(false)
+      setResults(true)
+    }
+    if (beachName) {
+      setResults(false)
+      setResult(true)
+    }
+  }
+
+  const getAllResults = () => {
+    const results = []
+    Locations.map( beach => { 
+      if (beach.name === locationName) {
+        for (let i=0; i < beach.beaches.length; i++) {
+          results.push(<BeachCard name={beach.beaches[i]} />)
+        }}})
+    return results
+  }
+
   return (
     <>
       <Container className="content">
       <div className="row justify-content-center ">
         <div className="col-sm-12">
           <h5 className="mt-4 mb-4 fw-bold text-black text-center">Time to swim</h5>
-            
+
               <div className="row mb-3 align-items-end">
                   <div className="form-group col-md-4">
                   <label className="mb-2 fw-bold text-black">Location</label>
-                  <select defaultValue={'DEFAULT'} id='location' name="location" className="form-control" onChange={(e)=>Handlelocation(e)}>
-                    <option value="DEFAULT">--Select Location--</option>
+                  <select id='location' name="location" className="form-control" onChange={(e)=>Handlelocation(e)}>
+                    <option>--Select Location--</option>
                     {
-                      Locations.map( loc => ( 
-                        <option value={loc.name}>{loc.name}</option>))
+                      Locations.map( (loc) => ( 
+                        <option key={uuidv4()} value={loc.name}>{loc.name}</option>))
                     }
                   </select>
                 </div>
                 <div className="form-group col-md-4">
                 <label className="mb-2 fw-bold text-black">Beach</label>
-                <select defaultValue={'DEFAULT'} id ='beach' name="beach" className="form-control">
-                    <option value='DEFAULT'>--Select Beach--</option>
+                <select id ='beach' name="beach" className="form-control" onChange={(e)=>Handlebeach(e)}>
+                    <option>--Select Beach--</option>
                     {
-                      Locations.map( (loc, index) => (
-                      loc.name === locationName ? loc.beaches.map(beach => <option>{beach}</option>)
+                      Locations.map( (loc) => (
+                      loc.name === locationName ? loc.beaches.map(beach => <option key={uuidv4()}>{beach}</option>)
                       : ''
                     ))
                     }
@@ -68,10 +93,23 @@ function SearchBox() {
         </div>
       </div>
       </Container>
+      
       {
-        result ? <BeachCard name={beachName}/> : <div className="text-center pt-5">
-        <h3>No beach selected</h3>
-      </div>
+        result ? 
+        <div className="d-flex">
+          <BeachCard name={beachName}/>
+        </div>
+         : 
+        null
+      }
+
+      { 
+        results ?
+        <div className="d-flex">
+          {getAllResults()}
+        </div>
+        :
+        null
       }
     </>
   );

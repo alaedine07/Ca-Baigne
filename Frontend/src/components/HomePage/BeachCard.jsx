@@ -3,19 +3,18 @@ import marsaImg from '../Assets/marsa.jpg'
 import gammarthImg from '../Assets/gammarth.jpg'
 
 const BeachesInfo = [
-    { name: 'Marsa', description: 'The beach of La Marsa, a small respectable resort near the capital, is located on the Gulf of Tunis between the beaches of Sidi Bou Said and Gammarth.', image: marsaImg  },
-    { name: 'Gammarth', description: 'The beach of Gammarth, a small respectable resort near the capital, is located on the Gulf of Tunis between the beaches of Sidi Bou Said and Gammarth.', image: marsaImg  },
+    { name: 'Marsa', description: 'The beach of La Marsa, a small respectable resort near the capital, is located on the Gulf of Tunis between the beaches of Sidi Bou Said and Gammarth.'},
+    { name: 'Gammarth', description: 'The beach of Gammarth, a small respectable resort near the capital, is located on the Gulf of Tunis between the beaches of Sidi Bou Said and Gammarth.'},
 ]
 const BeachesImg = [
     { name: 'Gammarth', image: gammarthImg },
-    {name: 'Marsa', image: marsaImg}
+    { name: 'Marsa', image: marsaImg }
 ]
 function BeachCard(props) {
     const getImage = () => {
         for (let i = 0; i < BeachesImg.length; i++) {
             if (BeachesImg[i].name === props.name)
             {
-                console.log("got a match");
                 return BeachesImg[i].image
             }
         }
