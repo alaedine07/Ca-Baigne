@@ -40,7 +40,7 @@ function SearchBox() {
     setBeach(getBeach);
     event.preventDefault();
   }
-  
+
   const handleSubmit = () => {
     if (locationName) {
       setResult(false)
@@ -71,8 +71,8 @@ function SearchBox() {
               <div className="row mb-3 align-items-end">
                   <div className="form-group col-md-4">
                   <label className="mb-2 fw-bold text-black">Location</label>
-                  <select id='location' name="location" className="form-control" onChange={Handlelocation}>
-                    <option>--Select Location--</option>
+                  <select id='location' name="location" className="form-control" onChange={Handlelocation} value={locationName}>
+                    <option hidden>--Select Location--</option>
                     {
                       Locations.map( (loc) => ( 
                         <option key={uuidv4()} value={loc.name}>{loc.name}</option>))
@@ -81,8 +81,8 @@ function SearchBox() {
                 </div>
                 <div className="form-group col-md-4">
                 <label className="mb-2 fw-bold text-black">Beach</label>
-                <select id ='beach' name="beach" className="form-control" onChange={Handlebeach}>
-                    <option>--Select Beach--</option>
+                <select id ='beach' name="beach" className="form-control" onChange={Handlebeach} value={beachName}>
+                    <option hidden>--Select Beach--</option>
                     {
                       Locations.map( (loc) => (
                       loc.name === locationName ? loc.beaches.map(beach => <option key={uuidv4()} value={beach} >{beach}</option>)

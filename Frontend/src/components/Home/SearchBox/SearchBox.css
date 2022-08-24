@@ -15,12 +15,39 @@
     margin-top: var(--bs-gutter-y);
 }
 
+.results-list {
+    display: flex;
+    padding: 0;
+    margin: 0;
+}
+
+li {
+    list-style-type: none;
+}
+
+@media screen and (max-width: 992px) {
+    .row>* {
+        flex-shrink: 0;
+        max-width: 100%;
+        padding-right: calc(var(--bs-gutter-x) * .5);
+        padding-left: calc(var(--bs-gutter-x) * .5);
+        margin-top: var(--bs-gutter-y);
+    }
+    .results-container {
+        display: flex ;
+        flex-direction: column;
+        padding: 0;
+    }
+}
+
 .results-container {
     display: flex;
+    justify-content: center;
     border: solid rgb(0, 0, 0);
     border-width: 1px;
     border-radius: 10px;
-    padding: 5rem;
+    padding: 0;
+    margin: 0;
 }
 
 h3 {
