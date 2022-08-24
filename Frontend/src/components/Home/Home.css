@@ -1,1 +1,10 @@
+.container {
+    padding-top: 4rem;
+}
 
+@media only screen and (min-width: 992px) {
+    .container {
+        padding-top: 4rem;
+        padding-left: 5rem;
+    }
+}
