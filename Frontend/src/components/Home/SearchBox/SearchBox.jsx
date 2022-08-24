@@ -5,6 +5,8 @@ import './SearchBox.css'
 import BeachCard from "../BeachCard";
 import { v4 as uuidv4 } from "uuid";
 
+
+
 const Locations = [
   { id: 84 , name: 'Tunis', beaches: ['Marsa', 'Gammarth']},
   { id: 456 , name: 'Bizerte', beaches: ['Ghar el Melah', 'Rafraf']},
@@ -15,19 +17,22 @@ const Locations = [
 ]
 
 function SearchBox() {
-  const [locationName, setLocation]= useState('');
-  const [beachName, setBeach] = useState('');
+  const [locationName, setLocation]= useState();
+  const [beachName, setBeach] = useState();
   const [result, setResult] = useState(false);
   const [results, setResults] = useState(false);
 
+  const Handleresults = () => {
+    setResult(false)
+    setBeach('')
+  }
+
   const Handlelocation = (event) => {
+    Handleresults()
     let getLocation = event.target.value;
     setLocation(getLocation);
     console.log(locationName)
-    event.preventDefault();
-    setResults(false)
-    setResult(false)
-    setBeach('')
+
   }
 
   const Handlebeach = (event) => {
@@ -59,8 +64,8 @@ function SearchBox() {
 
   return (
     <>
-      <h5 className="header-text">Time to swim</h5>
-      <Container className="content">
+      <h2 className="header-text">Time to swim</h2>
+      <Container className="content" style={divStyle}>
       <div className="row justify-content-center ">
         <div className="">
               <div className="row mb-3 align-items-end">
@@ -120,5 +125,8 @@ function SearchBox() {
     </>
   );
 }
-
+const divStyle = {
+  paddingTop: '4rem',
+  paddingBottom: '4rem'
+};
 export default SearchBox;

@@ -1,8 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Amiri&family=Coiny&family=Inter:wght@300&display=swap');
+
 .header-text {
-    padding: 2rem;
-    font-size: 20px;
+    padding-top: 2rem;
     text-align: center;
     font-weight: bolder;
+    font-family: 'Amiri', serif;
 }
 
 .row>* {
@@ -18,5 +20,9 @@
     border: solid rgb(0, 0, 0);
     border-width: 1px;
     border-radius: 10px;
-    padding-top: 2rem;
+    padding: 5rem;
+}
+
+h3 {
+    font-family: 'Amiri', serif;
 }

@@ -14,6 +14,7 @@
     "@headlessui/react": "^1.6.6",
     "@heroicons/react": "^1.0.6",
     "bootstrap": "^5.2.0",
+    "cdbreact": "^1.5.3",
     "jquery": "^3.6.0",
     "react": "^18.2.0",
     "react-bootstrap": "^2.5.0",
