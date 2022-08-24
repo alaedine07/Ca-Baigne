@@ -1,9 +1,8 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Header from '../HomePage/Header/Header'
-import Home from './../../../pages/Home/Home'
-import About from '../../../pages/About/About'
-import Contactpage from "../../../pages/Contact/Contact";
+import Header from '../Home/Header/Header'
+import Home from '../Home/Home'
+import Contactpage from "../Contact/Contact";
 import './App.css'
 
 export function App() {
@@ -14,7 +13,7 @@ export function App() {
            <Routes>
              <Route path="/" exact element={<Home />}>
              </Route>
-             <Route path="/signin" exact element={<About />}>
+             <Route path="/signin" exact element={''}>
              </Route>
              <Route path="/contact" exact element={<Contactpage />}>
              </Route>

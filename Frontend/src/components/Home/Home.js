@@ -1,5 +1,5 @@
 import React from 'react'
-import SearchBox from '../../src/components/HomePage/SearchBox/SearchBox'
+import SearchBox from './SearchBox/SearchBox'
 import './Home.css'
 const Home = () => {
   return (

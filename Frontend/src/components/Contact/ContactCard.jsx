@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
-import './Contact.css'
+import './ContactCard.css'
 
 const Result = () => {
   return (

@@ -1,8 +1,8 @@
 import React from 'react'
-import marsaImg from '../Assets/marsa.jpg'
-import gammarthImg from '../Assets/gammarth.jpg'
-import rafrafImg from '../Assets/rafraf.jpg'
-import gharelmelhImg from '../Assets/Gharelmelh.png'
+import marsaImg from '../../Assets/images/marsa.jpg'
+import gammarthImg from '../../Assets/images/gammarth.jpg'
+import rafrafImg from '../../Assets/images/rafraf.jpg'
+import gharelmelhImg from '../../Assets/images/Gharelmelh.png'
 
 const BeachesInfo = [
     { name: 'Marsa', description: 'The beach of La Marsa, a small respectable resort near the capital, is located on the Gulf of Tunis between the beaches of Sidi Bou Said and Gammarth.'},

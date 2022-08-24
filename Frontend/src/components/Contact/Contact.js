@@ -1,5 +1,5 @@
 import React from 'react'
-import Contact from '../../src/components/Contact/Contact';
+import Contact from './ContactCard';
 import './Contact.css'
 const Contactpage = () => {
   return (
