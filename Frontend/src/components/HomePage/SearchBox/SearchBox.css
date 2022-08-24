@@ -1,0 +1,22 @@
+.header-text {
+    padding: 2rem;
+    font-size: 20px;
+    text-align: center;
+    font-weight: bolder;
+}
+
+.row>* {
+    flex-shrink: 0;
+    max-width: 100%;
+    padding-right: calc(var(--bs-gutter-x) * .5);
+    padding-left: calc(var(--bs-gutter-x) * 3.5);
+    margin-top: var(--bs-gutter-y);
+}
+
+.results-container {
+    display: flex;
+    border: solid rgb(0, 0, 0);
+    border-width: 1px;
+    border-radius: 10px;
+    padding-top: 2rem;
+}

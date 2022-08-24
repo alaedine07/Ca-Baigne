@@ -18,7 +18,7 @@ h1{
 	font-size: 25px;
 	font-family: 'Raleway', sans-serif;
 	margin-top: 30px;
-	color: rgb(230, 151, 34);
+	color: black;
 	text-align: center;
     padding-top: 10px;
 }
@@ -56,14 +56,16 @@ input, textarea{
 	-webkit-transition: border 0.5s;
 	-moz-transition: border 0.5s;
 	-o-transition: border 0.5s;
-	border: solid 3px #083f5ad3;	
+	border: solid 3px black;
+	border-width: 1px;
 	-webkit-box-sizing:border-box;
 	-moz-box-sizing:border-box;
 	box-sizing:border-box;
 	
 }
 input:focus, textarea:focus{
-	border: solid 3px rgb(28, 95, 1);	
+	border: solid 3px rgb(59, 138, 223);
+	border-width: 1px;
 }
 
 textarea{
@@ -73,8 +75,8 @@ textarea{
 }
 
 input[type="submit"]{
-	background-color: #F90;
-	color: white;
+	background-color: rgb(255, 255, 255);
+	color: rgb(0, 0, 0);
 	height: 54px;
 	cursor: pointer;
 	margin-top: 30px;

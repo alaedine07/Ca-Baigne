@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import { Container } from "react-bootstrap";
+import './SearchBox.css'
 import BeachCard from "../BeachCard";
 import { v4 as uuidv4 } from "uuid";
 
@@ -22,6 +23,7 @@ function SearchBox() {
   const Handlelocation = (event) => {
     let getLocation = event.target.value;
     setLocation(getLocation);
+    console.log(locationName)
     event.preventDefault();
     setResults(false)
     setResult(false)
@@ -49,23 +51,22 @@ function SearchBox() {
     const results = []
     Locations.map( beach => { 
       if (beach.name === locationName) {
-        for (let i=0; i < beach.beaches.length; i++) {
-          results.push(<BeachCard name={beach.beaches[i]} />)
+        for (let i = 0; i < beach.beaches.length; i++) {
+          results.push(<BeachCard key={uuidv4()} name={beach.beaches[i]} />)
         }}})
     return results
   }
 
   return (
     <>
+      <h5 className="header-text">Time to swim</h5>
       <Container className="content">
       <div className="row justify-content-center ">
-        <div className="col-sm-12">
-          <h5 className="mt-4 mb-4 fw-bold text-black text-center">Time to swim</h5>
-
+        <div className="">
               <div className="row mb-3 align-items-end">
                   <div className="form-group col-md-4">
                   <label className="mb-2 fw-bold text-black">Location</label>
-                  <select id='location' name="location" className="form-control" onChange={(e)=>Handlelocation(e)}>
+                  <select id='location' name="location" className="form-control" onChange={Handlelocation}>
                     <option>--Select Location--</option>
                     {
                       Locations.map( (loc) => ( 
@@ -75,11 +76,11 @@ function SearchBox() {
                 </div>
                 <div className="form-group col-md-4">
                 <label className="mb-2 fw-bold text-black">Beach</label>
-                <select id ='beach' name="beach" className="form-control" onChange={(e)=>Handlebeach(e)}>
+                <select id ='beach' name="beach" className="form-control" onChange={Handlebeach}>
                     <option>--Select Beach--</option>
                     {
                       Locations.map( (loc) => (
-                      loc.name === locationName ? loc.beaches.map(beach => <option key={uuidv4()}>{beach}</option>)
+                      loc.name === locationName ? loc.beaches.map(beach => <option key={uuidv4()} value={beach} >{beach}</option>)
                       : ''
                     ))
                     }
@@ -95,19 +96,24 @@ function SearchBox() {
       </Container>
       
       {
-        result ? 
-        <div className="d-flex">
+        result ?
+        <>
+        <h3>Your search results for {beachName}</h3>
+        <div className="results-container d-flex justify-content-center">
           <BeachCard name={beachName}/>
         </div>
+        </>
          : 
         null
       }
-
       { 
         results ?
-        <div className="d-flex">
+        <>
+        <h3>Your search results for {locationName}</h3>
+        <div className="results-container">
           {getAllResults()}
         </div>
+        </>
         :
         null
       }

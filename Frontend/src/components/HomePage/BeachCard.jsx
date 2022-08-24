@@ -1,6 +1,8 @@
 import React from 'react'
 import marsaImg from '../Assets/marsa.jpg'
 import gammarthImg from '../Assets/gammarth.jpg'
+import rafrafImg from '../Assets/rafraf.jpg'
+import gharelmelhImg from '../Assets/Gharelmelh.png'
 
 const BeachesInfo = [
     { name: 'Marsa', description: 'The beach of La Marsa, a small respectable resort near the capital, is located on the Gulf of Tunis between the beaches of Sidi Bou Said and Gammarth.'},
@@ -8,7 +10,9 @@ const BeachesInfo = [
 ]
 const BeachesImg = [
     { name: 'Gammarth', image: gammarthImg },
-    { name: 'Marsa', image: marsaImg }
+    { name: 'Marsa', image: marsaImg },
+    { name: 'Rafraf', image: rafrafImg },
+    { name: 'Ghar el Melah', image: gharelmelhImg }
 ]
 function BeachCard(props) {
     const getImage = () => {
@@ -23,7 +27,7 @@ function BeachCard(props) {
   return (
     <div className='p-5'>
       <div className="card" style={divStyle}>
-      <img className="card-img-top" src={getImage()} 
+      <img className="card-img-top" src={getImage()} style={imgStyle} 
                    alt="Card image cap" />
       <div className="card-body">
         <h5 className="card-title">{props.name}</h5>
@@ -49,4 +53,9 @@ function BeachCard(props) {
 const divStyle = {
     width: '18rem'
 };
+const imgStyle = {
+    width: '100%',
+    height: '15vw',
+    objectFit: 'cover',
+}
 export default BeachCard

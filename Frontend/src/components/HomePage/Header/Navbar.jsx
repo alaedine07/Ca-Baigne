@@ -13,7 +13,7 @@ const Navbar = () => {
   }
 
   return (
-  <nav className="navbar navbar-expand-lg navbar-mainbg">
+  <nav className="navbar fixed-top navbar-expand-lg navbar-mainbg bg-light">
     
       <NavLink className="navbar-brand navbar-logo" to="/" exact>
       Ça baigne
