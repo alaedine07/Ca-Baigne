@@ -51,6 +51,8 @@ li {
 .result-text {
     font-family: 'Amiri', serif !important;
     font-size: 30px;
+    margin-left: 2rem;
+    font-weight: bolder;
 }
 
 .swiper {

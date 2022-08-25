@@ -6,7 +6,7 @@ import './Home.css'
 
 export function Home() {
     return (
-        <div className="container">
+        <div className="flex-wrapper">
             <SearchBox />
         </div>
     )

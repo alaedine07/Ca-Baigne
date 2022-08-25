@@ -143,7 +143,6 @@ function SearchBox() {
   );
 }
 const divStyle = {
-  paddingTop: '4rem',
   paddingBottom: '4rem'
 };
 const btnStyle = {
