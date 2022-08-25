@@ -4,6 +4,12 @@ import { Container } from "react-bootstrap";
 import './SearchBox.css'
 import BeachCard from "../BeachCard/BeachCard";
 import { v4 as uuidv4 } from "uuid";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, EffectFade} from 'swiper';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/effect-fade';
+
 
 const Locations = [
   { id: 84 , name: 'Tunis', beaches: ['Marsa', 'Gammarth']},
@@ -56,7 +62,7 @@ function SearchBox() {
     Locations.map( beach => { 
       if (beach.name === locationName) {
         for (let i = 0; i < beach.beaches.length; i++) {
-          results.push(<BeachCard key={uuidv4()} name={beach.beaches[i]} />)
+          results.push(<SwiperSlide><BeachCard key={uuidv4()} name={beach.beaches[i]} /></SwiperSlide>)
         }}})
     return results
   }
@@ -102,7 +108,7 @@ function SearchBox() {
       {
         result ?
         <>
-        <h3>Your search results for {beachName}</h3>
+        <h3 className="result-text">Your search results for {beachName}</h3>
         <div className="results-container d-flex justify-content-center">
           <BeachCard name={beachName}/>
         </div>
@@ -113,10 +119,22 @@ function SearchBox() {
       { 
         results ?
         <>
-        <h3 className='result-text'>Your search results for {locationName}</h3>
-        <div className="results-container">
+        <h3 className="result-text">Your search results for {locationName}</h3>
+        <div className='swiper-container'>
+        <Swiper
+        modules={[Navigation, EffectFade]}
+        navigation
+        effect
+        speed={800}
+        slidesPerView={1}
+        loop
+        className='myswiper'
+        >
           {getAllResults()}
-        </div>
+                
+        </Swiper>
+
+    </div>
         </>
         :
         null

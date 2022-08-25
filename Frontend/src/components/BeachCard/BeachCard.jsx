@@ -23,7 +23,7 @@ function BeachCard(props) {
         return null
     }
   return (
-    <div className='p-5 d-flex align-self-stretch justify-content-center'>
+    <div className='p-5' style={cardStyle}>
       <div className="card bg-dark text-white" style={divStyle}>
       <img className="card-img-top" src={getImage()} style={imgStyle} 
                    alt="Card image cap" />
@@ -44,6 +44,13 @@ function BeachCard(props) {
    </div>
   )
 }
+
+const cardStyle = {
+  display: 'flex',
+  alignSelf: 'stretch !important',
+  justifyContent: 'center'
+}
+
 const divStyle = {
     width: '18rem'
 };
