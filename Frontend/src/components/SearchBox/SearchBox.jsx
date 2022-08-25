@@ -113,7 +113,7 @@ function SearchBox() {
       { 
         results ?
         <>
-        <h3>Your search results for {locationName}</h3>
+        <h3 className='result-text'>Your search results for {locationName}</h3>
         <div className="results-container">
           {getAllResults()}
         </div>

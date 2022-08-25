@@ -7,6 +7,7 @@ import SignUpForm from "./Auth/sign_up";
 import Home from './Home/Home';
 import Header from "./Header/Header";
 import Contactpage from "./Contact/Contact";
+import Footer from './Footer/Footer';
 
 import './App.css';
 
@@ -39,6 +40,7 @@ export function App() {
                 />
             </Routes>
         </div>
+        <Footer />
         </React.StrictMode>
     );
 }
