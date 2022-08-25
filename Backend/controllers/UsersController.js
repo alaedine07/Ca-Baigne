@@ -1,9 +1,9 @@
 const User = require('../models/User');
+const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
 exports.verifyToken = (req, res, next) => {
   const authHeader = req.headers['authorization']
-  console.log('working')
   const token = authHeader && authHeader.split(' ')[1]
   if (token === null) return res.sendStatus(401)
   jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
@@ -29,16 +29,17 @@ exports.getUser = async (req, res) => {
 
 exports.addNewUser = async (req, res) =>
 {
+  console.log(req.body);
   const { userName, email, hashedPassword } = req.body
   const newUser = await User.findOne({ where: { email: req.body.email } })
   if (newUser) return res.status(409).send('User Already exists ')
-  else {
-    const hashedPwd = await bcrypt.hash(hashedPassword, 10)
-    const user = { userName, email, hashedPassword: hashedPwd }
-    User.create(user)
-    .then(newUser => res.status(201).json({ newUser }))
-    .catch( err => res.status(500).json({err}) )
-  }
+    else {
+      const hashedPwd = await bcrypt.hash(hashedPassword, 10)
+      const user = { userName, email, hashedPassword: hashedPwd }
+      User.create(user)
+      .then(newUser => res.status(201).json({ newUser }))
+      .catch( err => res.status(500).json({err}) )
+   }
 }
 
 exports.updateUser = (req, res) => {

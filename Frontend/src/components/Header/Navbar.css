@@ -11,11 +11,13 @@ i {
 
 .navbar {
   gap: 1rem;
+  border-bottom: black ridge;
+  border-width: 1px;
 }
 
 .navbar-logo {
   padding: 15px;
-  color: #fff;
+  color: black;
   pointer-events: none;
 }
 
@@ -43,76 +45,13 @@ i {
 }
 
 #navbarSupportedContent ul li a {
-  color: rgb(255, 255, 255);
+  color: black;
   text-decoration: none;
-  font-size: 20px;
+  font-size: 15px;
   display: block;
   padding: 20px 20px;
-  transition-duration: 0.6s;
-  transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
   position: relative;
-}
-
-#navbarSupportedContent > ul > li.active > a {
-  color: #ffffff;
-  background-color: transparent;
-  transition: all 0.7s;
-}
-
-#navbarSupportedContent a:not(:only-child):after {
-  content: '\f105';
-  position: absolute;
-  right: 20px;
-  top: 10px;
-  font-size: 14px;
-  font-family: 'Font Awesome 5 Free';
-  display: inline-block;
-  padding-right: 3px;
-  vertical-align: middle;
-  font-weight: 900;
-  transition: 0.5s;
-}
-
-#navbarSupportedContent .active > a:not(:only-child):after {
-  transform: rotate(90deg);
-}
-
-.hori-selector {
-  display: inline-block;
-  position: absolute;
-  height: 100%;
-  top: 0px;
-  left: 0px;
-  transition-duration: 0.6s;
-  transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
-  background-color: rgba(233, 155, 10, 0.726);
-  border-top-left-radius: 2px;
-  border-top-right-radius:30px;
-  border-bottom-left-radius: 40px;
-  border-bottom-right-radius: 9px;
-  margin-top: 6px;
-}
-
-.hori-selector .right {
-  position: absolute;
-  bottom: 10px;
-  right: -25px;
-}
-
-.hori-selector .left {
-  position: absolute;
-  bottom: 10px;
-  left: -25px;
-}
-
-.hori-selector .right:before {
-  bottom: 22px;
-  right: 1.2rem;
-}
-
-.hori-selector .left:before {
-  bottom: 22px;
-  left: 1.1rem;
 }
 
 @media (max-width: 991px) {

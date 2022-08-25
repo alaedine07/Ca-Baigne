@@ -1,7 +1,40 @@
 import React from "react";
+import { useState } from "react";
+import axios from "axios";
+import { reactLocalStorage } from 'reactjs-localstorage';
 import './sign_in.css';
 
-export function SignInForm() {
+export function SignInForm(props) {
+
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+    function loginUser(event) {
+      // console.log('sending request to backend');
+      event.preventDefault();
+      axios.post('http://localhost:3001/api/v1/auth/login', {
+        email: email,
+        hashedPassword: password
+      },
+      {
+        headers: {
+          "Content-type": "application/json"
+        }
+      }
+      ).then(res => {
+        if (res.data.token) {
+          localStorage.setItem("accessToken", res.data.token);
+          props.setIsLoggedIn(true);
+          reactLocalStorage.set('IsLogedIn', true);
+        }
+      })
+      .catch(function (error) {
+        if (error.response) {
+          console.error(error);
+        }
+      })
+    }
+
     return (
         <div
             className="
@@ -73,6 +106,8 @@ export function SignInForm() {
                     id="email"
                     type="email"
                     name="email"
+                    value={email}
+                    onChange={e => setEmail(e.target.value)}
                     className="
                     text-sm
                     placeholder-gray-500
@@ -121,6 +156,8 @@ export function SignInForm() {
                     id="password"
                     type="password"
                     name="password"
+                    value={password}
+                    onChange={e => setPassword(e.target.value)}
                     className="
                     text-sm
                     placeholder-gray-500
@@ -139,6 +176,7 @@ export function SignInForm() {
             <div className="flex w-full">
               <button
                 type="submit"
+                onClick={loginUser}
                 className="
                     flex
                     mt-2
@@ -192,7 +230,7 @@ export function SignInForm() {
           <span className="ml-2"
             >You don't have an account?
             <a
-              href="#"
+              href="/join"
               className="text-xs ml-2 text-blue-500 font-semibold"
               >Register now</a
             ></span

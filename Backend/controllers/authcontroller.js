@@ -9,12 +9,16 @@ exports.login = async (req, res) => {
     }
     try {
       if (await bcrypt.compare(req.body.hashedPassword, user.hashedPassword)) {
-        res.send(`Welcome ${user.userName}`)
+        new_user = {id: user.id, Username: user.userName}
+        const token = jwt.sign(new_user, process.env.ACCESS_TOKEN_SECRET)
+        res.status(200).send(
+          {
+          message: 'Logged in successfully',
+          token
+          })
+        console.log({accessToken: token})
       }
-      return res.send('Email or password are incorrect');
     } catch {
-      res.status(500).send()
+      res.status(500).send('Email or password are incorrect')
     }
-    const accessToken = jwt.sign(user.toJSON(), process.env.ACCESS_TOKEN_SECRET)
-    console.log({accessToken: accessToken})
-}
+  }
