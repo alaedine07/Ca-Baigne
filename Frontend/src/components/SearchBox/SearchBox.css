@@ -5,6 +5,7 @@
     text-align: center;
     font-weight: bolder;
     font-family: 'Amiri', serif;
+    font-size: 30px;
 }
 
 .row>* {
@@ -50,6 +51,7 @@ li {
     margin: 0;
 }
 
-h3 {
+.result-text {
     font-family: 'Amiri', serif;
+    font-size: 23px;
 }
