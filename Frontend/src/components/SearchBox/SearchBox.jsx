@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 
 import { Container } from "react-bootstrap";
+import './SearchBox.css'
 import BeachCard from "../BeachCard/BeachCard";
+import { v4 as uuidv4 } from "uuid";
 
 const Locations = [
   { id: 84 , name: 'Tunis', beaches: ['Marsa', 'Gammarth']},
@@ -13,48 +15,76 @@ const Locations = [
 ]
 
 function SearchBox() {
-  const [locationName, setLocation]= useState('');
-  const [beachName, setBeach] = useState('');
+  const [locationName, setLocation]= useState();
+  const [beachName, setBeach] = useState();
   const [result, setResult] = useState(false);
+  const [results, setResults] = useState(false);
+
+  const Handleresults = () => {
+    setResult(false)
+    setResults(false)
+    setBeach('')
+  }
 
   const Handlelocation = (event) => {
+    Handleresults()
     let getLocation = event.target.value;
     setLocation(getLocation);
+    console.log(locationName)
+
+  }
+
+  const Handlebeach = (event) => {
+    let getBeach = event.target.value;
+    setBeach(getBeach);
     event.preventDefault();
   }
 
-  const handleSubmit = (e) => {
-    const getBeach = $('#beach :selected').text()
-    setBeach(getBeach)
-    e.preventDefault();
-    setResult(true)
+  const handleSubmit = () => {
+    if (locationName) {
+      setResult(false)
+      setResults(true)
+    }
+    if (beachName) {
+      setResults(false)
+      setResult(true)
+    }
   }
-  
+
+  const getAllResults = () => {
+    const results = []
+    Locations.map( beach => { 
+      if (beach.name === locationName) {
+        for (let i = 0; i < beach.beaches.length; i++) {
+          results.push(<BeachCard key={uuidv4()} name={beach.beaches[i]} />)
+        }}})
+    return results
+  }
+
   return (
     <>
-      <Container className="content">
+      <h2 className="header-text">Time to swim</h2>
+      <Container className="content" style={divStyle}>
       <div className="row justify-content-center ">
-        <div className="col-sm-12">
-          <h5 className="mt-4 mb-4 fw-bold text-black text-center">Time to swim</h5>
-            
+        <div className="">
               <div className="row mb-3 align-items-end">
                   <div className="form-group col-md-4">
                   <label className="mb-2 fw-bold text-black">Location</label>
-                  <select defaultValue={'DEFAULT'} id='location' name="location" className="form-control" onChange={(e)=>Handlelocation(e)}>
-                    <option value="DEFAULT">--Select Location--</option>
+                  <select id='location' name="location" className="form-control" onChange={Handlelocation} value={locationName}>
+                    <option hidden>--Select Location--</option>
                     {
-                      Locations.map( loc => ( 
-                        <option value={loc.name}>{loc.name}</option>))
+                      Locations.map( (loc) => ( 
+                        <option key={uuidv4()} value={loc.name}>{loc.name}</option>))
                     }
                   </select>
                 </div>
                 <div className="form-group col-md-4">
                 <label className="mb-2 fw-bold text-black">Beach</label>
-                <select defaultValue={'DEFAULT'} id ='beach' name="beach" className="form-control">
-                    <option value='DEFAULT'>--Select Beach--</option>
+                <select id ='beach' name="beach" className="form-control" onChange={Handlebeach} value={beachName}>
+                    <option hidden>--Select Beach--</option>
                     {
-                      Locations.map( (loc, index) => (
-                      loc.name === locationName ? loc.beaches.map(beach => <option>{beach}</option>)
+                      Locations.map( (loc) => (
+                      loc.name === locationName ? loc.beaches.map(beach => <option key={uuidv4()} value={beach} >{beach}</option>)
                       : ''
                     ))
                     }
@@ -62,23 +92,43 @@ function SearchBox() {
                 </div>
 
                 <div className="form-group col-md-2 mt-4">              
-                <button type="submit" style={btnStyle} className="btn btn-success mt-2" onClick={handleSubmit}>Submit</button>               
+                <button type="submit" className="btn btn-success mt-2" style={btnStyle} onClick={handleSubmit}>Submit</button>               
                 </div>
               </div>
         </div>
       </div>
       </Container>
+      
       {
-        result ? <BeachCard name={beachName}/> : <div className="text-center pt-5">
-        <h3>No beach selected</h3>
-      </div>
+        result ?
+        <>
+        <h3>Your search results for {beachName}</h3>
+        <div className="results-container d-flex justify-content-center">
+          <BeachCard name={beachName}/>
+        </div>
+        </>
+         : 
+        null
+      }
+      { 
+        results ?
+        <>
+        <h3>Your search results for {locationName}</h3>
+        <div className="results-container">
+          {getAllResults()}
+        </div>
+        </>
+        :
+        null
       }
     </>
   );
 }
-
+const divStyle = {
+  paddingTop: '4rem',
+  paddingBottom: '4rem'
+};
 const btnStyle = {
   backgroundColor: '#198754'
 }
-
 export default SearchBox;
