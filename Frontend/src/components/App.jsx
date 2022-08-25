@@ -6,6 +6,7 @@ import SignInForm from './Auth/sign_in';
 import SignUpForm from "./Auth/sign_up";
 import Home from './Home/Home';
 import Header from "./Header/Header";
+import Contactpage from "./Contact/Contact";
 
 import './App.css';
 
@@ -30,6 +31,10 @@ export function App() {
                 } />
                 <Route path="/join" element={ 
                     <SignUpForm isLoggedIn={isLoggedIn} /> 
+                }  
+                />
+                <Route path="/contact" element={
+                    <Contactpage />
                 } 
                 />
             </Routes>

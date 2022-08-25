@@ -63,7 +63,7 @@ function SearchBox() {
 
   return (
     <>
-      <h2 className="header-text">Time to swim</h2>
+      <h2 className="header-text">Time to swim </h2>
       <Container className="content" style={divStyle}>
       <div className="row justify-content-center ">
         <div className="">
