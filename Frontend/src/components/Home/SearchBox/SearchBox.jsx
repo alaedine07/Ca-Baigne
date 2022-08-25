@@ -24,6 +24,7 @@ function SearchBox() {
 
   const Handleresults = () => {
     setResult(false)
+    setResults(false)
     setBeach('')
   }
 
