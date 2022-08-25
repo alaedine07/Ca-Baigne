@@ -62,7 +62,7 @@ function SearchBox() {
                 </div>
 
                 <div className="form-group col-md-2 mt-4">              
-                <button type="submit" className="btn btn-success mt-2" onClick={handleSubmit}>Submit</button>               
+                <button type="submit" style={btnStyle} className="btn btn-success mt-2" onClick={handleSubmit}>Submit</button>               
                 </div>
               </div>
         </div>
@@ -75,6 +75,10 @@ function SearchBox() {
       }
     </>
   );
+}
+
+const btnStyle = {
+  backgroundColor: '#198754'
 }
 
 export default SearchBox;
