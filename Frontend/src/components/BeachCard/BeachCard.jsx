@@ -25,6 +25,7 @@ function BeachCard(props) {
   return (
     <div className='p-5' style={cardStyle}>
       <div className="card bg-dark text-white" style={divStyle}>
+        <button style={pinStyle}><i class="fas fa-thumbtack"></i></button>
       <img className="card-img-top" src={getImage()} style={imgStyle} 
                    alt="Card image cap" />
       <div className="card-body">
@@ -52,11 +53,17 @@ const cardStyle = {
 }
 
 const divStyle = {
-    width: '18rem'
+    width: '26rem'
 };
 const imgStyle = {
     width: '100%',
     height: '15vw',
     objectFit: 'cover',
 }
+
+const pinStyle = {
+  position: 'absolute',
+  right: '1px'
+}
+
 export default BeachCard

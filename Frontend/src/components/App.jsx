@@ -27,12 +27,14 @@ export function App() {
                     </>
                 } 
                 />
-                <Route path="/login" element={ 
+                <Route path="/login" element={<>
+                    <Header />
                     <SignInForm isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} /> 
-                } />
-                <Route path="/join" element={ 
+                </>} />
+                <Route path="/join" element={ <>
+                    <Header />
                     <SignUpForm isLoggedIn={isLoggedIn} /> 
-                }  
+                </>}  
                 />
                 <Route path="/contact" element={
                     <Contactpage />

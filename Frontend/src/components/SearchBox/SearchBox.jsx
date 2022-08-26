@@ -75,7 +75,7 @@ function SearchBox() {
         <div className="">
               <div className="row mb-3 align-items-end">
                   <div className="form-group col-md-4">
-                  <label className="mb-2 fw-bold text-black">Location</label>
+                  <label className="label mb-2 fw-bold text-black">Location</label>
                   <select id='location' name="location" className="form-control" onChange={Handlelocation} value={locationName}>
                     <option hidden>--Select Location--</option>
                     {
@@ -85,7 +85,7 @@ function SearchBox() {
                   </select>
                 </div>
                 <div className="form-group col-md-4">
-                <label className="mb-2 fw-bold text-black">Beach</label>
+                <label className="label mb-2 fw-bold text-black">Beach</label>
                 <select id ='beach' name="beach" className="form-control" onChange={Handlebeach} value={beachName}>
                     <option hidden>--Select Beach--</option>
                     {

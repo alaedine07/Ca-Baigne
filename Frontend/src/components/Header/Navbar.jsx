@@ -2,6 +2,7 @@ import React , {useEffect} from 'react'
 import './Navbar.css';
 import { NavLink } from 'react-router-dom';
 import $ from 'jquery';
+import Dark from '../Darkmode/Darkmode';
 
 const Navbar = () => {
 
@@ -64,9 +65,19 @@ const Navbar = () => {
                 </i>Contact Us
               </NavLink>
             </li>
+            <div style={toggleStyle}>
+            <Dark />
+            </div>
         </ul>
       </div>
   </nav>
   )
 }
+
+const toggleStyle = {
+  position: 'absolute',
+  right: '5rem',
+  top: '1rem'
+}
+
 export default Navbar;
