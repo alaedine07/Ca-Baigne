@@ -20,8 +20,8 @@ exports.getBeach = (req, res) => {
 
 exports.addNewBeach = (req, res, next) =>
 {
-  const {name, governorate, latitude, longitude} = req.body
-  const beach = { name, governorate, latitude, longitude }
+  const {name, location, latitude, longitude, description} = req.body
+  const beach = { name, location, latitude, longitude, description }
   Beach.create(beach)
   .then(
     newBeach => res.status(200).json({ newBeach })
@@ -31,8 +31,8 @@ exports.addNewBeach = (req, res, next) =>
 
 exports.updateBeach = (req, res) => {
   const { id } = req.params
-  const {name, governorate, latitude, longitude} = req.body
-  const beach = { name, governorate, latitude, longitude }
+  const {name, location, latitude, longitude, description} = req.body
+  const beach = { name, location, latitude, longitude, description }
   Beach.update({ ...beach},
     { where: {id} })
   .then(

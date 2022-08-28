@@ -1,9 +1,6 @@
-PUT http://localhost:3001/api/v1/beach/updatebeach/22226871-8548-4daa-b571-1537bd4b7122
+PUT http://localhost:3001/api/v1/beach/updatebeach/f40ac1e1-fe6f-431b-842c-415c4599f39b
 content-type: application/json
 
 {
-    "name": "bizerte",
-    "governorate": "bizerte",
-    "latitude": 3.19,
-    "longitude": 25.65
+    "name": "Les Citronniers Beach"
 }
