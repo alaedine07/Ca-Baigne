@@ -29,7 +29,6 @@ exports.getUser = async (req, res) => {
 
 exports.addNewUser = async (req, res) =>
 {
-  console.log(req.body);
   const { userName, email, hashedPassword } = req.body
   const newUser = await User.findOne({ where: { email: req.body.email } })
   if (newUser) return res.status(409).send('User Already exists ')
@@ -42,10 +41,21 @@ exports.addNewUser = async (req, res) =>
    }
 }
 
-exports.updateUser = (req, res) => {
+exports.updateUser = async (req, res) => {
   const { id } = req.params
-  const { userName, email, hashedPassword} = req.body
+  const { userName, email, hashedPassword} = req.body.data
   const user = { userName, email, hashedPassword }
+  // hash the password if it's changed
+  if (user.hashedPassword !== undefined && user.hashedPassword !== '') {
+    const hashedPwd = await bcrypt.hash(hashedPassword, 10)
+    user.hashedPassword = hashedPwd
+  }
+  // remove undefined and empty values
+  Object.keys(user).forEach(key => {
+    if (user[key] === undefined || user[key] === '') {
+      delete user[key]
+    }
+  });
   User.update({ ...user },
     { where: {id} })
   .then(

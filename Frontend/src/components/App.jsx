@@ -1,6 +1,7 @@
 import React from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { useState } from "react";
+import { useEffect } from "react";
 
 import SignInForm from './Auth/sign_in';
 import SignUpForm from "./Auth/sign_up";
@@ -8,35 +9,52 @@ import Home from './Home/Home';
 import Header from "./Header/Header";
 import Contactpage from "./Contact/Contact";
 import Footer from './Footer/Footer';
+import Profile from "./Profile/Profile";
 
 import './App.css';
 
 const loginContext = React.createContext('false');
 
 
+
+
 export function App() {
     const location = useLocation();
-    const [ isLoggedIn, setIsLoggedIn ] = useState(false);
+
+    const [token, setToken] = useState('');
+
+    // check if the user is logedin by verifying if the token is in localStorage
+    useEffect(() => {
+    const token = localStorage.getItem('accessToken');
+    if (token) {
+      setToken(token)
+    }
+        });
+
     return (
         <React.StrictMode>
         <div>
             <Routes>
                 <Route path="/" element={<>
-                    <Header isLoggedIn={isLoggedIn}/>
-                    <Home isLoggedIn={isLoggedIn}/>
+                    <Header token={token}/>
+                    <Home   token={token}/>
                     </>
                 } 
                 />
                 <Route path="/login" element={ 
-                    <SignInForm isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} /> 
+                    <SignInForm /> 
                 } />
                 <Route path="/join" element={ 
-                    <SignUpForm isLoggedIn={isLoggedIn} /> 
+                    <SignUpForm /> 
                 }  
                 />
                 <Route path="/contact" element={
-                    <Contactpage />
-                } 
+                    <Contactpage token={token}/>
+                }
+                />
+                <Route path="/profile" element={
+                    <Profile token={token}/>
+                }
                 />
             </Routes>
         </div>

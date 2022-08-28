@@ -11,8 +11,8 @@ i {
 
 .navbar {
   gap: 1rem;
-  border-bottom: black ridge;
   border-width: 1px;
+  box-shadow: 0 3px 6px rgb(0 0 0 / 17%);
 }
 
 .navbar-logo {

@@ -6,7 +6,7 @@ const authController = require('../controllers/authcontroller');
 router.get('/allusers', UserController.getAllUsers);
 
 // Retrieve specific user from database
-router.get('/:id', UserController.verifyToken, UserController.getUser);
+router.get('/:id', UserController.getUser);
 
 // Add new user
 router.post('/newuser', UserController.addNewUser);

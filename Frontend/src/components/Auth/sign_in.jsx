@@ -1,10 +1,9 @@
 import React from "react";
 import { useState } from "react";
 import axios from "axios";
-import { reactLocalStorage } from 'reactjs-localstorage';
 import './sign_in.css';
 
-export function SignInForm(props) {
+export function SignInForm() {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -24,8 +23,9 @@ export function SignInForm(props) {
       ).then(res => {
         if (res.data.token) {
           localStorage.setItem("accessToken", res.data.token);
-          props.setIsLoggedIn(true);
-          reactLocalStorage.set('IsLogedIn', true);
+          const Domain = window.location.origin;
+          const URL = Domain + '/';
+          window.location.replace(URL);
         }
       })
       .catch(function (error) {
