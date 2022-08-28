@@ -16,7 +16,7 @@ const Navbar = () => {
   return (
   <nav className="navbar navbar-expand-lg navbar-mainbg">
     
-      <NavLink className="navbar-brand navbar-logo" to="/" exact>
+      <NavLink className="navbar-brand navbar-logo" to="/" >
       Ça baigne
       </NavLink>
       <button 
@@ -38,28 +38,28 @@ const Navbar = () => {
             </div>
             
             <li className="nav-item active">
-              <NavLink className="nav-link" to="/" exact>
+              <NavLink className="nav-link" to="/" >
                 <i 
                 className="fa fa-home">
                 </i>Home
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="/login" exact>
+              <NavLink className="nav-link" to="/login" >
                 <i 
                 className="fa fa-sign-in-alt">
                 </i>Login
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="/join" exact>
+              <NavLink className="nav-link" to="/join" >
                 <i 
                 className="fa fa-sign-in-alt">
                 </i>Join
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="/contact" exact>
+              <NavLink className="nav-link" to="/contact" >
                 <i 
                 className="far fa-envelope">
                 </i>Contact Us

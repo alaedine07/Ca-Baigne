@@ -32,8 +32,6 @@ function SearchBox() {
     Handleresults()
     let getLocation = event.target.value;
     setLocation(getLocation);
-
-
   }
 
 /********************/
@@ -46,7 +44,6 @@ function SearchBox() {
       axios.get('http://localhost:3001/api/v1/beach/allbeaches')
       .then(response => {
         const beaches = []
-        console.log(response.data.beaches[0])
         response.data.beaches.map(
           data => data.location === locationName
            ?

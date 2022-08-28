@@ -80,7 +80,7 @@ export function SignUpForm() {
             <form action="#">
             <div className="flex flex-col">
                 <label
-                    for="email"
+                    htmlFor="email"
                     className="mb-1 text-xs tracking-wide text-gray-600"
                 >
                 E-Mail Address:
@@ -124,7 +124,7 @@ export function SignUpForm() {
             </div>
             <div className="flex flex-col">
                 <label
-                    for="firstName"
+                    htmlFor="firstName"
                     className="mb-1 text-xs tracking-wide text-gray-600"
                 >
                 Username:
@@ -168,7 +168,7 @@ export function SignUpForm() {
             </div>
             <div className="flex flex-col mb-6">
               <label
-                    for="password"
+                    htmlFor="password"
                     className="
                     mb-1
                     text-xs
@@ -244,9 +244,7 @@ export function SignUpForm() {
                   <svg
                     className="h-6 w-6"
                     fill="none"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
+                    
                     viewBox="0 0 24 24"
                     stroke="currentColor"
                   >
@@ -261,7 +259,7 @@ export function SignUpForm() {
         </div>
       </div>
       <div className="flex justify-center items-center mt-6">
-        <a
+        <div
           href="#"
           target="_blank"
           className="
@@ -280,7 +278,7 @@ export function SignUpForm() {
               >Login now</a
             >
             </span>
-        </a>
+        </div>
       </div>
     </div>
     );
