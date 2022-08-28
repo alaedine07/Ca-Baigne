@@ -17,6 +17,6 @@ html, body {
 
 .flex-wrapper {
     display: flex;
-    min-height: 78vh;
+    min-height: 77.1vh;
     flex-direction: column;
 }

@@ -1,15 +1,20 @@
 import React from 'react'
-import marsaImg from '../../Assets/Images/marsa.jpg'
-import gammarthImg from '../../Assets/Images/gammarth.jpg'
+import { v4 as uuidv4 } from "uuid";
+import marsaImg from '../../Assets/Images/marsa.jpg';
+import gammarthImg from '../../Assets/Images/gammarth.jpg';
+import gharImg from '../../Assets/Images/gharelmelh.jpg';
+import ainmestirImg from '../../Assets/Images/ainmestir.jpg';
+import boujaafarImg from '../../Assets/Images/boujaafar.jpg';
+import cocoImg from '../../Assets/Images/coucoubeach.jpg';
 
 
-const BeachesInfo = [
-    { name: 'Marsa', description: 'The beach of La Marsa, a small respectable resort near the capital, is located on the Gulf of Tunis between the beaches of Sidi Bou Said and Gammarth.'},
-    { name: 'Gammarth', description: 'The beaches of Gammarth, a famous respectable resort in the suburbs of the capital of Tunisia, about 10 km long, are located along the northern coast of the Mediterranean Sea.'},
-]
 const BeachesImg = [
-    { name: 'Gammarth', image: gammarthImg },
-    { name: 'Marsa', image: marsaImg },
+  { name: 'Gammarth Beach', image: gammarthImg },
+  { name: 'Marsa Beach', image: marsaImg },
+  { name: 'Ghar El Melh Beach', image: gharImg },
+  { name: 'Ain Mestir Beach', image: ainmestirImg },
+  { name: 'Bou Jaafar Beach', image: boujaafarImg },
+  { name: 'Coco Beach utique', image: cocoImg },
 
 ]
 function BeachCard(props) {
@@ -25,21 +30,16 @@ function BeachCard(props) {
   return (
     <div className='p-5' style={cardStyle}>
       <div className="card bg-dark text-white" style={divStyle}>
-        <button style={pinStyle}><i class="fas fa-thumbtack"></i></button>
+        <button style={pinStyle}><i className="fas fa-thumbtack"></i></button>
       <img className="card-img-top" src={getImage()} style={imgStyle} 
                    alt="Card image cap" />
       <div className="card-body">
         <h5 className="card-title text-info">{props.name}</h5>
-        <p className="card-text">{
-                     BeachesInfo.map( beach => (
-                        beach.name === props.name ?
-                    beach.description : null
-                   ))}</p>
       </div>
       <ul className="list-group list-group-flush">
-        <li className="list-group-item bg-secondary text-white">Weather: 30c°</li>
-        <li className="list-group-item bg-secondary text-white">Beach state: white flag <i className="fas fa-solid fa-flag text-white"></i></li>
-        <li className="list-group-item bg-secondary text-white">Amenities: ****</li>
+        <li key={uuidv4()} className="list-group-item bg-secondary text-white">Weather: 30c°</li>
+        <li key={uuidv4()} className="list-group-item bg-secondary text-white">Beach state: white flag <i className="fas fa-solid fa-flag text-white"></i></li>
+        <li key={uuidv4()} className="list-group-item bg-secondary text-white">{props.description}</li>
       </ul>
     </div>
    </div>
@@ -48,12 +48,12 @@ function BeachCard(props) {
 
 const cardStyle = {
   display: 'flex',
-  alignSelf: 'stretch !important',
+  alignSelf: 'stretch',
   justifyContent: 'center'
 }
 
 const divStyle = {
-    width: '26rem'
+    width: '27rem'
 };
 const imgStyle = {
     width: '100%',

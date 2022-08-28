@@ -40,7 +40,8 @@ export function SignUpForm() {
             flex flex-col
             items-center
             justify-center
-            bg-gray-100"
+            bg-gray-100
+            p-5"
         >
         <div
             className="
@@ -67,7 +68,7 @@ export function SignUpForm() {
         </div>
         <div
             className="
-            mt-4
+            mt-2
             self-center
             text-xl
             sm:text-sm
@@ -75,9 +76,9 @@ export function SignUpForm() {
             Fill this form to create an account
         </div>
 
-        <div className="mt-10">
+        <div className="">
             <form action="#">
-            <div className="flex flex-col mb-5">
+            <div className="flex flex-col">
                 <label
                     for="email"
                     className="mb-1 text-xs tracking-wide text-gray-600"
@@ -108,6 +109,7 @@ export function SignUpForm() {
                     onChange={e => setEmail(e.target.value)}
                     className="
                     text-sm
+                    p-4
                     placeholder-gray-500
                     pl-10
                     pr-4
@@ -120,7 +122,7 @@ export function SignUpForm() {
                 />
               </div>
             </div>
-            <div className="flex flex-col mb-5">
+            <div className="flex flex-col">
                 <label
                     for="firstName"
                     className="mb-1 text-xs tracking-wide text-gray-600"
@@ -151,6 +153,7 @@ export function SignUpForm() {
                     onChange={e => setUsername(e.target.value)}
                     className="
                     text-sm
+                    p-4
                     placeholder-gray-500
                     pl-10
                     pr-4
@@ -201,6 +204,7 @@ export function SignUpForm() {
                     onChange={e => setPassword(e.target.value)}
                     className="
                     text-sm
+                    p-4
                     placeholder-gray-500
                     pl-10
                     pr-4

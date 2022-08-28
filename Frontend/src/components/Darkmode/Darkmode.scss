@@ -16,7 +16,7 @@ main {
   transition: background-color 0.2s ease-in;
 }
 
-header {
+.toggle-header {
   position: absolute;
 }
 
@@ -69,14 +69,14 @@ header {
   color: white;
     
   .flex-wrapper {
-    background-color: #1a202c;
+    background-color: #1a202cd3;
   }
   .label {
     color: white !important;
   }
   .navbar {
-    background-color: #1a202c;
-    border: none;
+    background-color: #212429f1;
+    border-color: #212429;
   }
   .nav-link, .navbar-brand {
     color: #f7fafc !important;
@@ -85,8 +85,15 @@ header {
   .swiper-button-prev {
   color: white !important;
   }
-
-
+  .contact-container {
+    background-color: #1a202cd3;
+  }
+  .contact-card  h1  {
+    color: white ;
+  }
+  .contact-card  label  {
+    color: white ;
+  }
   #toggle {
     background-color: white;
 

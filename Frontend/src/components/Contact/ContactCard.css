@@ -9,17 +9,26 @@ body, html{
 
 .contact-card {
     border-radius: 20px;
-    width: 500px;
+    width: 45%;
 }
 
 h1{
 	font-weight: normal;
-	font-size: 25px;
+	font-size: 25px !important;
 	font-family: 'Raleway', sans-serif;
 	margin-top: 30px;
 	color: black;
 	text-align: center;
     padding-top: 10px;
+}
+
+.credentials {
+	display: flex;
+	gap: 1rem;
+}
+
+.credentials input {
+	width: 250px;
 }
 
 #form{
@@ -30,7 +39,6 @@ h1{
 	
 }
 form{
-
 	width: 400px;
 	color: black;
 	position: relative;
@@ -39,28 +47,19 @@ form{
 }
 
 label, input, textarea{
-	display: block;	
+	display: block;
 }
 
 input, textarea{
-	width: 450px;	
-	border: none;
+	padding: 16px !important;
+	width: 519px;
+	height: 40px;
 	border-radius: 20px;
-	outline: none;
-	padding: 10px;
 	font-family: 'Sniglet', cursive;
-	font-size: 1em;
+	font-size: 2em;
 	color: #000000;
 	transition: border 0.5s;
-	-webkit-transition: border 0.5s;
-	-moz-transition: border 0.5s;
-	-o-transition: border 0.5s;
-	border: solid 3px black;
-	border-width: 1px;
-	-webkit-box-sizing:border-box;
-	-moz-box-sizing:border-box;
-	box-sizing:border-box;
-	
+	border: solid 1px black;
 }
 input:focus, textarea:focus{
 	border: solid 3px rgb(59, 138, 223);
@@ -69,29 +68,32 @@ input:focus, textarea:focus{
 
 textarea{
 	height: 100px;	
-	resize: none; 
+	resize: none !important; 
 	overflow: auto;
 }
 
 input[type="submit"]{
 	background-color: rgb(255, 255, 255);
 	color: rgb(0, 0, 0);
-	height: 54px;
+	height: 40px;
 	cursor: pointer;
 	margin-top: 30px;
 	font-size: 20px;
-	font-family: 'Sniglet', cursive;
-
 }
 
 input[type="submit"]:hover{
 	background-color: #e58f0e;
 }
 
+input[type="submit"] {
+	line-height: 10px;
+}
+
 label{
 	font-size: 16px;
 	margin-top: 20px;
-	padding-left: 20px;
+	margin-bottom: 5px;
+	padding-left: 10px;
 }
 
 .formgroup-error{
