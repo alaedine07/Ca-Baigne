@@ -45,7 +45,7 @@ exports.updateUser = async (req, res) => {
   const { id } = req.params
   const { userName, email, hashedPassword} = req.body.data
   const user = { userName, email, hashedPassword }
-  // hash the password if it's changed
+  // hash the password if it changed
   if (user.hashedPassword !== undefined && user.hashedPassword !== '') {
     const hashedPwd = await bcrypt.hash(hashedPassword, 10)
     user.hashedPassword = hashedPwd

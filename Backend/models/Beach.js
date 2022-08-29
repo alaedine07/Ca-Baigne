@@ -27,6 +27,10 @@ const Beach = db.define('beach', {
   amenities: {
     type: Sequelize.JSON,
     allowNull: true
+  },
+  imagepath: {
+    type: Sequelize.STRING,
+    allowNull: true
   }
 })
 

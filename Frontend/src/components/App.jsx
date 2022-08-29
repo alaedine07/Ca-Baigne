@@ -10,12 +10,9 @@ import Header from "./Header/Header";
 import Contactpage from "./Contact/Contact";
 import Footer from './Footer/Footer';
 import Profile from "./Profile/Profile";
+import NewBeachForm from "./newBeachForm/NewBeach";
 
 import './App.css';
-
-const loginContext = React.createContext('false');
-
-
 
 
 export function App() {
@@ -54,6 +51,10 @@ export function App() {
                 />
                 <Route path="/profile" element={
                     <Profile token={token}/>
+                }
+                />
+                <Route path="/newBeach" element={
+                    <NewBeachForm />
                 }
                 />
             </Routes>

@@ -3,6 +3,7 @@ const userRoute = require('./routes/userRoute');
 const beachRoute = require('./routes/beachRoute')
 const postRoute = require('./routes/postRoute')
 const authRoute = require('./routes/authRoute');
+const uploadRoute = require('./routes/uploads');
 const bodyParser = require('body-parser');
 const User = require('./models/User');
 const Post = require('./models/Post');
@@ -22,6 +23,7 @@ Beach.belongsToMany(User, {through: 'favoritebeaches'});
 User.belongsToMany(Beach, {through: 'favoritebeaches'});
 
 // add middlewares
+app.use(express.static(__dirname));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
 app.use((req, res, next) => {
@@ -39,6 +41,7 @@ app.use('/api/v1/user', userRoute);
 app.use('/api/v1/beach', beachRoute);
 app.use('/api/v1/post', postRoute);
 app.use('/api/v1/auth', authRoute);
+app.use('/api/v1/uploads', uploadRoute);
 
 // connect backend to the database
 db.authenticate ()
