@@ -1,6 +1,7 @@
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
+const Op = require('sequelize');
 
 exports.verifyToken = (req, res, next) => {
   const authHeader = req.headers['authorization']
@@ -14,6 +15,7 @@ exports.verifyToken = (req, res, next) => {
   })
 }
 
+// must be protected to be used by admins only
 exports.getAllUsers = (req, res, next) =>
 {
   User.findAll()
@@ -31,7 +33,8 @@ exports.addNewUser = async (req, res) =>
 {
   const { userName, email, hashedPassword } = req.body
   const newUser = await User.findOne({ where: { email: req.body.email } })
-  if (newUser) return res.status(409).send('User Already exists ')
+  const newUserWithName = await User.findOne({ where: { userName: req.body.userName } })
+  if (newUser || newUserWithName) return res.status(409).send('User Already exists')
     else {
       const hashedPwd = await bcrypt.hash(hashedPassword, 10)
       const user = { userName, email, hashedPassword: hashedPwd }

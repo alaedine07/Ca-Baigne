@@ -50,10 +50,15 @@ useEffect(() => {
                 'content-type': 'application/json'
                 }
             }
-            ).catch(err => {
-            console.log(err);
-        })
-    }
+            ).then(() => {
+                localStorage.removeItem('accessToken');
+                const Domain = window.location.origin;
+                const URL = Domain + '/login';
+                window.location.replace(URL);
+            }).catch((err) => {
+                console.error(err);
+            })
+        }
 
     return (
         <> 

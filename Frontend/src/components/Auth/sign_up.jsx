@@ -8,6 +8,7 @@ export function SignUpForm() {
     const [email, setEmail] = useState("");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [error, setError] = useState(false);
 
     function createUser(event) {
       event.preventDefault();
@@ -28,7 +29,7 @@ export function SignUpForm() {
       })
       .catch(function (error) {
         if (error.response) {
-          console.log(error.response.data)
+          setError(true);
         }
       })
     }
@@ -75,7 +76,7 @@ export function SignUpForm() {
             Fill this form to create an account
         </div>
 
-        <div className="mt-9">
+        <div className="mt-1">
             <form action="#">
             <div className="flex flex-col mb-6">
                 <label
@@ -249,6 +250,9 @@ export function SignUpForm() {
             </div>
           </form>
         </div>
+        {
+          error ? <div className="flex justify-center"><span className="errorMsg">User already exists</span></div> : null
+        }
       </div>
       <div className="flex justify-center items-center mt-6">
         <a

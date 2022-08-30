@@ -7,6 +7,7 @@ export function SignInForm() {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [error, setError] = useState(false);
 
     function loginUser(event) {
       // console.log('sending request to backend');
@@ -27,10 +28,9 @@ export function SignInForm() {
           const URL = Domain + '/';
           window.location.replace(URL);
         }
-      })
-      .catch(function (error) {
+      }).catch(function (error) {
         if (error.response) {
-          console.error(error);
+          setError(true);
         }
       })
     }
@@ -84,7 +84,7 @@ export function SignInForm() {
                     for="email"
                     className="mb-2 text-s tracking-wide text-gray-600"
                 >
-                E-Mail Address:
+                Mail Address:
                 </label>
               <div className="relative">
                 <div
@@ -205,9 +205,12 @@ export function SignInForm() {
                   </svg>
                 </span>
               </button>
-            </div>
+             </div>
           </form>
         </div>
+        {
+          error ? <div className="flex justify-center"><span className="errorMsg">Email or password are incorrect</span></div> : null
+        }
       </div>
       <div className="flex justify-center items-center mt-6">
         <a
