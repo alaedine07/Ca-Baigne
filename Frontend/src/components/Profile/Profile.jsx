@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import jwt_decode from 'jwt-decode';
 import axios from "axios";
+import FormData from 'form-data';
 
 import avatarMen from '../../Assets/Images/avatar_men.png'
 import avatarWomen from '../../Assets/Images/avatar_women.png'
@@ -13,13 +14,11 @@ import Header from "../Header/Header";
 
 export function Profile(props) {
 
-    const [token, setToken] = useState('');
-    const [userData, setUserData] = useState({username: '', email: '', password: undefined});
+    const [userData, setUserData] = useState({username: '', email: '', password: undefined, imgFullPath: ''});
    
-useEffect(() => {
+    useEffect(() => {
         const token = localStorage.getItem('accessToken');
         if (token) {
-            setToken(token)
             const decoded = jwt_decode(token);
             const userId = decoded['id'];
             axios.get('http://localhost:3001/api/v1/user/' + userId, {
@@ -27,11 +26,14 @@ useEffect(() => {
                     'Authorization': 'bearer ' + token
                 }
             }).then( res => {
-                setUserData({username: res.data.userName, email: res.data.email})
+                setUserData({username: res.data.userName, email: res.data.email, imgFullPath: res.data.imagePath})
+            }).catch(err => {
+                console.error(err);
             })
         }
     }, []);
-    
+
+
     function ModifyProfile(event) {
         event.preventDefault();
         const token = localStorage.getItem('accessToken');
@@ -60,13 +62,40 @@ useEffect(() => {
             })
         }
 
+    function saveFile(e) {
+        const file = e.target.files[0];
+        const fileName = e.target.files[0].name;
+        const formData = new FormData();
+        formData.append("file", file);
+        formData.append("fileName", fileName);
+        const token = localStorage.getItem('accessToken');
+        const decoded = jwt_decode(token);
+        const userId = decoded['id'];
+        formData.append("userid", userId);
+        axios.post('http://localhost:3001/api/v1/uploads/userUploads', formData, {
+            headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            }
+        ).then(() => {
+            const Domain = window.location.origin;
+            const URL = Domain + '/profile';
+            window.location.replace(URL);
+        }).catch(err => {
+            console.error(err);
+        })
+    }
+
     return (
         <> 
         <Header token={props.token}/>
         <div className="Container">
-            <div className="Avatar-image">
-            <img id="avatar-img" src={avatarMen} alt="avatar-image-here" />
-            </div>
+        <div className="image-upload">
+            <label for="file-input">
+                <img id="avatar-img" src={'http://localhost:3001/' + userData.imgFullPath.split('/').slice(-3).join('/')}/>
+            </label>
+            <input id="file-input" type="file" onChange={saveFile}/>
+        </div>
             <div className="form">
                 <form action="">
                     <label htmlFor="Username"> Username: </label>

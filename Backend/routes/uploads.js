@@ -18,10 +18,25 @@ const upload = multer({
     storage: storage
 })
 
-// upload a user related post
+// upload a Beach image
 router.post('/beachesUploads', upload.single('file'), beachController.addNewBeach);
 
-// upload a beach related post
-// router.post('/beachesUpload');
+const user_storage = multer.diskStorage({
+    destination: (req, file, callBack) => {
+        callBack(null, path.join(__dirname, '../uploads/users'));
+    },
+    filename: (req, file, callBack) => {
+        const fileName = file.originalname.toLowerCase().split(' ').join('-');
+        callBack(null, 'image' + '-' + fileName)
+    }
+});
+
+const user_upload = multer({
+    storage: user_storage
+})
+
+// upload a User image
+router.post('/userUploads', user_upload.single('file'), uploadController.uploadBeachImage);
+
 
 module.exports = router;

@@ -26,8 +26,7 @@ export function SignUpForm() {
         const Domain = window.location.origin;
         const URL = Domain + '/login';
         window.location.replace(URL);
-      })
-      .catch(function (error) {
+      }).catch(function (error) {
         if (error.response) {
           setError(true);
         }
