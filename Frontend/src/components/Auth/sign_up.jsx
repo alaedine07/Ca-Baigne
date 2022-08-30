@@ -75,14 +75,14 @@ export function SignUpForm() {
             Fill this form to create an account
         </div>
 
-        <div className="mt-10">
+        <div className="mt-9">
             <form action="#">
-            <div className="flex flex-col mb-5">
+            <div className="flex flex-col mb-6">
                 <label
                     for="email"
-                    className="mb-1 text-xs tracking-wide text-gray-600"
+                    className="mb-2 text-s tracking-wide text-gray-600"
                 >
-                E-Mail Address:
+                Mail Address:
                 </label>
               <div className="relative">
                 <div
@@ -120,10 +120,10 @@ export function SignUpForm() {
                 />
               </div>
             </div>
-            <div className="flex flex-col mb-5">
+            <div className="flex flex-col mb-6">
                 <label
                     for="firstName"
-                    className="mb-1 text-xs tracking-wide text-gray-600"
+                    className="mb-2 text-s tracking-wide text-gray-600"
                 >
                 Username:
                 </label>
@@ -163,16 +163,10 @@ export function SignUpForm() {
                 />
               </div>
             </div>
-            <div className="flex flex-col mb-6">
+            <div className="flex flex-col mb-5">
               <label
                     for="password"
-                    className="
-                    mb-1
-                    text-xs
-                    sm:text-sm
-                    tracking-wide
-                    text-gray-600"
-                >
+                    className="mb-2 text-s tracking-wide text-gray-600">
                 Password:
             </label>
               <div className="relative">

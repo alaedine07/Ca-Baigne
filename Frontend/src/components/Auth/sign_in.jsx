@@ -77,12 +77,12 @@ export function SignInForm() {
             Enter your credentials to access your account
         </div>
 
-        <div className="mt-10">
+        <div className="mt-2">
             <form action="#">
-            <div className="flex flex-col mb-5">
+            <div className="flex flex-col mb-4">
                 <label
                     for="email"
-                    className="mb-1 text-xs tracking-wide text-gray-600"
+                    className="mb-2 text-s tracking-wide text-gray-600"
                 >
                 E-Mail Address:
                 </label>
@@ -125,13 +125,7 @@ export function SignInForm() {
             <div className="flex flex-col mb-6">
               <label
                     for="password"
-                    className="
-                    mb-1
-                    text-xs
-                    sm:text-sm
-                    tracking-wide
-                    text-gray-600"
-                >
+                    className="mb-2 text-s tracking-wide text-gray-600">
                 Password:
             </label>
               <div className="relative">
