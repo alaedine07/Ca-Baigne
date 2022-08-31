@@ -1,13 +1,13 @@
 import React from "react";
 import { useState } from "react";
 import axios from "axios";
-import { reactLocalStorage } from 'reactjs-localstorage';
 import './sign_in.css';
 
-export function SignInForm(props) {
+export function SignInForm() {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [error, setError] = useState(false);
 
     function loginUser(event) {
       // console.log('sending request to backend');
@@ -24,13 +24,13 @@ export function SignInForm(props) {
       ).then(res => {
         if (res.data.token) {
           localStorage.setItem("accessToken", res.data.token);
-          props.setIsLoggedIn(true);
-          reactLocalStorage.set('IsLogedIn', true);
+          const Domain = window.location.origin;
+          const URL = Domain + '/';
+          window.location.replace(URL);
         }
-      })
-      .catch(function (error) {
+      }).catch(function (error) {
         if (error.response) {
-          console.error(error);
+          setError(true);
         }
       })
     }
@@ -77,14 +77,14 @@ export function SignInForm(props) {
             Enter your credentials to access your account
         </div>
 
-        <div className="mt-10">
+        <div className="mt-2">
             <form action="#">
-            <div className="flex flex-col mb-5">
+            <div className="flex flex-col mb-4">
                 <label
                     for="email"
-                    className="mb-1 text-xs tracking-wide text-gray-600"
+                    className="mb-2 text-s tracking-wide text-gray-600"
                 >
-                E-Mail Address:
+                Mail Address:
                 </label>
               <div className="relative">
                 <div
@@ -125,13 +125,7 @@ export function SignInForm(props) {
             <div className="flex flex-col mb-6">
               <label
                     for="password"
-                    className="
-                    mb-1
-                    text-xs
-                    sm:text-sm
-                    tracking-wide
-                    text-gray-600"
-                >
+                    className="mb-2 text-s tracking-wide text-gray-600">
                 Password:
             </label>
               <div className="relative">
@@ -211,9 +205,12 @@ export function SignInForm(props) {
                   </svg>
                 </span>
               </button>
-            </div>
+             </div>
           </form>
         </div>
+        {
+          error ? <div className="flex justify-center"><span className="errorMsg">Email or password are incorrect</span></div> : null
+        }
       </div>
       <div className="flex justify-center items-center mt-6">
         <a

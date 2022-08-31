@@ -1,19 +1,24 @@
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
+const Op = require('sequelize');
 
 exports.verifyToken = (req, res, next) => {
   const authHeader = req.headers['authorization']
   const token = authHeader && authHeader.split(' ')[1]
-  if (token === null) return res.sendStatus(401)
-  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
-    if (err) console.log(err)
-    req.user = user
-    console.log('user authorized')
-    next()
+  if (token === null) { 
+    res.redirect('/login');
+  } else {
+    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
+      if (err) console.log(err)
+      req.user = user
+      console.log('user authorized')
+      next()
   })
 }
+}
 
+// must be protected to be used by admins only
 exports.getAllUsers = (req, res, next) =>
 {
   User.findAll()
@@ -22,17 +27,17 @@ exports.getAllUsers = (req, res, next) =>
   })
   .catch(err => res.status(404).json('Error: ' + err));
 }
-
+ 
 exports.getUser = async (req, res) => {
   res.json(await User.findOne({ where: { id: req.params.id } }))
 }
 
 exports.addNewUser = async (req, res) =>
 {
-  console.log(req.body);
   const { userName, email, hashedPassword } = req.body
   const newUser = await User.findOne({ where: { email: req.body.email } })
-  if (newUser) return res.status(409).send('User Already exists ')
+  const newUserWithName = await User.findOne({ where: { userName: req.body.userName } })
+  if (newUser || newUserWithName) return res.status(409).send('User Already exists')
     else {
       const hashedPwd = await bcrypt.hash(hashedPassword, 10)
       const user = { userName, email, hashedPassword: hashedPwd }
@@ -42,10 +47,21 @@ exports.addNewUser = async (req, res) =>
    }
 }
 
-exports.updateUser = (req, res) => {
+exports.updateUser = async (req, res) => {
   const { id } = req.params
-  const { userName, email, hashedPassword} = req.body
+  const { userName, email, hashedPassword} = req.body.data
   const user = { userName, email, hashedPassword }
+  // hash the password if it changed
+  if (user.hashedPassword !== undefined && user.hashedPassword !== '') {
+    const hashedPwd = await bcrypt.hash(hashedPassword, 10)
+    user.hashedPassword = hashedPwd
+  }
+  // remove undefined and empty values
+  Object.keys(user).forEach(key => {
+    if (user[key] === undefined || user[key] === '') {
+      delete user[key]
+    }
+  });
   User.update({ ...user },
     { where: {id} })
   .then(
@@ -54,6 +70,7 @@ exports.updateUser = (req, res) => {
   .catch(err => res.status(404).json('Error: ' + err))
 }
 
+// must be protected to be used by only admins
 exports.deleteUser = (req, res) => {
   const { id } = req.params
   User.destroy({ where: { id }})

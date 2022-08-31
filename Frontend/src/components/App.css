@@ -14,3 +14,7 @@ html, body {
     height: 100vh;
     margin: 0;
 }
+label {
+    display: flex;
+    margin-bottom: 10px;
+}

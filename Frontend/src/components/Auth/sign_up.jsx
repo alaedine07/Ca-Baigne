@@ -8,6 +8,7 @@ export function SignUpForm() {
     const [email, setEmail] = useState("");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [error, setError] = useState(false);
 
     function createUser(event) {
       event.preventDefault();
@@ -25,10 +26,9 @@ export function SignUpForm() {
         const Domain = window.location.origin;
         const URL = Domain + '/login';
         window.location.replace(URL);
-      })
-      .catch(function (error) {
+      }).catch(function (error) {
         if (error.response) {
-          console.log(error.response.data)
+          setError(true);
         }
       })
     }
@@ -75,14 +75,14 @@ export function SignUpForm() {
             Fill this form to create an account
         </div>
 
-        <div className="mt-10">
+        <div className="mt-1">
             <form action="#">
-            <div className="flex flex-col mb-5">
+            <div className="flex flex-col mb-6">
                 <label
                     for="email"
-                    className="mb-1 text-xs tracking-wide text-gray-600"
+                    className="mb-2 text-s tracking-wide text-gray-600"
                 >
-                E-Mail Address:
+                Mail Address:
                 </label>
               <div className="relative">
                 <div
@@ -120,10 +120,10 @@ export function SignUpForm() {
                 />
               </div>
             </div>
-            <div className="flex flex-col mb-5">
+            <div className="flex flex-col mb-6">
                 <label
                     for="firstName"
-                    className="mb-1 text-xs tracking-wide text-gray-600"
+                    className="mb-2 text-s tracking-wide text-gray-600"
                 >
                 Username:
                 </label>
@@ -163,16 +163,10 @@ export function SignUpForm() {
                 />
               </div>
             </div>
-            <div className="flex flex-col mb-6">
+            <div className="flex flex-col mb-5">
               <label
                     for="password"
-                    className="
-                    mb-1
-                    text-xs
-                    sm:text-sm
-                    tracking-wide
-                    text-gray-600"
-                >
+                    className="mb-2 text-s tracking-wide text-gray-600">
                 Password:
             </label>
               <div className="relative">
@@ -255,6 +249,9 @@ export function SignUpForm() {
             </div>
           </form>
         </div>
+        {
+          error ? <div className="flex justify-center"><span className="errorMsg">User already exists</span></div> : null
+        }
       </div>
       <div className="flex justify-center items-center mt-6">
         <a
