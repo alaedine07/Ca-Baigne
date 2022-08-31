@@ -57,7 +57,7 @@ i {
 .profileImageZone {
   position: absolute;
   right: 5rem;
-  top: 1rem;
+  top: 0.6rem;
 }
 
 .profileImageZone>img {

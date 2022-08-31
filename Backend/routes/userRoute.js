@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const UserController = require('../controllers/UsersController')
+const UserController = require('../controllers/UsersController');
 const authController = require('../controllers/authcontroller');
 
 // Get All Users
@@ -15,6 +15,6 @@ router.post('/newuser', UserController.addNewUser);
 router.put('/updateuser/:id', UserController.verifyToken, UserController.updateUser)
 
 // Delete User
-router.delete('/deleteuser/:id', UserController.verifyToken, UserController.deleteUser);
+router.delete('/deleteuser/:id', UserController.deleteUser);
 
 module.exports = router;

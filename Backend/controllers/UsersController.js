@@ -6,13 +6,16 @@ const Op = require('sequelize');
 exports.verifyToken = (req, res, next) => {
   const authHeader = req.headers['authorization']
   const token = authHeader && authHeader.split(' ')[1]
-  if (token === null) return res.sendStatus(401)
-  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
-    if (err) console.log(err)
-    req.user = user
-    console.log('user authorized')
-    next()
+  if (token === null) { 
+    res.redirect('/login');
+  } else {
+    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
+      if (err) console.log(err)
+      req.user = user
+      console.log('user authorized')
+      next()
   })
+}
 }
 
 // must be protected to be used by admins only
@@ -24,7 +27,7 @@ exports.getAllUsers = (req, res, next) =>
   })
   .catch(err => res.status(404).json('Error: ' + err));
 }
-
+ 
 exports.getUser = async (req, res) => {
   res.json(await User.findOne({ where: { id: req.params.id } }))
 }
@@ -67,6 +70,7 @@ exports.updateUser = async (req, res) => {
   .catch(err => res.status(404).json('Error: ' + err))
 }
 
+// must be protected to be used by only admins
 exports.deleteUser = (req, res) => {
   const { id } = req.params
   User.destroy({ where: { id }})

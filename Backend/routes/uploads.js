@@ -1,6 +1,7 @@
 const router = require('express').Router()
 const uploadController = require('../controllers/UploadsController');
 const beachController = require('../controllers/BeachController');
+const UserController = require('../controllers/UsersController');
 const path = require('path');
 const multer = require('multer');
 
@@ -19,6 +20,7 @@ const upload = multer({
 })
 
 // upload a Beach image
+// add protection to this route to be used by admins only
 router.post('/beachesUploads', upload.single('file'), beachController.addNewBeach);
 
 const user_storage = multer.diskStorage({
@@ -36,7 +38,7 @@ const user_upload = multer({
 })
 
 // upload a User image
-router.post('/userUploads', user_upload.single('file'), uploadController.uploadBeachImage);
+router.post('/userUploads', UserController.verifyToken, user_upload.single('file'), uploadController.uploadBeachImage);
 
 
 module.exports = router;
