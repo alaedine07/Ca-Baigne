@@ -1,11 +1,14 @@
 import React , {useEffect} from 'react'
 import { useState } from 'react';
 import './Navbar.css';
+import axios from "axios";
+import jwt_decode from 'jwt-decode';
 import { NavLink } from 'react-router-dom';
-import { reactLocalStorage } from 'reactjs-localstorage';
 import $ from 'jquery';
 
 const Navbar = (props) => {
+
+  const [imagePath, setImagePath] = useState('');
 
   function animation(){
     $("#navbarSupportedContent").on("click","li",function(e){
@@ -20,6 +23,25 @@ const Navbar = (props) => {
     const URL = Domain + '/login';
     window.location.replace(URL);
   }
+  
+
+  useEffect(() => {
+      const token = props.token
+      if (token) {
+          const decoded = jwt_decode(token);
+          const userId = decoded['id'];
+          axios.get('http://localhost:3001/api/v1/user/' + userId, {
+              headers: {
+                  'Authorization': 'bearer ' + token
+              }
+          }).then( res => {
+            setImagePath(res.data.imagePath)
+          }).catch(err => {
+              console.error(err);
+          })
+      }
+    }, [props.token]);
+  
 
 
   if (!props.token) {
@@ -131,6 +153,9 @@ const Navbar = (props) => {
                   </i>Contact Us
                 </NavLink>
               </li>
+              <div className="profileImageZone">
+                <img src={'http://localhost:3001/' + imagePath.split('/').slice(-3).join('/')} alt="img" />
+              </div>
           </ul>
         </div>
     </nav>
