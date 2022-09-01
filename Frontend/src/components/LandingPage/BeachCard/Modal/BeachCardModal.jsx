@@ -2,9 +2,11 @@ import React, { useState, useEffect, useReducer } from "react";
 
 import Box from '@mui/material/Box';
 import ReactStars from "react-rating-stars-component";
+import Modal from '@mui/material/Modal';
+import Posts from "./ModalPosts/Posts";
 import axios from "axios";
 import './Modal.css';
-import moment from 'moment';
+
 
 const style = {
   position: 'absolute',
@@ -22,36 +24,98 @@ const style = {
 
 
 export default function BasicModal(props) {
-  const [postId, setPostId] = useState('');
+  
   const [rate, setRate]= useState();
-  const [reducedValue, forceUpdate] = useReducer(x => x + 1, 1);
+  const [content, setContent] = useState("");
+  const [postId, setPostId] = useState('');
+  const [id, setId]= useState("");
+  const [postArray, setPostArray] = useState([]);
 
+  
   const ratingChanged = (newRating) => {
     setRate(newRating)
   };
+
+  useEffect(()=> {
+    getBeach()
+  })
+
+  const getBeach = () => {
+    if (props.beachName) {
+      axios.get('http://localhost:3001/api/v1/beach/allbeaches')
+        .then(response => {
+          response.data.beaches.map( data =>
+            data.name === props.beachName ? setId(data.id) : null
+          )
+        })
+        .catch(error => {
+          if (error) console.log(error)
+        })
+    }
+  }
+
+  const addPost = () => {
+    axios.post('http://localhost:3001/api/v1/post/newpost', {
+      content: content,
+      beachId: id
+    },
+    {
+      headers: {
+        "Content-type": "application/json"
+      }
+    }
+    ).then(() => console.log('post added'))
+    .catch(function (error) {
+      if (error.response) {
+        console.log(error.response.data)
+      }
+    })
+    props.forceUpdate()
+  }
+
+  useEffect(() => {
+    getAllPosts()
+}, [props.reducedValue])
+
+  const getAllPosts = () => {
+    axios.get('http://localhost:3001/api/v1/post/allposts')
+    .then(response => {
+      const Posts = []
+      response.data.posts.map( data => 
+        data.beachId === id ? Posts.push({id: data.id , content: data.content, createdAt: data.createdAt}) : null
+      )
+      setPostArray(Posts)
+      console.log("here's your posts")
+    })
+    .catch(error => {
+      if (error) console.log(error)
+    })
+    
+  }
+
+  const hndleSubmit = (event) => {
+    event.preventDefault()
+    addPost(event)
+    setContent('')
+    props.forceUpdate()
+  }
 
   const deletePost = () => {
     axios.delete(`http://localhost:3001/api/v1/post/deletepost/${postId}`)
     .then(console.log(`post with id ${postId} has been deleted`))
     .catch(error => console.log(error))
-  }
+}
 
-  /*useEffect(() => {
-    props.getAllPosts()
-  }, [reducedValue])*/
 
-  const handleDelete = () => {
-    forceUpdate()
-    deletePost()
-    forceUpdate()
-  }
 
   return (
-        <Box sx={style}>
+    <Modal open={props.open} onClose={props.handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
+    
+    <Box sx={style}>
           <div className='first-half'>
           <img src={props.image} className='modal-img'></img>
         <div className='beach-name'>
-          <div>{props.name}</div>
+          <div>{props.beachName}</div>
           <div><span>4.5</span> <i className="star fas fa-star"></i></div>
           
         </div>
@@ -78,28 +142,12 @@ export default function BasicModal(props) {
             
             </div>
             <div className="posts">
-              {
-                props.postArray
-                  ? 
-                  <ul className="posts-list">
-                    {props.postArray.map(post =>
-                      <li onMouseOver={() => { setPostId(post.id)}} className="posts-item" >
-                        <div style={{display: 'flex', justifyContent: 'space-between'}}>
-                          <div style={{display: 'flex', alignItems: 'center'}}>
-                          <i class="fas fa-user-circle"></i>
-                          <p>{post.content}</p>
-                          </div>
-                          <button className="delete-btn" onClick={handleDelete}>Delete</button>
-                        </div>
-                        <p className="time">
-                          {moment(post.createdAt).startOf('seconds').fromNow()}
-                        </p>
-                      </li>
-                    )}
-                  </ul>
-                  : 
-                  null
-              }
+              <Posts 
+              postArray={postArray}
+              setPostId={setPostId}
+              deletePost={deletePost}
+              forceUpdate={props.forceUpdate}
+              />
             </div>
 
               <form className="post-form">
@@ -107,20 +155,22 @@ export default function BasicModal(props) {
               <input
                 type="text"
                 name='content'
-                onChange={(event) => props.setContent(event.target.value)}
-                value={props.content}
+                onChange={(event) => setContent(event.target.value)}
+                value={content}
                 className='post-input'
                 placeholder='Give us your review' ></input>
                 <button
                 type='submit'
                 className='post-btn btn btn-dark'
-                onClick={props.hndleSubmit}
+                onClick={hndleSubmit}
                 >Post</button>
                 </div>
               </form>
-            </div>
-        
-          
+            </div>  
         </Box>
+    
+    </Modal>
+        
+        
   );
 }
