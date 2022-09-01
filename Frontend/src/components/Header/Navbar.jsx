@@ -153,9 +153,11 @@ const Navbar = (props) => {
                   </i>Contact Us
                 </NavLink>
               </li>
+              {imagePath && 
               <div className="profileImageZone">
                 <img src={'http://localhost:3001/' + imagePath.split('/').slice(-3).join('/')} alt="img" />
               </div>
+              }
           </ul>
         </div>
     </nav>

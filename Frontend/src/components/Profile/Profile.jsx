@@ -92,7 +92,10 @@ export function Profile(props) {
         <div className="Container">
         <div className="image-upload">
             <label for="file-input">
-                <img id="avatar-img" src={'http://localhost:3001/' + userData.imgFullPath.split('/').slice(-3).join('/')}/>
+                { userData.imgFullPath ? 
+                <img id="avatar-img" src={'http://localhost:3001/' + userData.imgFullPath.split('/').slice(-3).join('/')}/> : 
+                <img id="avatar-img" src={avatarMen}/>
+                }
             </label>
             <input id="file-input" type="file" onChange={saveFile}/>
         </div>
