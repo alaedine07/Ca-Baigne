@@ -36,6 +36,7 @@ export function SignUpForm() {
     return (
         <div
             className="
+            signup
             min-h-screen
             flex flex-col
             items-center
@@ -263,6 +264,7 @@ export function SignUpForm() {
           href="#"
           target="_blank"
           className="
+            sigin-text
             inline-flex
             items-center
             text-gray-700

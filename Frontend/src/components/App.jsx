@@ -37,7 +37,10 @@ export function App() {
                 </>}  
                 />
                 <Route path="/contact" element={
+                    <>
+                    <Header />
                     <Contactpage />
+                    </>
                 } 
                 />
             </Routes>

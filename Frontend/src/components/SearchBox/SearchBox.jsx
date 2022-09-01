@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState, useEffect, useReducer } from "react";
 
+import axios from "axios";
+import Modal from '@mui/material/Modal';
 import { Container } from "react-bootstrap";
 import './SearchBox.css'
 import BeachCard from "../BeachCard/BeachCard";
@@ -10,7 +11,8 @@ import { Navigation, EffectFade} from 'swiper';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/effect-fade';
-
+import marsaImg from '../../Assets/Images/marsa.jpg';
+import BeachCardModal from '../BeachCard/BeachCardModal';
 
 function SearchBox() {
 
@@ -19,6 +21,13 @@ function SearchBox() {
   const [result, setResult] = useState(false);
   const [results, setResults] = useState(false);
   const [myArray, setMyArray] = useState([]);
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  const [id, setId]= useState("");
+  const [content, setContent] = useState("");
+  const [postArray, setPostArray] = useState([]);
+  const [reducedValue, forceUpdate] = useReducer(x => x + 1, 1);
 
   const Handleresults = () => {
     setResult(false)
@@ -38,7 +47,7 @@ function SearchBox() {
 
     useEffect(() => {
       getallBeaches();
-    }, []);
+    });
 
     const getallBeaches = () => {
       axios.get('http://localhost:3001/api/v1/beach/allbeaches')
@@ -73,6 +82,7 @@ function SearchBox() {
     setBeach(getBeach);
     event.preventDefault();
   }
+
 /********************/
 
   const handleSubmit = () => {
@@ -95,16 +105,104 @@ function SearchBox() {
         beaches.map(beach => {
         beach.location === locationName
         ?
-        results.push(<SwiperSlide> <BeachCard key={uuidv4()} name={beach.name} description={beach.description}/></SwiperSlide>)
+        results.push(<SwiperSlide> <BeachCard key={uuidv4()} name={beach.name} description={beach.description} handleOpen={handleOpen}/></SwiperSlide>)
         :
         '' 
         })})
     }
     return results
   }
+/***********************/
+
+
   
 /********************/
 
+useEffect(()=> {
+  getBeach()
+})
+
+const getBeach = () => {
+  if (beachName) {
+    axios.get('http://localhost:3001/api/v1/beach/allbeaches')
+      .then(response => {
+        response.data.beaches.map( data =>
+          data.name === beachName ? setId(data.id) : null
+        )
+      })
+      .catch(error => {
+        if (error) console.log(error)
+      })
+  }
+  
+}
+
+const addPost = () => {
+  
+  axios.post('http://localhost:3001/api/v1/post/newpost', {
+    content: content,
+    beachId: id
+  },
+  {
+    headers: {
+      "Content-type": "application/json"
+    }
+  }
+  ).then(() => console.log('post added'))
+  .catch(function (error) {
+    if (error.response) {
+      console.log(error.response.data)
+    }
+  })
+}
+ 
+  useEffect(() => {
+    axios.get('http://localhost:3001/api/v1/post/allposts')
+  .then(response => {
+    const Posts = []
+    response.data.posts.map( data => 
+      data.beachId === id ? Posts.push({id: data.id , content: data.content, createdAt: data.createdAt}) : null
+    )
+    setPostArray(Posts)
+    console.log("here's your posts")
+  })
+  .catch(error => {
+    if (error) console.log(error)
+  })}, [])
+
+  /*const getAllPosts = () => {
+    axios.get('http://localhost:3001/api/v1/post/allposts')
+    .then(response => {
+      const Posts = []
+      response.data.posts.map( data => 
+        data.beachId === id ? Posts.push({id: data.id , content: data.content, createdAt: data.createdAt}) : null
+      )
+      setPostArray(Posts)
+      console.log("here's your posts")
+    })
+    .catch(error => {
+      if (error) console.log(error)
+    })
+    
+  }*/
+
+
+const hndleSubmit = (event) => {
+  event.preventDefault()
+  addPost(event)
+  setContent('')
+  forceUpdate()
+}
+
+/***********************/
+
+
+const handleClick = () => {
+  handleOpen()
+  forceUpdate()
+}
+
+/**********************/
   return (
     <>
       <h2 className="header-text">Time to swim </h2>
@@ -114,7 +212,7 @@ function SearchBox() {
               <div className="row mb-3 align-items-end">
                   <div className="form-group col-md-4">
                   <label className="label mb-2 fw-bold text-black">Location</label>
-                  <select id='location' name="location" className="form-control" onClick={locationName? getallBeaches : null} onChange={Handlelocation} value={locationName}>
+                  <select id='select' name="location" className="form-control" onClick={locationName? getallBeaches : null} onChange={Handlelocation} value={locationName}>
                     <option hidden>--Select Location--</option>
                     <option>Tunis</option>
                     <option>Bizerte</option>
@@ -124,7 +222,7 @@ function SearchBox() {
                 </div>
                 <div className="form-group col-md-4">
                 <label className="label mb-2 fw-bold text-black">Beach</label>
-                <select id ='beach' name="beach" className="form-control" onChange={Handlebeach} value={beachName}>
+                <select id ='select' name="beach" className="form-control" onChange={Handlebeach} value={beachName}>
                     <option hidden>--Select Beach--</option>
                     {
                       myArray.map(beaches => beaches.map(beach => beach.option))
@@ -138,7 +236,21 @@ function SearchBox() {
               </div>
         </div>
       </div>
+      <div>
+      
+    </div>
       </Container>
+      {
+        open ?
+
+        <Modal open={open} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
+        <BeachCardModal image={marsaImg} name={beachName} postArray={postArray} content={content} 
+        setContent={setContent} hndleSubmit={hndleSubmit} /*getAllPosts={getAllPosts}*/
+        />
+        </Modal>
+        :
+        ''
+      }
 
       {
         result ?
@@ -146,6 +258,7 @@ function SearchBox() {
         <h3 className="result-text">Your search results for {beachName}</h3>
         <div className="results-container d-flex justify-content-center">
           <BeachCard
+          handleClick={handleClick}
           name={beachName}
           description={myArray.map(beaches => beaches.map(
             beach =>
@@ -178,11 +291,12 @@ function SearchBox() {
                 
         </Swiper>
 
-    </div>
+      </div>
         </>
         :
         null
       }
+    
     </>
   );
 }
@@ -193,4 +307,5 @@ const divStyle = {
 const btnStyle = {
   backgroundColor: '#198754'
 }
+
 export default SearchBox;

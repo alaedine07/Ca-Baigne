@@ -25,7 +25,7 @@ const Navbar = () => {
           setTimeout(function(){ animation(); });
         }}
         type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <i className="fas fa-bars text-black"></i>
+        <i className="hamburger fas fa-bars text-black"></i>
       </button>
  
       <div 

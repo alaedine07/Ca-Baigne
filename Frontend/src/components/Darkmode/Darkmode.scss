@@ -70,34 +70,56 @@ main {
     
   .flex-wrapper {
     background-color: #1a202cd3;
+    min-height: 79vh !important;
   }
+
+  .contact-container {
+    min-height: 79vh !important;
+  }
+
   .label {
     color: white !important;
   }
   .navbar {
     background-color: #212429f1;
-    border-color: #212429;
+    border: none;
+    box-shadow: 0 3px 6px rgba(231, 222, 222, 0.17);
   }
   .nav-link, .navbar-brand {
     color: #f7fafc !important;
   }
+
+  .hamburger {
+    color: white !important;
+  }
+
   .swiper-button-next,
   .swiper-button-prev {
   color: white !important;
   }
+
   .contact-container {
     background-color: #1a202cd3;
   }
+
   .contact-card  h1  {
     color: white ;
   }
   .contact-card  label  {
     color: white ;
   }
-
+  
   .card:hover {
     box-shadow: 5px 10px 20px 1px rgba(197, 197, 197, 0.514)!important;
 }
+
+  .signin, .signup {
+    background-color: #1a202cd3;
+  }
+
+  .register-text, .sigin-text {
+    color: white;
+  }
 
   #toggle {
     background-color: white;
@@ -106,4 +128,19 @@ main {
       background-color: #1a202c;
     }
   }
+  
+  .top-header {
+    background-color: #212529;
+    color: white;
+  }
+  .post-btn {
+    background-color: #212529;
+    color: white;
+  }
+  .beach-name  {
+    color: black;
+    }
+    .post {
+      color: black;
+    }
 }

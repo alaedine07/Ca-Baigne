@@ -30,6 +30,8 @@ const Contact = () => {
       <header> 
         <h1>Contact us</h1>
       </header>
+      <div className="fish" id="fish"></div>
+      <div className="fish" id="fish2"></div>
       <div id="form">
       <form ref={form} id="waterform" method="post" action="" onSubmit={sendEmail}>
         <div className="credentials">
@@ -84,6 +86,10 @@ const Contact = () => {
       }
       if($('#email').val() == "") {
         errorfield('#email-form');
+        stopsubmit=true;
+      }
+      if($('#message').val() == "") {
+        errorfield('#message-form');
         stopsubmit=true;
       }
         if(stopsubmit) return false;

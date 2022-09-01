@@ -5,9 +5,7 @@ import Navbar from '../Header/Navbar';
 const Contactpage = () => {
   return (
       <>  
-        <Navbar />
-        <div className='contact-container'>
-          
+        <div className='contact-container'>    
           <Contact />
         </div>
       </>
