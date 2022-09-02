@@ -1,5 +1,4 @@
 import React , {useEffect, useState} from 'react'
-
 import { NavLink } from 'react-router-dom';
 import axios from "axios";
 import jwt_decode from 'jwt-decode';
@@ -163,8 +162,10 @@ else {
               <img src={'http://localhost:3001/' + imagePath.split('/').slice(-3).join('/')} alt="img" />
             </div> : null
             }
-            
-        </ul>
+            <div style={toggleStyle}>
+              <Dark />
+            </div>
+          </ul>
       </div>
   </nav>
   ) 
