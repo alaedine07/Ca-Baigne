@@ -1,0 +1,33 @@
+.form {
+    position: relative;
+    max-width: 500px;
+    margin: auto;
+    text-align: center;
+}
+#avatar-img {
+    width: 200px;
+    position: relative;
+    max-width: 500px;
+    margin: auto;
+    cursor: pointer;
+    border-radius: 50%;
+}
+.Container {
+    margin-top: 2.5rem;
+    padding-bottom: 8.8rem;
+}
+.myInput {
+    margin-bottom: 25px !important;
+    text-indent: 10px;
+    padding: 0.3rem !important;
+    border-radius: 15px;
+}
+.myButton {
+    background-color: #2C6DEF !important;
+    position: relative;
+    padding: 5px;
+    border-radius: 10px;
+}
+.image-upload>input {
+    display: none;
+}

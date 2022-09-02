@@ -1,7 +1,6 @@
 import React from "react";
 
 import SearchBox from "../LandingPage/SearchBox/SearchBox";
-
 import './Home.css'
 
 export function Home() {

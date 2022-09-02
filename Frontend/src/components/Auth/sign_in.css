@@ -8,3 +8,7 @@
         min-height: 85.9vh !important;
     }
 }
+
+.errorMsg {
+    color: red;
+}

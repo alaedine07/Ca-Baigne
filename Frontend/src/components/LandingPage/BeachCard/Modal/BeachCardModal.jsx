@@ -31,6 +31,7 @@ export default function BasicModal(props) {
   const [id, setId]= useState("");
   const [postArray, setPostArray] = useState([]);
 
+
   
   const ratingChanged = (newRating) => {
     setRate(newRating)
@@ -38,7 +39,7 @@ export default function BasicModal(props) {
 
   useEffect(()=> {
     getBeach()
-  })
+  },[])
 
   const getBeach = () => {
     if (props.beachName) {
@@ -52,9 +53,15 @@ export default function BasicModal(props) {
           if (error) console.log(error)
         })
     }
+    console.log('getBeach executed')
+    console.log(id, content)
   }
 
+
+
+
   const addPost = () => {
+    
     axios.post('http://localhost:3001/api/v1/post/newpost', {
       content: content,
       beachId: id
@@ -64,18 +71,34 @@ export default function BasicModal(props) {
         "Content-type": "application/json"
       }
     }
-    ).then(() => console.log('post added'))
+    ).then(() => {console.log('post added')
+    props.forceUpdate()
+  })
     .catch(function (error) {
       if (error.response) {
         console.log(error.response.data)
       }
     })
-    props.forceUpdate()
+    
+  }
+
+  const hndleSubmit = (event) => {
+    event.preventDefault()
+    addPost(event)
+    setContent('')
+    
   }
 
   useEffect(() => {
+    console.log('id ready')
     getAllPosts()
-}, [props.reducedValue])
+}, [id])
+
+
+useEffect(()=> {
+  console.log('post added')
+  getAllPosts()
+},[props.reducedValue])
 
   const getAllPosts = () => {
     axios.get('http://localhost:3001/api/v1/post/allposts')
@@ -85,40 +108,37 @@ export default function BasicModal(props) {
         data.beachId === id ? Posts.push({id: data.id , content: data.content, createdAt: data.createdAt}) : null
       )
       setPostArray(Posts)
-      console.log("here's your posts")
+      console.log(postArray)
     })
     .catch(error => {
       if (error) console.log(error)
     })
-    
+    console.log("here's your posts")
   }
 
-  const hndleSubmit = (event) => {
-    event.preventDefault()
-    addPost(event)
-    setContent('')
-    props.forceUpdate()
-  }
+
 
   const deletePost = () => {
     axios.delete(`http://localhost:3001/api/v1/post/deletepost/${postId}`)
-    .then(console.log(`post with id ${postId} has been deleted`))
+    .then(() => {
+      console.log(`post with id ${postId} has been deleted`)
+      
+    })
     .catch(error => console.log(error))
 }
 
 
-
   return (
+    
     <Modal open={props.open} onClose={props.handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
     
     <Box sx={style}>
           <div className='first-half'>
-          <img src={props.image} className='modal-img'></img>
-        <div className='beach-name'>
-          <div>{props.beachName}</div>
-          <div><span>4.5</span> <i className="star fas fa-star"></i></div>
-          
-        </div>
+            <img src={props.image} className='modal-img'></img>
+            <div className='beach-name'>
+              <div>{props.beachName}</div>
+              <div><span>4.5</span> <i className="star fas fa-star"></i></div>
+            </div>
           
           </div>
         
@@ -138,7 +158,7 @@ export default function BasicModal(props) {
             />
             {
             rate ? <div style={{fontFamily: 'Amiri'}}><p>Your rate ({rate}) has been received</p><p>Thank you !</p></div> : null
-          }
+            }
             
             </div>
             <div className="posts">
@@ -170,7 +190,5 @@ export default function BasicModal(props) {
         </Box>
     
     </Modal>
-        
-        
   );
 }

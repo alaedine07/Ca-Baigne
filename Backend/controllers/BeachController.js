@@ -20,8 +20,15 @@ exports.getBeach = (req, res) => {
 
 exports.addNewBeach = (req, res, next) =>
 {
-  const {name, location, latitude, longitude, description} = req.body
-  const beach = { name, location, latitude, longitude, description }
+  items = req.body.caracteristiques.split(',');
+  output = {}
+  for (var i = 0; i < items.length; i++) {
+    output[i] = items[i];
+  }
+  const {name, governorate, latitude, longitude} = req.body;
+  const imagepath = req.file.path;
+  const amenities = output;
+  const beach = { name, governorate, latitude, longitude, imagepath, amenities}
   Beach.create(beach)
   .then(
     newBeach => res.status(200).json({ newBeach })
@@ -31,8 +38,8 @@ exports.addNewBeach = (req, res, next) =>
 
 exports.updateBeach = (req, res) => {
   const { id } = req.params
-  const {name, location, latitude, longitude, description} = req.body
-  const beach = { name, location, latitude, longitude, description }
+  const {name, governorate, latitude, longitude} = req.body
+  const beach = { name, governorate, latitude, longitude }
   Beach.update({ ...beach},
     { where: {id} })
   .then(

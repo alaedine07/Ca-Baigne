@@ -15,6 +15,11 @@ html, body {
     margin: 0;
 }
 
+label {
+    display: flex;
+    margin-bottom: 10px;
+}
+
 .flex-wrapper {
     display: flex;
     min-height: 78.8vh !important;

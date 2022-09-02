@@ -8,6 +8,7 @@ export function SignUpForm() {
     const [email, setEmail] = useState("");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [error, setError] = useState(false);
 
     function createUser(event) {
       event.preventDefault();
@@ -25,10 +26,9 @@ export function SignUpForm() {
         const Domain = window.location.origin;
         const URL = Domain + '/login';
         window.location.replace(URL);
-      })
-      .catch(function (error) {
+      }).catch(function (error) {
         if (error.response) {
-          console.log(error.response.data)
+          setError(true);
         }
       })
     }
@@ -36,13 +36,11 @@ export function SignUpForm() {
     return (
         <div
             className="
-            signup
             min-h-screen
             flex flex-col
             items-center
             justify-center
-            bg-gray-100
-            p-5"
+            bg-gray-100"
         >
         <div
             className="
@@ -69,7 +67,7 @@ export function SignUpForm() {
         </div>
         <div
             className="
-            mt-2
+            mt-4
             self-center
             text-xl
             sm:text-sm
@@ -77,14 +75,14 @@ export function SignUpForm() {
             Fill this form to create an account
         </div>
 
-        <div className="">
+        <div className="mt-1">
             <form action="#">
-            <div className="flex flex-col">
+            <div className="flex flex-col mb-6">
                 <label
-                    htmlFor="email"
-                    className="mb-1 text-xs tracking-wide text-gray-600"
+                    for="email"
+                    className="mb-2 text-s tracking-wide text-gray-600"
                 >
-                E-Mail Address:
+                Mail Address:
                 </label>
               <div className="relative">
                 <div
@@ -110,7 +108,6 @@ export function SignUpForm() {
                     onChange={e => setEmail(e.target.value)}
                     className="
                     text-sm
-                    p-4
                     placeholder-gray-500
                     pl-10
                     pr-4
@@ -123,10 +120,10 @@ export function SignUpForm() {
                 />
               </div>
             </div>
-            <div className="flex flex-col">
+            <div className="flex flex-col mb-6">
                 <label
-                    htmlFor="firstName"
-                    className="mb-1 text-xs tracking-wide text-gray-600"
+                    for="firstName"
+                    className="mb-2 text-s tracking-wide text-gray-600"
                 >
                 Username:
                 </label>
@@ -154,7 +151,6 @@ export function SignUpForm() {
                     onChange={e => setUsername(e.target.value)}
                     className="
                     text-sm
-                    p-4
                     placeholder-gray-500
                     pl-10
                     pr-4
@@ -167,16 +163,10 @@ export function SignUpForm() {
                 />
               </div>
             </div>
-            <div className="flex flex-col mb-6">
+            <div className="flex flex-col mb-5">
               <label
-                    htmlFor="password"
-                    className="
-                    mb-1
-                    text-xs
-                    sm:text-sm
-                    tracking-wide
-                    text-gray-600"
-                >
+                    for="password"
+                    className="mb-2 text-s tracking-wide text-gray-600">
                 Password:
             </label>
               <div className="relative">
@@ -205,7 +195,6 @@ export function SignUpForm() {
                     onChange={e => setPassword(e.target.value)}
                     className="
                     text-sm
-                    p-4
                     placeholder-gray-500
                     pl-10
                     pr-4
@@ -245,7 +234,9 @@ export function SignUpForm() {
                   <svg
                     className="h-6 w-6"
                     fill="none"
-                    
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
                   >
@@ -258,13 +249,15 @@ export function SignUpForm() {
             </div>
           </form>
         </div>
+        {
+          error ? <div className="flex justify-center"><span className="errorMsg">User already exists</span></div> : null
+        }
       </div>
       <div className="flex justify-center items-center mt-6">
-        <div
+        <a
           href="#"
           target="_blank"
           className="
-            sigin-text
             inline-flex
             items-center
             text-gray-700
@@ -280,7 +273,7 @@ export function SignUpForm() {
               >Login now</a
             >
             </span>
-        </div>
+        </a>
       </div>
     </div>
     );

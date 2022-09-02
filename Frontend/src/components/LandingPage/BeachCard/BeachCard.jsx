@@ -21,9 +21,11 @@ const BeachesImg = [
 function BeachCard(props) {
   const [rate, setRate]= useState();
   const [open, setOpen] = useState(false);
+  const [icon, setIcon] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const [reducedValue, forceUpdate] = useReducer(x => x + 1, 1);
+  
+  const [reducedValue, forceUpdate] = useReducer(x => x + 1, 0);
 
   const getImage = () => {
       for (let i = 0; i < BeachesImg.length; i++) {
@@ -42,14 +44,17 @@ function BeachCard(props) {
 
   const handleClick = () => {
     handleOpen()
-    forceUpdate()
   }
 
   return (
     <>
     <div id={props.id} className='f p-5' >
       <div className="card bg-dark text-white" >
-        <button className='pin'><i className="far fa-heart"></i></button>
+        <button className='pin' onClick={() => setIcon(0 + 1)
+        }>
+          { icon ? <i className="fas fa-heart"></i> :
+          <i className="far fa-heart"></i> }
+          </button>
         <div className='overflow'>
           <img className="card-img-top" src={getImage()} alt="Card image cap" onClick={handleClick}/>
         </div>

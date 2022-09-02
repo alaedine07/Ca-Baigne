@@ -12,7 +12,7 @@ const Beach = db.define('beach', {
     type: Sequelize.STRING,
     allowNull: false
   },
-  location: {
+  governorate: {
     type: Sequelize.STRING,
     allowNull: false
   },
@@ -24,10 +24,14 @@ const Beach = db.define('beach', {
     type: Sequelize.FLOAT,
     allowNull: false
   },
-  description: {
-    type: Sequelize.STRING,
+  amenities: {
+    type: Sequelize.JSON,
     allowNull: true
   },
+  imagepath: {
+    type: Sequelize.STRING,
+    allowNull: true
+  }
 })
 
 module.exports = Beach;

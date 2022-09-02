@@ -16,7 +16,7 @@ function BeachResults(props) {
         beaches.map(beach => {
         beach.location === props.locationName
         ?
-        results.push(<SwiperSlide> <BeachCard key={uuidv4()} beachName={beach.name} description={beach.description} /></SwiperSlide>)
+        results.push(<SwiperSlide> <BeachCard beach_id={beach.id} key={uuidv4()} beachName={beach.name} description={beach.description} /></SwiperSlide>)
         :
         '' 
         })})

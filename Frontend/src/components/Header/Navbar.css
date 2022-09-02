@@ -54,6 +54,18 @@ i {
   position: relative;
 }
 
+.profileImageZone {
+  position: absolute;
+  right: 5rem;
+  top: 0.6rem;
+}
+
+.profileImageZone>img {
+  width: 40px;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
 @media (max-width: 991px) {
   #navbarSupportedContent ul li a {
     padding: 12px 30px;

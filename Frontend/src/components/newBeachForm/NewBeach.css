@@ -1,0 +1,29 @@
+.form-container {
+    position: relative;
+    max-width: 500px;
+    margin: auto;
+    text-align: center;
+}
+
+.myInput {
+    margin-bottom: 25px !important;
+    text-indent: 10px;
+    padding: 0.3rem !important;
+    border-radius: 15px;
+}
+
+.checkBox-options {
+    display: flex;
+}
+
+.MyCheckBox {
+    width: 20px;
+}
+
+.checkBoxDescription {
+    margin: 0px !important
+}
+
+legend {
+    margin-bottom: 30px !important
+}

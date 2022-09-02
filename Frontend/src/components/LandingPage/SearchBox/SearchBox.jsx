@@ -105,6 +105,7 @@ function SearchBox() {
       
     </div>
       </Container>
+      <div className="beachResults">
       <BeachResults
        beachArray={beachArray}
        locationName={locationName}
@@ -112,6 +113,8 @@ function SearchBox() {
       result={result}
       results={results}
       />
+      </div>
+      
     </>
   );
 }

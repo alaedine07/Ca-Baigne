@@ -20,6 +20,10 @@ const User = db.define('user', {
   hashedPassword: {
     type: Sequelize.STRING(64),
   },
+  imagePath: {
+    type: Sequelize.STRING,
+    allowNull: true
+  }
 })
 
 
