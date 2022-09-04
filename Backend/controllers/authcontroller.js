@@ -9,7 +9,7 @@ exports.login = async (req, res) => {
     }
     try {
       if (await bcrypt.compare(req.body.hashedPassword, user.hashedPassword)) {
-        new_user = {id: user.id, Username: user.userName}
+        new_user = {id: user.id, Username: user.userName, imagePath: user.imagePath}
         const token = jwt.sign(new_user, process.env.ACCESS_TOKEN_SECRET)
         res.status(200).send(
           {

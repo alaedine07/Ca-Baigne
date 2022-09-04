@@ -20,8 +20,8 @@ exports.getPost = (req, res) => {
 
 exports.addNewPost = (req, res, next) =>
 {
-  const { content } = req.body
-  const post = { content }
+  const { content, beachId, userId, userName } = req.body
+  const post = { content, beachId, userId, userName }
   Post.create(post)
   .then(newPost => res.status(200).json({ newPost }))
   .catch(console.log('Some error occured'))

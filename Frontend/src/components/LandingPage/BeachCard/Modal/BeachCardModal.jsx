@@ -5,6 +5,7 @@ import ReactStars from "react-rating-stars-component";
 import Modal from '@mui/material/Modal';
 import Posts from "./ModalPosts/Posts";
 import axios from "axios";
+import jwt_decode from 'jwt-decode';
 import './Modal.css';
 
 
@@ -31,15 +32,24 @@ export default function BasicModal(props) {
   const [id, setId]= useState("");
   const [postArray, setPostArray] = useState([]);
 
-
+  useEffect(() => {
+    console.log('id ready')
+    getAllPosts()
+  }, [id])
   
-  const ratingChanged = (newRating) => {
-    setRate(newRating)
-  };
-
   useEffect(()=> {
     getBeach()
   },[])
+  
+  
+  useEffect(()=> {
+    console.log('post added')
+    getAllPosts()
+  },[props.reducedValue])
+
+  const ratingChanged = (newRating) => {
+    setRate(newRating)
+  };
 
   const getBeach = () => {
     if (props.beachName) {
@@ -57,14 +67,18 @@ export default function BasicModal(props) {
     console.log(id, content)
   }
 
-
-
-
   const addPost = () => {
-    
+    const token = localStorage.getItem('accessToken');
+    const decoded = jwt_decode(token);
+    const userId = decoded['id'];
+    const userName = decoded['Username'];
+    const imagePath = decoded['imagePath'];
     axios.post('http://localhost:3001/api/v1/post/newpost', {
       content: content,
-      beachId: id
+      beachId: id,
+      userId: userId,
+      userName: userName,
+      userImageatPh: imagePath
     },
     {
       headers: {
@@ -79,33 +93,22 @@ export default function BasicModal(props) {
         console.log(error.response.data)
       }
     })
-    
   }
 
   const hndleSubmit = (event) => {
     event.preventDefault()
     addPost(event)
     setContent('')
-    
   }
-
-  useEffect(() => {
-    console.log('id ready')
-    getAllPosts()
-}, [id])
-
-
-useEffect(()=> {
-  console.log('post added')
-  getAllPosts()
-},[props.reducedValue])
 
   const getAllPosts = () => {
     axios.get('http://localhost:3001/api/v1/post/allposts')
     .then(response => {
       const Posts = []
       response.data.posts.map( data => 
-        data.beachId === id ? Posts.push({id: data.id , content: data.content, createdAt: data.createdAt}) : null
+        data.beachId === id ? 
+        Posts.push({id: data.id , content: data.content, createdAt: data.createdAt, userId: data.userId, userName: data.userName}): 
+        null
       )
       setPostArray(Posts)
       console.log(postArray)
@@ -116,13 +119,10 @@ useEffect(()=> {
     console.log("here's your posts")
   }
 
-
-
   const deletePost = () => {
-    axios.delete(`http://localhost:3001/api/v1/post/deletepost/${postId}`)
-    .then(() => {
-      console.log(`post with id ${postId} has been deleted`)
-      
+    axios.delete(`http://localhost:3001/api/v1/post/deletepost/${postId}`).then(() => {
+      console.log('post is deleted')
+      props.forceUpdate();
     })
     .catch(error => console.log(error))
 }
@@ -130,16 +130,20 @@ useEffect(()=> {
 
   return (
     
-    <Modal open={props.open} onClose={props.handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
+    <Modal 
+          open={props.open} 
+          onClose={props.handleClose} 
+          aria-labelledby="modal-modal-title" 
+          aria-describedby="modal-modal-description"
+    >
     
     <Box sx={style}>
           <div className='first-half'>
-            <img src={props.image} className='modal-img'></img>
+            <img src={'http://localhost:3001/' + props.image.split('/').slice(-3).join('/')} className='modal-img'></img>
             <div className='beach-name'>
               <div>{props.beachName}</div>
               <div><span>4.5</span> <i className="star fas fa-star"></i></div>
             </div>
-          
           </div>
         
         <div className='second-half'>
@@ -163,28 +167,28 @@ useEffect(()=> {
             </div>
             <div className="posts">
               <Posts 
-              postArray={postArray}
-              setPostId={setPostId}
-              deletePost={deletePost}
-              forceUpdate={props.forceUpdate}
+                postArray={postArray}
+                setPostId={setPostId}
+                deletePost={deletePost}
+                forceUpdate={props.forceUpdate}
               />
             </div>
 
               <form className="post-form">
-              <div className='post'>
-              <input
-                type="text"
-                name='content'
-                onChange={(event) => setContent(event.target.value)}
-                value={content}
-                className='post-input'
-                placeholder='Give us your review' ></input>
-                <button
-                type='submit'
-                className='post-btn btn btn-dark'
-                onClick={hndleSubmit}
-                >Post</button>
-                </div>
+                <div className='post'>
+                  <input
+                  type="text"
+                  name='content'
+                  onChange={(event) => setContent(event.target.value)}
+                  value={content}
+                  className='post-input'
+                  placeholder='Give us your review' ></input>
+                  <button
+                  type='submit'
+                  className='post-btn btn btn-dark'
+                  onClick={hndleSubmit}
+                  >Post</button>
+                  </div>
               </form>
             </div>  
         </Box>

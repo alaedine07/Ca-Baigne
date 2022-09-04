@@ -1,6 +1,6 @@
-PUT http://localhost:3001/api/v1/beach/updatebeach/f40ac1e1-fe6f-431b-842c-415c4599f39b
+PUT http://localhost:3001/api/v1/beach/updatebeach/e8628f2d-0858-4d94-8a5f-92647fc71858
 content-type: application/json
 
 {
-    "name": "Les Citronniers Beach"
+    "imagepath": "/home/aladin/Ca-Baigne/Backend/uploads/beaches/image-mamoura.jpg"
 }

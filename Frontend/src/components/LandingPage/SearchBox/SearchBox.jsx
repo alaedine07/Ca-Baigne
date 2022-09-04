@@ -6,21 +6,22 @@ import BeachResults from "../SearchResult/BeachResults";
 import './SearchBox.css'
 
 function SearchBox() {
-  // States
   const [locationName, setLocation]= useState();
   const [beachName, setBeach] = useState();
+  // sets to true when specefic beach is selected
   const [result, setResult] = useState(false);
+  // sets to true when multiple beaches are selected (beaches carousel)
   const [results, setResults] = useState(false);
-  const [beachArray, setBeachArray] = useState([])
+  const [beachArray, setBeachArray] = useState([]);
 
   const Handleresults = () => {
-    setResult(false)
-    setResults(false)
-    setBeach('')
+    setResult(false);
+    setResults(false);
+    setBeach('');
   }
 
   const Handlelocation = (event) => {
-    Handleresults()
+    Handleresults();
     let getLocation = event.target.value;
     setLocation(getLocation);
   }
@@ -32,31 +33,35 @@ function SearchBox() {
   }
 
   const handleSubmit = () => {
+    // if only a location is selected turn the display to multiple beaches (carousel)
     if (locationName) {
-      setResult(false)
-      setResults(true)
+      setResult(false);
+      setResults(true);
     }
+    // if a beach is selected turn the display to one beach
     if (beachName) {
-      setResults(false)
-      setResult(true)
+      setResults(false);
+      setResult(true);
     }
   }
 
+  // fetch all beaches when a beach is selected and set the beachArray state to result
   const getallBeaches = () => {
     axios.get('http://localhost:3001/api/v1/beach/allbeaches')
     .then(response => {
       const beaches = []
       response.data.beaches.map(
-        data => data.location === locationName
+        data => data.governorate.toLowerCase() === locationName.toLowerCase()
          ?
          beaches.push([{
           name: data.name,
           id: data.id,
-          location: data.location,
+          location: data.governorate,
+          amenities: data.amenities,
           option: <option key={data.id}>{data.name}</option>,
+          imagepath: data.imagepath,
           latitude: data.latitude,
           longitude: data.longitude,
-          description: data.description,
     }])
          :
          null
@@ -64,7 +69,7 @@ function SearchBox() {
       setBeachArray(beaches)
     })
     .catch(error => {
-      if (error) console.log(error)
+      if (error) console.error(error)
     })
   }
 
@@ -105,17 +110,16 @@ function SearchBox() {
       
     </div>
       </Container>
-      <div className="beachResults">
-      <BeachResults
-       beachArray={beachArray}
-       locationName={locationName}
-       beachName={beachName}
-      result={result}
-      results={results}
-      />
-      </div>
-      
-    </>
+        <div className="beachResults">
+          <BeachResults
+            beachArray={beachArray}
+            locationName={locationName}
+            beachName={beachName}
+            result={result}
+            results={results}
+          />
+        </div>
+  </>
   );
 }
 
