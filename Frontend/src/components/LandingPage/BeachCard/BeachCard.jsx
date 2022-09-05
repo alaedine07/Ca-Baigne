@@ -3,12 +3,14 @@ import { v4 as uuidv4 } from "uuid";
 import ReactStars from "react-rating-stars-component";
 import './BeachCard.css'
 import BasicModal from './Modal/BeachCardModal';
+import getbeachState from '../../../Utils/WindyApiCall';
 
 function BeachCard(props) {
   
   const [rate, setRate]= useState();
   const [open, setOpen] = useState(false);
   const [icon, setIcon] = useState(false);
+  const [beachState, setBeachState] = useState('');
   
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -39,6 +41,13 @@ function BeachCard(props) {
     }
   }
 
+  async function getFlag(la, lo) {
+    const flag = await getbeachState(la, lo);
+    setBeachState(flag);
+  }
+
+
+
   return (
     <>
     <div id={props.id} className='f p-5' >
@@ -59,7 +68,7 @@ function BeachCard(props) {
         </div>
         <ul className="list-group list-group-flush">
           <li key={uuidv4()} className="list-group-item bg-secondary text-white">Weather: 30c°</li>
-          <li key={uuidv4()} className="list-group-item bg-secondary text-white">Beach state: white flag <i className="fas fa-solid fa-flag text-white"></i></li>
+          <li key={uuidv4()} className="list-group-item bg-secondary text-white">Beach state: {getFlag(props.beachData.latitude, props.beachData.longitude) && beachState === "green" ? <i className="green-flag fas fa-solid fa-flag"></i> : beachState === "orange" ? <i className="orange-flag fas fa-solid fa-flag"></i> : <i className="red-flag fas fa-solid fa-flag"></i>}</li>
           <li key={uuidv4()} className="list-group-item bg-secondary text-white">facilities: {getAmenities()}</li>
         </ul>
         {checkLogin() &&
