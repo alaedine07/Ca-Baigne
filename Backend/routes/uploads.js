@@ -38,11 +38,7 @@ const user_upload = multer({
 })
 
 // upload a User image
-<<<<<<< HEAD
-router.post('/userUploads', UserController.verifyToken, user_upload.single('file'), uploadController.uploadBeachImage);
-=======
 router.post('/userUploads', user_upload.single('file'), uploadController.uploadBeachImage);
->>>>>>> 23ddd0168db327500271bb0edac8c6f15b8783aa
 
 
 module.exports = router;

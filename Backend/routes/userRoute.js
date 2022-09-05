@@ -1,10 +1,5 @@
 const router = require('express').Router()
 const UserController = require('../controllers/UsersController');
-<<<<<<< HEAD
-const authController = require('../controllers/authcontroller');
-=======
-
->>>>>>> 23ddd0168db327500271bb0edac8c6f15b8783aa
 
 // Get All Users
 router.get('/allusers', UserController.getAllUsers);

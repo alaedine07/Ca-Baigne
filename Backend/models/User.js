@@ -22,12 +22,8 @@ const User = db.define('user', {
   },
   imagePath: {
     type: Sequelize.STRING,
-<<<<<<< HEAD
-    allowNull: true
-=======
     allowNull: true,
     defaultValue: ''
->>>>>>> 23ddd0168db327500271bb0edac8c6f15b8783aa
   }
 })
 

@@ -1,13 +1,14 @@
 const express = require('express');
 const userRoute = require('./routes/userRoute');
-const beachRoute = require('./routes/beachRoute')
-const postRoute = require('./routes/postRoute')
+const beachRoute = require('./routes/beachRoute');
+const postRoute = require('./routes/postRoute');
 const authRoute = require('./routes/authRoute');
 const uploadRoute = require('./routes/uploads');
 const bodyParser = require('body-parser');
 const User = require('./models/User');
 const Post = require('./models/Post');
 const Beach = require('./models/Beach');
+const logger = require('morgan');
 const db = require('./util/database');
 const app = express();
 
@@ -36,6 +37,7 @@ app.use((req, res, next) => {
 })
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(logger('dev'));
 
 
 // endoint routes

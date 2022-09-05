@@ -6,10 +6,7 @@ const Op = require('sequelize');
 exports.verifyToken = (req, res, next) => {
   const authHeader = req.headers['authorization']
   const token = authHeader && authHeader.split(' ')[1]
-<<<<<<< HEAD
-=======
   console.log(token)
->>>>>>> 23ddd0168db327500271bb0edac8c6f15b8783aa
   if (token === null) { 
     res.redirect('/login');
   } else {
@@ -74,7 +71,7 @@ exports.updateUser = async (req, res) => {
   .catch(err => res.status(404).json('Error: ' + err))
 }
 
-// must be protected to be used by only admins
+// must be protected to be used by admins only
 exports.deleteUser = (req, res) => {
   const { id } = req.params
   User.destroy({ where: { id }})
