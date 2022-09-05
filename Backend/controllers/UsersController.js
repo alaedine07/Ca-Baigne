@@ -6,6 +6,10 @@ const Op = require('sequelize');
 exports.verifyToken = (req, res, next) => {
   const authHeader = req.headers['authorization']
   const token = authHeader && authHeader.split(' ')[1]
+<<<<<<< HEAD
+=======
+  console.log(token)
+>>>>>>> 23ddd0168db327500271bb0edac8c6f15b8783aa
   if (token === null) { 
     res.redirect('/login');
   } else {

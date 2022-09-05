@@ -3,6 +3,12 @@
 @tailwind utilities;
 @import url('https://use.fontawesome.com/releases/v5.15.4/css/all.css');
 
+@media screen and (min-width: 1300px) {
+    .signin {
+        min-height: 85.9vh !important;
+    }
+}
+
 .errorMsg {
     color: red;
 }

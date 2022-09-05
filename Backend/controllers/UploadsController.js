@@ -14,4 +14,8 @@ exports.uploadBeachImage = (req, res, next) => {
       .then(
         res.status(200).json('Image has been successfully updated')
       ).catch(err => res.status(404).json('Error: ' + err))
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 23ddd0168db327500271bb0edac8c6f15b8783aa

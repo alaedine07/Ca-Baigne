@@ -38,8 +38,8 @@ exports.addNewBeach = (req, res, next) =>
 
 exports.updateBeach = (req, res) => {
   const { id } = req.params
-  const {name, governorate, latitude, longitude} = req.body
-  const beach = { name, governorate, latitude, longitude }
+  const {name, governorate, latitude, longitude, amenities, imagepath} = req.body
+  const beach = { name, governorate, latitude, longitude, amenities, imagepath}
   Beach.update({ ...beach},
     { where: {id} })
   .then(

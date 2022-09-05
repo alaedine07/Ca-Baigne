@@ -8,8 +8,9 @@ const db = new Sequelize(
     process.env.DATABASE_USER,
     process.env.DATABASE_PASSWORD,
     {
-        dialect: 'postgres'
-    }
+        dialect: 'postgres',
+        timezone: '+01'
+    },
 )
 
 module.exports = db

@@ -6,7 +6,10 @@ import axios from "axios";
 import FormData from 'form-data';
 
 import avatarMen from '../../Assets/Images/avatar_men.png'
+<<<<<<< HEAD
 import avatarWomen from '../../Assets/Images/avatar_women.png'
+=======
+>>>>>>> 23ddd0168db327500271bb0edac8c6f15b8783aa
 import './Profile.css'
 
 
@@ -69,8 +72,16 @@ export function Profile(props) {
         formData.append("file", file);
         formData.append("fileName", fileName);
         const token = localStorage.getItem('accessToken');
+<<<<<<< HEAD
         const decoded = jwt_decode(token);
         const userId = decoded['id'];
+=======
+        console.log(token)
+        const decoded = jwt_decode(token);
+        console.log(decoded)
+        const userId = decoded['id'];
+        console.log(userId)
+>>>>>>> 23ddd0168db327500271bb0edac8c6f15b8783aa
         formData.append("userid", userId);
         axios.post('http://localhost:3001/api/v1/uploads/userUploads', formData, {
             headers: {
@@ -91,8 +102,16 @@ export function Profile(props) {
         <Header token={props.token}/>
         <div className="Container">
         <div className="image-upload">
+<<<<<<< HEAD
             <label for="file-input">
                 <img id="avatar-img" src={'http://localhost:3001/' + userData.imgFullPath.split('/').slice(-3).join('/')}/>
+=======
+            <label htmlFor="file-input">
+            { userData.imgFullPath ? 
+                <img id="avatar-img" src={'http://localhost:3001/' + userData.imgFullPath.split('/').slice(-3).join('/')}/> : 
+                <img id="avatar-img" src={avatarMen}/>
+                }
+>>>>>>> 23ddd0168db327500271bb0edac8c6f15b8783aa
             </label>
             <input id="file-input" type="file" onChange={saveFile}/>
         </div>

@@ -1,2 +1,2 @@
-DELETE  http://localhost:3001/api/v1/beach/deletebeach/8c49feba-d693-4725-9f3b-9b5b544b22a8
+DELETE  http://localhost:3001/api/v1/beach/deletebeach/dc4e6589-f16e-4d24-9c19-88b3c694ef08
 
