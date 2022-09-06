@@ -14,11 +14,6 @@ html, body {
     height: 100%;
     margin: 0;
 }
-<<<<<<< HEAD
-label {
-    display: flex;
-    margin-bottom: 10px;
-=======
 
 label {
     display: flex;
@@ -35,5 +30,4 @@ label {
     .flex-wrapper {
         min-height: 85.9vh !important;
     }
->>>>>>> 23ddd0168db327500271bb0edac8c6f15b8783aa
 }

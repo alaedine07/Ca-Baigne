@@ -35,7 +35,13 @@ exports.getUser = async (req, res) => {
 
 exports.addNewUser = async (req, res) =>
 {
-  const { userName, email, hashedPassword } = req.body
+  const { userName, email, hashedPassword } = req.body 
+  if (userName === "" || email === "" || hashedPassword === "") {
+    return res.status(500).send('empty values are not allowed');
+  }
+  if (userName === undefined || email === undefined || hashedPassword === undefined) {
+    return res.status(500).send('empty values are not allowed');
+  }
   const newUser = await User.findOne({ where: { email: req.body.email } })
   const newUserWithName = await User.findOne({ where: { userName: req.body.userName } })
   if (newUser || newUserWithName) return res.status(409).send('User Already exists')
