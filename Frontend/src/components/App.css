@@ -11,10 +11,23 @@ html, body {
     font-family: 'Roboto', sans-serif;
     background-repeat: no-repeat;
     background-size: cover;
-    height: 100vh;
+    height: 100%;
     margin: 0;
 }
+
 label {
     display: flex;
     margin-bottom: 10px;
+}
+
+.flex-wrapper {
+    display: flex;
+    min-height: 78.8vh !important;
+    flex-direction: column;
+}
+
+@media screen and (min-width: 1300px) {
+    .flex-wrapper {
+        min-height: 85.9vh !important;
+    }
 }

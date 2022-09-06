@@ -5,9 +5,7 @@ import Navbar from '../Header/Navbar';
 const Contactpage = (props) => {
   return (
       <>  
-        <Navbar token={props.token}/>
-        <div className='con'>
-          
+        <div className='contact-container'>    
           <Contact />
         </div>
       </>

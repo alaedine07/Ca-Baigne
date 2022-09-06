@@ -6,6 +6,7 @@ const Op = require('sequelize');
 exports.verifyToken = (req, res, next) => {
   const authHeader = req.headers['authorization']
   const token = authHeader && authHeader.split(' ')[1]
+  console.log(token)
   if (token === null) { 
     res.redirect('/login');
   } else {
@@ -34,7 +35,13 @@ exports.getUser = async (req, res) => {
 
 exports.addNewUser = async (req, res) =>
 {
-  const { userName, email, hashedPassword } = req.body
+  const { userName, email, hashedPassword } = req.body 
+  if (userName === "" || email === "" || hashedPassword === "") {
+    return res.status(500).send('empty values are not allowed');
+  }
+  if (userName === undefined || email === undefined || hashedPassword === undefined) {
+    return res.status(500).send('empty values are not allowed');
+  }
   const newUser = await User.findOne({ where: { email: req.body.email } })
   const newUserWithName = await User.findOne({ where: { userName: req.body.userName } })
   if (newUser || newUserWithName) return res.status(409).send('User Already exists')
@@ -70,7 +77,7 @@ exports.updateUser = async (req, res) => {
   .catch(err => res.status(404).json('Error: ' + err))
 }
 
-// must be protected to be used by only admins
+// must be protected to be used by admins only
 exports.deleteUser = (req, res) => {
   const { id } = req.params
   User.destroy({ where: { id }})

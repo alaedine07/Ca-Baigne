@@ -1,9 +1,10 @@
-POST http://localhost:3001/api/v1/beach/newbeach
+POST http://localhost:3001/api/v1/beach/newbeach 
 content-type: application/json
 
 {
-    "name": "marsa",
-    "governorate": "tunis",
-    "latitude": 3.15,
-    "longitude": 24.65
+"name": "Maamoura Beach",
+ "location": "Nabeul",
+  "latitude": 36.4634,
+   "longitude": 10.8120,
+   "description": "Amenities beach * Easy access * Golden sand * Turquoise pure water * Free entrance * Crowded in season"
 }

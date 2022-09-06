@@ -1,13 +1,14 @@
 const express = require('express');
 const userRoute = require('./routes/userRoute');
-const beachRoute = require('./routes/beachRoute')
-const postRoute = require('./routes/postRoute')
+const beachRoute = require('./routes/beachRoute');
+const postRoute = require('./routes/postRoute');
 const authRoute = require('./routes/authRoute');
 const uploadRoute = require('./routes/uploads');
 const bodyParser = require('body-parser');
 const User = require('./models/User');
 const Post = require('./models/Post');
 const Beach = require('./models/Beach');
+const logger = require('morgan');
 const db = require('./util/database');
 const app = express();
 
@@ -36,6 +37,7 @@ app.use((req, res, next) => {
 })
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(logger('dev'));
 
 
 // endoint routes
@@ -44,6 +46,10 @@ app.use('/api/v1/beach', beachRoute);
 app.use('/api/v1/post', postRoute);
 app.use('/api/v1/auth', authRoute);
 app.use('/api/v1/uploads', uploadRoute);
+
+app.get('/', (req, res) => {
+    res.send('hello app is working');
+})
 
 // connect backend to the database
 db.authenticate ()
@@ -54,14 +60,18 @@ db.authenticate ()
 // loads environment variables from a .env file into the process.env object
 require('dotenv').config()
 
+
+
 // synchronize Sequelize model with database tables and run the server
 try {
     // Change false to true if you modified the models it will re-create the tables
     // NB: it will delete all previous entries
     db.sync({ force: false }).then(() => {
-        app.listen(process.env.EXTERNAL_PORT || 3001);
+        const server = app.listen(process.env.EXTERNAL_PORT || 3001);
         console.log(`*server running on port ${process.env.EXTERNAL_PORT}*`);
     });
 } catch (error) {
     console.error(error);
 }
+
+module.exports = app

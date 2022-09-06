@@ -1,0 +1,169 @@
+@import url('https://fonts.googleapis.com/css2?family=Amiri&family=Coiny&family=Inter:wght@300&display=swap');
+
+.modal-img {
+    width: 100%;
+    height: 80%;
+    padding: 0 !important;
+    margin: 0;
+    border-top-left-radius: 10px;
+}
+
+.first-half {
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid rgb(173, 173, 173);
+}
+
+.second-half {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.beach-name {
+    font-family: 'Amiri', sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    padding-top: 0.5rem;
+    padding-left: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.top-header {
+    background-color: #898b8d91;
+    display: flex;
+    justify-content: space-between;
+    padding-right: 5px;
+    padding-left: 5px;
+    color: rgb(0, 0, 0);
+    align-items: center;
+    border-top-right-radius : 6.3px;
+    box-shadow: 0 1px 9px rgba(0, 0, 0, 0.363);
+}
+
+.title-header {
+    font-family: 'Amiri', sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.ratings {
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 5px;
+}
+
+.star {
+    color: yellow;
+    padding-right: 5px;
+}
+
+.css-1d3z3hw-MuiOutlinedInput-notchedOutline {
+    text-align: left;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    top: 5px !important;
+    left: 0;
+    margin: 0;
+    pointer-events: none;
+    border-radius: inherit;
+    border-style: solid;
+    border-width: 1px;
+    overflow: hidden;
+    min-width: 0%;
+    border-color: rgba(0, 0, 0, 0.23);
+}
+
+.post-form {
+    width: auto;
+    color: black;
+    padding: 0;
+    margin: 0.6rem;
+
+}
+
+.post-input {
+    width: 100% !important;
+    border: none;
+    outline: none !important;
+    height: 2rem !important;
+    font-family: inherit;
+    font-size: 100%;
+    line-height: 0.2 !important;
+    padding-bottom: 1rem !important;
+    overflow: hidden !important;
+    resize: none;
+    display: inline-block;
+}
+
+.post-input:focus {
+    border: none;
+    
+}
+
+.post {
+    height: auto;
+    width: auto;
+    display: flex;
+    align-items: flex-end;
+    gap: 1;
+    border-top: 1px solid rgb(173, 173, 173);
+    align-items: center;
+}
+.post-btn {
+    font-family: 'Amiri', sans-serif;
+    font-weight: bold;
+    border: none;
+    border-bottom-right-radius: 7px;
+    border-bottom-left-radius : 0;
+    border-top-left-radius : 0;
+    border-top-right-radius : 0;
+    box-shadow: none !important;
+    background-color: rgb(188 189 190) !important;
+    color: black;
+    height: 35px;
+}
+
+.posts {
+    display: flex;
+    flex-direction: column;
+    height: 90%;
+    width: 100%;
+    overflow-y: scroll;
+}
+
+
+
+.posts::-webkit-scrollbar {
+    display: none;
+}
+
+.posts-list {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    height: auto;
+    
+}
+
+.posts-item {
+    font-family: 'Amiri', sans-serif;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    margin: 10px;
+    background-color: rgb(207, 206, 204);
+    width: 46vw;
+}
+
+.time {
+    right: 5px;
+}
+
+.delete-btn:hover {
+    color: red;
+}
