@@ -9,7 +9,8 @@ const db = new Sequelize(
     process.env.DATABASE_PASSWORD,
     {
         dialect: 'postgres',
-        timezone: '+01'
+        timezone: '+01',
+        logging: false
     },
 )
 

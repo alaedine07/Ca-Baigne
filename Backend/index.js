@@ -47,6 +47,10 @@ app.use('/api/v1/post', postRoute);
 app.use('/api/v1/auth', authRoute);
 app.use('/api/v1/uploads', uploadRoute);
 
+app.get('/', (req, res) => {
+    res.send('hello app is working');
+})
+
 // connect backend to the database
 db.authenticate ()
   .then(() => console.log('**Database connected**'))
@@ -56,14 +60,18 @@ db.authenticate ()
 // loads environment variables from a .env file into the process.env object
 require('dotenv').config()
 
+
+
 // synchronize Sequelize model with database tables and run the server
 try {
     // Change false to true if you modified the models it will re-create the tables
     // NB: it will delete all previous entries
     db.sync({ force: false }).then(() => {
-        app.listen(process.env.EXTERNAL_PORT || 3001);
+        const server = app.listen(process.env.EXTERNAL_PORT || 3001);
         console.log(`*server running on port ${process.env.EXTERNAL_PORT}*`);
     });
 } catch (error) {
     console.error(error);
 }
+
+module.exports = app
