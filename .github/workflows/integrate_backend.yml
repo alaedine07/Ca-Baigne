@@ -25,5 +25,7 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
+      - name: install psql
+        run: apt-get install -y postgresql-client
       - name: Run migrations
         run: psql -f setup_database.sql postgresql://postgres:postgres@localhost:5432/postgres
