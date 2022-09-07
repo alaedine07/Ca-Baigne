@@ -18,7 +18,6 @@ jobs:
           POSTGRES_PASSWORD: postgres_password
           POSTGRES_PORT: 5432
           POSTGRES_USER: postgres_user
-          PG_HOST: localhost
         ports:
           - 5432:5432
         options: >-
@@ -36,6 +35,7 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v3
       - name: setup the project database from file
-        run: |
-          service postgresql status
-          psql -f setup_database.sql
+        run: psql -f setup_database.sql
+        env: 
+          POSTGRES_HOST: localhost
+          POSTGRES_PORT: ${{ job.services.postgres.ports[5432] }}
