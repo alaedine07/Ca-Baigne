@@ -28,7 +28,7 @@ jobs:
           --health-retries 5
     steps:
       - name: Install library for postgres
-        run: sudo apt-get install --yes libpq-dev
+        run: apt-get install --yes libpq-dev
       - name: Install PostgreSQL client
         run: |
           apt-get update
