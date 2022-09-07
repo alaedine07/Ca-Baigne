@@ -30,7 +30,6 @@ jobs:
       run: |
           apt-get update
           apt-get install --yes postgresql-client
-  steps:
     - name: Check out repository code
       uses: actions/checkout@v3
     - name: setup the project database from file
