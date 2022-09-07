@@ -1,33 +1,44 @@
-name: Cabaigne backend API Continuous Integration
+name: Go
 
-on: 
-  # change to pull_request later
+on:
   push:
+    branches: [ main ]
+  pull_request:
     branches: [ main ]
 
 jobs:
-  setup_postgres_database-job:
-    runs-on: ubuntu-latest
-    container: node:latest
 
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+
+    # Service containers to run with `container-job`
     services:
+      # Label used to access the service container
       postgres:
-        image: postgres:latest
+        # Docker Hub image
+        image: postgres
+        # Provide the password for postgres
         env:
-          POSTGRES_PASSWORD: postgres_password
-        ports:
-          - postgres:5432
+          POSTGRES_PASSWORD: postgres
+        # Set health checks to wait until postgres has started
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
+        ports:
+          # Maps tcp port 5432 on service container to the host
+          - 5432:5432
+
     steps:
-      - name: Install PostgreSQL client
-        run: |
-          apt-get update
-          apt-get install --yes postgresql-client
-      - name: Check out repository code
-        uses: actions/checkout@v3
-      - name: Run migrations
-        run: psql -f setup_database.sql postgresql://postgres:postgres@localhost:5432/postgres
+    - name: Set up Go 1.x
+      uses: actions/setup-go@v2
+      with:
+        go-version: ^1.13
+
+    - name: Check out code into the Go module directory
+      uses: actions/checkout@v2
+
+    - name: Run migrations
+      run: psql -f db/migrations/file_name.sql postgresql://postgres:postgres@localhost:5432/postgres
