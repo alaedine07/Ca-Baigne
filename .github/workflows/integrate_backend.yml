@@ -9,7 +9,7 @@ on:
 jobs:
 
   setup_postgres_database-job:
-    name: Setup_database
+    name: Test backend API
     runs-on: ubuntu-latest
 
     services:
@@ -35,3 +35,7 @@ jobs:
       run: |
         cd Backend/
         npm ci
+    - name: run tests
+      run: |
+        cd Backend/
+        npm run test
