@@ -18,18 +18,19 @@ describe("Check that api is working", () => {
 });
 
 describe("test the user route", () => {
- it("should get all the users from database", async () => {
+  
+  it("adds a new user to the database", async () => {
+    new_user = {
+      userName: 'user_test_0',
+      email: 'user_test_0@gmail.com',
+      hashedPassword: 'user_test_0_password'
+    }
+    await request(server).post("/api/v1/user/newuser").send(new_user).expect(201);
+  })
+
+  it("should get all the users from database", async () => {
     await request(server).get("/api/v1/user/allusers").expect(200);
   });
-  
-  // it("adds a new user to the database", async () => {
-  //   new_user = {
-  //     userName: 'user_test_0',
-  //     email: 'user_test_0@gmail.com',
-  //     hashedPassword: 'user_test_0_password'
-  //   }
-  //   await request(server).post("/api/v1/user/newuser").send(new_user).expect(201);
-  // })
   
   it("should return an error because the user already exists", (done) => {
     new_user = {
@@ -42,6 +43,7 @@ describe("test the user route", () => {
       done();
     })
   })
+  
   it("should return an error because one the key fields is missing", (done) => {
     new_user = {
       email: 'user_test_0@gmail.com',
@@ -52,6 +54,7 @@ describe("test the user route", () => {
       done();
     })
   })
+  
   it("should return an error because password is an empty string", (done) => {
     new_user = {
       userName: 'user_',
@@ -63,4 +66,5 @@ describe("test the user route", () => {
       done();
     })
   })
+
 });
