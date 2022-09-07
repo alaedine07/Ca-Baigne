@@ -68,7 +68,6 @@ try {
     // NB: it will delete all previous entries
     db.sync({ force: false }).then(() => {
         const server = app.listen(process.env.EXTERNAL_PORT || 3001);
-        console.log(`*server running on port ${process.env.EXTERNAL_PORT}*`);
     });
 } catch (error) {
     console.error(error);

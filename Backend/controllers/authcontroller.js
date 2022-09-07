@@ -16,7 +16,6 @@ exports.login = async (req, res) => {
           message: 'Logged in successfully',
           token
           })
-        console.log({accessToken: token})
       }
     } catch {
       res.status(500).send('Email or password are incorrect')

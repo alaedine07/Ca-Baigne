@@ -38,7 +38,6 @@ exports.updatePost = (req, res) => {
   .catch(err => res.status(404).json('Error: ' + err))
 }
 
-
 exports.deletePost = (req, res) => {
   const { id } = req.params
   Post.destroy({ where: { id }})
