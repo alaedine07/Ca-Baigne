@@ -18,6 +18,7 @@ jobs:
           POSTGRES_PASSWORD: postgres_password
           POSTGRES_PORT: 5432
           POSTGRES_USER: postgres_user
+          PG_HOST: localhost
         ports:
           - 5432:5432
         options: >-
@@ -26,6 +27,8 @@ jobs:
           --health-timeout 5s
           --health-retries 5
     steps:
+      - name: Install library for postgres
+        run: sudo apt-get install --yes libpq-dev
       - name: Install PostgreSQL client
         run: |
           apt-get update
