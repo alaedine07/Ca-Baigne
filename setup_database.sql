@@ -1,3 +1,3 @@
-CREATE DATABASE weird_database;
-CREATE user weird_manager WITH encrypted password 'weird_manager';
-GRANT ALL PRIVILEGES ON DATABASE weird_database TO weird_manager;
+CREATE DATABASE cabaigne_database;
+CREATE user cabaigne_manager WITH encrypted password 'cabaigne';
+GRANT ALL PRIVILEGES ON DATABASE cabaigne_database TO cabaigne_manager;
