@@ -31,3 +31,5 @@ jobs:
 
     - name: Run migrations
       run: psql -f setup_database.sql postgresql://postgres:postgres@localhost:5432/postgres
+    - name: install node modules
+      run: npm ci
