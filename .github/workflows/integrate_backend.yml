@@ -8,15 +8,23 @@ on:
 jobs:
   setup_postgres_database-job:
     runs-on: ubuntu-latest
-    
+    container: node:latest
+
+    services:
+      postgres:
+        image: postgres:latest
+        env:
+          POSTGRES_PASSWORD: postgres_password
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
     steps:
-      - name: Install PostgreSQL client
-        run: |
-          sudo apt-get update
-          sudo apt-get install postgresql libpq-dev
-          sudo apt-get install --yes postgresql-client
-          sudo service postgresql start
       - name: Check out repository code
         uses: actions/checkout@v3
-      - name: setup the project database from file
-        run: psql -f setup_database.sql
+        run: ls -la
+      - name: Run migrations
+        run: psql -f setup_database.sql postgresql://postgres:postgres@localhost:5432/postgres
