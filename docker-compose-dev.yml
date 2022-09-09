@@ -1,0 +1,18 @@
+version: "3"
+services:
+  react-app:
+    image: react-app
+    stdin_open: true
+    ports:
+      - "3000:3000"
+    networks:
+      - cabaigne
+  backend-api:
+    image: cabaigne-api-server
+    ports:
+      - "3001:3001"
+    networks:
+      - cabaigne
+networks:
+  cabaigne:
+    driver: bridge
