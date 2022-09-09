@@ -1,0 +1,10 @@
+version: "3"
+services:
+  backend-api:
+    build: ./Backend
+    ports:
+      - "3001:3001"
+  frontend-react:
+    build: ./Frontend
+    ports:
+      - "80:80"
