@@ -1,54 +1,80 @@
-@import url(https://fonts.googleapis.com/css?family=Sniglet|Raleway:900);
+@import url('https://fonts.googleapis.com/css2?family=Amiri&family=Coiny&family=Inter:wght@300&display=swap');
 
-body, html{
+
+body, html {
 	max-height: 100%;
 	padding: 0;
 	margin: 0;
-	font-family: 'Sniglet', cursive;
+	font-family: 'Roboto', sans-serif;
+  }
+  
+  .contact-page {
+	min-height: 77.5vh;
+	padding-top: 2rem !important;
 }
 
-.contact-card {
-    border-radius: 20px;
-    display: flex;
+
+  .contact-card {
+	width: 40rem;
+	height: 20rem;
+	box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .2); 
+	border-radius: 5px;
+	position: relative;
+	z-index: 1;
+	background: inherit;
+	overflow: hidden;
+	display: flex;
 	flex-direction: column;
 	align-items: center;
-}
+	height: 90%;
+	background-color: rgb(148, 148, 148);
+	
+  }
+  
+  .contact-card:before {
+	content: "";
+	position: absolute;
+	background: inherit;
+	z-index: -1;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	box-shadow: inset 0 0 2000px rgba(255, 255, 255, 0.856);
+	filter: blur(10px);
+	margin: -20px;
+  }
 
 h1{
 	font-weight: normal;
-	font-size: 25px !important;
-	font-family: 'Raleway', sans-serif;
+	font-size: 30px !important;
+	font-family: 'Roboto', sans-serif;
 	margin-top: 30px;
-	color: black;
+	color: white;
 
-    padding-top: 10px;
+    padding-top: 15px;
 }
 
 .credentials {
 	display: flex;
 	gap: 1rem;
+	justify-content: center;
 }
 
 .credentials input {
 	width: 250px;
 }
 
-#form{
-	height: 90%;	
-	overflow: hidden;
-	position: relative;
-    border-radius: 16px;
-	width: 130%;
-}
 form{
-	width: 400px;
 	color: black;
-	position: relative;
     margin: 16px;
     padding-bottom: 10px;
+	display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-label, input, textarea{
+label, input, textarea {
 	display: block;
 }
 
@@ -56,16 +82,14 @@ input, textarea{
 	padding: 16px !important;
 	width: 519px;
 	height: 40px;
-	border-radius: 20px;
 	font-family: 'Sniglet', cursive;
 	font-size: 2em;
 	color: #000000;
 	transition: border 0.5s;
-	border: solid 1px black;
 }
-input:focus, textarea:focus{
-	border: solid 3px rgb(59, 138, 223);
-	border-width: 1px;
+
+input:focus, textarea:focus {
+	outline: none !important;
 }
 
 textarea{
@@ -81,26 +105,31 @@ input[type="submit"]{
 	cursor: pointer;
 	margin-top: 30px;
 	font-size: 20px;
-}
-
-
-
-input[type="submit"] {
 	line-height: 7px;
 }
 
-label{
+.contact-label {
+	color: white !important;
 	font-size: 16px;
 	margin-top: 20px;
 	margin-bottom: 5px;
 	padding-left: 10px;
 }
 
-.formgroup-error{
-	color: rgb(255, 0, 0);
-	font-weight: bold
+
+.success-message{
+    padding: 10px;
 }
 
-.row {
-    padding: 10px;
+@media screen and (min-width: 1300px) {
+    .contact-page {
+        min-height: 84.1vh !important;
+    }
+	.contact-card {
+		height: 35rem;
+	}
+}
+
+.notification-message {
+	color: white;
 }

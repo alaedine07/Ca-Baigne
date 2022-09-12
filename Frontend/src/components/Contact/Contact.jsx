@@ -2,7 +2,7 @@ import React from 'react'
 import Contact from './ContactCard';
 import './Contact.css'
 import Navbar from '../Header/Navbar';
-const Contactpage = (props) => {
+const Contactpage = () => {
   return (
       <>  
         <div className='contact-container'>    

@@ -1,8 +1,9 @@
-import React from 'react'
+import React, {useState} from 'react'
 import BeachCard from '../BeachCard/BeachCard'
+import CarouseCard from '../BeachCard/CarouselCard'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, EffectFade} from 'swiper';
-import { v4 as uuidv4 } from "uuid";
+
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/effect-fade';
@@ -11,16 +12,17 @@ function BeachResults(props) {
 
   const getAllResults = () => {
     const results = []
-    if (props.beachArray) {
-      props.beachArray.map( beaches => {
+    if (props.governorateArray) {
+      props.governorateArray.map( beaches => {
         beaches.map(beach => {
         results.push(
         <SwiperSlide> 
-          <BeachCard 
+          <CarouseCard
             beach_id={beach.id} 
-            key={uuidv4()} 
+            key={beach.id} 
             beachName={beach.name}
             beachData={beach}
+            governorateArray={props.governorateArray}
           />
         </SwiperSlide>
         )
@@ -28,27 +30,31 @@ function BeachResults(props) {
     }
     return results
   }
-  
+
   function getBeach() {
-    for (let i = 0; i < props.beachArray.length; i++) {
-      if (props.beachArray[i][0].name === props.beachName) {
-        return props.beachArray[0];
+    for (let i = 0; i < props.governorateArray.length; i++) {
+      if (props.governorateArray[i][0].name === props.beachName) {
+        
+        return props.governorateArray[0];
       }
     }
     return null;
   }
-  
+
 
   return (
     <div>
         {
         props.result ?
         <>
-        <h3 className="result-text">Your search results for {props.beachName}</h3>
+        <h3 className="result-text">Your search results for “{props.beachName}”</h3>
         <div className="results-container d-flex justify-content-center">
           <BeachCard
+          id = {getBeach()[0].id}
           beachName={props.beachName}
+          governorateArray={props.governorateArray}
           beachData={getBeach()[0]}
+          pinnedArray={props.pinnedArray}
           />
         </div>
         </>
@@ -58,7 +64,7 @@ function BeachResults(props) {
       { 
         props.results ?
         <>
-        <h3 className="result-text">Your search results for {props.locationName}</h3>
+        <h3 className="result-text">Your search results for “{props.locationName}”</h3>
           <div className='swiper-container'>
             <Swiper
               modules={[Navigation, EffectFade]}
@@ -71,7 +77,9 @@ function BeachResults(props) {
             >
             {getAllResults()}
             </Swiper>
+            
           </div>
+          
         </>
         :
         null
@@ -79,5 +87,6 @@ function BeachResults(props) {
     </div>
   )
 }
+
 
 export default BeachResults

@@ -1,7 +1,7 @@
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
-const Op = require('sequelize');
+
 
 exports.verifyToken = (req, res, next) => {
   const authHeader = req.headers['authorization']
@@ -56,8 +56,8 @@ exports.addNewUser = async (req, res) =>
 
 exports.updateUser = async (req, res) => {
   const { id } = req.params
-  const { userName, email, hashedPassword} = req.body.data
-  const user = { userName, email, hashedPassword }
+  const { userName, email, hashedPassword, favorites } = req.body.data
+  const user = { userName, email, hashedPassword, favorites }
   // hash the password if it changed
   if (user.hashedPassword !== undefined && user.hashedPassword !== '') {
     const hashedPwd = await bcrypt.hash(hashedPassword, 10)

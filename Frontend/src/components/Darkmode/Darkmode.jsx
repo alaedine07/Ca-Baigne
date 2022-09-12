@@ -31,4 +31,4 @@ function Dark() {
     )
   }
 
-  export default Dark
+export default Dark

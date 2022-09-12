@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 import SignInForm from './Auth/sign_in';
@@ -32,15 +32,14 @@ export function App() {
                 <Route path="/" element={<>
                     <Header token={token}/>
                     <Home   token={token}/>
+                    <Footer />
                     </>
-                } 
+                }
                 />
                 <Route path="/login" element={<>
-                    
                     <SignInForm /> 
                 </>} />
                 <Route path="/join" element={ <>
-                    
                     <SignUpForm /> 
                 </>}  
                 />
@@ -48,11 +47,15 @@ export function App() {
                     <>
                     <Header token={token}/>
                     <Contactpage  token={token}/>
+                    <Footer />
                     </>
                 } 
                 />
                 <Route path="/profile" element={
+                    <>
                     <Profile token={token}/>
+                    <Footer />
+                    </>
                 }
                 />
                 <Route path="/newBeach" element={
@@ -61,7 +64,6 @@ export function App() {
                 />
             </Routes>
         </div>
-        <Footer />
         </React.StrictMode>
     );
 }

@@ -1,33 +1,86 @@
-.form {
-    position: relative;
-    max-width: 500px;
+.profile-page {
+    height: 79.9vh !important;
+    display: flex;
+    justify-content: center;
+}
+
+.profile-form {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 5px !important;
+    max-width: 100%;
     margin: auto;
-    text-align: center;
+    text-align: start;
 }
 #avatar-img {
-    width: 200px;
+    width: 100px;
     position: relative;
     max-width: 500px;
     margin: auto;
     cursor: pointer;
     border-radius: 50%;
 }
-.Container {
-    margin-top: 2.5rem;
+.update-container {
+    margin-top: 3.5rem;
     padding-bottom: 8.8rem;
+    width: 40rem;
+    height: 40rem;
+	box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .2); 
+	border-radius: 5px;
+	position: relative;
+	z-index: 1;
+	background: inherit;
+	overflow: hidden;
 }
-.myInput {
-    margin-bottom: 25px !important;
+
+
+.update-container:before {
+	content: "";
+	position: absolute;
+	background: inherit;
+	z-index: -1;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	box-shadow: inset 0 0 2000px rgba(255, 255, 255, 0.856);
+	filter: blur(10px);
+	margin: -20px;
+    background-color: rgb(156, 156, 156);
+  }
+
+.myLabel {
     text-indent: 10px;
-    padding: 0.3rem !important;
-    border-radius: 15px;
+    padding: 0.0rem !important;
+    margin: 10px;
+    color: white !important;
 }
 .myButton {
-    background-color: #2C6DEF !important;
+    background-color: #00351c !important;
     position: relative;
-    padding: 5px;
-    border-radius: 10px;
+    padding: 10px;
+    border: none !important;
+    margin: 10px;
+}
+.image-upload {
+    padding-top: 2rem;
 }
 .image-upload>input {
     display: none;
+}
+
+.label-input {
+    width: 50% !important;
+    border-radius: 0 !important;
+    border: none;
+}
+
+.label-input:focus {
+    outline: none;
+}
+
+@media screen and (min-width: 1300px) {
+    .profile-page {
+        height: 85.7vh !important;
+    }
 }

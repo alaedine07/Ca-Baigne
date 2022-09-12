@@ -10,12 +10,6 @@ const Navbar = (props) => {
 
   const [imagePath, setImagePath] = useState('');
 
-  function animation(){
-    $("#navbarSupportedContent").on("click","li",function(e){
-      $('#navbarSupportedContent ul li').removeClass("active");
-      $(this).addClass('active');
-    });
-  }
 
   function handleSignOut() {
     localStorage.removeItem('accessToken');

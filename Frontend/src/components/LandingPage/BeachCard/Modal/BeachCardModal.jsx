@@ -22,30 +22,32 @@ const style = {
   borderRadius: '10px'
 };
 
-
-
 export default function BasicModal(props) {
   
   const [rate, setRate]= useState();
   const [content, setContent] = useState("");
   const [postId, setPostId] = useState('');
+  const [postArray, setPostArray] = useState([])
   const [id, setId]= useState("");
-  const [postArray, setPostArray] = useState([]);
 
-  useEffect(() => {
-    console.log('id ready')
-    getAllPosts()
-  }, [id])
+  const [reducedValue, forceUpdate] = useReducer(x => x + 1, 0);
   
+
+
   useEffect(()=> {
     getBeach()
   },[])
-  
-  
-  useEffect(()=> {
-    console.log('post added')
+
+  useEffect(() => {
     getAllPosts()
-  },[props.reducedValue])
+  }, [id])
+
+
+  useEffect(()=> {
+    getAllPosts()
+  },[reducedValue])
+
+
 
   const ratingChanged = (newRating) => {
     setRate(newRating)
@@ -63,8 +65,6 @@ export default function BasicModal(props) {
           if (error) console.log(error)
         })
     }
-    console.log('getBeach executed')
-    console.log(id, content)
   }
 
   const addPost = () => {
@@ -72,21 +72,22 @@ export default function BasicModal(props) {
     const decoded = jwt_decode(token);
     const userId = decoded['id'];
     const userName = decoded['Username'];
-    const imagePath = decoded['imagePath'];
+    const imagePath = decoded['image'];
     axios.post('http://localhost:3001/api/v1/post/newpost', {
       content: content,
       beachId: id,
       userId: userId,
       userName: userName,
-      userImageatPh: imagePath
+      userImagePath: imagePath
     },
     {
       headers: {
         "Content-type": "application/json"
       }
     }
-    ).then(() => {console.log('post added')
-    props.forceUpdate()
+    ).then(() => {
+      console.log('post added')
+      forceUpdate()
   })
     .catch(function (error) {
       if (error.response) {
@@ -106,12 +107,19 @@ export default function BasicModal(props) {
     .then(response => {
       const Posts = []
       response.data.posts.map( data => 
-        data.beachId === id ? 
-        Posts.push({id: data.id , content: data.content, createdAt: data.createdAt, userId: data.userId, userName: data.userName}): 
+        data.beachId === id ?
+        Posts.push({
+          id: data.id,
+          content: data.content,
+          createdAt: data.createdAt, 
+          userId: data.userId, 
+          userName: data.userName, 
+          image: data.userImagePath
+        })
+        : 
         null
       )
       setPostArray(Posts)
-      console.log(postArray)
     })
     .catch(error => {
       if (error) console.log(error)
@@ -122,11 +130,10 @@ export default function BasicModal(props) {
   const deletePost = () => {
     axios.delete(`http://localhost:3001/api/v1/post/deletepost/${postId}`).then(() => {
       console.log('post is deleted')
-      props.forceUpdate();
+      forceCounter()
     })
     .catch(error => console.log(error))
 }
-
 
   return (
     
@@ -148,7 +155,9 @@ export default function BasicModal(props) {
         
         <div className='second-half'>
             <div className='top-header'>
-            <div><p className='title-header'> Rate your visite</p></div>
+              <div>
+                <p className='title-header'> Rate your visite</p>
+              </div>
             <ReactStars
                 count={5}
                 onChange={ratingChanged}
@@ -165,27 +174,28 @@ export default function BasicModal(props) {
             }
             
             </div>
-            <div className="posts">
-              <Posts 
+            <div className="reviews">
+              <Posts
                 postArray={postArray}
                 setPostId={setPostId}
                 deletePost={deletePost}
-                forceUpdate={props.forceUpdate}
+                getAllPosts={getAllPosts}
+
               />
             </div>
 
-              <form className="post-form">
-                <div className='post'>
+              <form className="review-form">
+                <div className='review'>
                   <input
                   type="text"
                   name='content'
                   onChange={(event) => setContent(event.target.value)}
                   value={content}
-                  className='post-input'
+                  className='review-input'
                   placeholder='Give us your review' ></input>
                   <button
                   type='submit'
-                  className='post-btn btn btn-dark'
+                  className='review-btn btn btn-dark'
                   onClick={hndleSubmit}
                   >Post</button>
                   </div>

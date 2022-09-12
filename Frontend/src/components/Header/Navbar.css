@@ -11,20 +11,21 @@ i {
 
 .navbar {
   gap: 1rem;
-  border-width: 1px;
-  box-shadow: 0 3px 6px rgb(0 0 0 / 17%);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.685);
+ 
 }
 
 .navbar-logo {
   padding: 15px;
-  color: black;
+  color: rgb(255, 255, 255);
   pointer-events: none;
 }
 
 .navbar-mainbg {
-  background-color: #fdfdfd00;
+  background-color: #212529;
   padding: 0px;
 }
+
 #navbarSupportedContent {
   overflow: hidden;
   position: relative;
@@ -45,7 +46,7 @@ i {
 }
 
 #navbarSupportedContent ul li a {
-  color: black;
+  color: rgb(255, 255, 255);
   text-decoration: none;
   font-size: 15px;
   display: block;
@@ -56,7 +57,7 @@ i {
 
 .profileImageZone {
   position: absolute;
-  right: 9rem;
+  right: 6rem;
   top: 0.6rem;
 }
 
@@ -71,4 +72,3 @@ i {
     padding: 12px 30px;
   }
 }
-

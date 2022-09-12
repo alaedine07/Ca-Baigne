@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize');
 const db = require('../util/database');
+const path = require('path');
 
 const Post = db.define('post', {
   id: {
@@ -20,7 +21,7 @@ const Post = db.define('post', {
     type: Sequelize.STRING,
     allowNull: true
   },
-  userImagePath: {
+  userImageatPh: {
     type: Sequelize.STRING,
     allowNull: true
   }

@@ -60,33 +60,46 @@ export function NewBeachForm() {
     
     return (
         <>
-        <div className="Container">
-            <div className="form-container">
-                <h1>New beach</h1>
-                <form action="">
-                    <input className="myInput" type="text" placeholder="beach name" value={beachName} onChange={e => setBeachName(e.target.value)}/>
-                    <input className="myInput" type="text" placeholder="governorate" value={beachGovernorate} onChange={e => setbeachGovernorate(e.target.value)}/>
-                    <input className="myInput" type="number" placeholder="longitude" value={longititude} onChange={e => setLongititude(e.target.value)}/>
-                    <input className="myInput" type="number" placeholder="lattitude" value={lattitude} onChange={e => setlattitude(e.target.value)}/>
-                    {/* check boxes */}
-                    <legend>Add amenities</legend>
-                        <br />
-                        {amenities.map((item, id) => {
-                            return <>
-                            <div className="checkBox-options" key={id}>
-                                <input type="checkbox" className="MyCheckBox" onClick={() => addOrRemove(item)}/>
-                                <label htmlFor="checkBoxDescription" className="checkBoxDescription" > {item} </label>
+        <div className="newbeach-page">
+            <div className="newbeach-container">
+                <div className="newbeach-card">
+                    <h1 className="form-header">New beach</h1>
+                <div>
+                    <form className="newbeach-form" action="">
+                            <div>
+                                <label className="newbeach-label">Beach name</label>
+                                <input className="newbeach-input" type="text" placeholder="Beach name" value={beachName} onChange={e => setBeachName(e.target.value)}/>
+                                
+                                <label className="newbeach-label">Governorate</label>
+                                <input className="newbeach-input" type="text" placeholder="Governorate" value={beachGovernorate} onChange={e => setbeachGovernorate(e.target.value)}/>
+                                
+                                <label className="newbeach-label">Latitude</label>
+                                <input className="newbeach-input" type="number" placeholder="e.g 30.8749" value={lattitude} onChange={e => setlattitude(e.target.value)}/>
+
+                                <label className="newbeach-label">Longitude</label>
+                                <input className="newbeach-input" type="number" placeholder="e.g 10.6542" value={longititude} onChange={e => setLongititude(e.target.value)}/>
                             </div>
-                            <br />
-                            </>
-                        })}
-                    <br />
-                    <br />
-                    <legend>Image</legend>
-                    <input type="file" onChange={saveFile}/>
-                    <br />
-                    <button onClick={uploadData}>Upload</button>
-                </form>
+                            <div>
+                                <label className="newbeach-label">Select amenities</label>
+                                    {amenities.map((item, id) => {
+                                        return <>
+                                        <div className="checkBox-options" key={id}>
+                                            <input type="checkbox" className="MyCheckBox" onClick={() => addOrRemove(item)}/>
+                                            <label htmlFor="checkBoxDescription" className="checkBoxDescription" > {item} </label>
+                                        </div>
+                                        </>
+                                    })}
+                                <label className="newbeach-label">Add image</label>
+                                <input type="file" onChange={saveFile}/>
+                            </div>
+                            
+                            
+                        </form>
+                    
+                </div>
+                <button className="newbeach-button" onClick={uploadData}>Upload</button>
+                </div>
+                
             </div>
         </div>
         </>

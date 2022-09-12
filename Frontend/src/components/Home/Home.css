@@ -2,3 +2,11 @@
     margin: 0;
     padding: 0;
 }
+.profile-img-alert {
+    margin-top: 40px;
+    text-align: center;
+}
+.profile-img-alert > a > p{
+    color: red !important;
+    font-size: 20px;
+}

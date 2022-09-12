@@ -13,7 +13,7 @@ if (process.env.NODE_ENV === "test") {
     {
         dialect: 'postgres',
         timezone: '+01',
-        logging: false
+        logging: true
     },
 )}
 else {

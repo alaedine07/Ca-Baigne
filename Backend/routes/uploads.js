@@ -1,7 +1,6 @@
 const router = require('express').Router()
 const uploadController = require('../controllers/UploadsController');
 const beachController = require('../controllers/BeachController');
-const UserController = require('../controllers/UsersController');
 const path = require('path');
 const multer = require('multer');
 
@@ -38,7 +37,7 @@ const user_upload = multer({
 })
 
 // upload a User image
-router.post('/userUploads', user_upload.single('file'), uploadController.uploadBeachImage);
+router.post('/userUploads', user_upload.single('file'), uploadController.uploadUserImage);
 
 
 module.exports = router;
