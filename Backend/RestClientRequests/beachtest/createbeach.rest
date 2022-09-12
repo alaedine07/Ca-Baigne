@@ -2,9 +2,8 @@ POST http://localhost:3001/api/v1/beach/newbeach
 content-type: application/json
 
 {
-"name": "Maamoura Beach",
- "location": "Nabeul",
-  "latitude": 36.4634,
-   "longitude": 10.8120,
-   "description": "Amenities beach * Easy access * Golden sand * Turquoise pure water * Free entrance * Crowded in season"
+      "name": "Maamoura Beach",
+      "governorate": "Nabeul",
+      "latitude": 36.4634,
+      "longitude": 10.8120
 }

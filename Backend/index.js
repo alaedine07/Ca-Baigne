@@ -20,9 +20,9 @@ Post.belongsTo(Beach);
 // beach has many posts
 Beach.hasMany(Post, {foreignKey: 'post_id', onDelete: 'CASCADE'});
 
-// create a junction table
+/*// create a junction table
 Beach.belongsToMany(User, {through: 'favoritebeaches'});
-User.belongsToMany(Beach, {through: 'favoritebeaches'});
+User.belongsToMany(Beach, {through: 'favoritebeaches'});*/
 
 // add middlewares
 app.use(express.static(__dirname));

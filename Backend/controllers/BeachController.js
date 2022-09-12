@@ -20,13 +20,17 @@ exports.getBeach = (req, res) => {
 
 exports.addNewBeach = (req, res, next) =>
 {
+  console.log(req.body.caracteristiques)
   items = req.body.caracteristiques.split(',');
+  console.log(items)
   output = {}
   for (var i = 0; i < items.length; i++) {
     output[i] = items[i];
   }
   const {name, governorate, latitude, longitude} = req.body;
+  console.log(req.file.path)
   const imagepath = req.file.path;
+  
   const amenities = output;
   const beach = { name, governorate, latitude, longitude, imagepath, amenities}
   Beach.create(beach)

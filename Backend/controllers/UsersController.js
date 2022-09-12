@@ -3,15 +3,19 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const Op = require('sequelize');
 
+
 exports.verifyToken = (req, res, next) => {
   const authHeader = req.headers['authorization']
   const token = authHeader && authHeader.split(' ')[1]
-  console.log(token)
+  console.log('token is: ' + token)
   if (token === null) { 
     res.redirect('/login');
   } else {
+    console.log('token not null')
     jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
-      if (err) console.log(err)
+      if (err) {
+         console.log('error found: ' + err)
+      }
       req.user = user
       console.log('user authorized')
       next()
@@ -50,8 +54,8 @@ exports.addNewUser = async (req, res) =>
 
 exports.updateUser = async (req, res) => {
   const { id } = req.params
-  const { userName, email, hashedPassword} = req.body.data
-  const user = { userName, email, hashedPassword }
+  const { userName, email, hashedPassword, favorites } = req.body.data
+  const user = { userName, email, hashedPassword, favorites }
   // hash the password if it changed
   if (user.hashedPassword !== undefined && user.hashedPassword !== '') {
     const hashedPwd = await bcrypt.hash(hashedPassword, 10)
