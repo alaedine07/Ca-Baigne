@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 @import url('https://use.fontawesome.com/releases/v5.15.4/css/all.css');
 
 @media screen and (min-width: 1300px) {
@@ -11,4 +12,16 @@
 
 .errorMsg {
     color: red;
+}
+.sign-label {
+    color: rgb(43, 43, 43) !important;
+}
+
+.signin-input {
+    width: 400px !important;
+    padding-left: 26px !important;
+}
+
+.signin-container {
+    font-family: 'Roboto', sans-serif;
 }

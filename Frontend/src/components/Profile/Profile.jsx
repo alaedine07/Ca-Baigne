@@ -1,6 +1,5 @@
-import React from "react";
-import { useEffect } from "react";
-import { useState } from "react";
+import React, { useEffect, useState} from "react";
+import { useNavigate } from "react-router-dom";
 import jwt_decode from 'jwt-decode';
 import axios from "axios";
 import FormData from 'form-data';
@@ -14,7 +13,14 @@ import Header from "../Header/Header";
 export function Profile(props) {
 
     const [userData, setUserData] = useState({username: '', email: '', password: undefined, imgFullPath: ''});
-   
+    
+    let navigate = useNavigate(); 
+    const routeChange = () =>{ 
+    let path = '/';
+    navigate(path);
+    }
+
+
     useEffect(() => {
         const token = localStorage.getItem('accessToken');
         if (token) {
@@ -42,7 +48,8 @@ export function Profile(props) {
             data: {
                 userName: userData.username,
                 email: userData.email,
-                hashedPassword: userData.password
+                hashedPassword: userData.password,
+                imagePath: userData.imgFullPath
             }
             }, 
             {
@@ -91,28 +98,30 @@ export function Profile(props) {
     return (
         <> 
         <Header token={props.token}/>
-        <div className="Container">
-        <div className="image-upload">
-            <label htmlFor="file-input">
-            { userData.imgFullPath ? 
-                <img id="avatar-img" src={'http://localhost:3001/' + userData.imgFullPath.split('/').slice(-3).join('/')}/> : 
-                <img id="avatar-img" src={avatarMen}/>
-                }
-            </label>
-            <input id="file-input" type="file" onChange={saveFile}/>
-        </div>
-            <div className="form">
-                <form action="">
-                    <label htmlFor="Username"> Username: </label>
-                        <input className="myInput" type="text" value={userData.username} onChange={e => setUserData({...userData, username: e.target.value})}/>
-                    <label htmlFor="email"> email address </label>
-                        <input className="myInput" type="email" value={userData.email} onChange={e => setUserData({...userData, email: e.target.value})}/>
-                    <label htmlFor="email"> new password </label>
-                        <input className="myInput" type="password" value={userData.password} onChange={e => setUserData({...userData, password: e.target.value})}/>
-                    <button type="submit" className="myButton" onClick={ModifyProfile}>
-                        Modify   
-                    </button>
-                </form>
+        <div className="profile-page">
+            <div className="update-container">
+                <div className="image-upload">
+                    <label htmlFor="file-input">
+                    { userData.imgFullPath ? 
+                        <img id="avatar-img" src={'http://localhost:3001/' + userData.imgFullPath.split('/').slice(-3).join('/')}/> : 
+                        <img id="avatar-img" src={avatarMen}/>
+                        }
+                    </label>
+                    <input id="file-input" type="file" onChange={saveFile}/>
+                </div>
+                <div className="form">
+                    <form className="profile-form" action="">
+                        <label className="myLabel" htmlFor="Username"> Username : </label>
+                            <input className="label-input"  type="text" value={userData.username} onChange={e => setUserData({...userData, username: e.target.value})}/>
+                        <label className="myLabel" htmlFor="email"> Email Address : </label>
+                            <input className="label-input" type="email" value={userData.email} onChange={e => setUserData({...userData, email: e.target.value})}/>
+                        <label className="myLabel" htmlFor="email"> New Password : </label>
+                            <input className="label-input" type="password" value={userData.password} onChange={e => setUserData({...userData, password: e.target.value})}/>
+                        <button type="submit" className=" myButton btn btn-success"  onClick={() => {ModifyProfile, routeChange()}}>
+                            Modify   
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
         </>

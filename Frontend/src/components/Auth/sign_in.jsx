@@ -36,69 +36,28 @@ export function SignInForm() {
     }
 
     return (
-        <div
-            className="
-            min-h-screen
-            flex flex-col
-            items-center
-            justify-center
-            bg-gray-100"
-        >
-        <div
-            className="
-            flex flex-col
-            bg-white
-            shadow-md
-            px-4
-            sm:px-6
-            md:px-8
-            lg:px-10
-            py-8
-            rounded-3xl
-            w-50
-            max-w-md"
-        >
-        <div
-            className="
-            font-medium
-            self-center
-            text-xl
-            sm:text-3xl
-            text-gray-800">
-            Welcome Back
-        </div>
-        <div
-            className="
-            mt-4
-            self-center
-            text-xl
-            sm:text-sm
-            text-gray-800">
-            Enter your credentials to access your account
-        </div>
+        <div className=" signin-container min-h-screen flex flex-col items-center justify-center bg-gray-100" >
+          <div className=" flex flex-col bg-white shadow-md px-4 sm:px-6 md:px-8 lg:px-10 py-8 rounded-3xl w-50 max-w-md">
+          <div className="font-medium self-center text-xl sm:text-3xl text-gray-800">
+              Welcome Back
+          </div>
+          <div
+              className=" mt-4 self-center text-xl sm:text-s text-gray-800">
+              Enter your credentials to access your account
+          </div>
 
         <div className="mt-2">
             <form action="#">
             <div className="flex flex-col mb-4">
                 <label
                     for="email"
-                    className="mb-2 text-s tracking-wide text-gray-600"
+                    className="sign-label text-s tracking-wide"
                 >
-                Mail Address:
+                Email Address:
                 </label>
               <div className="relative">
                 <div
-                    className="
-                        inline-flex
-                        items-center
-                        justify-center
-                        absolute
-                        left-0
-                        top-0
-                        h-full
-                        w-10
-                        text-gray-400"
-                >
+                    className=" inline-flex items-center justify-center absolute left-0 top-0 h-full w-10 text-gray-400" >
                 <i className="fas fa-at text-blue-500"></i>
                 </div>
 
@@ -108,16 +67,7 @@ export function SignInForm() {
                     name="email"
                     value={email}
                     onChange={e => setEmail(e.target.value)}
-                    className="
-                    text-sm
-                    placeholder-gray-500
-                    pl-10
-                    pr-4
-                    rounded-2xl
-                    border border-gray-400
-                    w-full
-                    py-2
-                    focus:outline-none focus:border-blue-400"
+                    className="signin-input text-sm placeholder-gray-500  pr-4 rounded-2xl border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400"
                     placeholder="Enter your email"
                 />
               </div>
@@ -125,15 +75,12 @@ export function SignInForm() {
             <div className="flex flex-col mb-6">
               <label
                     for="password"
-                    className="mb-2 text-s tracking-wide text-gray-600">
+                    className="sign-label text-s tracking-wide">
                 Password:
             </label>
               <div className="relative">
                 <div
-                  className="
-                    inline-flex
-                    items-center
-                    justify-center
+                  className=" inline-flex items-center justify-center
                     absolute
                     left-0
                     top-0
@@ -153,10 +100,9 @@ export function SignInForm() {
                     value={password}
                     onChange={e => setPassword(e.target.value)}
                     className="
+                    signin-input
                     text-sm
                     placeholder-gray-500
-                    pl-10
-                    pr-4
                     rounded-2xl
                     border border-gray-400
                     w-full
@@ -211,30 +157,25 @@ export function SignInForm() {
         {
           error ? <div className="flex justify-center"><span className="errorMsg">Email or password are incorrect</span></div> : null
         }
-      </div>
-      <div className="flex justify-center items-center mt-6">
-        <a
+          </div>
+          <div className="flex justify-center items-center mt-6">
+        <div
           href="#"
           target="_blank"
           className="
             inline-flex
             items-center
             text-gray-700
-            font-medium
-            text-xs text-center
+            font-bold
+            text-s text-center
           "
         >
-          <span className="ml-2"
-            >You don't have an account?
-            <a
-              href="/join"
-              className="text-xs ml-2 text-blue-500 font-semibold"
-              >Register now</a
-            ></span
-          >
-        </a>
-      </div>
-    </div>
+          <span className="ml-2">
+            You don't have an account?
+            <a href="/join" className="text-s ml-2 text-blue-500 font-semibold">Register now</a></span>
+        </div>
+          </div>
+        </div>
     );
 }
 

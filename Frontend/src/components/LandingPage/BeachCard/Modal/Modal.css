@@ -9,13 +9,14 @@
 }
 
 .first-half {
+    width: 43% !important;
     display: flex;
     flex-direction: column;
     border-right: 1px solid rgb(173, 173, 173);
 }
 
 .second-half {
-    width: 100%;
+    width: 57%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -78,7 +79,7 @@
     border-color: rgba(0, 0, 0, 0.23);
 }
 
-.post-form {
+.review-form {
     width: auto;
     color: black;
     padding: 0;
@@ -86,7 +87,7 @@
 
 }
 
-.post-input {
+.review-input {
     width: 100% !important;
     border: none;
     outline: none !important;
@@ -100,21 +101,22 @@
     display: inline-block;
 }
 
-.post-input:focus {
+.review-input:focus {
     border: none;
     
 }
 
-.post {
+.review {
     height: auto;
-    width: auto;
+    width: 100%;
     display: flex;
     align-items: flex-end;
     gap: 1;
     border-top: 1px solid rgb(173, 173, 173);
     align-items: center;
 }
-.post-btn {
+
+.review-btn {
     font-family: 'Amiri', sans-serif;
     font-weight: bold;
     border: none;
@@ -128,42 +130,15 @@
     height: 35px;
 }
 
-.posts {
+.reviews {
     display: flex;
     flex-direction: column;
     height: 90%;
-    width: 100%;
+    width: 99%;
     overflow-y: scroll;
 }
 
-
-
-.posts::-webkit-scrollbar {
+.reviews::-webkit-scrollbar {
     display: none;
 }
 
-.posts-list {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    height: auto;
-    
-}
-
-.posts-item {
-    font-family: 'Amiri', sans-serif;
-    display: flex;
-    flex-direction: column;
-    padding: 10px;
-    margin: 10px;
-    background-color: rgb(207, 206, 204);
-    width: 46vw;
-}
-
-.time {
-    right: 5px;
-}
-
-.delete-btn:hover {
-    color: red;
-}

@@ -58,5 +58,6 @@ module.exports = {
             filename: "index.css",
             chunkFilename: "index.css"
           }),
+
     ]
 };

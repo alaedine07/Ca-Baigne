@@ -32,7 +32,7 @@ export function SignUpForm() {
         }
       })
     }
-
+    console.log(username)
     return (
         <div
             className="
@@ -82,7 +82,7 @@ export function SignUpForm() {
                     for="email"
                     className="mb-2 text-s tracking-wide text-gray-600"
                 >
-                Mail Address:
+                E-Mail Address:
                 </label>
               <div className="relative">
                 <div
@@ -109,7 +109,7 @@ export function SignUpForm() {
                     className="
                     text-sm
                     placeholder-gray-500
-                    pl-10
+                    p-4
                     pr-4
                     rounded-2xl
                     border border-gray-400
@@ -152,7 +152,7 @@ export function SignUpForm() {
                     className="
                     text-sm
                     placeholder-gray-500
-                    pl-10
+                    p-4
                     pr-4
                     rounded-2xl
                     border border-gray-400
@@ -196,7 +196,7 @@ export function SignUpForm() {
                     className="
                     text-sm
                     placeholder-gray-500
-                    pl-10
+                    p-4
                     pr-4
                     rounded-2xl
                     border border-gray-400
@@ -229,7 +229,7 @@ export function SignUpForm() {
                     duration-150
                     ease-in"
                 >
-                <span className="mr-2 uppercase">Sign In</span>
+                <span className="mr-2 uppercase">Sign Up</span>
                 <span>
                   <svg
                     className="h-6 w-6"
@@ -254,26 +254,26 @@ export function SignUpForm() {
         }
       </div>
       <div className="flex justify-center items-center mt-6">
-        <a
+        <div
           href="#"
           target="_blank"
           className="
             inline-flex
             items-center
             text-gray-700
-            font-medium
-            text-xs text-center
+            font-bold
+            text-s text-center
           "
         >
           <span className="ml-2"
             >Already have an account?
             <a
               href="/login"
-              className="text-xs ml-2 text-blue-500 font-semibold"
+              className="text-s ml-2 text-blue-500 font-semibold"
               >Login now</a
             >
             </span>
-        </a>
+        </div>
       </div>
     </div>
     );
