@@ -31,7 +31,6 @@ exports.getAllPinnedBeaches = (req, res) => {
 
 exports.removePinnedBeach = (req, res) => {
   const {id} = req.params
-  beach = id
   Favorites.destroy({ where: { beach_id: id }})
   .then(
     res.status(200).json(`Beach with id: ${id} has been removed from favorites !`)
