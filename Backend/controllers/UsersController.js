@@ -35,7 +35,10 @@ exports.getUser = async (req, res) => {
 
 exports.addNewUser = async (req, res) =>
 {
-  const { userName, email, hashedPassword } = req.body 
+  const { userName, email, hashedPassword } = req.body
+  if (!userName || !email || !hashedPassword) {
+    return res.status(500).send('Missing required values');
+  }
   if (userName === "" || email === "" || hashedPassword === "") {
     return res.status(500).send('empty values are not allowed');
   }

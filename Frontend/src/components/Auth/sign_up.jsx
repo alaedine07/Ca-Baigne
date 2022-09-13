@@ -8,6 +8,7 @@ export function SignUpForm() {
     const [email, setEmail] = useState("");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [errorMsg, setErrorMsg] = useState("");
     const [error, setError] = useState(false);
 
     function createUser(event) {
@@ -29,10 +30,10 @@ export function SignUpForm() {
       }).catch(function (error) {
         if (error.response) {
           setError(true);
+          setErrorMsg(error.response.data);
         }
       })
     }
-    console.log(username)
     return (
         <div
             className="
@@ -109,7 +110,7 @@ export function SignUpForm() {
                     className="
                     text-sm
                     placeholder-gray-500
-                    p-4
+                    p-5
                     pr-4
                     rounded-2xl
                     border border-gray-400
@@ -152,7 +153,7 @@ export function SignUpForm() {
                     className="
                     text-sm
                     placeholder-gray-500
-                    p-4
+                    p-5
                     pr-4
                     rounded-2xl
                     border border-gray-400
@@ -196,7 +197,7 @@ export function SignUpForm() {
                     className="
                     text-sm
                     placeholder-gray-500
-                    p-4
+                    p-5
                     pr-4
                     rounded-2xl
                     border border-gray-400
@@ -250,7 +251,7 @@ export function SignUpForm() {
           </form>
         </div>
         {
-          error ? <div className="flex justify-center"><span className="errorMsg">User already exists</span></div> : null
+          error ? <div className="flex justify-center"><span className="errorMsg">{ errorMsg }</span></div> : null
         }
       </div>
       <div className="flex justify-center items-center mt-6">
