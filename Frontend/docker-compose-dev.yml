@@ -1,0 +1,16 @@
+version: '3'
+services:
+  cabaigne-app:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3010:3010"
+    volumes:
+      - ./src:/app/src:ro
+
+
+# to build docker composer run $ docker-compose -f docker-compose-dev.yml up -d 
+# to rebuild docker composer run $ docker-compose -f docker-compose-dev.yml up -d --build
+
+# to tear docker comoser down run $ docker-compose -f docker-compose-dev.yml down
