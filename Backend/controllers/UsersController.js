@@ -59,8 +59,17 @@ exports.addNewUser = async (req, res) =>
 
 exports.updateUser = async (req, res) => {
   const { id } = req.params
-  const { userName, email, hashedPassword, favorites } = req.body.data
-  const user = { userName, email, hashedPassword, favorites }
+  const existingUser = await User.findOne({ where: { id: req.params.id } })
+  const { userName, email, hashedPassword } = req.body.data
+  const user = { userName, email, hashedPassword }
+  // check if data is the same even if password didn't change
+  if (existingUser.userName === userName && existingUser.email === email && !hashedPassword) {
+    return res.status(500).send('no modifications detected');
+  }
+  // check if the data entered is the same in the database
+  if (existingUser.userName === userName && existingUser.email === email && await bcrypt.compare(hashedPassword, existingUser.hashedPassword)) {
+    return res.status(500).send('no modifications detected');
+  }
   // hash the password if it changed
   if (user.hashedPassword !== undefined && user.hashedPassword !== '') {
     const hashedPwd = await bcrypt.hash(hashedPassword, 10)

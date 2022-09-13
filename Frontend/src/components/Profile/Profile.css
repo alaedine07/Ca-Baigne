@@ -84,3 +84,8 @@
         height: 85.7vh !important;
     }
 }
+
+.errorMsg {
+    color: red;
+    text-align: center;
+}

@@ -24,10 +24,6 @@ const User = db.define('user', {
     type: Sequelize.STRING,
     allowNull: true,
     defaultValue: ''
-  },
-  favorites: {
-    type: Sequelize.JSON,
-    allowNull: true
   }
 })
 

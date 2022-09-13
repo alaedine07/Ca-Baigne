@@ -1,5 +1,4 @@
 import React, { useEffect, useState} from "react";
-import { useNavigate } from "react-router-dom";
 import jwt_decode from 'jwt-decode';
 import axios from "axios";
 import FormData from 'form-data';
@@ -13,13 +12,7 @@ import Header from "../Header/Header";
 export function Profile(props) {
 
     const [userData, setUserData] = useState({username: '', email: '', password: undefined, imgFullPath: ''});
-    
-    let navigate = useNavigate(); 
-    const routeChange = () =>{ 
-    let path = '/';
-    navigate(path);
-    }
-
+    const [errorMsg, setErrorMsg] = useState('');
 
     useEffect(() => {
         const token = localStorage.getItem('accessToken');
@@ -65,6 +58,7 @@ export function Profile(props) {
                 window.location.replace(URL);
             }).catch((err) => {
                 console.error(err);
+                setErrorMsg(err.response.data);
             })
         }
 
@@ -117,10 +111,11 @@ export function Profile(props) {
                             <input className="label-input" type="email" value={userData.email} onChange={e => setUserData({...userData, email: e.target.value})}/>
                         <label className="myLabel" htmlFor="email"> New Password : </label>
                             <input className="label-input" type="password" value={userData.password} onChange={e => setUserData({...userData, password: e.target.value})}/>
-                        <button type="submit" className=" myButton btn btn-success"  onClick={() => {ModifyProfile, routeChange()}}>
+                        <button type="submit" className=" myButton btn btn-success"  onClick={ModifyProfile}>
                             Modify   
                         </button>
                     </form>
+                    { errorMsg !== '' && <div className="errorMsg"><p>{errorMsg}</p></div> }
                 </div>
             </div>
         </div>
