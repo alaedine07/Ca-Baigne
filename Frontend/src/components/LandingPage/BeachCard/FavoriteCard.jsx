@@ -10,7 +10,7 @@ import './BeachCard.css'
 
 const API_KEY = 'de668cda57d2ffe3f3b8fadc3fdeb118'
 
-function BeachCard(props) {
+function FavoriteCard(props) {
   
   const [rate, setRate]= useState();
   const [open, setOpen] = useState(false);
@@ -149,4 +149,4 @@ function BeachCard(props) {
   )
 }
 
-export default BeachCard
+export default FavoriteCard

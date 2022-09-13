@@ -34,13 +34,12 @@ function BeachResults(props) {
   function getBeach() {
     for (let i = 0; i < props.governorateArray.length; i++) {
       if (props.governorateArray[i][0].name === props.beachName) {
-        
-        return props.governorateArray[0];
+        return props.governorateArray[i];
       }
     }
     return null;
   }
-
+console.log('gov: ' + props.governorateArray)
 
   return (
     <div>

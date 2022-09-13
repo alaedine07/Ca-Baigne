@@ -48,32 +48,6 @@ function CarouselCard(props) {
     setBeachState(flag);
   }
 
-  // Pin a favorite beach
-  const pinBeach = (id) => {
-      const token = localStorage.getItem('accessToken');
-      const decoded = jwt_decode(token);
-      const userId = decoded['id'];
-      axios.post('http://localhost:3001/api/v1/user/pinned/',
-        {
-          user_id: userId,
-          beach_id: id
-        },
-      {
-        headers: {
-        'Authorization': 'bearer ' + token,
-        'content-type': 'application/json'
-        }
-      }
-      ).then(() => {
-        console.log(`beach with id ${id} has been pinned to user ${userId}`)
-      })
-      .catch((err) => {
-        console.error(err);
-    })
-
-  }
-
-  
 
   const ratingChanged = (newRating) => {
     setRate(newRating)

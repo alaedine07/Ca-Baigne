@@ -96,6 +96,7 @@ function SearchBox() {
          :
          null
     )
+      console.log(beaches);
       setGovernorateArray(beaches)
     })
     .catch(error => {
@@ -127,8 +128,6 @@ function SearchBox() {
     }
     
   }
-
-  console.log(pinnedArray)
 
   // Create cards for pinned beaches
   const getAllPinned = () => {
@@ -206,7 +205,7 @@ function SearchBox() {
             results={results}
           />
         </div>
-        {checkLogin() &&
+        {checkLogin() && result === false && results === false &&
         <>
         {
           pinnedArray.length

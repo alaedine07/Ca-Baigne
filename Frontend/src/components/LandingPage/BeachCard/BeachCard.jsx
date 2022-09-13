@@ -113,6 +113,7 @@ function BeachCard(props) {
     return false
   }
 
+
   if (found()) {
       return (
         <>

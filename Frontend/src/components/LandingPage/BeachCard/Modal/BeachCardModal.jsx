@@ -72,7 +72,7 @@ export default function BasicModal(props) {
     const decoded = jwt_decode(token);
     const userId = decoded['id'];
     const userName = decoded['Username'];
-    const imagePath = decoded['image'];
+    const imagePath = decoded['imagePath'];
     axios.post('http://localhost:3001/api/v1/post/newpost', {
       content: content,
       beachId: id,
