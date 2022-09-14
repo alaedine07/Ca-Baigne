@@ -2,9 +2,11 @@ version: "3"
 services:
   backend-api:
     build: ./Backend
+    image: cabaigne:backend-api
     ports:
       - "3001:3001"
   frontend-react:
     build: ./Frontend
+    image: cabaigne:front-end-react
     ports:
       - "80:80"
