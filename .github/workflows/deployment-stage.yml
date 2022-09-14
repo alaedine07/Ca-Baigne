@@ -12,6 +12,4 @@ jobs:
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       - name: pull changes
-        run: |
-            cd ..
-            git pull
+        run: git pull
