@@ -15,4 +15,4 @@ jobs:
         run: |
             cd /home/azureuser/Ca-Baigne
             git pull
-            docker-compose up -d
+            sudo docker-compose up -d
