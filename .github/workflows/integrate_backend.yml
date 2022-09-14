@@ -39,4 +39,3 @@ jobs:
       run: |
         cd Backend/
         npm run test
-        docker-compose up -d
