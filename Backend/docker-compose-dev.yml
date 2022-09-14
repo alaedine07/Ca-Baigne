@@ -7,10 +7,22 @@ services:
     ports:
       - "3001:3001"
     volumes:
-      - ./:/app:ro
+      - ./:/app
+  postgres:
+    image: "postgres"
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: 'cabaigne_database'
+      POSTGRES_USER: 'cabaigne_manager'
+      POSTGRES_PASSWORD: 'cabaigne'
+    volumes:
+    - data:/var/lib/postgresql/data 
 
+volumes:
+  data:
 
-# to build docker composer run $ docker-compose -f docker-compose-dev.yml build -d 
-# to rebuild docker composer run $ docker-compose -f docker-compose-dev.yml up -d --build
-
+# to build docker composer run $ docker-compose -f docker-compose-dev.yml build
+# to rebuild docker composer run $ docker-compose -f docker-compose-dev.yml --build
+# to run docker image run $  docker-compose -f docker-compose-dev.yml up
 # to tear docker comoser down run $ docker-compose -f docker-compose-dev.yml down
