@@ -1,14 +1,16 @@
 version: "3"
 services:
   backend-api:
-    build: ./Backend
-    dockerfile: Dockerfile-prod.yml 
+    build: 
+      context: ./Backend
+      dockerfile: Dockerfile.prod
     image: cabaigne:backend-api
     ports:
       - "3001:3001"
   frontend-react:
-    build: ./Frontend
-    dockerfile: Dockerfile-prod.yml
+    build: 
+      context: ./Frontend
+      dockerfile: Dockerfile.prod
     image: cabaigne:front-end-react
     ports:
       - "80:80"
