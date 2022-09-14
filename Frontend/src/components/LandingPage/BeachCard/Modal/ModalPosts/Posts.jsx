@@ -15,18 +15,16 @@ function Posts(props) {
 	const [userName, setUserName] = useState('');
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
-	const [count, forceCounter] = useReducer(x => x + 1, 0);
+	
 
 
 	const handleDelete = () => {
 		props.deletePost()
 		handleClose()
-		forceCounter()
+		props.setCounter(props.count + 1)
 	  }
 
-	  useEffect(()=> {
-		props.getAllPosts()
-	  },[count])
+	
 
 
 	// security risk here

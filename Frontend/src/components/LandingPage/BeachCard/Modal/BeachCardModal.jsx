@@ -31,7 +31,7 @@ export default function BasicModal(props) {
   const [id, setId]= useState("");
 
   const [reducedValue, forceUpdate] = useReducer(x => x + 1, 0);
-  
+  const [count, setCounter] = useState(0);
 
 
   useEffect(()=> {
@@ -47,7 +47,9 @@ export default function BasicModal(props) {
     getAllPosts()
   },[reducedValue])
 
-
+  useEffect(()=> {
+		getAllPosts()
+	  },[count])
 
   const ratingChanged = (newRating) => {
     setRate(newRating)
@@ -130,7 +132,6 @@ export default function BasicModal(props) {
   const deletePost = () => {
     axios.delete(`http://localhost:3001/api/v1/post/deletepost/${postId}`).then(() => {
       console.log('post is deleted')
-      forceCounter()
     })
     .catch(error => console.log(error))
 }
@@ -180,6 +181,8 @@ export default function BasicModal(props) {
                 setPostId={setPostId}
                 deletePost={deletePost}
                 getAllPosts={getAllPosts}
+                setCounter={setCounter}
+                count={count}
 
               />
             </div>

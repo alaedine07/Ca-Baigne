@@ -76,7 +76,7 @@ function BeachCard(props) {
 
   }
 
-  
+
 
   const ratingChanged = (newRating) => {
     setRate(newRating)
@@ -94,6 +94,7 @@ function BeachCard(props) {
     }
     return amenities;
   }
+ 
 
   function checkLogin() {
     const token = localStorage.getItem('accessToken');

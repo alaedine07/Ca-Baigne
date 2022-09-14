@@ -1,5 +1,5 @@
 .profile-page {
-    height: 79.9vh !important;
+    height: 88.3vh !important;
     display: flex;
     justify-content: center;
 }
@@ -21,10 +21,10 @@
     border-radius: 50%;
 }
 .update-container {
-    margin-top: 3.5rem;
+    margin-top: 2rem;
     padding-bottom: 8.8rem;
     width: 40rem;
-    height: 40rem;
+    height: 35rem;
 	box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .2); 
 	border-radius: 5px;
 	position: relative;
@@ -78,7 +78,7 @@
 .label-input:focus {
     outline: none;
 }
-@media screen and (min-width: 1300px) {
+@media screen and (min-width: 1800px) {
     .profile-page {
         height: 85.7vh !important;
     }

@@ -14,11 +14,11 @@ export function Profile(props) {
 
     const [userData, setUserData] = useState({username: '', email: '', password: undefined, imgFullPath: ''});
     
-    let navigate = useNavigate(); 
+    /*let navigate = useNavigate(); 
     const routeChange = () =>{ 
     let path = '/';
     navigate(path);
-    }
+    }*/
 
 
     useEffect(() => {
@@ -117,7 +117,7 @@ export function Profile(props) {
                             <input className="label-input" type="email" value={userData.email} onChange={e => setUserData({...userData, email: e.target.value})}/>
                         <label className="myLabel" htmlFor="email"> New Password : </label>
                             <input className="label-input" type="password" value={userData.password} onChange={e => setUserData({...userData, password: e.target.value})}/>
-                        <button type="submit" className=" myButton btn btn-success"  onClick={() => {ModifyProfile, routeChange()}}>
+                        <button type="submit" className=" myButton btn btn-success"  onClick={() => {ModifyProfile}}>
                             Modify   
                         </button>
                     </form>

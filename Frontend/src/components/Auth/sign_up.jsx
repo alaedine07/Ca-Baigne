@@ -107,9 +107,10 @@ export function SignUpForm() {
                     value={email}
                     onChange={e => setEmail(e.target.value)}
                     className="
+                    signup-ipnut
                     text-sm
                     placeholder-gray-500
-                    p-4
+                    p-5
                     pr-4
                     rounded-2xl
                     border border-gray-400
@@ -130,6 +131,7 @@ export function SignUpForm() {
               <div className="relative">
                 <div
                     className="
+                        
                         inline-flex
                         items-center
                         justify-center
@@ -150,9 +152,10 @@ export function SignUpForm() {
                     value={username}
                     onChange={e => setUsername(e.target.value)}
                     className="
+                    signup-ipnut
                     text-sm
                     placeholder-gray-500
-                    p-4
+                    p-5
                     pr-4
                     rounded-2xl
                     border border-gray-400
@@ -172,6 +175,7 @@ export function SignUpForm() {
               <div className="relative">
                 <div
                   className="
+                  
                     inline-flex
                     items-center
                     justify-center
@@ -194,9 +198,10 @@ export function SignUpForm() {
                     value={password}
                     onChange={e => setPassword(e.target.value)}
                     className="
+                    signup-ipnut
                     text-sm
                     placeholder-gray-500
-                    p-4
+                    p-5
                     pr-4
                     rounded-2xl
                     border border-gray-400
