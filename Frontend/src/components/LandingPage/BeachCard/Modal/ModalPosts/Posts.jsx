@@ -89,7 +89,7 @@ function Posts(props) {
 							{	post.image !== "" ?
 								<img className='user-image' src={avatar_men} alt="img" />
 								:
-								<img className='user-image' src={'http://localhost:3001/' + post.image.split('/').slice(-3).join('/')} alt="img" />
+								<img className='user-image' src={process.env.API_BASE_URL + '' + post.image.split('/').slice(-3).join('/')} alt="img" />
 							}
 								<div className="comment-content">
 									<p>{post.userName.charAt(0).toUpperCase() + post.userName.slice(1)}</p>

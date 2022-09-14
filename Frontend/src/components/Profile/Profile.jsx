@@ -19,7 +19,7 @@ export function Profile(props) {
         if (token) {
             const decoded = jwt_decode(token);
             const userId = decoded['id'];
-            axios.get('http://localhost:3001/api/v1/user/' + userId, {
+            axios.get(process.env.API_BASE_URL + 'api/v1/user/' + userId, {
                 headers: {
                     'Authorization': 'bearer ' + token
                 }
@@ -37,7 +37,7 @@ export function Profile(props) {
         const token = localStorage.getItem('accessToken');
         const decoded = jwt_decode(token);
         const userId = decoded['id'];
-        axios.put('http://localhost:3001/api/v1/user/updateuser/' + userId, {
+        axios.put(process.env.API_BASE_URL + 'api/v1/user/updateuser/' + userId, {
             data: {
                 userName: userData.username,
                 email: userData.email,
@@ -72,7 +72,7 @@ export function Profile(props) {
         const decoded = jwt_decode(token);
         const userId = decoded['id'];
         formData.append("userid", userId);
-        axios.post('http://localhost:3001/api/v1/uploads/userUploads', formData, {
+        axios.post(process.env.API_BASE_URL + 'api/v1/uploads/userUploads', formData, {
             headers: {
                     'Content-Type': 'multipart/form-data',
                     'Authorization': 'bearer ' + token,
@@ -97,7 +97,7 @@ export function Profile(props) {
                 <div className="image-upload">
                     <label htmlFor="file-input">
                     { userData.imgFullPath ? 
-                        <img id="avatar-img" src={'http://localhost:3001/' + userData.imgFullPath.split('/').slice(-3).join('/')}/> : 
+                        <img id="avatar-img" src={process.env.API_BASE_URL + '' + userData.imgFullPath.split('/').slice(-3).join('/')}/> : 
                         <img id="avatar-img" src={avatarMen}/>
                         }
                     </label>

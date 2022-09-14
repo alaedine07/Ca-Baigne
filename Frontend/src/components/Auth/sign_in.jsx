@@ -12,7 +12,7 @@ export function SignInForm() {
     function loginUser(event) {
       // console.log('sending request to backend');
       event.preventDefault();
-      axios.post('http://localhost:3001/api/v1/auth/login', {
+      axios.post(process.env.API_BASE_URL + 'api/v1/auth/login', {
         email: email,
         hashedPassword: password
       },

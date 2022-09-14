@@ -55,7 +55,7 @@ export default function BasicModal(props) {
 
   const getBeach = () => {
     if (props.beachName) {
-      axios.get('http://localhost:3001/api/v1/beach/allbeaches')
+      axios.get(process.env.API_BASE_URL + 'api/v1/beach/allbeaches')
         .then(response => {
           response.data.beaches.map( data =>
             data.name === props.beachName ? setId(data.id) : null
@@ -73,7 +73,7 @@ export default function BasicModal(props) {
     const userId = decoded['id'];
     const userName = decoded['Username'];
     const imagePath = decoded['imagePath'];
-    axios.post('http://localhost:3001/api/v1/post/newpost', {
+    axios.post(process.env.API_BASE_URL + 'api/v1/post/newpost', {
       content: content,
       beachId: id,
       userId: userId,
@@ -103,7 +103,7 @@ export default function BasicModal(props) {
   }
 
   const getAllPosts = () => {
-    axios.get('http://localhost:3001/api/v1/post/allposts')
+    axios.get(process.env.API_BASE_URL + 'api/v1/post/allposts')
     .then(response => {
       const Posts = []
       response.data.posts.map( data => 
@@ -146,7 +146,7 @@ export default function BasicModal(props) {
     
     <Box sx={style}>
           <div className='first-half'>
-            <img src={'http://localhost:3001/' + props.image.split('/').slice(-3).join('/')} className='modal-img'></img>
+            <img src={process.env.API_BASE_URL + '' + props.image.split('/').slice(-3).join('/')} className='modal-img'></img>
             <div className='beach-name'>
               <div>{props.beachName}</div>
               <div><span>4.5</span> <i className="star fas fa-star"></i></div>

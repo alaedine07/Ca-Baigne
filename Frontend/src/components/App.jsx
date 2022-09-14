@@ -14,6 +14,8 @@ import NewBeachForm from "./newBeachForm/NewBeach";
 import './App.css';
 
 export function App() {
+
+    
     const [token, setToken] = useState('');
 
     // check if the user is logedin by verifying if the token is in localStorage

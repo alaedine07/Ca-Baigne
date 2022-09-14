@@ -97,7 +97,7 @@ function FavoriteCard(props) {
         </> 
         }
         <div className='overflow'>
-          <img className="card-img-top" src={'http://localhost:3001/' + props.beachData.imagepath.split('/').slice(-3).join('/')} alt="Card image cap" onClick={checkLogin() && handleClick} />
+          <img className="card-img-top" src={process.env.API_BASE_URL + '' + props.beachData.imagepath.split('/').slice(-3).join('/')} alt="Card image cap" onClick={checkLogin() && handleClick} />
         </div>
         <div className="card-body">
           <h5 className="card-title text-info">{props.beachName}</h5>

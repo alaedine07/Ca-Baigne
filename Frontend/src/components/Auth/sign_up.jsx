@@ -13,7 +13,7 @@ export function SignUpForm() {
 
     function createUser(event) {
       event.preventDefault();
-      axios.post('http://localhost:3001/api/v1/user/newuser/', {
+      axios.post(process.env.API_BASE_URL + 'api/v1/user/newuser/', {
         email: email,
         userName: username,
         hashedPassword: password

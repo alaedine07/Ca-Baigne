@@ -24,7 +24,7 @@ const Navbar = (props) => {
       if (token) {
           const decoded = jwt_decode(token);
           const userId = decoded['id'];
-          axios.get('http://localhost:3001/api/v1/user/' + userId, {
+          axios.get(process.env.API_BASE_URL + 'api/v1/user/' + userId, {
               headers: {
                   'Authorization': 'bearer ' + token
               }
@@ -153,7 +153,7 @@ else {
             </li>
             {
               imagePath ? <div className="profileImageZone">
-              <img src={'http://localhost:3001/' + imagePath.split('/').slice(-3).join('/')} alt="img" />
+              <img src={process.env.API_BASE_URL + '' + imagePath.split('/').slice(-3).join('/')} alt="img" />
             </div> : null
             }
             <div style={toggleStyle}>
