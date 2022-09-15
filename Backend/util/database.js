@@ -22,7 +22,7 @@ else {
     process.env.PROD_DATABASE_USER,
     process.env.PROD_DATABASE_PASSWORD,
     {
-        host: process.env.PROD_DATABASE_HOST,
+        host: process.env.PROD_DATABASE_HOST, //change host to 'postgres' when working with docker
         dialect: 'postgres',
         timezone: '+01',
         logging: false,
