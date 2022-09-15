@@ -1,13 +1,17 @@
 version: "3"
 services:
-  cabaigne-app:
+  cabaigne-frontend:
+    build: 
+      context: ./Frontend
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3010:3010"
+  cabaigne-backend:
     build:
-      context: .
+      context: ./Backend
       dockerfile: Dockerfile.dev
     ports:
       - "3001:3001"
-    volumes:
-      - ./:/app
   postgres:
     image: "postgres"
     ports:
