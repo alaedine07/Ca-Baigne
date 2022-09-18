@@ -35,13 +35,7 @@ export function SignUpForm() {
     console.log(username)
     return (
         <div
-            className="
-            min-h-screen
-            flex flex-col
-            items-center
-            justify-center
-            bg-gray-100"
-        >
+            className="min-h-screen flex flex-col items-center justify-center bg-gray-100">
         <div
             className="
             flex flex-col
@@ -60,6 +54,7 @@ export function SignUpForm() {
             className="
             font-medium
             self-center
+            mb-2
             text-xl
             sm:text-3xl
             text-gray-800">
@@ -67,7 +62,6 @@ export function SignUpForm() {
         </div>
         <div
             className="
-            mt-4
             self-center
             text-xl
             sm:text-sm
@@ -77,10 +71,10 @@ export function SignUpForm() {
 
         <div className="mt-1">
             <form action="#">
-            <div className="flex flex-col mb-6">
+            <div className="flex flex-col mb-3">
                 <label
                     for="email"
-                    className="mb-2 text-s tracking-wide text-gray-600"
+                    className=" signup-label mb-2 text-s tracking-wide text-dark-600"
                 >
                 E-Mail Address:
                 </label>
@@ -110,7 +104,6 @@ export function SignUpForm() {
                     signup-ipnut
                     text-sm
                     placeholder-gray-500
-                    p-5
                     pr-4
                     rounded-2xl
                     border border-gray-400
@@ -121,10 +114,10 @@ export function SignUpForm() {
                 />
               </div>
             </div>
-            <div className="flex flex-col mb-6">
+            <div className="flex flex-col mb-3">
                 <label
                     for="firstName"
-                    className="mb-2 text-s tracking-wide text-gray-600"
+                    className="signup-label mb-2 text-s tracking-wide text-gray-600"
                 >
                 Username:
                 </label>
@@ -155,7 +148,7 @@ export function SignUpForm() {
                     signup-ipnut
                     text-sm
                     placeholder-gray-500
-                    p-5
+                    
                     pr-4
                     rounded-2xl
                     border border-gray-400
@@ -169,10 +162,10 @@ export function SignUpForm() {
             <div className="flex flex-col mb-5">
               <label
                     for="password"
-                    className="mb-2 text-s tracking-wide text-gray-600">
+                    className="signup-label mb-2 text-s tracking-wide text-gray-600">
                 Password:
-            </label>
-              <div className="relative">
+              </label>
+              <div className="relative ">
                 <div
                   className="
                   
@@ -201,7 +194,6 @@ export function SignUpForm() {
                     signup-ipnut
                     text-sm
                     placeholder-gray-500
-                    p-5
                     pr-4
                     rounded-2xl
                     border border-gray-400

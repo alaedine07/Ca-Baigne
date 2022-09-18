@@ -10,5 +10,9 @@
 }
 
 .signup-ipnut {
+    padding-left: 2rem;
     width: 350px !important;
+}
+.signup-label {
+    color: black !important;
 }

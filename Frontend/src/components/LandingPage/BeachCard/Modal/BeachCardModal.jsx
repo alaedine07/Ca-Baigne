@@ -19,7 +19,6 @@ const style = {
   bgcolor: 'background.paper',
   boxShadow: 24,
   display: 'flex',
-  borderRadius: '10px'
 };
 
 export default function BasicModal(props) {

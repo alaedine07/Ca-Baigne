@@ -13,14 +13,10 @@ html, body {
     margin: 0;
 }
 
-label {
-    display: flex;
-    margin-bottom: 10px;
-}
 
 .flex-wrapper {
     display: flex;
-    min-height: 79.9vh !important;
+    /*min-height: 79.9vh !important;*/
     flex-direction: column;
 }
 

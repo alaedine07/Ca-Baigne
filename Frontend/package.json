@@ -19,6 +19,7 @@
     "@mui/icons-material": "^5.10.2",
     "@mui/joy": "^5.0.0-alpha.42",
     "@mui/material": "^5.10.2",
+    "animate.css": "^4.1.1",
     "axios": "^0.27.2",
     "bootstrap": "^5.2.0",
     "cdbreact": "^1.5.3",

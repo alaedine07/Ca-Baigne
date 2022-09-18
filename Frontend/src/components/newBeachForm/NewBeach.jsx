@@ -63,15 +63,22 @@ export function NewBeachForm() {
         <div className="newbeach-page">
             <div className="newbeach-container">
                 <div className="newbeach-card">
-                    <h1 className="form-header">New beach</h1>
-                <div>
-                    <form className="newbeach-form" action="">
-                            <div>
+                    <p>*Admin access only</p>
+                    <h1 className="form-header">Fill new beach info</h1>
+                    <div className="newbeach-form">
+                            <div className="newbeach-section-one">
                                 <label className="newbeach-label">Beach name</label>
                                 <input className="newbeach-input" type="text" placeholder="Beach name" value={beachName} onChange={e => setBeachName(e.target.value)}/>
                                 
                                 <label className="newbeach-label">Governorate</label>
-                                <input className="newbeach-input" type="text" placeholder="Governorate" value={beachGovernorate} onChange={e => setbeachGovernorate(e.target.value)}/>
+                                <select value={beachGovernorate} onChange={e => setbeachGovernorate(e.target.value)}>
+                                    <option hidden>--Select Governorate--</option>
+                                    <option>Tunis</option>
+                                    <option>Bizerte</option>
+                                    <option>Nabeul</option>
+                                    <option>Sousse</option>
+                                </select>
+                                
                                 
                                 <label className="newbeach-label">Latitude</label>
                                 <input className="newbeach-input" type="number" placeholder="e.g 30.8749" value={lattitude} onChange={e => setlattitude(e.target.value)}/>
@@ -79,7 +86,7 @@ export function NewBeachForm() {
                                 <label className="newbeach-label">Longitude</label>
                                 <input className="newbeach-input" type="number" placeholder="e.g 10.6542" value={longititude} onChange={e => setLongititude(e.target.value)}/>
                             </div>
-                            <div>
+                            <div className="newbeach-section-two">
                                 <label className="newbeach-label">Select amenities</label>
                                     {amenities.map((item, id) => {
                                         return <>
@@ -91,13 +98,12 @@ export function NewBeachForm() {
                                     })}
                                 <label className="newbeach-label">Add image</label>
                                 <input type="file" onChange={saveFile}/>
+                                <button className="newbeach-button" onClick={uploadData}>Upload</button>
                             </div>
                             
                             
-                        </form>
-                    
-                </div>
-                <button className="newbeach-button" onClick={uploadData}>Upload</button>
+                    </div>
+                
                 </div>
                 
             </div>

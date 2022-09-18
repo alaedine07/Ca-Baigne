@@ -3,9 +3,8 @@
 .modal-img {
     width: 100%;
     height: 80%;
-    padding: 0 !important;
+    padding: 0.25rem !important;
     margin: 0;
-    border-top-left-radius: 10px;
 }
 
 .first-half {
@@ -23,7 +22,7 @@
 }
 
 .beach-name {
-    font-family: 'Amiri', sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-size: 20px;
     font-weight: bold;
     padding-top: 0.5rem;
@@ -34,19 +33,18 @@
 }
 
 .top-header {
-    background-color: #898b8d91;
+    background-color: rgba(2, 34, 56, 0.664);
     display: flex;
     justify-content: space-between;
     padding-right: 5px;
     padding-left: 5px;
-    color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
     align-items: center;
-    border-top-right-radius : 6.3px;
     box-shadow: 0 1px 9px rgba(0, 0, 0, 0.363);
 }
 
 .title-header {
-    font-family: 'Amiri', sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-size: 20px;
     font-weight: bold;
 }
@@ -95,7 +93,7 @@
     font-family: inherit;
     font-size: 100%;
     line-height: 0.2 !important;
-    padding-bottom: 1rem !important;
+    padding-left: 0.3rem !important;
     overflow: hidden !important;
     resize: none;
     display: inline-block;
@@ -117,7 +115,7 @@
 }
 
 .review-btn {
-    font-family: 'Amiri', sans-serif;
+    
     font-weight: bold;
     border: none;
     border-bottom-right-radius: 7px;
@@ -125,8 +123,8 @@
     border-top-left-radius : 0;
     border-top-right-radius : 0;
     box-shadow: none !important;
-    background-color: rgb(188 189 190) !important;
-    color: black;
+    background-color: rgba(2, 34, 56, 0.664) !important;
+    color: rgb(255, 255, 255);
     height: 35px;
 }
 
@@ -137,6 +135,8 @@
     width: 99%;
     overflow-y: scroll;
 }
+
+
 
 .reviews::-webkit-scrollbar {
     display: none;
