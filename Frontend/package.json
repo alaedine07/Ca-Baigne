@@ -29,6 +29,7 @@
     "react": "^18.2.0",
     "react-bootstrap": "^2.5.0",
     "react-dom": "^18.2.0",
+    "react-dropzone": "^14.2.2",
     "react-multi-select-component": "^4.3.3",
     "react-rating-stars-component": "^2.2.0",
     "react-router-dom": "^6.3.0",
