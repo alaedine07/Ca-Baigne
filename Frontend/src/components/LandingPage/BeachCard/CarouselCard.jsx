@@ -1,10 +1,9 @@
-import React, {useState, useRef, useReducer, useEffect} from 'react'
+import React, {useState, useReducer, useEffect} from 'react'
 
 import { v4 as uuidv4 } from "uuid";
 import ReactStars from "react-rating-stars-component";
 import BasicModal from './Modal/BeachCardModal';
 import axios from "axios";
-import jwt_decode from 'jwt-decode';
 import getbeachState from '../../../Utils/WindyApiCall';
 
 import './BeachCard.css'
@@ -59,9 +58,9 @@ function CarouselCard(props) {
   }
 
   function getAmenities() {
-    let amenities = "";
+    let amenities = [];
     for (const [key, value] of Object.entries(props.beachData.amenities)) {
-      amenities += value + " * "
+      amenities.push(<li key={uuidv4()}>{value}</li>)
     }
     return amenities;
   }
@@ -71,28 +70,60 @@ function CarouselCard(props) {
     if (token) {
       return true;
     }
+    return false
   }
   return (
     <>
           <div  className='f p-5' >
-            <div className="card bg-dark text-white" >
+            <div className="beach-card card text-white" >
             <div className='overflow'>
-              <img className="card-img-top" src={process.env.API_BASE_URL + '' + props.beachData.imagepath.split('/').slice(-3).join('/')} alt="Card image cap" onClick={checkLogin() && handleClick} />
+              <img className="card-img-top" src={'http://localhost:3001/' + props.beachData.imagepath.split('/').slice(-3).join('/')} alt="Card image cap"  />
+              <div className="image-button">
+              {
+                  checkLogin()
+                   ?
+                   <a onClick={handleClick} href="#"> Check reviews </a>
+                   :
+                   <a href="/login"> Check reviews </a>
+                }
+                </div>
             </div>
             <div className="card-body">
-              <h5 className="card-title text-info">{props.beachName}</h5>
+              <div className="card-title">
+                <h5 >{props.beachName}</h5>
+              </div>
             </div>
             <ul className="list-group list-group-flush">
-              
-            <li key={uuidv4()} className="weather-data list-group-item bg-secondary text-white">
+              <li key={uuidv4()} className="weather-data list-group-item text-dark">
+              <span className='card-list-title'>Current weather :</span>
                 <div style={{display: 'flex', alignItems: 'center'}}>
-                  {weather} <sup>°C</sup>
-                  <img className="weather-icon" src={weatherIcon} /> 
+                
+                {weather} <sup>°C</sup>
+                <img className="weather-icon" src={weatherIcon} /> 
                 </div>
                 <p>{weatherDescription}</p>
-              </li>
-              <li key={uuidv4()} className="list-group-item bg-secondary text-white">Beach state: {getFlag(props.beachData.latitude, props.beachData.longitude) && beachState === "green" ? <i className="green-flag fas fa-solid fa-flag"></i> : beachState === "orange" ? <i className="orange-flag fas fa-solid fa-flag"></i> : <i className="red-flag fas fa-solid fa-flag"></i>}</li>
-              <li key={uuidv4()} className="list-group-item bg-secondary text-white">Facilities: {getAmenities()}</li>
+                </li>
+                <li key={uuidv4()} className="list-group-item text-dark"><span className='card-list-title'>Beach state :</span> {getFlag(props.beachData.latitude, props.beachData.longitude) && beachState === "green"
+            ?
+            <> 
+              <i className="green-flag fas fa-solid fa-flag"> Green flag</i>
+              <p>Low hazard ~ Calm conditions, exercise caution.</p>
+            </>
+              : 
+            beachState === "orange"
+             ?
+            <>
+              <i className="orange-flag fas fa-solid fa-flag"> Orange flag</i>
+              <p style={{color: 'yellow'}}>Medium hazard ~ Ocean conditions are rough (moderate surf and/or currents).</p>
+            </>
+            : 
+            <>
+              <i className="red-flag fas fa-solid fa-flag"> Red flag</i>
+              <p>High Hazard ~ Rough conditions (strong surf and/or currents) are present.</p>
+            </>
+          }
+          </li>
+              <li key={uuidv4()} className="list-group-item text-dark"><span className='card-list-title'>Amenities :</span> <ul>{getAmenities()}</ul></li>
             </ul>
             {checkLogin() &&
             <>

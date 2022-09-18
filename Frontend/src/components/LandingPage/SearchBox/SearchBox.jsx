@@ -1,8 +1,10 @@
-import React, { useState, useEffect, useMemo} from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 import axios from "axios";
+import { v4 as uuidv4 } from "uuid";
 import jwt_decode from 'jwt-decode';
 import { Container } from "react-bootstrap";
+import Header from "../../Header/Header";
 import BeachResults from "../SearchResult/BeachResults";
 import FavoriteCard from '../BeachCard/FavoriteCard'
 import './SearchBox.css'
@@ -20,6 +22,20 @@ function SearchBox() {
   const [beachArray, setBeachArray] = useState([])
   // sets an array of all pinned beaches related to user
   const [pinnedArray, setPinnedArray] = useState([])
+
+
+  const [token, setToken] = useState('');
+
+    // check if the user is logedin by verifying if the token is in localStorage
+    useEffect(() => {
+        const token = localStorage.getItem('accessToken');
+        if (token) {
+          setToken(token)
+        }
+    });
+
+  const ref = useRef(null);
+
 
   const Handleresults = () => {
     setResult(false);
@@ -44,12 +60,14 @@ function SearchBox() {
     if (locationName) {
       setResult(false);
       setResults(true);
+      
     }
     // if a beach is selected turn the display to one beach
     if (beachName) {
       setResults(false);
       setResult(true);
     }
+    ref.current?.scrollIntoView({behavior: "smooth"});
   }
 
   // check if user is logged in
@@ -66,7 +84,7 @@ function SearchBox() {
 
   // fetch all beaches from database
   const getAllBeaches = () => {
-    axios.get(process.env.API_BASE_URL + 'api/v1/beach/allbeaches')
+    axios.get('http://localhost:3001/api/v1/beach/allbeaches')
     .then(response => {
       setBeachArray(response.data.beaches.map(data => data))
     })
@@ -77,7 +95,7 @@ function SearchBox() {
 
   // fetch all beaches when a governorate is selected and set the governorateArray state to result
   const getGovernorateBeaches = () => {
-    axios.get(process.env.API_BASE_URL + 'api/v1/beach/allbeaches')
+    axios.get('http://localhost:3001/api/v1/beach/allbeaches')
     .then(response => {
       const beaches = []
       response.data.beaches.map(
@@ -96,7 +114,7 @@ function SearchBox() {
          :
          null
     )
-      console.log(beaches);
+    console.log(beaches)
       setGovernorateArray(beaches)
     })
     .catch(error => {
@@ -129,6 +147,7 @@ function SearchBox() {
     
   }
 
+
   // Create cards for pinned beaches
   const getAllPinned = () => {
     const pinned = []
@@ -137,7 +156,7 @@ function SearchBox() {
         beachArray.map( beaches => beaches.id === b
            ?
            pinned.push(
-            <li>
+            <li key={uuidv4()}>
               <FavoriteCard
               id={beaches.id}
               key={beaches.id}
@@ -160,15 +179,19 @@ function SearchBox() {
 
   return (
     <>
-      <h2 className="header-text">Time to swim </h2>
+    <div className="hero-section">
+      
+      <Header token={token}/>
+      <div className="searchbox-container"> 
+      <h2 className="header-text">Find your perfect beach</h2>
       <Container className="content" style={divStyle}>
       <div className="searchbox-row">
         <div className="">
               <div className="searchbox-row align-items-end">
                   <div className="form-group col-md-4">
-                  <label className="label mb-2 fw-bold">Location</label>
+                  <label className="label mb-2 fw-bold">Governorate</label>
                   <select id='select' name="location" className="form-control" onClick={locationName? getGovernorateBeaches : null} onChange={Handlelocation} value={locationName}>
-                    <option hidden>--Select Location--</option>
+                    <option hidden>--Select Governorate--</option>
                     <option>Tunis</option>
                     <option>Bizerte</option>
                     <option>Nabeul</option>
@@ -195,33 +218,51 @@ function SearchBox() {
       
     </div>
       </Container>
-        <div className="beachResults">
-          <BeachResults
-            governorateArray={governorateArray}
-            pinnedArray={pinnedArray}
-            locationName={locationName}
-            beachName={beachName}
-            result={result}
-            results={results}
-          />
+      </div>
+      {pinnedArray.length && !result && !results
+       ?
+        <div className="arrow">
+          <p className="arrow-icon-text">Check your pinned beaches</p>
+          <button onClick={() => {ref.current?.scrollIntoView({behavior: "smooth"});}}>
+            <img className="arrow-icon" src={require('../../../Assets/Images/arrow.png')} alt=""></img>
+          </button>
         </div>
-        {checkLogin() && result === false && results === false &&
-        <>
-        {
-          pinnedArray.length
-           ?
-           <>
-           {pinnedArray.length > 1 ? <p className="pin-text">Your pinned beaches</p> : <p>Your pinned beach </p>}
-        <ul style={{display: 'flex'}}>
-          {getAllPinned()}
-        </ul>
-        </>
-        : null
-        }
+       : 
+        null
+      }
         
-          
-        </>
-        }
+    </div>
+    <div ref={ref}></div>
+    { 
+    result || results ?
+    <div ref={ref} className="beachResults">
+      <BeachResults
+        governorateArray={governorateArray}
+        pinnedArray={pinnedArray}
+        locationName={locationName}
+        beachName={beachName}
+        result={result}
+        results={results}
+      />
+
+    </div>
+    :
+    checkLogin() &&
+      <div ref={ref} className="pinned-section">
+      {
+        pinnedArray.length
+          ?
+          <>
+          {pinnedArray.length > 1 ? <p className="pin-text">Your pinned beaches</p> : <p className="pin-text">Your pinned beach </p>}
+            <ul style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'center'}}>
+              {getAllPinned()}
+            </ul>
+          </>
+          : null
+      }  
+      </div>
+    
+}
   </>
   );
 }

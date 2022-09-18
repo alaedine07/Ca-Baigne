@@ -1,3 +1,95 @@
+
+.newbeach-page {
+    background: url('../../Assets/Images/background-image.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+}
+
+.newbeach-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.newbeach-card{
+    width: 55rem;
+    height: 32rem;
+	box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .2); 
+	border-radius: 5px;
+	position: relative;
+	z-index: 1;
+	background: inherit;
+	overflow: hidden;
+    padding: 2rem;
+}
+
+
+.newbeach-card:before {
+	content: "";
+	position: absolute;
+	background: inherit;
+	z-index: -1;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	box-shadow: inset 0 0 2000px rgba(255, 255, 255, 0.555);
+	filter: blur(10px);
+	margin: -20px;
+    background-color: rgba(175, 175, 175, 0.651);
+  }
+
+
+.newbeach-form {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 1rem;
+    gap: 1.5rem;
+}
+
+.form-header {
+    text-align: center;
+    font-size: 30px !important;
+    font-style: italic;
+    font-weight: bold;
+}
+
+.newbeach-label {
+    color: rgb(0, 0, 0) !important;
+    font-size: 20px !important;
+    padding: 0.5rem;
+    font-style: italic;
+    font-weight: bold;
+}
+
+.newbeach-button {
+    background-color: #00351c !important;
+    position: relative;
+    padding: 10px;
+    border: none !important;
+    margin: 10px;
+    color: white;
+}
+.image-upload>input {
+    display: none;
+}
+
+.newbeach-input {
+    width: 100%;
+    height: 10%;
+    border-radius: 0 !important;
+    border: none;
+    padding: 1rem;
+}
+
+.newbeach-input:focus {
+    outline: none;
+}
+
 .checkBox-options {
     display: flex;
     gap: 1rem;
@@ -13,77 +105,13 @@
     color: white !important;
 }
 
-.newbeach-page {
-    height: 77.9vh !important;
+.newbeach-section-one {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    width: 50%;
 }
-
-.newbeach-card{
-    margin-top: 8rem;
-    padding-bottom: 8.8rem;
-    width: 60rem;
-    height: 40rem;
-	box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .2); 
-	border-radius: 5px;
-	position: relative;
-	z-index: 1;
-	background: inherit;
-	overflow: hidden;
-}
-
-.newbeach-card:before {
-	content: "";
-	position: absolute;
-	background: inherit;
-	z-index: -1;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	box-shadow: inset 0 0 2000px rgba(255, 255, 255, 0.856);
-	filter: blur(10px);
-	margin: -20px;
-    background-color: rgb(175, 175, 175);
-}
-
-.newbeach-form {
+.newbeach-section-two {
     display: flex;
-    flex-direction: row;
-    gap: 5rem;
-    padding: 0.5rem;
-}
-
-.form-header {
-    text-align: center;
-    font-size: 50px !important;
-}
-
-.newbeach-label {
-    color: white !important;
-    font-size: 25px !important;
-    padding: 0.5rem;
-}
-
-.newbeach-button {
-    background-color: #333333 !important;
-    position: relative;
-    padding: 10px;
-    border: none !important;
-    margin: 10px;
-    color: white;
-}
-
-.image-upload>input {
-    display: none;
-}
-
-.label-input {
-    width: 30%;
-    border-radius: 0 !important;
-    border: none;
-}
-
-.label-input:focus {
-    outline: none;
+    flex-direction: column;
+    width: 50%;
 }

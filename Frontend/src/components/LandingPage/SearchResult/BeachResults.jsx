@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React from 'react';
 import BeachCard from '../BeachCard/BeachCard'
 import CarouseCard from '../BeachCard/CarouselCard'
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -16,15 +16,15 @@ function BeachResults(props) {
       props.governorateArray.map( beaches => {
         beaches.map(beach => {
         results.push(
-        <SwiperSlide> 
-          <CarouseCard
-            beach_id={beach.id} 
-            key={beach.id} 
-            beachName={beach.name}
-            beachData={beach}
-            governorateArray={props.governorateArray}
-          />
-        </SwiperSlide>
+          <SwiperSlide>
+            <CarouseCard
+              beach_id={beach.id} 
+              key={beach.id} 
+              beachName={beach.name}
+              beachData={beach}
+              governorateArray={props.governorateArray}
+            />
+          </SwiperSlide>
         )
         })})
     }
@@ -34,20 +34,20 @@ function BeachResults(props) {
   function getBeach() {
     for (let i = 0; i < props.governorateArray.length; i++) {
       if (props.governorateArray[i][0].name === props.beachName) {
+        
         return props.governorateArray[i];
       }
     }
     return null;
   }
-console.log('gov: ' + props.governorateArray)
 
   return (
     <div>
         {
         props.result ?
-        <>
-        <h3 className="result-text">Your search results for “{props.beachName}”</h3>
-        <div className="results-container d-flex justify-content-center">
+        <div className='results-container'>
+        <p className="result-text">Your search results for “{props.beachName}”</p>
+        <div className="results-cards d-flex justify-content-center">
           <BeachCard
           id = {getBeach()[0].id}
           beachName={props.beachName}
@@ -56,7 +56,7 @@ console.log('gov: ' + props.governorateArray)
           pinnedArray={props.pinnedArray}
           />
         </div>
-        </>
+        </div>
          : 
         null
       }

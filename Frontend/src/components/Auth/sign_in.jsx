@@ -12,7 +12,7 @@ export function SignInForm() {
     function loginUser(event) {
       // console.log('sending request to backend');
       event.preventDefault();
-      axios.post(process.env.API_BASE_URL + 'api/v1/auth/login', {
+      axios.post('http://localhost:3001/api/v1/auth/login', {
         email: email,
         hashedPassword: password
       },
@@ -51,7 +51,7 @@ export function SignInForm() {
             <div className="flex flex-col mb-4">
                 <label
                     for="email"
-                    className="sign-label text-s tracking-wide"
+                    className="sign-label text-s tracking-wide mb-2"
                 >
                 Email Address:
                 </label>
@@ -67,7 +67,7 @@ export function SignInForm() {
                     name="email"
                     value={email}
                     onChange={e => setEmail(e.target.value)}
-                    className="signin-input text-sm placeholder-gray-500  pr-4 rounded-2xl border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400"
+                    className="signin-input text-sm placeholder-gray-500 pr-4 rounded-2xl border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400"
                     placeholder="Enter your email"
                 />
               </div>
@@ -75,7 +75,7 @@ export function SignInForm() {
             <div className="flex flex-col mb-6">
               <label
                     for="password"
-                    className="sign-label text-s tracking-wide">
+                    className="sign-label text-s tracking-wide mb-2">
                 Password:
             </label>
               <div className="relative">

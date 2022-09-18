@@ -5,6 +5,7 @@ import jwt_decode from 'jwt-decode';
 import $ from 'jquery';
 import Dark from '../Darkmode/Darkmode';
 import './Navbar.css';
+import { requirePropFactory } from '@mui/material';
 
 const Navbar = (props) => {
 
@@ -14,7 +15,7 @@ const Navbar = (props) => {
   function handleSignOut() {
     localStorage.removeItem('accessToken');
     const Domain = window.location.origin;
-    const URL = Domain + '/login';
+    const URL = Domain + '/';
     window.location.replace(URL);
   }
   
@@ -24,7 +25,7 @@ const Navbar = (props) => {
       if (token) {
           const decoded = jwt_decode(token);
           const userId = decoded['id'];
-          axios.get(process.env.API_BASE_URL + 'api/v1/user/' + userId, {
+          axios.get('http://localhost:3001/api/v1/user/' + userId, {
               headers: {
                   'Authorization': 'bearer ' + token
               }
@@ -43,7 +44,6 @@ const Navbar = (props) => {
   <nav className="navbar navbar-expand-lg navbar-mainbg">
     
       <NavLink className="navbar-brand navbar-logo" to="/" >
-      Ça baigne
       </NavLink>
       <button 
         className="navbar-toggler"
@@ -64,30 +64,30 @@ const Navbar = (props) => {
             </div>
             
             <li className="nav-item active">
-              <NavLink className="nav-link" to="/" >
+              <NavLink onClick={() => {window.location.reload()}} className="nav-link" to="/" >
                 <i 
-                className="fa fa-home">
+                  className="fa fa-home">
                 </i>Home
               </NavLink>
             </li>
             <li className="nav-item">
               <NavLink className="nav-link" to="/login" >
                 <i 
-                className="fa fa-sign-in-alt">
+                  className="fa fa-sign-in-alt">
                 </i>Login
               </NavLink>
             </li>
             <li className="nav-item">
               <NavLink className="nav-link" to="/join" >
                 <i 
-                className="fa fa-sign-in-alt">
+                  className="fa fa-sign-in-alt">
                 </i>Join
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="/contact" >
+              <NavLink onClick={() => {window.scrollTo(0, document.body.scrollHeight);}} className="nav-link" to="/" >
                 <i 
-                className="far fa-envelope">
+                  className="far fa-envelope">
                 </i>Contact Us
               </NavLink>
             </li>
@@ -103,7 +103,6 @@ else {
   return (
     <nav className="navbar navbar-expand-lg navbar-mainbg">
     <NavLink className="navbar-brand navbar-logo" to="/" exact>
-      Ça baigne
       </NavLink>
       <button 
         className="navbar-toggler"
@@ -145,7 +144,7 @@ else {
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="/contact" exact>
+              <NavLink onClick={() => {window.scrollTo(0, document.body.scrollHeight);}} className="nav-link contact-navlink" to="/">
                 <i 
                 className="far fa-envelope">
                 </i>Contact Us
@@ -153,7 +152,7 @@ else {
             </li>
             {
               imagePath ? <div className="profileImageZone">
-              <img src={process.env.API_BASE_URL + '' + imagePath.split('/').slice(-3).join('/')} alt="img" />
+              <img src={'http://localhost:3001/' + imagePath.split('/').slice(-3).join('/')} alt="img" />
             </div> : null
             }
             <div style={toggleStyle}>

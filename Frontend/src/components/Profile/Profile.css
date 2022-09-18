@@ -1,7 +1,16 @@
+.profile {
+    background: url('../../Assets/Images/background-image.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}
+
 .profile-page {
-    height: 120.9vh !important;
+    height: 100% !important;
     display: flex;
     justify-content: center;
+    height: 89.9vh !important;
 }
 
 .profile-form {
@@ -11,7 +20,25 @@
     max-width: 100%;
     margin: auto;
     text-align: start;
+    padding-top: 2rem;
 }
+
+.image-upload {
+    background-color: rgba(35, 73, 95, 0.582);
+    height: 20%;
+}
+
+.image-upload-label {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+#avatar-img:hover {
+    background-color:#000;
+    opacity:0.5;
+
+}
+
 #avatar-img {
     width: 100px;
     position: relative;
@@ -20,12 +47,13 @@
     cursor: pointer;
     border-radius: 50%;
 }
+
 .update-container {
-    margin-top: 3.5rem;
+    margin-top: 2rem;
     padding-bottom: 8.8rem;
-    width: 40rem;
-    height: 40rem;
-	box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .2); 
+    width: 35rem;
+    height: 32rem;
+	box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.541); 
 	border-radius: 5px;
 	position: relative;
 	z-index: 1;
@@ -46,7 +74,7 @@
 	box-shadow: inset 0 0 2000px rgba(255, 255, 255, 0.856);
 	filter: blur(10px);
 	margin: -20px;
-    background-color: rgb(156, 156, 156);
+    background-color: rgba(156, 156, 156, 0.589);
   }
 
 .myLabel {
@@ -63,7 +91,7 @@
     margin: 10px;
 }
 .image-upload {
-    padding-top: 2rem;
+    padding-top: 1rem;
 }
 .image-upload>input {
     display: none;
@@ -71,21 +99,20 @@
 
 .label-input {
     width: 50% !important;
+    height: 40px !important;
     border-radius: 0 !important;
     border: none;
+    padding-left: 0.7rem;
 }
 
 .label-input:focus {
     outline: none;
 }
-
-@media screen and (min-width: 1600px) {
+@media screen and (min-width: 1295px) {
     .profile-page {
-        height: 85.7vh !important;
+        height: 93.6vh !important;
     }
-}
-
-.errorMsg {
-    color: red;
-    text-align: center;
+    .update-container {
+        margin-top: 5rem;
+    }
 }

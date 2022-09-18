@@ -8,12 +8,11 @@ export function SignUpForm() {
     const [email, setEmail] = useState("");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const [errorMsg, setErrorMsg] = useState("");
     const [error, setError] = useState(false);
 
     function createUser(event) {
       event.preventDefault();
-      axios.post(process.env.API_BASE_URL + 'api/v1/user/newuser/', {
+      axios.post('http://localhost:3001/api/v1/user/newuser/', {
         email: email,
         userName: username,
         hashedPassword: password
@@ -30,19 +29,13 @@ export function SignUpForm() {
       }).catch(function (error) {
         if (error.response) {
           setError(true);
-          setErrorMsg(error.response.data);
         }
       })
     }
+    console.log(username)
     return (
         <div
-            className="
-            min-h-screen
-            flex flex-col
-            items-center
-            justify-center
-            bg-gray-100"
-        >
+            className="min-h-screen flex flex-col items-center justify-center bg-gray-100">
         <div
             className="
             flex flex-col
@@ -61,6 +54,7 @@ export function SignUpForm() {
             className="
             font-medium
             self-center
+            mb-2
             text-xl
             sm:text-3xl
             text-gray-800">
@@ -68,7 +62,6 @@ export function SignUpForm() {
         </div>
         <div
             className="
-            mt-4
             self-center
             text-xl
             sm:text-sm
@@ -78,10 +71,10 @@ export function SignUpForm() {
 
         <div className="mt-1">
             <form action="#">
-            <div className="flex flex-col mb-6">
+            <div className="flex flex-col mb-3">
                 <label
                     for="email"
-                    className="mb-2 text-s tracking-wide text-gray-600"
+                    className=" signup-label mb-2 text-s tracking-wide text-dark-600"
                 >
                 E-Mail Address:
                 </label>
@@ -108,9 +101,9 @@ export function SignUpForm() {
                     value={email}
                     onChange={e => setEmail(e.target.value)}
                     className="
+                    signup-ipnut
                     text-sm
                     placeholder-gray-500
-                    p-5
                     pr-4
                     rounded-2xl
                     border border-gray-400
@@ -121,16 +114,17 @@ export function SignUpForm() {
                 />
               </div>
             </div>
-            <div className="flex flex-col mb-6">
+            <div className="flex flex-col mb-3">
                 <label
                     for="firstName"
-                    className="mb-2 text-s tracking-wide text-gray-600"
+                    className="signup-label mb-2 text-s tracking-wide text-gray-600"
                 >
                 Username:
                 </label>
               <div className="relative">
                 <div
                     className="
+                        
                         inline-flex
                         items-center
                         justify-center
@@ -151,9 +145,10 @@ export function SignUpForm() {
                     value={username}
                     onChange={e => setUsername(e.target.value)}
                     className="
+                    signup-ipnut
                     text-sm
                     placeholder-gray-500
-                    p-5
+                    
                     pr-4
                     rounded-2xl
                     border border-gray-400
@@ -167,12 +162,13 @@ export function SignUpForm() {
             <div className="flex flex-col mb-5">
               <label
                     for="password"
-                    className="mb-2 text-s tracking-wide text-gray-600">
+                    className="signup-label mb-2 text-s tracking-wide text-gray-600">
                 Password:
-            </label>
-              <div className="relative">
+              </label>
+              <div className="relative ">
                 <div
                   className="
+                  
                     inline-flex
                     items-center
                     justify-center
@@ -195,9 +191,9 @@ export function SignUpForm() {
                     value={password}
                     onChange={e => setPassword(e.target.value)}
                     className="
+                    signup-ipnut
                     text-sm
                     placeholder-gray-500
-                    p-5
                     pr-4
                     rounded-2xl
                     border border-gray-400
@@ -251,7 +247,7 @@ export function SignUpForm() {
           </form>
         </div>
         {
-          error ? <div className="flex justify-center"><span className="errorMsg">{ errorMsg }</span></div> : null
+          error ? <div className="flex justify-center"><span className="errorMsg">User already exists</span></div> : null
         }
       </div>
       <div className="flex justify-center items-center mt-6">

@@ -12,14 +12,20 @@ import Header from "../Header/Header";
 export function Profile(props) {
 
     const [userData, setUserData] = useState({username: '', email: '', password: undefined, imgFullPath: ''});
-    const [errorMsg, setErrorMsg] = useState('');
+    
+    /*let navigate = useNavigate(); 
+    const routeChange = () =>{ 
+    let path = '/';
+    navigate(path);
+    }*/
+
 
     useEffect(() => {
         const token = localStorage.getItem('accessToken');
         if (token) {
             const decoded = jwt_decode(token);
             const userId = decoded['id'];
-            axios.get(process.env.API_BASE_URL + 'api/v1/user/' + userId, {
+            axios.get('http://localhost:3001/api/v1/user/' + userId, {
                 headers: {
                     'Authorization': 'bearer ' + token
                 }
@@ -37,7 +43,7 @@ export function Profile(props) {
         const token = localStorage.getItem('accessToken');
         const decoded = jwt_decode(token);
         const userId = decoded['id'];
-        axios.put(process.env.API_BASE_URL + 'api/v1/user/updateuser/' + userId, {
+        axios.put('http://localhost:3001/api/v1/user/updateuser/' + userId, {
             data: {
                 userName: userData.username,
                 email: userData.email,
@@ -58,7 +64,6 @@ export function Profile(props) {
                 window.location.replace(URL);
             }).catch((err) => {
                 console.error(err);
-                setErrorMsg(err.response.data);
             })
         }
 
@@ -72,15 +77,12 @@ export function Profile(props) {
         const decoded = jwt_decode(token);
         const userId = decoded['id'];
         formData.append("userid", userId);
-        axios.post(process.env.API_BASE_URL + 'api/v1/uploads/userUploads', formData, {
+        axios.post('http://localhost:3001/api/v1/uploads/userUploads', formData, {
             headers: {
-                    'Content-Type': 'multipart/form-data',
-                    'Authorization': 'bearer ' + token,
+                    'Content-Type': 'multipart/form-data'
                 }
             }
-        ).then(res => {
-            localStorage.removeItem('accessToken');
-            localStorage.setItem("accessToken", res.data.token);
+        ).then(() => {
             const Domain = window.location.origin;
             const URL = Domain + '/profile';
             window.location.replace(URL);
@@ -90,36 +92,36 @@ export function Profile(props) {
     }
 
     return (
-        <> 
-        <Header token={props.token}/>
-        <div className="profile-page">
-            <div className="update-container">
-                <div className="image-upload">
-                    <label htmlFor="file-input">
-                    { userData.imgFullPath ? 
-                        <img id="avatar-img" src={process.env.API_BASE_URL + '' + userData.imgFullPath.split('/').slice(-3).join('/')}/> : 
-                        <img id="avatar-img" src={avatarMen}/>
-                        }
-                    </label>
-                    <input id="file-input" type="file" onChange={saveFile}/>
-                </div>
-                <div className="form">
-                    <form className="profile-form" action="">
-                        <label className="myLabel" htmlFor="Username"> Username : </label>
-                            <input className="label-input"  type="text" value={userData.username} onChange={e => setUserData({...userData, username: e.target.value})}/>
-                        <label className="myLabel" htmlFor="email"> Email Address : </label>
-                            <input className="label-input" type="email" value={userData.email} onChange={e => setUserData({...userData, email: e.target.value})}/>
-                        <label className="myLabel" htmlFor="email"> New Password : </label>
-                            <input className="label-input" type="password" value={userData.password} onChange={e => setUserData({...userData, password: e.target.value})}/>
-                        <button type="submit" className=" myButton btn btn-success"  onClick={ModifyProfile}>
-                            Modify   
-                        </button>
-                    </form>
-                    { errorMsg !== '' && <div className="errorMsg"><p>{errorMsg}</p></div> }
+
+        <div className="profile"> 
+            <Header token={props.token}/>
+            <div className="profile-page">
+                <div className="update-container">
+                    <div className="image-upload">
+                        <label className="image-upload-label" htmlFor="file-input">
+                        { userData.imgFullPath ? 
+                            <img id="avatar-img" src={'http://localhost:3001/' + userData.imgFullPath.split('/').slice(-3).join('/')}/> : 
+                            <img id="avatar-img" src={avatarMen}/>
+                            }
+                        </label>
+                        <input id="file-input" type="file" onChange={saveFile}/>
+                    </div>
+                    <div className="form">
+                        <form className="profile-form" action="">
+                            <label className="myLabel" htmlFor="Username"> Username : </label>
+                                <input className="label-input"  type="text" value={userData.username} onChange={e => setUserData({...userData, username: e.target.value})}/>
+                            <label className="myLabel" htmlFor="email"> Email Address : </label>
+                                <input className="label-input" type="email" value={userData.email} onChange={e => setUserData({...userData, email: e.target.value})}/>
+                            <label className="myLabel" htmlFor="email"> New Password : </label>
+                                <input className="label-input" type="password" value={userData.password} onChange={e => setUserData({...userData, password: e.target.value})}/>
+                            <button type="submit" className=" myButton btn btn-success"  onClick={() => {ModifyProfile}}>
+                                Modify   
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-        </>
     )
 }
 
