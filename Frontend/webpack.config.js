@@ -16,7 +16,7 @@ module.exports = {
         historyApiFallback: true,
     },
     resolve: {
-        extensions: ['.js', '.jsx']
+        extensions: ['.js', '.jsx', 'ts']
     },
     module: {
         rules: [

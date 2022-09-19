@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import axios from "axios";
+import OAuth2Login from 'react-simple-oauth2-login';
 import './sign_in.css';
 
 export function SignInForm() {
@@ -8,6 +9,39 @@ export function SignInForm() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState(false);
+
+    async function onSuccess(res) {
+      const accessToken = res.access_token;
+      const result = await fetch(`https://graph.facebook.com/me?fields=id,name,email,picture&access_token=${accessToken}`);
+      const profileData = await result.json()
+      const { id, name, email } = profileData
+      const avatar = profileData.picture.data.url
+      axios.post(process.env.API_BASE_URL + 'api/v1/auth/facebooklogin', {
+        userName: name,
+        email: email,
+        imageURL: avatar
+      },
+      {
+        headers: {
+          "Content-type": "application/json"
+        }
+      }).then(res => {
+        if (res.data.token) {
+          localStorage.setItem("accessToken", res.data.token);
+          const Domain = window.location.origin;
+          const URL = Domain + '/';
+          window.location.replace(URL);
+        }
+      }).catch(err => {
+        console.log(err);
+      })
+    }
+
+    function onFailure(res) {
+      console.log(res);
+    }
+
+    
 
     function loginUser(event) {
       // console.log('sending request to backend');
@@ -50,7 +84,7 @@ export function SignInForm() {
             <form action="#">
             <div className="flex flex-col mb-4">
                 <label
-                    for="email"
+                    htmlFor="email"
                     className="sign-label text-s tracking-wide"
                 >
                 Email Address:
@@ -74,7 +108,7 @@ export function SignInForm() {
             </div>
             <div className="flex flex-col mb-6">
               <label
-                    for="password"
+                    htmlFor="password"
                     className="sign-label text-s tracking-wide">
                 Password:
             </label>
@@ -139,9 +173,9 @@ export function SignInForm() {
                   <svg
                     className="h-6 w-6"
                     fill="none"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
                   >
@@ -152,6 +186,32 @@ export function SignInForm() {
                 </span>
               </button>
              </div>
+             <OAuth2Login
+              buttonText="Continue with facebook"
+              authorizationUrl="https://www.facebook.com/dialog/oauth"
+              responseType="token"
+              clientId="3312495928984816"
+              redirectUri="http://localhost:3010"
+              // scope="public_profile"
+              onSuccess={onSuccess}
+              onFailure={onFailure}
+              className="
+                    flex
+                    mt-2
+                    items-center
+                    justify-center
+                    focus:outline-none
+                    text-white text-sm
+                    sm:text-base
+                    bg-blue-500
+                    hover:bg-blue-600
+                    rounded-2xl
+                    py-2
+                    w-full
+                    transition
+                    duration-150
+                    ease-in"
+                />
           </form>
         </div>
         {
@@ -173,7 +233,7 @@ export function SignInForm() {
           <span className="ml-2">
             You don't have an account?
             <a href="/join" className="text-s ml-2 text-blue-500 font-semibold">Register now</a></span>
-        </div>
+            </div>
           </div>
         </div>
     );

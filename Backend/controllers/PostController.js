@@ -1,8 +1,9 @@
 const Post = require('../models/Post')
 
-exports.getAllPosts = (req, res, next) =>
+exports.getAllPosts = async (req, res, next) =>
 {
-  Post.findAll()
+  // remove some sensitive user informations
+  Post.findAll({ include: ["user"] })
   .then(posts => {
     res.status(200).json({ posts });
   })
@@ -20,8 +21,8 @@ exports.getPost = (req, res) => {
 
 exports.addNewPost = (req, res, next) =>
 {
-  const { content, beachId, userId, userName } = req.body
-  const post = { content, beachId, userId, userName }
+  const { content, beachId, userId } = req.body
+  const post = { content, beachId, userId }
   Post.create(post)
   .then(newPost => res.status(200).json({ newPost }))
   .catch(console.log('Some error occured'))

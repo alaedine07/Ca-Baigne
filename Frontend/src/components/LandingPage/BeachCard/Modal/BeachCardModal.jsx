@@ -28,9 +28,10 @@ export default function BasicModal(props) {
   const [content, setContent] = useState("");
   const [postId, setPostId] = useState('');
   const [postArray, setPostArray] = useState([])
+  // set the id for the specefic beach
   const [id, setId]= useState("");
-
   const [reducedValue, forceUpdate] = useReducer(x => x + 1, 0);
+  const [count, setCounter] = useState(0);
   
 
 
@@ -42,17 +43,20 @@ export default function BasicModal(props) {
     getAllPosts()
   }, [id])
 
-
   useEffect(()=> {
     getAllPosts()
   },[reducedValue])
 
+  useEffect(()=> {
+		getAllPosts()
+	},[count])
 
 
   const ratingChanged = (newRating) => {
     setRate(newRating)
   };
 
+  // retrieve the specefic beach by it's name
   const getBeach = () => {
     if (props.beachName) {
       axios.get(process.env.API_BASE_URL + 'api/v1/beach/allbeaches')
@@ -71,14 +75,10 @@ export default function BasicModal(props) {
     const token = localStorage.getItem('accessToken');
     const decoded = jwt_decode(token);
     const userId = decoded['id'];
-    const userName = decoded['Username'];
-    const imagePath = decoded['imagePath'];
     axios.post(process.env.API_BASE_URL + 'api/v1/post/newpost', {
       content: content,
       beachId: id,
       userId: userId,
-      userName: userName,
-      userImagePath: imagePath
     },
     {
       headers: {
@@ -86,10 +86,9 @@ export default function BasicModal(props) {
       }
     }
     ).then(() => {
-      console.log('post added')
       forceUpdate()
-  })
-    .catch(function (error) {
+    }).catch(function (error) {
+      // shoud return error 500
       if (error.response) {
         console.log(error.response.data)
       }
@@ -102,38 +101,30 @@ export default function BasicModal(props) {
     setContent('')
   }
 
+  // extract posts related to the selected beach
   const getAllPosts = () => {
     axios.get(process.env.API_BASE_URL + 'api/v1/post/allposts')
     .then(response => {
       const Posts = []
       response.data.posts.map( data => 
         data.beachId === id ?
-        Posts.push({
-          id: data.id,
-          content: data.content,
-          createdAt: data.createdAt, 
-          userId: data.userId, 
-          userName: data.userName, 
-          image: data.userImagePath
-        })
+        Posts.push(data)
         : 
         null
       )
       setPostArray(Posts)
     })
     .catch(error => {
+      // change to display a 500 error
       if (error) console.log(error)
     })
-    console.log("here's your posts")
   }
 
   const deletePost = () => {
     axios.delete(`http://localhost:3001/api/v1/post/deletepost/${postId}`).then(() => {
-      console.log('post is deleted')
       forceCounter()
-    })
-    .catch(error => console.log(error))
-}
+    }).catch(error => console.log(error))
+  }
 
   return (
     
@@ -180,7 +171,8 @@ export default function BasicModal(props) {
                 setPostId={setPostId}
                 deletePost={deletePost}
                 getAllPosts={getAllPosts}
-
+                setCounter={setCounter}
+                count={count}
               />
             </div>
 

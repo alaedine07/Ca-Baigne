@@ -75,7 +75,7 @@ function SearchBox() {
     })
   }
 
-  // fetch all beaches when a governorate is selected and set the governorateArray state to result
+  // fetch all beaches corresponding to the selected governorate
   const getGovernorateBeaches = () => {
     axios.get(process.env.API_BASE_URL + 'api/v1/beach/allbeaches')
     .then(response => {
@@ -83,16 +83,8 @@ function SearchBox() {
       response.data.beaches.map(
         data => data.governorate.toLowerCase() === locationName.toLowerCase()
          ?
-         beaches.push([{
-          name: data.name,
-          id: data.id,
-          location: data.governorate,
-          amenities: data.amenities,
-          option: <option key={data.id}>{data.name}</option>,
-          imagepath: data.imagepath,
-          latitude: data.latitude,
-          longitude: data.longitude,
-    }])
+         // beach is an array of objects and each object is the beach data
+         beaches.push(data)
          :
          null
     )
@@ -126,7 +118,6 @@ function SearchBox() {
     else {
       return
     }
-    
   }
 
   // Create cards for pinned beaches
@@ -155,8 +146,7 @@ function SearchBox() {
 
     }
         return pinned
-    
-  }
+    }
 
   return (
     <>
@@ -180,9 +170,9 @@ function SearchBox() {
                 <select id ='select' name="beach" className="form-control" onChange={Handlebeach} value={beachName}>
                     <option hidden>--Select Beach--</option>
                     {
-                      governorateArray.map(beaches => beaches.map(beach => beach.option))
+                      governorateArray.map(beach => <option key={beach.id}>{beach.name}</option>)
                     }
-                </select>
+                </select> 
                 </div>
 
                 <div className="form-group col-md-2 mt-4">              

@@ -2,7 +2,6 @@ import React , {useEffect, useState} from 'react'
 import { NavLink } from 'react-router-dom';
 import axios from "axios";
 import jwt_decode from 'jwt-decode';
-import $ from 'jquery';
 import Dark from '../Darkmode/Darkmode';
 import './Navbar.css';
 
@@ -10,7 +9,7 @@ const Navbar = (props) => {
 
   const [imagePath, setImagePath] = useState('');
 
-
+  
   function handleSignOut() {
     localStorage.removeItem('accessToken');
     const Domain = window.location.origin;
@@ -19,6 +18,7 @@ const Navbar = (props) => {
   }
   
 
+  // change this use effect to a function and call it in the image div
   useEffect(() => {
       const token = props.token
       if (token) {
@@ -151,10 +151,10 @@ else {
                 </i>Contact Us
               </NavLink>
             </li>
-            {
-              imagePath ? <div className="profileImageZone">
-              <img src={process.env.API_BASE_URL + '' + imagePath.split('/').slice(-3).join('/')} alt="img" />
-            </div> : null
+            { imagePath ? 
+              <div className="profileImageZone">
+                <img src={imagePath} alt="img" />
+              </div> : null
             }
             <div style={toggleStyle}>
               <Dark />

@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@azure/storage-blob": "^12.11.0",
     "@emailjs/browser": "^3.6.2",
     "@emotion/react": "^11.10.0",
     "@emotion/styled": "^11.10.0",
@@ -32,6 +33,7 @@
     "react-rating-stars-component": "^2.2.0",
     "react-router-dom": "^6.3.0",
     "react-select": "^5.4.0",
+    "react-simple-oauth2-login": "^0.5.3",
     "reactjs-localstorage": "^1.0.1",
     "request": "^2.79.0",
     "swiper": "^8.3.2",

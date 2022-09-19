@@ -11,54 +11,35 @@ import avatar_men from '../../../../../Assets/Images/avatar_men.png'
 import './Post.css';
 
 function Posts(props) {
+
 	const [open, setOpen] = useState(false);
-	const [userName, setUserName] = useState('');
-	const handleOpen = () => setOpen(true);
-	const handleClose = () => setOpen(false);
 	const [count, forceCounter] = useReducer(x => x + 1, 0);
 
+	const handleOpen = () => setOpen(true);
+	const handleClose = () => setOpen(false);
 
-	const handleDelete = () => {
+	useEffect(() => 
+	{
+		props.getAllPosts()
+	},[count])
+
+	const handleDelete = () => 
+	{
 		props.deletePost()
 		handleClose()
 		forceCounter()
-	  }
+	}
 
-	  useEffect(()=> {
-		props.getAllPosts()
-	  },[count])
-
-
-	// security risk here
-	function checkLogin(postUserId) {
+	function checkLogin(postUserId) 
+	{
 		const token = localStorage.getItem('accessToken');
 		const decoded = jwt_decode(token);
         const userId = decoded['id'];
 		if (postUserId === userId) {
 		  return true;
 		}
-
 	}
-	// Get username
-	useEffect(() => {
-		getUserName()
-	}, [])
-
-	const getUserName = () => {
-		const token = localStorage.getItem('accessToken');
-		const decoded = jwt_decode(token);
-		const userName = decoded['Username'];
-		setUserName(userName.charAt(0).toUpperCase() + userName.slice(1));
-	}
-
-	function getUserImage() {
-		const token = localStorage.getItem('accessToken');
-		const decoded = jwt_decode(token);
-        const imagePath = decoded['imagePath'];
-		if (imagePath) {
-			return imagePath
-		}
-}
+	
 	const style = {
 		position: 'absolute',
 		top: '50%',
@@ -82,17 +63,17 @@ function Posts(props) {
 				{props.postArray.map(post =>
 				<>
 				{props.setPostId(post.id)}
-				<li /*onMouseOver={() => { props.setPostId(post.id)}}*/ className="reviews-item" key={post.id}>
+				<li className="reviews-item" key={post.id}>
 					<div className='review-container'>
 						<div className='review-content'>
 							<div className='user-credentials'>
-							{	post.image !== "" ?
+							{	post.user.imagePath === "" ?
 								<img className='user-image' src={avatar_men} alt="img" />
 								:
-								<img className='user-image' src={process.env.API_BASE_URL + '' + post.image.split('/').slice(-3).join('/')} alt="img" />
+								<img className='user-image' src={post.user.imagePath} alt="img" />
 							}
 								<div className="comment-content">
-									<p>{post.userName.charAt(0).toUpperCase() + post.userName.slice(1)}</p>
+									<p>{post.user.userName.charAt(0).toUpperCase() + post.user.userName.slice(1)}</p>
 									<p >“{post.content}”</p>
 									<div className='review-time'>
 										<p className="time">
@@ -102,21 +83,17 @@ function Posts(props) {
 								</div>
 							</div>
 							<div>
-								{ checkLogin(post.userId) &&
+								{ checkLogin(post.user.id) &&
 									<button className="delete-btn" onClick={handleOpen}>Delete</button>
 								}
 							</div>
 						</div>
 						
-						
-						
 					</div>
 					
-						
 				</li>
 				</>
 				)}
-				
 			</ul>
 			: 
 			null
@@ -136,7 +113,7 @@ function Posts(props) {
 			</svg>
 			<div>
 				<Typography id="modal-modal-title" variant="h6" component="h2">
-					{userName}, your review will be deleted immediatly. You can't undo this action.
+					your review will be deleted immediatly. You can't undo this action.
 				</Typography>
 				<Typography id="modal-modal-description" sx={{ mt: 2 }}>
 					Are you sure you want to delete your review ?

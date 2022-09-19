@@ -1,13 +1,15 @@
 import React, { useEffect, useState} from "react";
 import jwt_decode from 'jwt-decode';
 import axios from "axios";
-import FormData from 'form-data';
+const { BlobServiceClient } = require('@azure/storage-blob');
 
 import avatarMen from '../../Assets/Images/avatar_men.png'
+
 import './Profile.css'
 
 
 import Header from "../Header/Header";
+
 
 export function Profile(props) {
 
@@ -62,31 +64,44 @@ export function Profile(props) {
             })
         }
 
-    function saveFile(e) {
+    // save user image to azure container
+    async function saveFile(e) {
+        // access the storage container
+        const blobServiceClient  = new BlobServiceClient(process.env.STORAGESASTOKEN);
+        const containerClient  = blobServiceClient.getContainerClient(process.env.container_name)
         const file = e.target.files[0];
         const fileName = e.target.files[0].name;
-        const formData = new FormData();
-        formData.append("file", file);
-        formData.append("fileName", fileName);
+        const blobName = fileName;
+        // necessary to retrieve image via url when rendering
+        // add verification that the type is could only be an image
+        const blobOptions = {
+            blobHTTPHeaders: { 'blobContentType': file.type },
+        };
+        // upload image to container
+        const blockBlobClient = containerClient.getBlockBlobClient(blobName);
         const token = localStorage.getItem('accessToken');
-        const decoded = jwt_decode(token);
-        const userId = decoded['id'];
-        formData.append("userid", userId);
-        axios.post(process.env.API_BASE_URL + 'api/v1/uploads/userUploads', formData, {
-            headers: {
-                    'Content-Type': 'multipart/form-data',
+        const userData = {filename: fileName}
+        blockBlobClient.uploadData(file, blobOptions).then(res => {
+            // save the image url to database
+            axios.post(process.env.API_BASE_URL + 'api/v1/uploads/azureblopuploaduser', userData, {
+                headers: {
                     'Authorization': 'bearer ' + token,
                 }
-            }
-        ).then(res => {
-            localStorage.removeItem('accessToken');
-            localStorage.setItem("accessToken", res.data.token);
-            const Domain = window.location.origin;
-            const URL = Domain + '/profile';
-            window.location.replace(URL);
-        }).catch(err => {
+            }).then(res => {
+                // refresh the page to see changes if the upload was succesfull
+                localStorage.removeItem('accessToken');
+                localStorage.setItem("accessToken", res.data.token);
+                const Domain = window.location.origin;
+                const URL = Domain + '/profile';
+                window.location.replace(URL);
+            }).catch(err => {
+                // replace this with an error message to tell user the upload has failed
+                console.error(err)
+            })
+        }).then(err => {
+            // replace this with an error message to tell user the upload has failed
             console.error(err);
-        })
+        });
     }
 
     return (
@@ -97,7 +112,7 @@ export function Profile(props) {
                 <div className="image-upload">
                     <label htmlFor="file-input">
                     { userData.imgFullPath ? 
-                        <img id="avatar-img" src={process.env.API_BASE_URL + '' + userData.imgFullPath.split('/').slice(-3).join('/')}/> : 
+                        <img id="avatar-img" src={userData.imgFullPath}/>: 
                         <img id="avatar-img" src={avatarMen}/>
                         }
                     </label>

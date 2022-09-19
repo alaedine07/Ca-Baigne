@@ -10,11 +10,11 @@ import 'swiper/css/effect-fade';
 
 function BeachResults(props) {
 
+  // get all the beaches related to a selected gouvernorate
   const getAllResults = () => {
     const results = []
     if (props.governorateArray) {
-      props.governorateArray.map( beaches => {
-        beaches.map(beach => {
+      props.governorateArray.map( beach => {
         results.push(
         <SwiperSlide> 
           <CarouseCard
@@ -22,24 +22,23 @@ function BeachResults(props) {
             key={beach.id} 
             beachName={beach.name}
             beachData={beach}
-            governorateArray={props.governorateArray}
           />
         </SwiperSlide>
         )
-        })})
+        })
     }
     return results
   }
 
+  // when user select a specefic beach
   function getBeach() {
     for (let i = 0; i < props.governorateArray.length; i++) {
-      if (props.governorateArray[i][0].name === props.beachName) {
+      if (props.governorateArray[i].name === props.beachName) {
         return props.governorateArray[i];
       }
     }
     return null;
   }
-console.log('gov: ' + props.governorateArray)
 
   return (
     <div>
@@ -49,11 +48,11 @@ console.log('gov: ' + props.governorateArray)
         <h3 className="result-text">Your search results for “{props.beachName}”</h3>
         <div className="results-container d-flex justify-content-center">
           <BeachCard
-          id = {getBeach()[0].id}
-          beachName={props.beachName}
-          governorateArray={props.governorateArray}
-          beachData={getBeach()[0]}
-          pinnedArray={props.pinnedArray}
+            id = {getBeach().id}
+            beachName={props.beachName}
+            governorateArray={props.governorateArray}
+            beachData={getBeach()}
+            pinnedArray={props.pinnedArray}
           />
         </div>
         </>

@@ -26,8 +26,6 @@ function BeachCard(props) {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  
-
   useEffect(() => {
     getWeather(props.beachData.latitude, props.beachData.longitude)
   },[])
@@ -42,9 +40,7 @@ function BeachCard(props) {
           setWeatherDescription(weather[0].description)
     })
     .catch(error => console.log(error))
-
-}
-
+  }
 
   async function getFlag(la, lo) {
     const flag = await getbeachState(la, lo);
@@ -102,6 +98,7 @@ function BeachCard(props) {
     }
   }
 
+  // check if beach exists in user favorite beaches
   const found = () => {
     for (let i=0; i<props.pinnedArray.length; i++) {
       for (let j=0; j<props.pinnedArray[i].length; j++) {
@@ -122,7 +119,6 @@ function BeachCard(props) {
         key={props.id}
         beachName={props.beachName}
         beachData={props.beachData}
-        governorateArray={props.governorateArray}
       />
       {
         open ? <BasicModal
@@ -202,6 +198,7 @@ function BeachCard(props) {
             handleClose={handleClose} 
             beachName={props.beachName} 
             image={props.beachData.imagepath}
+            beachData={props.beachData}
             /> : null
           }
         </>

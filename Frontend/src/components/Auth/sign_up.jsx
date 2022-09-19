@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { useState } from "react";
+import OAuth2Login from 'react-simple-oauth2-login';
 import './sign_up.css';
 
 export function SignUpForm() {
@@ -10,6 +11,35 @@ export function SignUpForm() {
     const [password, setPassword] = useState("");
     const [errorMsg, setErrorMsg] = useState("");
     const [error, setError] = useState(false);
+
+    async function onSuccess(res) {
+      console.log(res);
+      const accessToken = res.access_token;
+      console.log(accessToken);
+      const result = await fetch(`https://graph.facebook.com/me?fields=id,name,email,picture&access_token=${accessToken}`);
+      const profileData = await result.json()
+      const { id, name, email } = profileData
+      const avatar = profileData.picture.data.url
+      axios.post(process.env.API_BASE_URL + 'api/v1/auth/facebookregistration', {
+        userName: name,
+        id: id,
+        email: email,
+        imageURL: avatar
+      },
+      {
+        headers: {
+          "Content-type": "application/json"
+        }
+      }).then(res => {
+        console.log(res)
+      }).catch(err => {
+        console.log(err);
+      })
+    }
+
+    function onFailure(res) {
+      console.log(res);
+    }
 
     function createUser(event) {
       event.preventDefault();
@@ -248,6 +278,32 @@ export function SignUpForm() {
                 </span>
               </button>
             </div>
+            <OAuth2Login
+              buttonText="Register with facebook"
+              authorizationUrl="https://www.facebook.com/dialog/oauth"
+              responseType="token"
+              clientId="3312495928984816"
+              redirectUri="http://localhost:3010"
+              // scope="public_profile"
+              onSuccess={onSuccess}
+              onFailure={onFailure}
+              className="
+                    flex
+                    mt-2
+                    items-center
+                    justify-center
+                    focus:outline-none
+                    text-white text-sm
+                    sm:text-base
+                    bg-blue-500
+                    hover:bg-blue-600
+                    rounded-2xl
+                    py-2
+                    w-full
+                    transition
+                    duration-150
+                    ease-in"
+                />
           </form>
         </div>
         {
