@@ -1,11 +1,11 @@
 import React , {useEffect, useState} from 'react'
 import { NavLink } from 'react-router-dom';
+
 import axios from "axios";
 import jwt_decode from 'jwt-decode';
-import $ from 'jquery';
 import Dark from '../Darkmode/Darkmode';
+
 import './Navbar.css';
-import { requirePropFactory } from '@mui/material';
 
 const Navbar = (props) => {
 
@@ -15,7 +15,7 @@ const Navbar = (props) => {
   function handleSignOut() {
     localStorage.removeItem('accessToken');
     const Domain = window.location.origin;
-    const URL = Domain + '/';
+    const URL = Domain + '/login';
     window.location.replace(URL);
   }
   
@@ -25,7 +25,7 @@ const Navbar = (props) => {
       if (token) {
           const decoded = jwt_decode(token);
           const userId = decoded['id'];
-          axios.get('http://localhost:3001/api/v1/user/' + userId, {
+          axios.get(process.env.API_BASE_URL + 'api/v1/user/' + userId, {
               headers: {
                   'Authorization': 'bearer ' + token
               }
@@ -152,7 +152,7 @@ else {
             </li>
             {
               imagePath ? <div className="profileImageZone">
-              <img src={'http://localhost:3001/' + imagePath.split('/').slice(-3).join('/')} alt="img" />
+              <img src={imagePath} alt="img"/>
             </div> : null
             }
             <div style={toggleStyle}>

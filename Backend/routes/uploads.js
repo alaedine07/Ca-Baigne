@@ -36,8 +36,11 @@ const user_upload = multer({
     storage: user_storage
 })
 
-// upload a User image
+// upload a User image to local file system
 router.post('/userUploads', user_upload.single('file'), uploadController.uploadUserImage);
+
+// upload user image to azure storage container
+router.post('/azureblopuploaduser', uploadController.azureblobuploaduser);
 
 
 module.exports = router;

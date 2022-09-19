@@ -48,7 +48,7 @@ export function NewBeachForm() {
         for (let key in beachData) {
             formData.append(key, beachData[key]);
         }
-        axios.post('http://localhost:3001/api/v1/uploads/beachesUploads', formData, {
+        axios.post(process.env.API_BASE_URL + 'api/v1/uploads/beachesUploads', formData, {
             headers: {
                     'Content-Type': 'multipart/form-data'
                 }

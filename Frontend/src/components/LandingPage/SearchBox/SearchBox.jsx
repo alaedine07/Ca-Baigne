@@ -84,7 +84,7 @@ function SearchBox() {
 
   // fetch all beaches from database
   const getAllBeaches = () => {
-    axios.get('http://localhost:3001/api/v1/beach/allbeaches')
+    axios.get(process.env.API_BASE_URL + 'api/v1/beach/allbeaches')
     .then(response => {
       setBeachArray(response.data.beaches.map(data => data))
     })
@@ -95,7 +95,7 @@ function SearchBox() {
 
   // fetch all beaches when a governorate is selected and set the governorateArray state to result
   const getGovernorateBeaches = () => {
-    axios.get('http://localhost:3001/api/v1/beach/allbeaches')
+    axios.get(process.env.API_BASE_URL + 'api/v1/beach/allbeaches')
     .then(response => {
       const beaches = []
       response.data.beaches.map(
