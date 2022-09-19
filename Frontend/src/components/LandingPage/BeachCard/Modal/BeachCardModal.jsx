@@ -148,7 +148,7 @@ export default function BasicModal(props) {
     
     <Box sx={style}>
           <div className='first-half'>
-            <img src={process.env.API_BASE_URL + '' + props.image.split('/').slice(-3).join('/')} className='modal-img'></img>
+            <img src={props.image} className='modal-img'></img>
             <div className='beach-name'>
               <div>{props.beachName}</div>
               <div><span>4.5</span> <i className="star fas fa-star"></i></div>

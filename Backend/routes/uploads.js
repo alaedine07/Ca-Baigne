@@ -42,5 +42,8 @@ router.post('/userUploads', user_upload.single('file'), uploadController.uploadU
 // upload user image to azure storage container
 router.post('/azureblopuploaduser', uploadController.azureblobuploaduser);
 
+// upload beach image to azure storage container
+router.post('/azureblopuploadbeach', beachController.addNewBeach);
+
 
 module.exports = router;

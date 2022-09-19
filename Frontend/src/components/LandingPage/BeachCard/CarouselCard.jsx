@@ -77,7 +77,7 @@ function CarouselCard(props) {
           <div  className='f p-5' >
             <div className="beach-card card text-white" >
             <div className='overflow'>
-              <img className="card-img-top" src={process.env.API_BASE_URL + '' + props.beachData.imagepath.split('/').slice(-3).join('/')} alt="Card image cap"  />
+              <img className="card-img-top" src={props.beachData.imagepath} alt="Card image cap" />
               <div className="image-button">
               {
                   checkLogin()

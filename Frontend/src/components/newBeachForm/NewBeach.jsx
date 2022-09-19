@@ -1,7 +1,9 @@
 import React from "react";
 import { useState } from "react";
+
 import axios from "axios";
 import FormData from 'form-data';
+const { BlobServiceClient } = require('@azure/storage-blob');
 
 import './NewBeach.css'
 
@@ -33,29 +35,72 @@ export function NewBeachForm() {
         setFileName(e.target.files[0].name);
     }
 
-    function uploadData(event) {
+    // function uploadData(event) {
+    //     event.preventDefault();
+    //     const formData = new FormData();
+    //     formData.append("file", file);
+    //     formData.append("fileName", fileName);
+    //     const beachData = {
+    //         name: beachName,
+    //         governorate: beachGovernorate,
+    //         longitude: longititude,
+    //         latitude: lattitude,
+    //         caracteristiques: amenitie
+    //     }
+    //     for (let key in beachData) {
+    //         formData.append(key, beachData[key]);
+    //     }
+    //     axios.post(process.env.API_BASE_URL + 'api/v1/uploads/beachesUploads', formData, {
+    //         headers: {
+    //                 'Content-Type': 'multipart/form-data'
+    //             }
+    //         }
+    //     ).catch(err => {
+    //         console.error(err);
+    //     })
+    // }
+
+    // save beach image to azure container
+    async function uploadData(event) {
         event.preventDefault();
-        const formData = new FormData();
-        formData.append("file", file);
-        formData.append("fileName", fileName);
-        const beachData = {
+        // access the storage container
+        const blobServiceClient  = new BlobServiceClient(process.env.STORAGESASTOKEN);
+        const containerClient  = blobServiceClient.getContainerClient(process.env.container_name)
+        const blobName = fileName;
+        // necessary to retrieve image via url when rendering
+        // add verification that the type is could only be an image
+        const blobOptions = {
+            blobHTTPHeaders: { 'blobContentType': file.type },
+        };
+        // upload image to container
+        const blockBlobClient = containerClient.getBlockBlobClient(blobName);
+        const token = localStorage.getItem('accessToken');
+        const beachData = 
+        {
             name: beachName,
             governorate: beachGovernorate,
             longitude: longititude,
             latitude: lattitude,
-            caracteristiques: amenitie
+            caracteristiques: amenitie,
+            imagepath: "https://cabaignestorage.blob.core.windows.net/images/" + fileName
         }
-        for (let key in beachData) {
-            formData.append(key, beachData[key]);
-        }
-        axios.post(process.env.API_BASE_URL + 'api/v1/uploads/beachesUploads', formData, {
-            headers: {
-                    'Content-Type': 'multipart/form-data'
+        blockBlobClient.uploadData(file, blobOptions).then(res => {
+            // save the image url to database
+            axios.post(process.env.API_BASE_URL + 'api/v1/uploads/azureblopuploadbeach', beachData, {
+                headers: {
+                    'Authorization': 'bearer ' + token,
                 }
-            }
-        ).catch(err => {
+            }).then(res => {
+                // refresh the page
+                const Domain = window.location.origin;
+                const URL = Domain + '/newbeach';
+                window.location.replace(URL);
+            }).catch(err => {
+                console.error(err)
+            })
+        }).then(err => {
             console.error(err);
-        })
+        });
     }
     
     return (
