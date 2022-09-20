@@ -7,6 +7,7 @@ import { Navigation, EffectFade} from 'swiper';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/effect-fade';
+import '../SearchBox/SearchBox.css'
 
 function BeachResults(props) {
 
@@ -45,18 +46,29 @@ function BeachResults(props) {
     <div>
         {
         props.result ?
-        <div className='results-container'>
-        <p className="result-text">Your search results for “{props.beachName}”</p>
-        <div className="results-cards d-flex justify-content-center">
-          <BeachCard
-          id = {getBeach()[0].id}
-          beachName={props.beachName}
-          governorateArray={props.governorateArray}
-          beachData={getBeach()[0]}
-          pinnedArray={props.pinnedArray}
-          />
-        </div>
-        </div>
+        <>
+          <p className="result-text">Your search results for “{props.beachName}”</p>
+          <div className='results-container d-flex justify-content-center'>
+          
+          <div className="results-cards ">
+            <BeachCard
+            id = {getBeach()[0].id}
+            beachName={props.beachName}
+            governorateArray={props.governorateArray}
+            beachData={getBeach()[0]}
+            pinnedArray={props.pinnedArray}
+            />
+          </div>
+            <div className="mapouter">
+            <div className="gmap_canvas" style={{overflow: "hidden", background: 'none !important', height: "500px", width: "600px"}}>
+              <iframe width="600" height="500" id="gmap_canvas" src={`https://maps.google.com/maps?q=${props.beachName}&t=&z=13&ie=UTF8&iwloc=&output=embed`} frameBorder="0" scrolling="no" marginHeight="0" marginWidth="0"></iframe>
+                <a href="https://123movies-to.org">123 movies</a>
+                  <br/>
+                      <a href="https://www.embedgooglemap.net">embedgooglemap.net</a>
+            </div>
+          </div>
+          </div>
+        </>
          : 
         null
       }

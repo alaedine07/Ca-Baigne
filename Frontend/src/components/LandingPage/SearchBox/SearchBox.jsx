@@ -177,6 +177,8 @@ function SearchBox() {
     
   }
 
+
+
   return (
     <>
     <div className="hero-section">
@@ -263,6 +265,7 @@ function SearchBox() {
       </div>
     
 }
+     
   </>
   );
 }

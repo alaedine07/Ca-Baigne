@@ -11,7 +11,6 @@ import getbeachState from '../../../Utils/WindyApiCall';
 
 import './BeachCard.css'
 
-const API_KEY = 'de668cda57d2ffe3f3b8fadc3fdeb118'
 
 function BeachCard(props) {
   
@@ -34,7 +33,7 @@ function BeachCard(props) {
 
 
   const getWeather = (lat, long) => {
-    axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${API_KEY}&units=metric`)
+    axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${process.env.API_KEY}&units=metric`)
     .then(response => {
         const { main, weather } = response.data;
         setWeatherIcon(`http://openweathermap.org/img/w/${
