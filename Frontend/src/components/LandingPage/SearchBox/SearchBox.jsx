@@ -124,7 +124,7 @@ function SearchBox() {
       const token = localStorage.getItem('accessToken');
       const decoded = jwt_decode(token);
       const userId = decoded['id'];
-    axios.get(`http://localhost:3001/api/v1/user/allpinnedbeaches/${userId}`)
+    axios.get(process.env.API_BASE_URL + `/api/v1/user/allpinnedbeaches/${userId}`)
     .then(response => {
       
       setPinnedArray(response.data.beaches.map(b => [b.beach_id]))

@@ -47,7 +47,7 @@ function BeachCard(props) {
 
 
   const unpinBeach = (id) => {
-      axios.delete(`http://localhost:3001/api/v1/user/unpin/${id}`)
+      axios.delete(process.env.API_BASE_URL + `api/v1/user/unpin/${id}`)
       .then(() => console.log(`beach with id ${id} has been unpinned`))
       .catch((err) => {
       console.error(err);
