@@ -12,7 +12,7 @@ import Header from "../Header/Header";
 export function Profile(props) {
 
     const [userData, setUserData] = useState({username: '', email: '', password: undefined, imgFullPath: ''});
-    
+    const [errorMsg, setErrorMsg] = useState('');
     
     useEffect(() => {
         const token = localStorage.getItem('accessToken');
@@ -58,7 +58,9 @@ export function Profile(props) {
                 window.location.replace(URL);
             }).catch((err) => {
                 console.error(err);
+                setErrorMsg(err.response.data);
             })
+
         }
 
     // save user image to azure container
@@ -98,6 +100,7 @@ export function Profile(props) {
         }).then(err => {
             // replace this with an error message to tell user the upload has failed
             console.error(err);
+
         });
     }
 
@@ -124,10 +127,11 @@ export function Profile(props) {
                                 <input className="label-input" type="email" value={userData.email} onChange={e => setUserData({...userData, email: e.target.value})}/>
                             <label className="myLabel" htmlFor="email"> New Password : </label>
                                 <input className="label-input" type="password" value={userData.password} onChange={e => setUserData({...userData, password: e.target.value})}/>
-                            <button type="submit" className=" myButton btn btn-success"  onClick={() => {ModifyProfile}}>
+                            <button type="submit" className=" myButton btn btn-success"  onClick={(event) => {ModifyProfile(event)}}>
                                 Modify   
                             </button>
                         </form>
+                        { errorMsg !== '' && <div className="errorMsg"><p>{errorMsg}</p></div> }
                     </div>
                 </div>
             </div>

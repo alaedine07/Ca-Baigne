@@ -50,7 +50,7 @@ export function SignInForm() {
             <form action="#">
             <div className="flex flex-col mb-4">
                 <label
-                    for="email"
+                    htmlFor="email"
                     className="sign-label text-s tracking-wide mb-2"
                 >
                 Email Address:
@@ -74,7 +74,7 @@ export function SignInForm() {
             </div>
             <div className="flex flex-col mb-6">
               <label
-                    for="password"
+                    htmlFor="password"
                     className="sign-label text-s tracking-wide mb-2">
                 Password:
             </label>
@@ -139,9 +139,9 @@ export function SignInForm() {
                   <svg
                     className="h-6 w-6"
                     fill="none"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
                   >

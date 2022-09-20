@@ -1,5 +1,6 @@
 import React, {useEffect, useState, useReducer} from 'react';
 
+import { v4 as uuidv4 } from "uuid";
 import moment from 'moment';
 import jwt_decode from "jwt-decode";
 import Box from '@mui/material/Box';
@@ -16,18 +17,18 @@ function Posts(props) {
 	const [userName, setUserName] = useState('');
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
-	const [count, forceCounter] = useReducer(x => x + 1, 0);
+	// const [count, forceCounter] = useReducer(x => x + 1, 0);
 
 
 	const handleDelete = () => {
 		props.deletePost()
 		handleClose()
-		forceCounter()
+		props.setCounter()
 	  }
 
 	  useEffect(()=> {
 		props.getAllPosts()
-	  },[count])
+	  },[props.count])
 
 
 	// security risk here
@@ -76,7 +77,7 @@ function Posts(props) {
 				{props.postArray.map(post =>
 				<>
 				{props.setPostId(post.id)}
-				<li className="reviews-item" key={post.id}>
+				<li className="reviews-item" key={uuidv4()}>
 					<div className='review-container'>
 						<div className='review-content'>
 							<div className='user-credentials'>

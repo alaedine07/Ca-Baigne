@@ -79,7 +79,29 @@ li {
     list-style-type: none;
 }
 
-@media screen and (max-width: 976px) {
+.mapouter {
+    position: relative;
+    text-align: right;
+    padding: 1.5rem;
+}
+
+.gmap_canvas {
+    overflow: hidden;
+    background: none !important;
+    height: 500px;
+    width: 600px
+}
+
+
+@media screen and (max-width: 767px) {
+    .form-control {
+        width: 120%;
+    }
+
+    .searchbox-row {
+        gap: 5rem;
+    }
+
     .searchbox-row>* {
         flex-shrink: 0;
         max-width: 100%;
@@ -88,8 +110,45 @@ li {
         display: flex ;
         flex-direction: column;
         padding: 0;
+        align-items: center;
     }
+    .result-text, .pin-text {
+        font-family: 'Roboto', sans-serif;
+        font-size: 20px !important;
+        margin-top: 2rem;
+        margin:  0 3rem 0 3rem;
+        padding-top: 2rem;
+        font-weight: bolder;
+        text-align: center;
+    }
+    .mapouter {
+        position: relative;
+        text-align: right;
+        padding: 1.5rem;
+    }
+}
 
+
+@media screen and (max-width: 600px) {
+    .searchbox-row>* {
+        flex-shrink: 0;
+        max-width: 100%;
+    }
+    .results-container {
+        display: flex ;
+        flex-direction: column;
+        padding: 0;
+        align-items: center;
+    }
+    .result-text, .pin-text {
+        font-family: 'Roboto', sans-serif;
+        font-size: 30px;
+        margin-top: 2rem;
+        margin:  0 3rem 0 3rem;
+        padding-top: 2rem;
+        font-weight: bolder;
+        text-align: center;
+    }
 }
 
 @media screen and (min-width: 1295px) {
@@ -102,7 +161,7 @@ li {
         padding: 3rem;
     }
     .swiper {
-        width: 46.8vw !important;
+        width: 53vw !important;
     }
     .header-text {
         padding-top: 2rem !important;
@@ -123,10 +182,23 @@ li {
     .beachResults {
         height: 100vh;
     }
+    .results-container {
+        display: flex ;
+        padding: 0;
+        align-items: center;
+    }
+
 }
 
 .beachResults {
     background-color: #ffffff36;
+}
+
+
+.results-container {
+    display: flex ;
+    padding: 0;
+    align-items: center;
 }
 
 .results-cards {
@@ -167,7 +239,7 @@ li {
 
 
 .swiper {
-    width: 79.5vw
+    width: 75.1vw
 }
 
 .swiper-button-next,

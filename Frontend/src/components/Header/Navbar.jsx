@@ -1,6 +1,6 @@
 import React , {useEffect, useState} from 'react'
 import { NavLink } from 'react-router-dom';
-
+import { v4 as uuidv4 } from "uuid";
 import axios from "axios";
 import jwt_decode from 'jwt-decode';
 import Dark from '../Darkmode/Darkmode';
@@ -63,28 +63,28 @@ const Navbar = (props) => {
               <div className="right"></div>
             </div>
             
-            <li className="nav-item active">
+            <li key={uuidv4()} className="nav-item active">
               <NavLink onClick={() => {window.location.reload()}} className="nav-link" to="/" >
                 <i 
                   className="fa fa-home">
                 </i>Home
               </NavLink>
             </li>
-            <li className="nav-item">
+            <li key={uuidv4()} className="nav-item">
               <NavLink className="nav-link" to="/login" >
                 <i 
                   className="fa fa-sign-in-alt">
                 </i>Login
               </NavLink>
             </li>
-            <li className="nav-item">
+            <li key={uuidv4()} className="nav-item">
               <NavLink className="nav-link" to="/join" >
                 <i 
                   className="fa fa-sign-in-alt">
                 </i>Join
               </NavLink>
             </li>
-            <li className="nav-item">
+            <li key={uuidv4()} className="nav-item">
               <NavLink onClick={() => {window.scrollTo(0, document.body.scrollHeight);}} className="nav-link" to="/" >
                 <i 
                   className="far fa-envelope">
@@ -102,7 +102,7 @@ const Navbar = (props) => {
 else {
   return (
     <nav className="navbar navbar-expand-lg navbar-mainbg">
-    <NavLink className="navbar-brand navbar-logo" to="/" exact>
+    <NavLink className="navbar-brand navbar-logo" to="/">
       </NavLink>
       <button 
         className="navbar-toggler"
@@ -122,28 +122,28 @@ else {
               <div className="right"></div>
             </div>
             
-            <li className="nav-item active">
-              <NavLink className="nav-link" to="/" exact>
+            <li key={uuidv4()} className="nav-item active">
+              <NavLink className="nav-link" to="/">
                 <i 
                 className="fa fa-home">
                 </i>Home
               </NavLink>
             </li>
-            <li className="nav-item active">
-              <NavLink className="nav-link" to="/profile" exact>
+            <li key={uuidv4()} className="nav-item active">
+              <NavLink className="nav-link" to="/profile">
                 <i 
                 className="fa fa-user">
                 </i>Profile
               </NavLink>
             </li>
-            <li className="nav-item active" onClick={handleSignOut}>
-              <NavLink className="nav-link" to="/" exact>
+            <li key={uuidv4()} className="nav-item active" onClick={handleSignOut}>
+              <NavLink className="nav-link" to="/">
                 <i 
                 className="fas fa-sign-out-alt">
                 </i>Sign out
               </NavLink>
             </li>
-            <li className="nav-item">
+            <li key={uuidv4()} className="nav-item">
               <NavLink onClick={() => {window.scrollTo(0, document.body.scrollHeight);}} className="nav-link contact-navlink" to="/">
                 <i 
                 className="far fa-envelope">

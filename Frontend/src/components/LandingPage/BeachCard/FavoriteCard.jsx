@@ -8,7 +8,6 @@ import getbeachState from '../../../Utils/WindyApiCall';
 
 import './BeachCard.css'
 
-const API_KEY = 'de668cda57d2ffe3f3b8fadc3fdeb118'
 
 function BeachCard(props) {
   
@@ -29,7 +28,7 @@ function BeachCard(props) {
   },[])
 
   const getWeather = (lat, long) => {
-    axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${API_KEY}&units=metric`)
+    axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${process.env.WEATHER_API_KEY}&units=metric`)
     .then(response => {
         const { main, weather } = response.data;
         setWeatherIcon(`http://openweathermap.org/img/w/${
@@ -46,7 +45,7 @@ function BeachCard(props) {
     setBeachState(flag);
   }
 
-  
+
   const unpinBeach = (id) => {
       axios.delete(`http://localhost:3001/api/v1/user/unpin/${id}`)
       .then(() => console.log(`beach with id ${id} has been unpinned`))
@@ -68,7 +67,7 @@ function BeachCard(props) {
   function getAmenities() {
     let amenities = [];
     for (const [key, value] of Object.entries(props.beachData.amenities)) {
-      amenities.push(<li>{value}</li>)
+      amenities.push(<li key={uuidv4()}>{value}</li>)
     }
     return amenities;
   }
@@ -91,7 +90,7 @@ function BeachCard(props) {
             window.location.reload();
             
             }}>
-              <i class="fas fa-unlink"></i>
+              <i className="fas fa-unlink"></i>
           </button>
         
         </> 
@@ -141,7 +140,7 @@ function BeachCard(props) {
             </>
           }
           </li>
-              <li key={uuidv4()} className="list-group-item text-dark"><span className='card-list-title'>Amenities :</span> {getAmenities()}</li>
+              <li key={uuidv4()} className="list-group-item text-dark"><span className='card-list-title'>Amenities :</span> <ul>{getAmenities()}</ul></li>
             </ul>
         {checkLogin() &&
         <>

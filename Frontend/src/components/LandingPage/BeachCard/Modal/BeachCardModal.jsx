@@ -1,7 +1,6 @@
-
-
 import React, { useState, useEffect, useReducer } from "react";
 
+import { v4 as uuidv4 } from "uuid";
 import Box from '@mui/material/Box';
 import ReactStars from "react-rating-stars-component";
 import Modal from '@mui/material/Modal';
@@ -127,7 +126,7 @@ export default function BasicModal(props) {
 
   return (
     
-    <Modal 
+    <Modal
           open={props.open} 
           onClose={props.handleClose} 
           aria-labelledby="modal-modal-title" 
@@ -149,6 +148,7 @@ export default function BasicModal(props) {
                 <p className='title-header'> Rate your visite</p>
               </div>
             <ReactStars
+            
                 count={5}
                 onChange={ratingChanged}
                 size={24}
@@ -156,8 +156,7 @@ export default function BasicModal(props) {
                 emptyIcon={<i className="far fa-star"></i>}
                 halfIcon={<i className="fa fa-star-half-alt"></i>}
                 fullIcon={<i className="fa fa-star"></i>}
-                activeColor="#ffd700"
-                
+                activeColor="#ffd700"  
             />
             {
             rate ? <div style={{fontFamily: 'Amiri'}}><p>Your rate ({rate}) has been received</p><p>Thank you !</p></div> : null

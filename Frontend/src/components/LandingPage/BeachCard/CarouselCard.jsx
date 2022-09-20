@@ -8,7 +8,6 @@ import getbeachState from '../../../Utils/WindyApiCall';
 
 import './BeachCard.css'
 
-const API_KEY = 'de668cda57d2ffe3f3b8fadc3fdeb118'
 
 function CarouselCard(props) {
   
@@ -30,7 +29,7 @@ function CarouselCard(props) {
   },[])
 
   const getWeather = (lat, long) => {
-    axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${API_KEY}&units=metric`)
+    axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${process.env.WEATHER_API_KEY}&units=metric`)
     .then(response => {
         const { main, weather } = response.data;
         setWeatherIcon(`http://openweathermap.org/img/w/${
@@ -74,7 +73,7 @@ function CarouselCard(props) {
   }
   return (
     <>
-          <div  className='f p-5' >
+          <div className='f p-5' >
             <div className="beach-card card text-white" >
             <div className='overflow'>
               <img className="card-img-top" src={props.beachData.imagepath} alt="Card image cap" />
@@ -103,27 +102,29 @@ function CarouselCard(props) {
                 </div>
                 <p>{weatherDescription}</p>
                 </li>
-                <li key={uuidv4()} className="list-group-item text-dark"><span className='card-list-title'>Beach state :</span> {getFlag(props.beachData.latitude, props.beachData.longitude) && beachState === "green"
-            ?
-            <> 
-              <i className="green-flag fas fa-solid fa-flag"> Green flag</i>
-              <p>Low hazard ~ Calm conditions, exercise caution.</p>
-            </>
-              : 
-            beachState === "orange"
-             ?
-            <>
-              <i className="orange-flag fas fa-solid fa-flag"> Orange flag</i>
-              <p style={{color: 'yellow'}}>Medium hazard ~ Ocean conditions are rough (moderate surf and/or currents).</p>
-            </>
-            : 
-            <>
-              <i className="red-flag fas fa-solid fa-flag"> Red flag</i>
-              <p>High Hazard ~ Rough conditions (strong surf and/or currents) are present.</p>
-            </>
-          }
-          </li>
-              <li key={uuidv4()} className="list-group-item text-dark"><span className='card-list-title'>Amenities :</span> <ul>{getAmenities()}</ul></li>
+                <li key={uuidv4()} className="list-group-item text-dark">
+                  <span className='card-list-title'>Beach state :</span>
+                   { getFlag(props.beachData.latitude, props.beachData.longitude) && beachState === "green"
+                    ?
+                    <> 
+                      <i className="green-flag fas fa-solid fa-flag"> Green flag</i>
+                      <p>Low hazard ~ Calm conditions, exercise caution.</p>
+                    </>
+                      : 
+                    beachState === "orange"
+                    ?
+                    <>
+                      <i className="orange-flag fas fa-solid fa-flag"> Orange flag</i>
+                      <p style={{color: 'yellow'}}>Medium hazard ~ Ocean conditions are rough (moderate surf and/or currents).</p>
+                    </>
+                    : 
+                    <>
+                      <i className="red-flag fas fa-solid fa-flag"> Red flag</i>
+                      <p>High Hazard ~ Rough conditions (strong surf and/or currents) are present.</p>
+                    </>
+                  }
+                </li>
+                <li key={uuidv4()} className="list-group-item text-dark"><span className='card-list-title'>Amenities :</span> <ul>{getAmenities()}</ul></li>
             </ul>
             {checkLogin() &&
             <>
@@ -141,7 +142,7 @@ function CarouselCard(props) {
               {
                 rate ? <div style={{fontFamily: 'Amiri'}}><p>Your rate ({rate}) has been received</p><p>Thank you !</p></div> : null
               }
-            </div>
+              </div>
             </>
             }
             </div>

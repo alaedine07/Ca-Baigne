@@ -1,5 +1,5 @@
 import React from 'react';
-import { CDBFooter, CDBBox, CDBBtn, CDBIcon } from 'cdbreact';
+import { CDBIcon } from 'cdbreact';
 import './Footer.css'
 
 const Footer = () => {
@@ -22,10 +22,10 @@ const Footer = () => {
           <div >
             <a href='https://github.com/alaedine07/Ca-Baigne'  target="blank"><CDBIcon fab icon="github" /></a>
           </div>
-          <div flat color="dark">
+          <div color="dark">
             <a href='/' target="blank"><CDBIcon fab icon="twitter" /></a>
           </div>
-          <div flat color="dark">
+          <div color="dark">
             <a href='/' target="blank"><CDBIcon  fab icon="instagram" /></a>
           </div>
         </div>

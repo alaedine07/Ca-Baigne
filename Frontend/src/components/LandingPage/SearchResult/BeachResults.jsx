@@ -1,5 +1,6 @@
 import React from 'react';
 import BeachCard from '../BeachCard/BeachCard'
+import { v4 as uuidv4 } from "uuid";
 import CarouseCard from '../BeachCard/CarouselCard'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, EffectFade} from 'swiper';
@@ -7,6 +8,7 @@ import { Navigation, EffectFade} from 'swiper';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/effect-fade';
+import '../SearchBox/SearchBox.css'
 
 function BeachResults(props) {
 
@@ -15,7 +17,7 @@ function BeachResults(props) {
     if (props.governorateArray) {
       props.governorateArray.map( beach => {
         results.push(
-        <SwiperSlide> 
+        <SwiperSlide key={uuidv4()}> 
           <CarouseCard
             beach_id={beach.id} 
             key={beach.id} 
@@ -43,22 +45,30 @@ function BeachResults(props) {
     <div>
         {
         props.result ?
-        <div className='results-container'>
+        <>
         <p className="result-text">Your search results for “{props.beachName}”</p>
-        <div className="results-cards d-flex justify-content-center">
+        <div className='results-container d-flex justify-content-center'>
+        
+        <div className="results-cards ">
           <BeachCard
-            id = {getBeach().id}
-            beachName={props.beachName}
-            governorateArray={props.governorateArray}
-            beachData={getBeach()}
-            pinnedArray={props.pinnedArray}
+          id = {getBeach().id}
+          beachName={props.beachName}
+          governorateArray={props.governorateArray}
+          beachData={getBeach()}
+          pinnedArray={props.pinnedArray}
           />
         </div>
+          <div className="mapouter">
+          <div className="gmap_canvas">
+            <iframe width="600" height="500" id="gmap_canvas" src={`https://maps.google.com/maps?q=${props.beachName}&t=&z=13&ie=UTF8&iwloc=&output=embed`} frameBorder="0" scrolling="no" marginHeight="0" marginWidth="0"></iframe>
+          </div>
         </div>
+        </div>
+      </>
          : 
         null
       }
-      { 
+      {
         props.results ?
         <>
         <h3 className="result-text">Your search results for “{props.locationName}”</h3>
