@@ -65,7 +65,7 @@ require('dotenv').config()
 try {
     // Change false to true if you modified the models it will re-create the tables
     // NB: it will delete all previous entries
-    db.sync({ force: true }).then(() => {
+    db.sync({ force: false }).then(() => {
         const server = app.listen(process.env.EXTERNAL_PORT || 3001);
     });
 } catch (error) {
