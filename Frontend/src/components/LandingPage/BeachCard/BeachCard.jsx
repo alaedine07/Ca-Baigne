@@ -46,8 +46,6 @@ function BeachCard(props) {
 
 }
 
-
-
   async function getFlag(la, lo) {
     const flag = await getbeachState(la, lo);
     setBeachState(flag);

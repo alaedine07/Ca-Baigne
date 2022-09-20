@@ -17,14 +17,6 @@ const Post = db.define('post', {
     type: Sequelize.STRING,
     allowNull: false
   },
-  userName: {
-    type: Sequelize.STRING,
-    allowNull: true
-  },
-  userImageatPh: {
-    type: Sequelize.STRING,
-    allowNull: true
-  }
 })
 
 module.exports = Post;

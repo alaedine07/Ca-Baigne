@@ -13,27 +13,25 @@ function BeachResults(props) {
   const getAllResults = () => {
     const results = []
     if (props.governorateArray) {
-      props.governorateArray.map( beaches => {
-        beaches.map(beach => {
+      props.governorateArray.map( beach => {
         results.push(
-          <SwiperSlide>
-            <CarouseCard
-              beach_id={beach.id} 
-              key={beach.id} 
-              beachName={beach.name}
-              beachData={beach}
-              governorateArray={props.governorateArray}
-            />
-          </SwiperSlide>
+        <SwiperSlide> 
+          <CarouseCard
+            beach_id={beach.id} 
+            key={beach.id} 
+            beachName={beach.name}
+            beachData={beach}
+          />
+        </SwiperSlide>
         )
-        })})
+        })
     }
     return results
   }
 
   function getBeach() {
     for (let i = 0; i < props.governorateArray.length; i++) {
-      if (props.governorateArray[i][0].name === props.beachName) {
+      if (props.governorateArray[i].name === props.beachName) {
         
         return props.governorateArray[i];
       }
@@ -49,11 +47,11 @@ function BeachResults(props) {
         <p className="result-text">Your search results for “{props.beachName}”</p>
         <div className="results-cards d-flex justify-content-center">
           <BeachCard
-          id = {getBeach()[0].id}
-          beachName={props.beachName}
-          governorateArray={props.governorateArray}
-          beachData={getBeach()[0]}
-          pinnedArray={props.pinnedArray}
+            id = {getBeach().id}
+            beachName={props.beachName}
+            governorateArray={props.governorateArray}
+            beachData={getBeach()}
+            pinnedArray={props.pinnedArray}
           />
         </div>
         </div>

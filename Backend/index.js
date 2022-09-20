@@ -12,14 +12,13 @@ const logger = require('morgan');
 const db = require('./util/database');
 const app = express();
 
-// user can have many posts
-User.hasMany(Post, {foreignKey: 'post_id', onDelete: 'CASCADE'});
+// user can have many posts and each post belong to one user
+User.hasMany(Post, {as: 'comments', onDelete: 'CASCADE'});
+Post.belongsTo(User, {foreignKey: "userId", as: "user"});
 
-// each post belong to a user and a beach
-Post.belongsTo(User);
-Post.belongsTo(Beach);
-// beach has many posts
-Beach.hasMany(Post, {foreignKey: 'post_id', onDelete: 'CASCADE'});
+// beach can have many posts and each post belong to one beach
+Beach.hasMany(Post, {as: 'comments', onDelete: 'CASCADE'});
+Post.belongsTo(Beach, {foreignKey: "beachId", as: "beach"});
 
 // create a junction table
 // Beach.belongsToMany(User, {through: 'favoritebeaches'});
@@ -66,7 +65,7 @@ require('dotenv').config()
 try {
     // Change false to true if you modified the models it will re-create the tables
     // NB: it will delete all previous entries
-    db.sync({ force: false }).then(() => {
+    db.sync({ force: true }).then(() => {
         const server = app.listen(process.env.EXTERNAL_PORT || 3001);
     });
 } catch (error) {

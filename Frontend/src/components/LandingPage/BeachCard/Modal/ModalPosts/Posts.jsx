@@ -11,6 +11,7 @@ import avatar_men from '../../../../../Assets/Images/avatar_men.png'
 import './Post.css';
 
 function Posts(props) {
+
 	const [open, setOpen] = useState(false);
 	const [userName, setUserName] = useState('');
 	const handleOpen = () => setOpen(true);
@@ -39,6 +40,7 @@ function Posts(props) {
 		}
 
 	}
+	
 	// Get username
 	useEffect(() => {
 		getUserName()
@@ -51,14 +53,6 @@ function Posts(props) {
 		setUserName(userName.charAt(0).toUpperCase() + userName.slice(1));
 	}
 
-	function getUserImage() {
-		const token = localStorage.getItem('accessToken');
-		const decoded = jwt_decode(token);
-        const imagePath = decoded['imagePath'];
-		if (imagePath) {
-			return imagePath
-		}
-}
 	const style = {
 		position: 'absolute',
 		top: '50%',
@@ -82,17 +76,17 @@ function Posts(props) {
 				{props.postArray.map(post =>
 				<>
 				{props.setPostId(post.id)}
-				<li /*onMouseOver={() => { props.setPostId(post.id)}}*/ className="reviews-item" key={post.id}>
+				<li className="reviews-item" key={post.id}>
 					<div className='review-container'>
 						<div className='review-content'>
 							<div className='user-credentials'>
-							{	post.image !== "" ?
+							{	post.user.imagePath === "" ?
 								<img className='user-image' src={avatar_men} alt="img" />
 								:
-								<img className='user-image' src={process.env.API_BASE_URL + '' + post.image.split('/').slice(-3).join('/')} alt="img" />
+								<img className='user-image' src={post.user.imagePath} alt="img" />
 							}
 								<div className="comment-content">
-									<p>{post.userName.charAt(0).toUpperCase() + post.userName.slice(1)}</p>
+									<p>{post.user.userName.charAt(0).toUpperCase() + post.user.userName.slice(1)}</p>
 									<p >“{post.content}”</p>
 									<div className='review-time'>
 										<p className="time">

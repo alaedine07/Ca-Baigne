@@ -74,14 +74,10 @@ export default function BasicModal(props) {
     const token = localStorage.getItem('accessToken');
     const decoded = jwt_decode(token);
     const userId = decoded['id'];
-    const userName = decoded['Username'];
-    const imagePath = decoded['image'];
     axios.post(process.env.API_BASE_URL + 'api/v1/post/newpost', {
       content: content,
       beachId: id,
       userId: userId,
-      userName: userName,
-      userImagePath: imagePath
     },
     {
       headers: {
@@ -89,10 +85,9 @@ export default function BasicModal(props) {
       }
     }
     ).then(() => {
-      console.log('post added')
       forceUpdate()
-  })
-    .catch(function (error) {
+    }).catch(function (error) {
+      // shoud return error 500
       if (error.response) {
         console.log(error.response.data)
       }
@@ -111,23 +106,16 @@ export default function BasicModal(props) {
       const Posts = []
       response.data.posts.map( data => 
         data.beachId === id ?
-        Posts.push({
-          id: data.id,
-          content: data.content,
-          createdAt: data.createdAt, 
-          userId: data.userId, 
-          userName: data.userName, 
-          image: data.userImagePath
-        })
+        Posts.push(data)
         : 
         null
       )
       setPostArray(Posts)
     })
     .catch(error => {
+      // change to display a 500 error
       if (error) console.log(error)
     })
-    console.log("here's your posts")
   }
 
   const deletePost = () => {

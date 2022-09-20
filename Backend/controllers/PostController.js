@@ -1,8 +1,9 @@
 const Post = require('../models/Post')
 
-exports.getAllPosts = (req, res, next) =>
+exports.getAllPosts = async (req, res, next) =>
 {
-  Post.findAll()
+  // remove some sensitive user informations
+  Post.findAll({ include: ["user"] })
   .then(posts => {
     res.status(200).json({ posts });
   })

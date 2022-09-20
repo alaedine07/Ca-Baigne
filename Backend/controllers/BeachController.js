@@ -1,8 +1,20 @@
 const Beach = require('../models/Beach');
+const User = require('../models/User');
+const Post = require('../models/Post');
+
 
 exports.getAllBeaches = (req, res, next) =>
 {
-  Beach.findAll()
+  // remove sensitive informations
+  Beach.findAll({ include: [{
+    model: Post,
+    as: 'comments',
+    include: [
+      {
+      model: User,
+      as: "user"
+  }]
+  }] })
   .then(beaches => {
     res.status(200).json({ beaches });
   })

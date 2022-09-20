@@ -101,20 +101,12 @@ function SearchBox() {
       response.data.beaches.map(
         data => data.governorate.toLowerCase() === locationName.toLowerCase()
          ?
-         beaches.push([{
-          name: data.name,
-          id: data.id,
-          location: data.governorate,
-          amenities: data.amenities,
-          option: <option key={data.id}>{data.name}</option>,
-          imagepath: data.imagepath,
-          latitude: data.latitude,
-          longitude: data.longitude,
-    }])
+         // beach is an array of objects and each object is the beach data
+         beaches.push(data)
          :
          null
     )
-    console.log(beaches)
+      console.log(beaches);
       setGovernorateArray(beaches)
     })
     .catch(error => {
@@ -203,7 +195,7 @@ function SearchBox() {
                 <select id ='select' name="beach" className="form-control" onChange={Handlebeach} value={beachName}>
                     <option hidden>--Select Beach--</option>
                     {
-                      governorateArray.map(beaches => beaches.map(beach => beach.option))
+                      governorateArray.map(beach => <option key={beach.id}>{beach.name}</option>)
                     }
                 </select>
                 </div>
