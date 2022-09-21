@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --mode development --open --hot",
-    "build": "webpack --mode production"
+    "build": "webpack --mode production",
+    "test": "jest"
   },
   "author": "",
   "license": "ISC",
@@ -21,8 +22,10 @@
     "@mui/material": "^5.10.2",
     "animate.css": "^4.1.1",
     "axios": "^0.27.2",
+    "babel-jest": "^29.0.3",
     "bootstrap": "^5.2.0",
     "cdbreact": "^1.5.3",
+    "jest": "^29.0.3",
     "jquery": "^3.6.0",
     "jwt-decode": "^3.1.2",
     "moment": "^2.29.4",
@@ -36,6 +39,7 @@
     "reactjs-localstorage": "^1.0.1",
     "request": "^2.79.0",
     "swiper": "^8.3.2",
+    "ts-jest": "^29.0.1",
     "use-force-update": "^1.0.10"
   },
   "devDependencies": {
@@ -45,12 +49,17 @@
     "@babel/plugin-transform-runtime": "^7.18.10",
     "@babel/preset-env": "^7.18.10",
     "@babel/preset-react": "^7.18.6",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^14.4.3",
     "autoprefixer": "^10.4.8",
     "babel-loader": "^8.2.5",
     "css-loader": "^6.7.1",
     "dotenv": "^16.0.2",
     "file-loader": "^6.2.0",
     "html-webpack-plugin": "^5.5.0",
+    "identity-obj-proxy": "^3.0.0",
+    "jest-cli": "^29.0.3",
     "mini-css-extract-plugin": "^2.6.1",
     "postcss": "^8.4.16",
     "postcss-cli": "^10.0.0",
