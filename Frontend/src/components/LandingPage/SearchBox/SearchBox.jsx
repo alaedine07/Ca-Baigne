@@ -210,7 +210,6 @@ function SearchBox() {
       
     </div>
       </Container>
-      </div>
       {pinnedArray.length && !result && !results
        ?
         <div className="arrow">
@@ -222,6 +221,8 @@ function SearchBox() {
        : 
         null
       }
+      </div>
+      
         
     </div>
     <div ref={ref}></div>

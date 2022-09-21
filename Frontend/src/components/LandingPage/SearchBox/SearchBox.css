@@ -93,102 +93,7 @@ li {
 }
 
 
-@media screen and (max-width: 767px) {
-    .form-control {
-        width: 120%;
-    }
 
-    .searchbox-row {
-        gap: 5rem;
-    }
-
-    .searchbox-row>* {
-        flex-shrink: 0;
-        max-width: 100%;
-    }
-    .results-container {
-        display: flex ;
-        flex-direction: column;
-        padding: 0;
-        align-items: center;
-    }
-    .result-text, .pin-text {
-        font-family: 'Roboto', sans-serif;
-        font-size: 20px !important;
-        margin-top: 2rem;
-        margin:  0 3rem 0 3rem;
-        padding-top: 2rem;
-        font-weight: bolder;
-        text-align: center;
-    }
-    .mapouter {
-        position: relative;
-        text-align: right;
-        padding: 1.5rem;
-    }
-}
-
-
-@media screen and (max-width: 600px) {
-    .searchbox-row>* {
-        flex-shrink: 0;
-        max-width: 100%;
-    }
-    .results-container {
-        display: flex ;
-        flex-direction: column;
-        padding: 0;
-        align-items: center;
-    }
-    .result-text, .pin-text {
-        font-family: 'Roboto', sans-serif;
-        font-size: 30px;
-        margin-top: 2rem;
-        margin:  0 3rem 0 3rem;
-        padding-top: 2rem;
-        font-weight: bolder;
-        text-align: center;
-    }
-}
-
-@media screen and (min-width: 1295px) {
-    .searchbox-container {
-        position: absolute;
-        top: 39%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        /*border: 2px solid white;*/
-        padding: 3rem;
-    }
-    .swiper {
-        width: 53vw !important;
-    }
-    .header-text {
-        padding-top: 2rem !important;
-    }
-    .arrow {
-        display: flex;
-        align-items: center;
-        position: absolute;
-        top: 32rem !important;
-        right: 52rem !important;
-        gap: 1rem;
-    }
-    .pinned-section {
-        background-color: #ffffff36;
-        width: 100%;
-
-    }
-    .beachResults {
-        height: 100vh;
-    }
-    .results-container {
-        display: flex ;
-        padding: 0;
-        align-items: center;
-    }
-
-}
 
 .beachResults {
     background-color: #ffffff36;
@@ -255,9 +160,6 @@ li {
 .arrow {
     display: flex;
     align-items: center;
-    position: absolute;
-    top: 25rem;
-    right: 35rem;
     gap: 1rem;
 }
 
@@ -274,4 +176,37 @@ li {
 
 .arrow:hover  .arrow-icon-text {
     opacity: 1;
+}
+
+@media only screen and (min-width: 992px) {
+    .searchbox-container {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 39%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 3rem;
+    }
+    .swiper {
+        width: 63vw !important;
+    }
+    .header-text {
+        padding-top: 2rem !important;
+    }
+
+
+    .pinned-section {
+         width: 100%;
+    }
+    .beachResults {
+        height: 100%;
+    }
+    .results-container {
+        display: flex ;
+        padding: 0;
+        align-items: center;
+    }
+
+
 }
