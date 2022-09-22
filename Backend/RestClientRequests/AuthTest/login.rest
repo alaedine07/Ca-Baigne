@@ -1,7 +1,0 @@
-POST http://localhost:3001/api/v1/auth/login
-content-type: application/json
-
-{
-    "email": "aladin@gmail.com",
-    "hashedPassword": "pass123"
-}

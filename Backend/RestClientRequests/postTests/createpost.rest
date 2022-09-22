@@ -1,8 +1,0 @@
-POST http://localhost:3001/api/v1/post/newpost
-content-type: application/json
-
-{
-    "content": "this is my second post",
-    "beachId": "5724e6e8-b30d-454f-90c2-92f923c8dfd8"
-
-}

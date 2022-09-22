@@ -14,5 +14,7 @@ jobs:
       - name: pull changes
         run: |
             cd /home/azureuser/Ca-Baigne
-            git pull 
+            git pull
+            cp /home/azureuser/Front-env/.env /home/azureuser/Ca-Baigne/Frontend
+            cp /home/azureuser/Back-env/.env  /home/azureuser/Ca-Baigne/Backend 
             docker-compose -f docker-compose.prod.yml up --build --no-deps -d
