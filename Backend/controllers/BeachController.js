@@ -40,7 +40,6 @@ exports.addNewBeach = (req, res, next) =>
   const {name, governorate, latitude, longitude, imagepath} = req.body;
   const amenities = output;
   const beach = { name, governorate, latitude, longitude, imagepath, amenities}
-  console.log(beach)
   Beach.create(beach)
   .then(
     beach => res.status(200).json({ beach })
