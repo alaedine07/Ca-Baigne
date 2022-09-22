@@ -119,7 +119,6 @@ export default function BasicModal(props) {
 
   const deletePost = () => {
     axios.delete(process.env.API_BASE_URL + `api/v1/post/deletepost/${postId}`).then(() => {
-      console.log('post is deleted')
     })
     .catch(error => console.log(error))
 }

@@ -106,7 +106,6 @@ function SearchBox() {
          :
          null
     )
-      console.log(beaches);
       setGovernorateArray(beaches)
     })
     .catch(error => {

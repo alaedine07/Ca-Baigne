@@ -35,30 +35,6 @@ export function NewBeachForm() {
         setFileName(e.target.files[0].name);
     }
 
-    // function uploadData(event) {
-    //     event.preventDefault();
-    //     const formData = new FormData();
-    //     formData.append("file", file);
-    //     formData.append("fileName", fileName);
-    //     const beachData = {
-    //         name: beachName,
-    //         governorate: beachGovernorate,
-    //         longitude: longititude,
-    //         latitude: lattitude,
-    //         caracteristiques: amenitie
-    //     }
-    //     for (let key in beachData) {
-    //         formData.append(key, beachData[key]);
-    //     }
-    //     axios.post(process.env.API_BASE_URL + 'api/v1/uploads/beachesUploads', formData, {
-    //         headers: {
-    //                 'Content-Type': 'multipart/form-data'
-    //             }
-    //         }
-    //     ).catch(err => {
-    //         console.error(err);
-    //     })
-    // }
 
     // save beach image to azure container
     async function uploadData(event) {
