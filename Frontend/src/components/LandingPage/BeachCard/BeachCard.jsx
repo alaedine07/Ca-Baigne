@@ -1,4 +1,4 @@
-import React, {useState, useRef, useReducer, useEffect} from 'react'
+import React, {useState, useEffect} from 'react'
 
 import { v4 as uuidv4 } from "uuid";
 
@@ -11,7 +11,6 @@ import getbeachState from '../../../Utils/WindyApiCall';
 
 import './BeachCard.css'
 
-const API_KEY = 'de668cda57d2ffe3f3b8fadc3fdeb118'
 
 function BeachCard(props) {
   
@@ -30,8 +29,9 @@ function BeachCard(props) {
     getWeather(props.beachData.latitude, props.beachData.longitude)
   },[])
 
+
   const getWeather = (lat, long) => {
-    axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${API_KEY}&units=metric`)
+    axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${process.env.WEATHER_API_KEY}&units=metric`)
     .then(response => {
         const { main, weather } = response.data;
         setWeatherIcon(`http://openweathermap.org/img/w/${
@@ -40,7 +40,12 @@ function BeachCard(props) {
           setWeatherDescription(weather[0].description)
     })
     .catch(error => console.log(error))
+<<<<<<< HEAD
   }
+=======
+
+}
+>>>>>>> e1b40d7e3ebe59ebe78a96828cfeaeafa4edcde6
 
   async function getFlag(la, lo) {
     const flag = await getbeachState(la, lo);
@@ -72,7 +77,6 @@ function BeachCard(props) {
 
   }
 
-  
 
   const ratingChanged = (newRating) => {
     setRate(newRating)
@@ -84,12 +88,13 @@ function BeachCard(props) {
   }
 
   function getAmenities() {
-    let amenities = "";
+    let amenities = [];
     for (const [key, value] of Object.entries(props.beachData.amenities)) {
-      amenities += value + " * "
+      amenities.push(<li key={uuidv4()}>{value}</li>)
     }
     return amenities;
   }
+ 
 
   function checkLogin() {
     const token = localStorage.getItem('accessToken');
@@ -109,7 +114,6 @@ function BeachCard(props) {
     }
     return false
   }
-
 
   if (found()) {
       return (
@@ -135,8 +139,8 @@ function BeachCard(props) {
     else if(!found()) {
       return (
         <>
-          <div  className='f p-5' >
-            <div className="card bg-dark text-white" >
+          <div className='f p-5' >
+            <div className="beach-card bg-dark card text-white" >
             {checkLogin() && 
             
               <button className='pin' onClick={() => {
@@ -145,22 +149,34 @@ function BeachCard(props) {
                 window.location.reload();
                 
                 }}>
-                  
-                  
+
                   {check ? <i className="fas fa-heart text-danger" ></i> : <i className="far fa-heart"></i>}
                   
               </button>
-            
-            
+
             }
             <div className='overflow'>
-              <img className="card-img-top" src={process.env.API_BASE_URL + '' + props.beachData.imagepath.split('/').slice(-3).join('/')} alt="Card image cap" onClick={checkLogin() && handleClick} />
+              <img className="card-img-top" src={props.beachData.imagepath} alt="Card image cap"  />
+              <div className="image-button">
+                {
+                  checkLogin()
+                   ?
+                   <a onClick={handleClick} href="#"> Check reviews </a>
+                   :
+                   <a href="/login"> Check reviews </a>
+                }
+                
+              </div>
             </div>
             <div className="card-body">
-              <h5 className="card-title text-info">{props.beachName}</h5>
+              <div className="card-title">
+                <h5 >{props.beachName}</h5>
+              </div>
+              
             </div>
             <ul className="list-group list-group-flush">
-              <li key={uuidv4()} className="weather-data list-group-item bg-secondary text-white">
+              <li key={uuidv4()} className="weather-data list-group-item text-dark">
+              <span className='card-list-title'>Current weather :</span>
                 <div style={{display: 'flex', alignItems: 'center'}}>
                 
                 {weather} <sup>°C</sup>
@@ -168,8 +184,27 @@ function BeachCard(props) {
                 </div>
                 <p>{weatherDescription}</p>
                 </li>
-              <li key={uuidv4()} className="list-group-item bg-secondary text-white">Sea state: {getFlag(props.beachData.latitude, props.beachData.longitude) && beachState === "green" ? <i className="green-flag fas fa-solid fa-flag"></i> : beachState === "orange" ? <i className="orange-flag fas fa-solid fa-flag"></i> : <><i className="red-flag fas fa-solid fa-flag"></i><p>Swimming is prohibited</p></>}</li>
-              <li key={uuidv4()} className="list-group-item bg-secondary text-white">facilities: {getAmenities()}</li>
+                <li key={uuidv4()} className="list-group-item text-dark"><span className='card-list-title'>Beach state :</span> {getFlag(props.beachData.latitude, props.beachData.longitude) && beachState === "green"
+            ?
+            <> 
+              <i className="green-flag fas fa-solid fa-flag"> Green flag</i>
+              <p>Low hazard ~ Calm conditions, exercise caution.</p>
+            </>
+              : 
+            beachState === "orange"
+             ?
+            <>
+              <i className="orange-flag fas fa-solid fa-flag"> Orange flag</i>
+              <p style={{color: 'yellow'}}>Medium hazard ~ Ocean conditions are rough (moderate surf and/or currents).</p>
+            </>
+            : 
+            <>
+              <i className="red-flag fas fa-solid fa-flag"> Red flag</i>
+              <p>High Hazard ~ Rough conditions (strong surf and/or currents) are present.</p>
+            </>
+          }
+          </li>
+              <li key={uuidv4()} className="list-group-item text-dark"><span className='card-list-title'>Amenities :</span> <ul>{getAmenities()}</ul></li>
             </ul>
             {checkLogin() &&
             <>

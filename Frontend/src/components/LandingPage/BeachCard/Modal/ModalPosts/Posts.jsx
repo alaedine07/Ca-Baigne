@@ -1,5 +1,6 @@
 import React, {useEffect, useState, useReducer} from 'react';
 
+import { v4 as uuidv4 } from "uuid";
 import moment from 'moment';
 import jwt_decode from "jwt-decode";
 import Box from '@mui/material/Box';
@@ -17,6 +18,10 @@ function Posts(props) {
 
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
+<<<<<<< HEAD
+=======
+	// const [count, forceCounter] = useReducer(x => x + 1, 0);
+>>>>>>> e1b40d7e3ebe59ebe78a96828cfeaeafa4edcde6
 
 	useEffect(() => 
 	{
@@ -27,8 +32,18 @@ function Posts(props) {
 	{
 		props.deletePost()
 		handleClose()
+<<<<<<< HEAD
 		forceCounter()
 	}
+=======
+		props.setCounter()
+	  }
+
+	  useEffect(()=> {
+		props.getAllPosts()
+	  },[props.count])
+
+>>>>>>> e1b40d7e3ebe59ebe78a96828cfeaeafa4edcde6
 
 	function checkLogin(postUserId) 
 	{
@@ -38,8 +53,26 @@ function Posts(props) {
 		if (postUserId === userId) {
 		  return true;
 		}
+<<<<<<< HEAD
 	}
 	
+=======
+
+	}
+	
+	// Get username
+	useEffect(() => {
+		getUserName()
+	}, [])
+
+	const getUserName = () => {
+		const token = localStorage.getItem('accessToken');
+		const decoded = jwt_decode(token);
+		const userName = decoded['Username'];
+		setUserName(userName.charAt(0).toUpperCase() + userName.slice(1));
+	}
+
+>>>>>>> e1b40d7e3ebe59ebe78a96828cfeaeafa4edcde6
 	const style = {
 		position: 'absolute',
 		top: '50%',
@@ -63,7 +96,11 @@ function Posts(props) {
 				{props.postArray.map(post =>
 				<>
 				{props.setPostId(post.id)}
+<<<<<<< HEAD
 				<li className="reviews-item" key={post.id}>
+=======
+				<li className="reviews-item" key={uuidv4()}>
+>>>>>>> e1b40d7e3ebe59ebe78a96828cfeaeafa4edcde6
 					<div className='review-container'>
 						<div className='review-content'>
 							<div className='user-credentials'>

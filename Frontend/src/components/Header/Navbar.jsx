@@ -1,8 +1,10 @@
 import React , {useEffect, useState} from 'react'
 import { NavLink } from 'react-router-dom';
+import { v4 as uuidv4 } from "uuid";
 import axios from "axios";
 import jwt_decode from 'jwt-decode';
 import Dark from '../Darkmode/Darkmode';
+
 import './Navbar.css';
 
 const Navbar = (props) => {
@@ -43,7 +45,6 @@ const Navbar = (props) => {
   <nav className="navbar navbar-expand-lg navbar-mainbg">
     
       <NavLink className="navbar-brand navbar-logo" to="/" >
-      Ça baigne
       </NavLink>
       <button 
         className="navbar-toggler"
@@ -63,31 +64,31 @@ const Navbar = (props) => {
               <div className="right"></div>
             </div>
             
-            <li className="nav-item active">
-              <NavLink className="nav-link" to="/" >
+            <li key={uuidv4()} className="nav-item active">
+              <NavLink onClick={() => {window.location.reload()}} className="nav-link" to="/" >
                 <i 
-                className="fa fa-home">
+                  className="fa fa-home">
                 </i>Home
               </NavLink>
             </li>
-            <li className="nav-item">
+            <li key={uuidv4()} className="nav-item">
               <NavLink className="nav-link" to="/login" >
                 <i 
-                className="fa fa-sign-in-alt">
+                  className="fa fa-sign-in-alt">
                 </i>Login
               </NavLink>
             </li>
-            <li className="nav-item">
+            <li key={uuidv4()} className="nav-item">
               <NavLink className="nav-link" to="/join" >
                 <i 
-                className="fa fa-sign-in-alt">
+                  className="fa fa-sign-in-alt">
                 </i>Join
               </NavLink>
             </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/contact" >
+            <li key={uuidv4()} className="nav-item">
+              <NavLink onClick={() => {window.scrollTo(0, document.body.scrollHeight);}} className="nav-link" to="/" >
                 <i 
-                className="far fa-envelope">
+                  className="far fa-envelope">
                 </i>Contact Us
               </NavLink>
             </li>
@@ -102,8 +103,7 @@ const Navbar = (props) => {
 else {
   return (
     <nav className="navbar navbar-expand-lg navbar-mainbg">
-    <NavLink className="navbar-brand navbar-logo" to="/" exact>
-      Ça baigne
+    <NavLink className="navbar-brand navbar-logo" to="/">
       </NavLink>
       <button 
         className="navbar-toggler"
@@ -123,38 +123,45 @@ else {
               <div className="right"></div>
             </div>
             
-            <li className="nav-item active">
-              <NavLink className="nav-link" to="/" exact>
+            <li key={uuidv4()} className="nav-item active">
+              <NavLink className="nav-link" to="/">
                 <i 
                 className="fa fa-home">
                 </i>Home
               </NavLink>
             </li>
-            <li className="nav-item active">
-              <NavLink className="nav-link" to="/profile" exact>
+            <li key={uuidv4()} className="nav-item active">
+              <NavLink className="nav-link" to="/profile">
                 <i 
                 className="fa fa-user">
                 </i>Profile
               </NavLink>
             </li>
-            <li className="nav-item active" onClick={handleSignOut}>
-              <NavLink className="nav-link" to="/" exact>
+            <li key={uuidv4()} className="nav-item active" onClick={handleSignOut}>
+              <NavLink className="nav-link" to="/">
                 <i 
                 className="fas fa-sign-out-alt">
                 </i>Sign out
               </NavLink>
             </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/contact" exact>
+            <li key={uuidv4()} className="nav-item">
+              <NavLink onClick={() => {window.scrollTo(0, document.body.scrollHeight);}} className="nav-link contact-navlink" to="/">
                 <i 
                 className="far fa-envelope">
                 </i>Contact Us
               </NavLink>
             </li>
+<<<<<<< HEAD
             { imagePath ? 
               <div className="profileImageZone">
                 <img src={imagePath} alt="img" />
               </div> : null
+=======
+            {
+              imagePath ? <div className="profileImageZone">
+              <img src={imagePath} alt="img"/>
+            </div> : null
+>>>>>>> e1b40d7e3ebe59ebe78a96828cfeaeafa4edcde6
             }
             <div style={toggleStyle}>
               <Dark />

@@ -1,9 +1,0 @@
-PUT http://localhost:3001/api/v1/user/updateuser/6f680996-63cf-4e3b-80f9-18f7766cf86a
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZmNjgwOTk2LTYzY2YtNGUzYi04MGY5LTE4Zjc3NjZjZjg2YSIsInVzZXJOYW1lIjoiYWxhIiwiZW1haWwiOiJ0ZXN0QGdtYWlsLmNvbSIsImhhc2hlZFBhc3N3b3JkIjoiJDJiJDEwJFNWbFo2T3JXS1RaUGU1ZS4xM2w2VXVFVjNGbUF5TzV5cktTUGFNbmYwaUROakpLRUY0blYyIiwiY3JlYXRlZEF0IjoiMjAyMi0wOC0xNVQxMjowMjoxMS4yNDJaIiwidXBkYXRlZEF0IjoiMjAyMi0wOC0xNVQxMjowMjoxMS4yNDJaIiwiaWF0IjoxNjYwNTY0OTU0fQ.3hu2HfKbavXRJ_y7o6rQAbvyON30SCe0Y1PQZo6gdJ0
-content-type: application/json
-
-{
-    "userName": "ala",
-    "email": "test@gmail.com",
-    "hashedPassword": "testpassword123"
-}

@@ -1,9 +1,10 @@
+
 .review-container {
     display: flex;
     flex-direction: column;
     width: auto;
     justify-content: space-between;
-    border-bottom: 1px solid black;
+    border-bottom: 2px solid  rgb(107, 105, 104)
 }
 
 .commenter-image {

@@ -1,33 +1,19 @@
-import React, { useState, useEffect } from "react";
-
-import jwt_decode from "jwt-decode";
+import React from "react";
 
 import SearchBox from "../LandingPage/SearchBox/SearchBox";
-import './Home.css';
+import Contactpage from "../Contact/ContactCard";
+import Footer from '../Footer/Footer';
+import './Home.css'
 
-
-export function Home(props) {
-    
-    const [imgPath, setImgPath] = useState('');
-    
-    useEffect(() => {
-        const token = localStorage.getItem('accessToken');
-        if (token) {
-            const decoded = jwt_decode(token);
-            const imgPath = decoded['imagePath'];
-            setImgPath(imgPath);
-        }
-    }, []);
-    
+export function Home() {
     return (
         <>
-        {imgPath === '' && props.token !== "" &&
-            <div className="profile-img-alert"> 
-                <a href="/profile"><p> complete your profile by adding profile image </p></a>
-            </div>
-        }
         <div className="flex-wrapper">
             <SearchBox />
+        </div>
+        <div className="contact-us-section">
+            <Contactpage />
+            <Footer />
         </div>
         </>
     )

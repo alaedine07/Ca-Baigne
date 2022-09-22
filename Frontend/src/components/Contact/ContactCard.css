@@ -9,8 +9,11 @@ body, html {
   }
   
   .contact-page {
-	min-height: 77.5vh;
-	padding-top: 2rem !important;
+	min-height: 92.3vh !important;
+	padding-top: 4.5rem !important;
+	padding-bottom: 2.5rem !important;
+	display: flex;
+	justify-content: center;
 }
 
 
@@ -27,7 +30,7 @@ body, html {
 	flex-direction: column;
 	align-items: center;
 	height: 90%;
-	background-color: rgb(148, 148, 148);
+	background-color: rgba(2, 34, 56, 0.473);
 	
   }
   
@@ -40,17 +43,17 @@ body, html {
 	left: 0;
 	right: 0;
 	bottom: 0;
-	box-shadow: inset 0 0 2000px rgba(255, 255, 255, 0.856);
+	box-shadow: inset 0 0 2000px rgba(255, 255, 255, 0.925);
 	filter: blur(10px);
 	margin: -20px;
   }
 
-h1{
-	font-weight: normal;
+.contact-header {
+	font-weight: bold !important;
 	font-size: 30px !important;
 	font-family: 'Roboto', sans-serif;
 	margin-top: 30px;
-	color: white;
+	color: rgb(238, 228, 228);
 
     padding-top: 15px;
 }
@@ -66,54 +69,54 @@ h1{
 }
 
 form{
-	color: black;
     margin: 16px;
-    padding-bottom: 10px;
 	display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-label, input, textarea {
+.contact-label, .contact-input, .contact-textarea {
 	display: block;
 }
 
-input, textarea{
+.contact-input, .contact-textarea{
 	padding: 16px !important;
 	width: 519px;
 	height: 40px;
 	font-family: 'Sniglet', cursive;
-	font-size: 2em;
+	font-size: 1em;
 	color: #000000;
 	transition: border 0.5s;
 }
 
-input:focus, textarea:focus {
+.contact-input:focus, .contact-textarea:focus {
 	outline: none !important;
 }
 
-textarea{
+.contact-textarea{
 	height: 100px;	
 	resize: none !important; 
 	overflow: auto;
 }
 
-input[type="submit"]{
+.contact-input[type="submit"]{
 	background-color: rgb(255, 255, 255);
-	color: rgb(0, 0, 0);
+	color: rgb(58 58 58);
 	height: 40px;
 	cursor: pointer;
 	margin-top: 30px;
 	font-size: 20px;
 	line-height: 7px;
+	font-weight: bold
 }
 
 .contact-label {
-	color: white !important;
+	color: rgb(238, 230, 230) !important;
 	font-size: 16px;
 	margin-top: 20px;
 	margin-bottom: 5px;
 	padding-left: 10px;
+	font-weight: bold
 }
 
 
@@ -123,7 +126,8 @@ input[type="submit"]{
 
 @media screen and (min-width: 1300px) {
     .contact-page {
-        min-height: 84.1vh !important;
+		padding-top: 6.5rem !important;
+        min-height: 94.5vh !important;
     }
 	.contact-card {
 		height: 35rem;
@@ -131,5 +135,5 @@ input[type="submit"]{
 }
 
 .notification-message {
-	color: white;
+	color: rgb(255, 251, 251);
 }

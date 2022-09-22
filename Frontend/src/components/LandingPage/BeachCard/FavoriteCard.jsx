@@ -8,9 +8,8 @@ import getbeachState from '../../../Utils/WindyApiCall';
 
 import './BeachCard.css'
 
-const API_KEY = 'de668cda57d2ffe3f3b8fadc3fdeb118'
 
-function FavoriteCard(props) {
+function BeachCard(props) {
   
   const [rate, setRate]= useState();
   const [open, setOpen] = useState(false);
@@ -29,7 +28,7 @@ function FavoriteCard(props) {
   },[])
 
   const getWeather = (lat, long) => {
-    axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${API_KEY}&units=metric`)
+    axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${process.env.WEATHER_API_KEY}&units=metric`)
     .then(response => {
         const { main, weather } = response.data;
         setWeatherIcon(`http://openweathermap.org/img/w/${
@@ -46,9 +45,9 @@ function FavoriteCard(props) {
     setBeachState(flag);
   }
 
-  
+
   const unpinBeach = (id) => {
-      axios.delete(`http://localhost:3001/api/v1/user/unpin/${id}`)
+      axios.delete(process.env.API_BASE_URL + `api/v1/user/unpin/${id}`)
       .then(() => console.log(`beach with id ${id} has been unpinned`))
       .catch((err) => {
       console.error(err);
@@ -66,9 +65,9 @@ function FavoriteCard(props) {
   }
 
   function getAmenities() {
-    let amenities = "";
+    let amenities = [];
     for (const [key, value] of Object.entries(props.beachData.amenities)) {
-      amenities += value + " * "
+      amenities.push(<li key={uuidv4()}>{value}</li>)
     }
     return amenities;
   }
@@ -83,7 +82,7 @@ function FavoriteCard(props) {
   return (
     <>
     <div  className='f p-5' >
-      <div className="card bg-dark text-white" >
+      <div className="beach-card card bg-dark text-white" >
         {checkLogin() && 
         <>
           <button className='pin' onClick={() => {
@@ -91,28 +90,58 @@ function FavoriteCard(props) {
             window.location.reload();
             
             }}>
-              <i className="fas fa-heart-broken"></i>
+              <i className="fas fa-unlink"></i>
           </button>
         
         </> 
         }
         <div className='overflow'>
-          <img className="card-img-top" src={process.env.API_BASE_URL + '' + props.beachData.imagepath.split('/').slice(-3).join('/')} alt="Card image cap" onClick={checkLogin() && handleClick} />
+          <img className="card-img-top" src={props.beachData.imagepath} alt="Card image cap" />
+          <div className="image-button">
+          {
+            checkLogin()
+              ?
+              <a onClick={handleClick} href="#"> Check reviews </a>
+              :
+              <a href="/login"> Check reviews </a>
+          }
+          </div>
         </div>
         <div className="card-body">
-          <h5 className="card-title text-info">{props.beachName}</h5>
+          <h5 className="card-title">{props.beachName}</h5>
         </div>
         <ul className="list-group list-group-flush">
-        <li key={uuidv4()} className="weather-data list-group-item bg-secondary text-white">
-          <div style={{display: 'flex', alignItems: 'center'}}>
-            {weather} <sup>°C</sup>
-            <img className="weather-icon" src={weatherIcon} /> 
-          </div>
-          <p>{weatherDescription}</p>
-        </li>
-          <li key={uuidv4()} className="list-group-item bg-secondary text-white">Beach state: {getFlag(props.beachData.latitude, props.beachData.longitude) && beachState === "green" ? <i className="green-flag fas fa-solid fa-flag"></i> : beachState === "orange" ? <i className="orange-flag fas fa-solid fa-flag"></i> : <i className="red-flag fas fa-solid fa-flag"></i>}</li>
-          <li key={uuidv4()} className="list-group-item bg-secondary text-white">facilities: {getAmenities()}</li>
-        </ul>
+              <li key={uuidv4()} className="weather-data list-group-item text-dark">
+              <span className='card-list-title'>Current weather :</span>
+                <div style={{display: 'flex', alignItems: 'center'}}>
+                
+                {weather} <sup>°C</sup>
+                <img className="weather-icon" src={weatherIcon} /> 
+                </div>
+                <p>{weatherDescription}</p>
+                </li>
+                <li key={uuidv4()} className="list-group-item text-dark"><span className='card-list-title'>Beach state :</span> {getFlag(props.beachData.latitude, props.beachData.longitude) && beachState === "green"
+            ?
+            <> 
+              <i className="green-flag fas fa-solid fa-flag"> Green flag</i>
+              <p>Low hazard ~ Calm conditions, exercise caution.</p>
+            </>
+              : 
+            beachState === "orange"
+             ?
+            <>
+              <i className="orange-flag fas fa-solid fa-flag"> Orange flag</i>
+              <p style={{color: 'yellow'}}>Medium hazard ~ Ocean conditions are rough (moderate surf and/or currents).</p>
+            </>
+            : 
+            <>
+              <i className="red-flag fas fa-solid fa-flag"> Red flag</i>
+              <p>High Hazard ~ Rough conditions (strong surf and/or currents) are present.</p>
+            </>
+          }
+          </li>
+              <li key={uuidv4()} className="list-group-item text-dark"><span className='card-list-title'>Amenities :</span> <ul>{getAmenities()}</ul></li>
+            </ul>
         {checkLogin() &&
         <>
           <div className='stars-div'>
@@ -149,4 +178,4 @@ function FavoriteCard(props) {
   )
 }
 
-export default FavoriteCard
+export default BeachCard

@@ -4,6 +4,7 @@ const Post = require('../models/Post');
 
 exports.getAllBeaches = (req, res, next) =>
 {
+  // remove sensitive informations
   Beach.findAll({ include: [{
     model: Post,
     as: 'comments',
@@ -30,20 +31,19 @@ exports.getBeach = (req, res) => {
 
 exports.addNewBeach = (req, res, next) =>
 {
-  items = req.body.caracteristiques.split(',');
+  items = req.body.caracteristiques
   output = {}
   for (var i = 0; i < items.length; i++) {
     output[i] = items[i];
   }
-  const {name, governorate, latitude, longitude} = req.body;
-  const imagepath = req.file.path;
+  const {name, governorate, latitude, longitude, imagepath} = req.body;
   const amenities = output;
   const beach = { name, governorate, latitude, longitude, imagepath, amenities}
   Beach.create(beach)
   .then(
-    newBeach => res.status(200).json({ newBeach })
+    beach => res.status(200).json({ beach })
   )
-  .catch(err => res.status(404).json('Error: ' + err))
+  .catch(err => console.error(err));
 }
 
 exports.updateBeach = (req, res) => {

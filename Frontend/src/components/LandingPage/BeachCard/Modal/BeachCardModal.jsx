@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useReducer } from "react";
 
+import { v4 as uuidv4 } from "uuid";
 import Box from '@mui/material/Box';
 import ReactStars from "react-rating-stars-component";
 import Modal from '@mui/material/Modal';
@@ -19,7 +20,6 @@ const style = {
   bgcolor: 'background.paper',
   boxShadow: 24,
   display: 'flex',
-  borderRadius: '10px'
 };
 
 export default function BasicModal(props) {
@@ -32,7 +32,10 @@ export default function BasicModal(props) {
   const [id, setId]= useState("");
   const [reducedValue, forceUpdate] = useReducer(x => x + 1, 0);
   const [count, setCounter] = useState(0);
+<<<<<<< HEAD
   
+=======
+>>>>>>> e1b40d7e3ebe59ebe78a96828cfeaeafa4edcde6
 
 
   useEffect(()=> {
@@ -49,8 +52,12 @@ export default function BasicModal(props) {
 
   useEffect(()=> {
 		getAllPosts()
+<<<<<<< HEAD
 	},[count])
 
+=======
+	  },[count])
+>>>>>>> e1b40d7e3ebe59ebe78a96828cfeaeafa4edcde6
 
   const ratingChanged = (newRating) => {
     setRate(newRating)
@@ -121,14 +128,21 @@ export default function BasicModal(props) {
   }
 
   const deletePost = () => {
+<<<<<<< HEAD
     axios.delete(`http://localhost:3001/api/v1/post/deletepost/${postId}`).then(() => {
       forceCounter()
     }).catch(error => console.log(error))
   }
+=======
+    axios.delete(process.env.API_BASE_URL + `api/v1/post/deletepost/${postId}`).then(() => {
+    })
+    .catch(error => console.log(error))
+}
+>>>>>>> e1b40d7e3ebe59ebe78a96828cfeaeafa4edcde6
 
   return (
     
-    <Modal 
+    <Modal
           open={props.open} 
           onClose={props.handleClose} 
           aria-labelledby="modal-modal-title" 
@@ -137,7 +151,7 @@ export default function BasicModal(props) {
     
     <Box sx={style}>
           <div className='first-half'>
-            <img src={process.env.API_BASE_URL + '' + props.image.split('/').slice(-3).join('/')} className='modal-img'></img>
+            <img src={props.image} className='modal-img'></img>
             <div className='beach-name'>
               <div>{props.beachName}</div>
               <div><span>4.5</span> <i className="star fas fa-star"></i></div>
@@ -150,6 +164,7 @@ export default function BasicModal(props) {
                 <p className='title-header'> Rate your visite</p>
               </div>
             <ReactStars
+            
                 count={5}
                 onChange={ratingChanged}
                 size={24}
@@ -157,8 +172,7 @@ export default function BasicModal(props) {
                 emptyIcon={<i className="far fa-star"></i>}
                 halfIcon={<i className="fa fa-star-half-alt"></i>}
                 fullIcon={<i className="fa fa-star"></i>}
-                activeColor="#ffd700"
-                
+                activeColor="#ffd700"  
             />
             {
             rate ? <div style={{fontFamily: 'Amiri'}}><p>Your rate ({rate}) has been received</p><p>Thank you !</p></div> : null
@@ -173,6 +187,10 @@ export default function BasicModal(props) {
                 getAllPosts={getAllPosts}
                 setCounter={setCounter}
                 count={count}
+<<<<<<< HEAD
+=======
+
+>>>>>>> e1b40d7e3ebe59ebe78a96828cfeaeafa4edcde6
               />
             </div>
 

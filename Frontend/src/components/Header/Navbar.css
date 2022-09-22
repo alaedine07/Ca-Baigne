@@ -11,8 +11,6 @@ i {
 
 .navbar {
   gap: 1rem;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.685);
- 
 }
 
 .navbar-logo {
@@ -22,7 +20,7 @@ i {
 }
 
 .navbar-mainbg {
-  background-color: #212529;
+  /*background-color: #212529;*/
   padding: 0px;
 }
 
@@ -51,7 +49,7 @@ i {
   font-size: 15px;
   display: block;
   padding: 20px 20px;
-
+  cursor: pointer;
   position: relative;
 }
 
@@ -71,4 +69,35 @@ i {
   #navbarSupportedContent ul li a {
     padding: 12px 30px;
   }
+}
+
+.navbar .navbar-nav .nav-item .nav-link,
+.navbar .navbar-nav .nav-item .nav-link:after,
+.navbar .navbar-nav .nav-item .nav-link:before {
+  transition: all .5s;
+}
+.navbar .navbar-nav .nav-item .nav-link:hover {
+  color: rgb(20, 18, 18) !important;
+}
+
+
+.navbar .navbar-nav .nav-item .nav-link,
+nav.fill .navbar-nav .nav-item .nav-link {
+  position: relative;
+}
+.navbar .navbar-nav .nav-item .nav-link:after,
+nav.fill .navbar-nav .nav-item .nav-link:after {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 0%;
+  content: '.';
+  color: transparent;
+  background: rgb(233, 233, 233);
+  height: 1px;
+}
+.navbar .navbar-nav .nav-item .nav-link:hover:after {
+  width: 100%;
 }

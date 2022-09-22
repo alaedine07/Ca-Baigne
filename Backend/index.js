@@ -15,12 +15,19 @@ const app = express();
 // user can have many posts and each post belong to one user
 User.hasMany(Post, {as: 'comments', onDelete: 'CASCADE'});
 Post.belongsTo(User, {foreignKey: "userId", as: "user"});
+<<<<<<< HEAD
 
 // beach can have many posts and each post belong to one beach
 Beach.hasMany(Post, {as: 'comments', onDelete: 'CASCADE'});
 Post.belongsTo(Beach, {foreignKey: "beachId", as: "beach"});
 
 
+=======
+
+// beach can have many posts and each post belong to one beach
+Beach.hasMany(Post, {as: 'comments', onDelete: 'CASCADE'});
+Post.belongsTo(Beach, {foreignKey: "beachId", as: "beach"});
+>>>>>>> e1b40d7e3ebe59ebe78a96828cfeaeafa4edcde6
 
 // create a junction table
 // Beach.belongsToMany(User, {through: 'favoritebeaches'});

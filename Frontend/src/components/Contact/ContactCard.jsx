@@ -41,20 +41,20 @@ const Contact = () => {
     <div className="contact-page">
       <div className="contact-card">
         <header> 
-          <h1>Contact us</h1>
+          <h1 className="contact-header">Contact us</h1>
         </header>
         <div id="form">
         <form ref={form} id="waterform" method="post" action="" onSubmit={sendEmail}>
           <div className="credentials">
             <div className="formgroup" id="name-form">
                 <label className="contact-label" htmlFor="name" placeholder="Enter your name">Your name</label>
-                <input type="text" id="name" name="name" onChange={(event) => {setNameValue(event.target.value);}}
+                <input className="contact-input" type="text" id="name" name="name" onChange={(event) => {setNameValue(event.target.value);}}
           />
             </div>
 
             <div className="formgroup" id="email-form">
                 <label  className="contact-label" htmlFor="email">Your e-mail</label>
-                <input type="email" id="email" name="email" onChange={(event) => {
+                <input className="contact-input" type="email" id="email" name="email" onChange={(event) => {
             setEmailValue(event.target.value);
           }}
           />
@@ -63,10 +63,10 @@ const Contact = () => {
 
           <div className="formgroup" id="message-form">
               <label className="contact-label" htmlFor="message">Your message</label>
-              <textarea id="message" name="message"></textarea>
+              <textarea className="contact-textarea" id="message" name="message"></textarea>
           </div>
 
-          <input type="submit" value="Send your message!" />
+          <input className="contact-input" type="submit" value="Send your message!" />
           <div className="success-message">
             {
               result ? <Result /> : null

@@ -12,5 +12,4 @@ router.post('/facebookregistration', authController.facebookRegistration);
 router.post('/facebooklogin', authController.facebookLogin)
 
 
-
 module.exports = router;

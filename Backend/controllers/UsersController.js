@@ -6,7 +6,6 @@ const bcrypt = require('bcrypt');
 exports.verifyToken = (req, res, next) => {
   const authHeader = req.headers['authorization']
   const token = authHeader && authHeader.split(' ')[1]
-  console.log(token)
   if (token === null) { 
     res.redirect('/login');
   } else {
@@ -64,11 +63,11 @@ exports.updateUser = async (req, res) => {
   const user = { userName, email, hashedPassword }
   // check if data is the same even if password didn't change
   if (existingUser.userName === userName && existingUser.email === email && !hashedPassword) {
-    return res.status(500).send('no modifications detected');
+    return res.status(500).send('No modifications detected');
   }
   // check if the data entered is the same in the database
   if (existingUser.userName === userName && existingUser.email === email && await bcrypt.compare(hashedPassword, existingUser.hashedPassword)) {
-    return res.status(500).send('no modifications detected');
+    return res.status(500).send('No modifications detected');
   }
   // hash the password if it changed
   if (user.hashedPassword !== undefined && user.hashedPassword !== '') {

@@ -8,6 +8,16 @@
         min-height: 85.9vh !important;
     }
 }
+<<<<<<< HEAD
 .facebook-button {
     background-color: #4267B2 !important;
+=======
+
+.signup-ipnut {
+    padding-left: 2rem;
+    width: 350px !important;
+}
+.signup-label {
+    color: black !important;
+>>>>>>> e1b40d7e3ebe59ebe78a96828cfeaeafa4edcde6
 }

@@ -1,35 +1,36 @@
 import React from 'react';
-import { CDBFooter, CDBBox, CDBBtn, CDBIcon } from 'cdbreact';
+import { CDBIcon } from 'cdbreact';
+import './Footer.css'
 
 const Footer = () => {
   return (
-    <CDBFooter className=" shadow bg-dark text-light">
-      <CDBBox display="flex" justifyContent="between" alignItems="center" className="footer-container mx-auto py-4 flex-wrap" style={{ width: '100%' }}>
-        <CDBBox display="flex" alignItems="center">
+    <footer>
+      <div className='footer-container'>
+        <div>
           <a href="/" className="d-flex align-items-center pl-5 text-dark">
             {/*<img
               alt="logo"
               src
               width="30px"/>*/}
-            <span className="ml-4 h5 mb-0 font-weight-bold text-light">Ça baigne</span>
+            <span >Ça baigne</span>
           </a>
-        </CDBBox>
-        <CDBBox>
-          <small className="ml-2">&copy; Ça baigne, 2022. All rights reserved.</small>
-        </CDBBox>
-        <CDBBox display="flex" className="pr-5">
-          <CDBBtn flat color="dark" className="p-2">
-            <CDBIcon fab icon="github" />
-          </CDBBtn>
-          <CDBBtn flat color="dark" className="mx-3 p-2">
-            <CDBIcon fab icon="twitter" />
-          </CDBBtn>
-          <CDBBtn flat color="dark" className="p-2">
-            <CDBIcon  fab icon="instagram" />
-          </CDBBtn>
-        </CDBBox>
-      </CDBBox>
-    </CDBFooter>
+        </div>
+        <div>
+          <small>&copy; Ça baigne, 2022. All rights reserved.</small>
+        </div>
+        <div className='footer-icons'>
+          <div >
+            <a href='https://github.com/alaedine07/Ca-Baigne'  target="blank"><CDBIcon fab icon="github" /></a>
+          </div>
+          <div color="dark">
+            <a href='/' target="blank"><CDBIcon fab icon="twitter" /></a>
+          </div>
+          <div color="dark">
+            <a href='/' target="blank"><CDBIcon  fab icon="instagram" /></a>
+          </div>
+        </div>
+      </div>
+    </footer>
   );
 };
 

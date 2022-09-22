@@ -15,7 +15,7 @@ export function Profile(props) {
 
     const [userData, setUserData] = useState({username: '', email: '', password: undefined, imgFullPath: ''});
     const [errorMsg, setErrorMsg] = useState('');
-
+    
     useEffect(() => {
         const token = localStorage.getItem('accessToken');
         if (token) {
@@ -62,6 +62,7 @@ export function Profile(props) {
                 console.error(err);
                 setErrorMsg(err.response.data);
             })
+
         }
 
     // save user image to azure container
@@ -101,10 +102,15 @@ export function Profile(props) {
         }).then(err => {
             // replace this with an error message to tell user the upload has failed
             console.error(err);
+<<<<<<< HEAD
+=======
+
+>>>>>>> e1b40d7e3ebe59ebe78a96828cfeaeafa4edcde6
         });
     }
 
     return (
+<<<<<<< HEAD
         <> 
         <Header token={props.token}/>
         <div className="profile-page">
@@ -114,27 +120,39 @@ export function Profile(props) {
                     { userData.imgFullPath ? 
                         <img id="avatar-img" src={userData.imgFullPath}/>: 
                         <img id="avatar-img" src={avatarMen}/>
+=======
+
+        <div className="profile"> 
+            <Header token={props.token}/>
+            <div className="profile-page">
+                <div className="update-container">
+                    <div className="image-upload">
+                        <label className="image-upload-label" htmlFor="file-input">
+                        { userData.imgFullPath ? 
+                            <img id="avatar-img" src={userData.imgFullPath}/>: 
+                            <img id="avatar-img" src={avatarMen}/>
+>>>>>>> e1b40d7e3ebe59ebe78a96828cfeaeafa4edcde6
                         }
-                    </label>
-                    <input id="file-input" type="file" onChange={saveFile}/>
-                </div>
-                <div className="form">
-                    <form className="profile-form" action="">
-                        <label className="myLabel" htmlFor="Username"> Username : </label>
-                            <input className="label-input"  type="text" value={userData.username} onChange={e => setUserData({...userData, username: e.target.value})}/>
-                        <label className="myLabel" htmlFor="email"> Email Address : </label>
-                            <input className="label-input" type="email" value={userData.email} onChange={e => setUserData({...userData, email: e.target.value})}/>
-                        <label className="myLabel" htmlFor="email"> New Password : </label>
-                            <input className="label-input" type="password" value={userData.password} onChange={e => setUserData({...userData, password: e.target.value})}/>
-                        <button type="submit" className=" myButton btn btn-success"  onClick={ModifyProfile}>
-                            Modify   
-                        </button>
-                    </form>
-                    { errorMsg !== '' && <div className="errorMsg"><p>{errorMsg}</p></div> }
+                        </label>
+                        <input id="file-input" type="file" onChange={saveFile}/>
+                    </div>
+                    <div className="form">
+                        <form className="profile-form" action="">
+                            <label className="myLabel" htmlFor="Username"> Username : </label>
+                                <input className="label-input"  type="text" value={userData.username} onChange={e => setUserData({...userData, username: e.target.value})}/>
+                            <label className="myLabel" htmlFor="email"> Email Address : </label>
+                                <input className="label-input" type="email" value={userData.email} onChange={e => setUserData({...userData, email: e.target.value})}/>
+                            <label className="myLabel" htmlFor="email"> New Password : </label>
+                                <input className="label-input" type="password" value={userData.password} onChange={e => setUserData({...userData, password: e.target.value})}/>
+                            <button type="submit" className=" myButton btn btn-success"  onClick={(event) => {ModifyProfile(event)}}>
+                                Modify   
+                            </button>
+                        </form>
+                        { errorMsg !== '' && <div className="errorMsg"><p>{errorMsg}</p></div> }
+                    </div>
                 </div>
             </div>
         </div>
-        </>
     )
 }
 

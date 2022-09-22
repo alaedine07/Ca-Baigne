@@ -67,37 +67,22 @@ main {
 
 .dark-mode {
   color: white;
-    
-  .flex-wrapper {
-    background-color: #1a202cd3;
-    min-height: 79.8vh !important;
-  }
+  
+ 
   @media screen and (min-width: 1300px) {
     .flex-wrapper {
         min-height: 85.7vh !important;
     }
 }
-  .contact-container {
-    min-height: 79vh !important;
-  }
 
   label {
     color: rgb(255, 255, 255) !important;
   }
-  .navbar {
-    background-color: #212429f1;
-    border: none;
-    box-shadow: 0 3px 6px rgba(231, 222, 222, 0.17);
-    
-  }
+
   .nav-link, .navbar-brand {
     color: #f7fafc !important;
   }
 
-  .footer-container {
-    box-shadow: 0px -3px 6px rgba(231, 222, 222, 0.17);
-    
-  }
 
   .hamburger {
     color: white !important;
@@ -105,11 +90,7 @@ main {
 
   .swiper-button-next,
   .swiper-button-prev {
-  color: white !important;
-  }
-
-  .contact-container {
-    background-color: #1a202cd3;
+    color: white !important;
   }
 
   .contact-card  h1  {
@@ -119,7 +100,7 @@ main {
     color: white ;
   }
   
-  .card:hover {
+  .card {
     box-shadow: 5px 10px 20px 1px rgba(197, 197, 197, 0.514)!important;
 }
 
@@ -143,8 +124,8 @@ main {
     background-color: #212529;
     color: white;
   }
-  .post-btn {
-    background-color: #212529;
+  .review-btn {
+    background-color: #212529 !important;
     color: white;
   }
   .beach-name  {
@@ -153,8 +134,38 @@ main {
     .post {
       color: black;
     }
-
-    .profile-page {
+    .reviews-item {
+      color: black;
+    }
+  
+    .alert-modal {
+      color: black;
+    }
+    .profile {
+      background: none;
+      background-color: #1a202cd3;
+      height: 100vh;
+    }
+    .hero-section {
+      background: none;
+      background-color: #1a202cd3;
+      // box-shadow: 6px 6px 6px rgb(192, 189, 184) ;
+    }
+    .pinned-section {
+      background-color: #1a202cd3;
+      // box-shadow: 6px 6px 6px rgb(192, 189, 184) ;
+    }
+    .beachResults {
+      background-color: #1a202cd3;
+      // box-shadow: 6px 6px 6px rgb(145, 141, 138) ;
+  }
+    .contact-us-section {
+      background: none;
       background-color: #1a202cd3;
     }
-}
+
+    .footer-container {
+      color: white !important;
+      background: none;
+    }
+} 

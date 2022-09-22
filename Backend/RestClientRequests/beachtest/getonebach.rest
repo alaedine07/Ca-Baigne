@@ -1,1 +1,0 @@
-GET http://localhost:3001/api/v1/beach/c8d07a1e-4b24-4bad-aba4-f410c9c7f4b0
