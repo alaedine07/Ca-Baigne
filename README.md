@@ -1,6 +1,6 @@
 # Introduction 👋
 
-Cabaigne is a web application developed with PERN stack, that offers tourists and local beachgoers informations related to beaches in Tunisia <img src='./images/tn.png' width='20'>
+Cabaigne is a web application developed with PERN stack, that offers tourists and local beachgoers informations related to beaches in Tunisia <img src='./Readme-images/tn.png' width='20'>
 <br>
 We provide a list of Amenities , Real time sea state (Calm, moderate or Agitated) and current weather report.
 
