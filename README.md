@@ -1,5 +1,5 @@
 # Introduction 👋
-<center><img src="Readme-images/logo.png"></center>
+<p align="center"><img src="Readme-images/logo.png"></p>
 
 
 Cabaigne is a web application developed with PERN stack, that offers tourists and local beachgoers informations related to beaches in Tunisia <img src='./Readme-images/tn.png' width='20'>
