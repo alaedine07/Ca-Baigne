@@ -1,24 +1,27 @@
 # Introduction 👋
 
-Cabaigne is a PERN stack web application that helps (tourists | local) discover beaches in Tunisa.
+Cabaigne is a web application developed with PERN stack, that offers tourists and local beachgoers informations related to beaches in Tunisia <img src='./images/tn.png' width='20'> , 
+We provide a list of Amenities , Real time sea state (calm | moderate | agitated) and current weather report.
 
-The goal behind this app is to promote tunisian beaches (because we have awesome ones !!) to people around the world which can support tourism in our country and therefore help locals.
+The purpose behind developing our application is to give tourists and locals a service for finding their perfect beach and therefore promote Tunisian spots and support tourism industry.
 
-Cabaigne also provides informations related to the beach (entertainment options | safety | accessibility ...), real time sea state(calm | agitated | moderate), weather from [https://api.windy.com/](Windy API) and [https://openweathermap.org/](OpenWeather API)
 
-# let's get technical 👨‍💻
+# Let's get technical 👨‍💻
 
 ## Tech Stack 🚀
 
-![techStack](images/techStack.png)
+![techStack](images/tech-stack.png)
 
 
 ## Back-End ⚙️:
 
-The backend server and RESTFul API are written with expressjs. the database is postgresql and to communicate between them we use
-Sequelize ORM.
-
-We use JWT token for authentication
+### The backend server and RESTFul API : 
+-   Express js web framework. 
+### Database system : 
+-   Postgresql. 
+-   Sequelize ORM.
+### User authentication :
+-   JWT (JSON Web Tokens).
 
 ### Dependencies 🔗
 
@@ -26,29 +29,33 @@ View the complete list of Back-End dependencies in the corresponding [package.js
 
 | Tool/Library                                                                       | Version |
 | ---------------------------------------------------------------------------------- | ------- |
-| [sequelize](https://sequelize.org/)                                                | ^6.21.3 |
-| [pg](https://www.npmjs.com/package/pg)                                             | ^8.7.3  |
-| [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken)                         | ^8.5.1  |
-| [express](https://expressjs.com/)                                                  | ^4.18.1 |
-| [nodemon](https://www.npmjs.com/package/nodemon)                                   | ^4.18.1 |
-| [supertest](https://www.npmjs.com/package/supertest)                               | ^1.0.0  |
-| [jest](https://jestjs.io/)                                                         | ^3.0.0  |
+| [Express js](https://expressjs.com/)                                               | ^4.18.1 |
+| [Sequelize](https://sequelize.org/)                                                | ^6.21.3 |
+| [node-postgres](https://www.npmjs.com/package/pg)                                  | ^8.7.3  |
+| [JSON web token](https://www.npmjs.com/package/jsonwebtoken)                       | ^8.5.1  |
+| [Nodemon](https://www.npmjs.com/package/nodemon)                                   | ^4.18.1 |
+| [Supertest](https://www.npmjs.com/package/supertest)                               | ^1.0.0  |
+| [Jest](https://jestjs.io/)                                                         | ^3.0.0  |
 
-### routes 🚈
+### Routes 🚈
 
-- `/api/v1/beach/allbeaches`: extract all beaches with corresponding posts(eager loading) from database.
-- `/api/v1/posts/allposts`:   extract all posts with corresponding user(eager loading) from database.
-- `/api/v1/beach/newbeach`:   add new beach to database(only accessible by admins)
-- `/api/v1/uploads/azureblopuploaduser`:  add azure image url to the corresponding user row.
-- `/api/v1/uploads/azureblopuploadbeach`: add azure beach image url to the corresponding beach row.
-- `/api/v1/user/allpinnedbeaches/:id`:  extract all beaches pinned by `:id`(id corresponds to user).
-- `/api/v1/auth/login`: verify user creds and return a signed jwt token.
+- `/api/v1/beach/allbeaches`: Extract all beaches with corresponding posts(eager loading) from database.
+- `/api/v1/posts/allposts`:   Extract all posts with corresponding user(eager loading) from database.
+- `/api/v1/beach/newbeach`:   Add new beach to database(only accessible by admins).
+- `/api/v1/uploads/azureblopuploaduser`:  Add azure image url to the corresponding user row.
+- `/api/v1/uploads/azureblopuploadbeach`: Add azure beach image url to the corresponding beach row.
+- `/api/v1/user/allpinnedbeaches/:id`:  Extract all beaches pinned by `:id`(id corresponds to user).
+- `/api/v1/auth/login`: Verify user creds and return a signed jwt token.
 
 ## Front-End 🌐:
 
-The front-End is written using ReactJS library, tailwind, Webpack to bundle all the javascript files and Babel for javascript compatibilty between all browsers.
+#### Tools:
+-   React JS library
+-   Webpack for bundling all the javascript files
+-   Babel for javascript compatibilty between all browsers
+-   Tailwind & Bootstrap for styling
+-   Axios for making requests to APIs (server and third parties).
 
-We use `axios` for making requests to APIs (server and third parties).
 
 ### Dependencies 🔗
 
@@ -66,7 +73,7 @@ View the complete list of Front-End dependencies in the corresponding [package.j
 | [webpack](https://webpack.js.org/)                                                 | ^5.74.0 |
 | [tailwindcss](https://tailwindcss.com/)                                            | ^3.1.8  |
 
-### routes 🚈
+### Routes 🚈
 
 - `/login`: a basic login page created with tailwind
 - `/signup`: basic signup page (email, username, password) signups
@@ -75,22 +82,25 @@ View the complete list of Front-End dependencies in the corresponding [package.j
 
 ## Cloud Deployment ☁
 
-![infrastructure](images/infrastructure.png)
+![infrastructure](images/deployment.png)
 
 ### Deployment Tools 🛠️:
 
-`github actions`: For our **CI/CD** pipeline we decided to go with github actions to automate the build, test and deployment process by writing workflows with `yaml` syntax in a `.github` folder inside the repo.
+`github actions`: For our **CI/CD** pipeline we doad on two servers. One server will handle all the application processes - web interface and the Database server will handle all the database queries.
 
-find backend tests workflow here [workflows](.github/workflows/integrate_backend.yml)
-find deployment workflow here [workflows](.github/workflows/deployment-stage.yml)
+`Nginx`: As react built-in server is not suitable for production apps we use nginx web server. Nginx will manage all the requests and will pass it to the **application server** that is connected to a database server.
+ecided to go with github actions to automate the build, test and deployment process by writing workflows with `yaml` syntax in a `.github` folder inside the repository.
 
-`Azure blobstorage container`: out first option was to sotre all images on the filesystem but as we rebuild the docker images on each changes we decided to use azure blob storage to keep the data in separate place. It was a better choice as it separates the storage from the main server and by that out data will be secure in cases like server crashes or data loss.
+find Back-end tests workflow here [workflows](.github/workflows/integrate_backend.yml).
+find Deployment workflow here [workflows](.github/workflows/deployment-stage.yml).
 
-`Azure PostgreSQL instance`: with the same mindset of separating the code from data, we decided to spin up a dedicated azure postgreSQL instance and link it to our main server. Doing this will distribute the load on two servers. One server will handle all the application processes - web interface and the Database server will handle all the database queries.
+`Azure blobstorage container`: Our first option was to store all images on the filesystem but as we rebuild the docker images on each changes we decided to use azure blob storage to keep the data in separate place. It was a better choice as it separates the storage from the main server and by that ort data will be secure in cases the server crashes or data gets lost.
 
-`Nginx`: as react built-in server is not suitable for production apps we use nginx web server. Nginx will manage all the requests and will pass it to the **application server** that is connected with a database server.
+`Azure PostgreSQL instance`: With the same mindset of separating the code from data, we decided to spin up a dedicated azure postgreSQL instance and link it to our main server. Doing this will distribute the load on two servers. One server will handle all the application processes - web interface and the Database server will handle all the database queries.
 
-`Docker`: Docker containers holds dependencies and libraries that our application needs. therefore eliminate the need of installing dependencies manually. we were also able to create a separate dev and production environment. In the DEV environment we create a container for the Front-End, another for Back-End and the last one for postgreSQL while we only need the first 2 containers in the production and add nginx service to the Front-End. view our [docker-compose production file](docker-compose.prod.yml) [docker-compose development file](docker-compose.dev.yml).
+`Nginx`: As react built-in server is not suitable for production apps we use nginx web server. Nginx will manage all the requests and will pass it to the **application server** that is connected to a database server.
+
+`Docker`: Docker containers holds dependencies and libraries that our application needs. therefore eliminate the need of installing dependencies manually. we were also able to create a separate development and production environments. In the development environment we created a container for the Front-End, another for Back-End and the last one for postgreSQL while we only need the first 2 containers in the production and add nginx service to the Front-End. view our [docker-compose production file](docker-compose.prod.yml) [docker-compose development file](docker-compose.dev.yml).
 
 ## Run 🔌:
 
@@ -98,14 +108,14 @@ Make sure to have docker installed on your system
 
 * Clone the repository
 * run `docker-compose -f docker-compose.dev.yml up --build`
-* access `http://localhost:3010` to interact with the application `localhost:3001` for the API and ``localhost:5432` for the database
+* access `http://localhost:3010` to interact with the application `localhost:3001` for the API and `localhost:5432` for the database.
 
 ## Disclaimer❗
 
-do not use any real informations emails |passwords!! the app is still in development and lacks security testing.
+Do not use any real informations like Email adresses, Passwords, etc because the app is still under development and lacks security testing.
 
 ## Authors ✒️
 
-[omar yahya](https://www.linkedin.com/in/omaryahia1/)
+[Omar Yahia](https://www.linkedin.com/in/omaryahia1/)
 
-[boufaden alaedine](https://www.linkedin.com/in/b-alaedine/)
+[Boufaden Alaedine](https://www.linkedin.com/in/b-alaedine/)
