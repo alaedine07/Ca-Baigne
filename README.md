@@ -1,10 +1,10 @@
 # Introduction 👋
 
-Cabaigne is a web application that help (tourists | local) discover beaches in tunisa.
+Cabaigne is a PERN stack web application that helps (tourists | local) discover beaches in Tunisa.
 
-the goal behind this app is to promote tunisian beaches(because we have awesome ones !!) to people around the world which can support tourism in our country and therefore help locals.
+The goal behind this app is to promote tunisian beaches (because we have awesome ones !!) to people around the world which can support tourism in our country and therefore help locals.
 
-Cabaigne also provides informations about the beach (entertainment options | safety | accessibility ...), real time sea state(calm | agitated | moderate) and weather from [https://api.windy.com/](Windy API) and [https://openweathermap.org/](OpenWeather API)
+Cabaigne also provides informations related to the beach (entertainment options | safety | accessibility ...), real time sea state(calm | agitated | moderate), weather from [https://api.windy.com/](Windy API) and [https://openweathermap.org/](OpenWeather API)
 
 # let's get technical 👨‍💻
 
@@ -14,6 +14,11 @@ Cabaigne also provides informations about the beach (entertainment options | saf
 
 
 ## Back-End ⚙️:
+
+The backend server and RESTFul API are written with expressjs. the database is postgresql and to communicate between them we use
+Sequelize ORM.
+
+We use JWT token for authentication
 
 ### Dependencies 🔗
 
@@ -31,20 +36,19 @@ View the complete list of Back-End dependencies in the corresponding [package.js
 
 ### routes 🚈
 
-- `/api/v1/beach/allbeaches`: extract all added with corresponding posts(eager loading) from database.
+- `/api/v1/beach/allbeaches`: extract all beaches with corresponding posts(eager loading) from database.
 - `/api/v1/posts/allposts`:   extract all posts with corresponding user(eager loading) from database.
 - `/api/v1/beach/newbeach`:   add new beach to database(only accessible by admins)
-- `/api/v1/uploads/azureblopuploaduser`: add upload azure image url to the corresponding user row.
-- `/api/v1/uploads/azureblopuploadbeach`: add upload beach image url to the corresponding user row.
-- `/api/v1/user/allpinnedbeaches/:id`:  extract all beaches pinned by `:id`.
+- `/api/v1/uploads/azureblopuploaduser`:  add azure image url to the corresponding user row.
+- `/api/v1/uploads/azureblopuploadbeach`: add azure beach image url to the corresponding beach row.
+- `/api/v1/user/allpinnedbeaches/:id`:  extract all beaches pinned by `:id`(id corresponds to user).
 - `/api/v1/auth/login`: verify user creds and return a signed jwt token.
 
 ## Front-End 🌐:
 
-The backend server and RESTFul API are written with expressjs. the database is postgresql and to communicate between them we use
-Sequelize ORM.
+The front-End is written using ReactJS library, tailwind, Webpack to bundle all the javascript files and Babel for javascript compatibilty between all browsers.
 
-We use JWT token for authentication
+We use `axios` for making requests to APIs (server and third parties).
 
 ### Dependencies 🔗
 
@@ -75,7 +79,7 @@ View the complete list of Front-End dependencies in the corresponding [package.j
 
 ### Deployment Tools 🛠️:
 
-`github actions`: for our **CI/CD** pipeline we decided to go with github actions to automate the build, test and deployment process by writing workflows with `yaml` syntax in a `.github` folder inside the repo.
+`github actions`: For our **CI/CD** pipeline we decided to go with github actions to automate the build, test and deployment process by writing workflows with `yaml` syntax in a `.github` folder inside the repo.
 
 find backend tests workflow here [workflows](.github/workflows/integrate_backend.yml)
 find deployment workflow here [workflows](.github/workflows/deployment-stage.yml)
@@ -86,4 +90,21 @@ find deployment workflow here [workflows](.github/workflows/deployment-stage.yml
 
 `Nginx`: as react built-in server is not suitable for production apps we use nginx web server. Nginx will manage all the requests and will pass it to the **application server** that is connected with a database server.
 
-`Docker`: 
+`Docker`: Docker containers holds dependencies and libraries that our application needs. therefore eliminate the need of installing dependencies manually. we were also able to create a separate dev and production environment. In the DEV environment we create a container for the Front-End, another for Back-End and the last one for postgreSQL while we only need the first 2 containers in the production and add nginx service to the Front-End. view our [docker-compose production file](docker-compose.prod.yml) [docker-compose development file](docker-compose.dev.yml).
+
+## Run 🔌:
+
+Make sure to have docker installed on your system
+
+* Clone the repository
+* run `docker-compose -f docker-compose.dev.yml up --build`
+* access `http://localhost:3010` to interact with the application `localhost:3001` for the API and ``localhost:5432` for the database
+
+## Disclaimer❗
+
+do not use any real informations emails |passwords!! the app is still in development and lacks security testing.
+
+## Authors ✒️
+
+[omar yahya](https://www.linkedin.com/in/omaryahia1/)
+[boufaden alaedine](https://www.linkedin.com/in/b-alaedine/)
