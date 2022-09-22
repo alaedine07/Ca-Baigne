@@ -11,7 +11,7 @@ The purpose behind developing our application is to give tourists and locals a s
 
 ## Tech Stack 🚀
 
-![techStack](images/tech-stack.png)
+![techStack](Readme-images/tech-stack.png)
 
 
 ## Back-End ⚙️:
@@ -83,7 +83,7 @@ View the complete list of Front-End dependencies in the corresponding [package.j
 
 ## Cloud Deployment ☁
 
-![infrastructure](images/deployment.png)
+![infrastructure](Readme-images/deployment.png)
 
 ### Deployment Tools 🛠️:
 
