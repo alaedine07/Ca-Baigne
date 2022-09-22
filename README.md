@@ -89,9 +89,6 @@ View the complete list of Front-End dependencies in the corresponding [package.j
 
 `github actions`: For our **CI/CD** pipeline we doad on two servers. One server will handle all the application processes - web interface and the Database server will handle all the database queries.
 
-`Nginx`: As react built-in server is not suitable for production apps we use nginx web server. Nginx will manage all the requests and will pass it to the **application server** that is connected to a database server.
-ecided to go with github actions to automate the build, test and deployment process by writing workflows with `yaml` syntax in a `.github` folder inside the repository.
-
 find Back-end tests workflow here [workflows](.github/workflows/integrate_backend.yml).
 find Deployment workflow here [workflows](.github/workflows/deployment-stage.yml).
 
