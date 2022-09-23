@@ -41,9 +41,12 @@ const Navbar = (props) => {
 
   if (!props.token) {
   return (
-  <nav className="navbar navbar-expand-lg navbar-mainbg">
+    <>
     
-      <NavLink className="navbar-brand navbar-logo" to="/" >
+    <nav className="navbar navbar-expand-lg navbar-mainbg">
+      
+    <NavLink className="navbar-brand navbar-logo" to="/" >
+        <img className='logo-image' src={require('../../Assets/Images/logo.png')}></img>
       </NavLink>
       <button 
         className="navbar-toggler"
@@ -54,15 +57,14 @@ const Navbar = (props) => {
         <i className="hamburger fas fa-bars text-black"></i>
       </button>
  
-      <div 
-        className="collapse navbar-collapse" id="navbarSupportedContent">
+      <div  className="collapse navbar-collapse" id="navbarSupportedContent">
+      
         <ul className="navbar-nav ml-auto">
 
             <div className="hori-selector">
               <div className="left"></div>
               <div className="right"></div>
             </div>
-            
             <li key={uuidv4()} className="nav-item active">
               <NavLink onClick={() => {window.location.reload()}} className="nav-link" to="/" >
                 <i 
@@ -97,6 +99,7 @@ const Navbar = (props) => {
         </ul>
       </div>
   </nav>
+  </>
   )
 }
 else {

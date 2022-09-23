@@ -10,18 +10,29 @@ i {
 }
 
 .navbar {
+  align-items: flex-start !important;
+  padding-top: 5px !important;
   gap: 1rem;
 }
 
 .navbar-logo {
-  padding: 15px;
+  position: relative;
+  top: -35px;
+  padding: 0;
   color: rgb(255, 255, 255);
   pointer-events: none;
+  margin: 0;
 }
 
+.logo-image {
+  width: 70%;
+}
+
+
 .navbar-mainbg {
-  /*background-color: #212529;*/
+  
   padding: 0px;
+  margin: 0px;
 }
 
 #navbarSupportedContent {

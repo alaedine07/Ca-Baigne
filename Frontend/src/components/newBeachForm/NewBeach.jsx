@@ -17,7 +17,7 @@ export function NewBeachForm() {
     const [file, setFile] = useState();
     const [fileName, setFileName] = useState("");
 
-    const amenities = ['Parking', 'Hiking Spot', 'Volleyball field'];
+    const amenities = ['Parking', 'Hiking Spot', 'Volleyball field',];
 
     function addOrRemove(item) {
         const newAmenities = [...amenitie];

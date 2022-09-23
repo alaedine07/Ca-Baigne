@@ -8,11 +8,12 @@ const Footer = () => {
       <div className='footer-container'>
         <div>
           <a href="/" className="d-flex align-items-center pl-5 text-dark">
-            {/*<img
+            <img
+            className='footer-logo'
               alt="logo"
-              src
-              width="30px"/>*/}
-            <span >Ça baigne</span>
+              src={require('../../Assets/Images/logo.png')}
+              />
+              
           </a>
         </div>
         <div>
