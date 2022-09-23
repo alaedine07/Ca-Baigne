@@ -1,124 +1,120 @@
-import React from "react";
-import { useState } from "react";
-import axios from "axios";
+import React, { useState } from 'react';
+import axios from 'axios';
 import OAuth2Login from 'react-simple-oauth2-login';
 import './sign_in.css';
 
 export function SignInForm() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState(false);
 
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [error, setError] = useState(false);
-
-    async function onSuccess(res) {
-      const accessToken = res.access_token;
-      const result = await fetch(`https://graph.facebook.com/me?fields=id,name,email,picture&access_token=${accessToken}`);
-      const profileData = await result.json()
-      const { id, name, email } = profileData
-      const avatar = profileData.picture.data.url
-      axios.post(process.env.API_BASE_URL + 'api/v1/auth/facebooklogin', {
+  async function onSuccess(res) {
+    const accessToken = res.access_token;
+    const result = await fetch(`https://graph.facebook.com/me?fields=id,name,email,picture&access_token=${accessToken}`);
+    const profileData = await result.json();
+    const { id, name, email } = profileData;
+    const avatar = profileData.picture.data.url;
+    axios.post(
+      `${process.env.API_BASE_URL}api/v1/auth/facebooklogin`,
+      {
         userName: name,
-        email: email,
-        imageURL: avatar
+        email,
+        imageURL: avatar,
       },
       {
         headers: {
-          "Content-type": "application/json"
-        }
-      }).then(res => {
-        if (res.data.token) {
-          localStorage.setItem("accessToken", res.data.token);
-          const Domain = window.location.origin;
-          const URL = Domain + '/';
-          window.location.replace(URL);
-        }
-      }).catch(err => {
-        console.log(err);
-      })
-    }
-
-    function onFailure(res) {
-      console.log(res);
-    }
-
-    
-
-    function loginUser(event) {
-      event.preventDefault();
-      axios.post(process.env.API_BASE_URL + 'api/v1/auth/login', {
-        email: email,
-        hashedPassword: password
+          'Content-type': 'application/json',
+        },
       },
-      {
-        headers: {
-          "Content-type": "application/json"
-        }
+    ).then((res) => {
+      if (res.data.token) {
+        localStorage.setItem('accessToken', res.data.token);
+        const Domain = window.location.origin;
+        const URL = `${Domain}/`;
+        window.location.replace(URL);
       }
-      ).then(res => {
-        if (res.data.token) {
-          localStorage.setItem("accessToken", res.data.token);
-          const Domain = window.location.origin;
-          const URL = Domain + '/';
-          window.location.replace(URL);
-        }
-      }).catch(function (error) {
-        if (error.response) {
-          setError(true);
-        }
-      })
-    }
+    }).catch((err) => {
+      console.log(err);
+    });
+  }
 
-    return (
-        <div className=" signin-container min-h-screen flex flex-col items-center justify-center bg-gray-100" >
-          <div className=" flex flex-col bg-white shadow-md px-4 sm:px-6 md:px-8 lg:px-10 py-8 rounded-3xl w-50 max-w-md">
-          <div className="font-medium self-center text-xl sm:text-3xl text-gray-800">
-              Welcome Back
-          </div>
-          <div
-              className=" mt-4 self-center text-xl sm:text-s text-gray-800">
-              Enter your credentials to access your account
-          </div>
+  function onFailure(res) {
+    console.log(res);
+  }
+
+  function loginUser(event) {
+    event.preventDefault();
+    axios.post(
+      `${process.env.API_BASE_URL}api/v1/auth/login`,
+      {
+        email,
+        hashedPassword: password,
+      },
+      {
+        headers: {
+          'Content-type': 'application/json',
+        },
+      },
+    ).then((res) => {
+      if (res.data.token) {
+        localStorage.setItem('accessToken', res.data.token);
+        const Domain = window.location.origin;
+        const URL = `${Domain}/`;
+        window.location.replace(URL);
+      }
+    }).catch((error) => {
+      if (error.response) {
+        setError(true);
+      }
+    });
+  }
+
+  return (
+    <div className=" signin-container min-h-screen flex flex-col items-center justify-center bg-gray-100">
+      <div className=" flex flex-col bg-white shadow-md px-4 sm:px-6 md:px-8 lg:px-10 py-8 rounded-3xl w-50 max-w-md">
+        <div className="font-medium self-center text-xl sm:text-3xl text-gray-800">
+          Welcome Back
+        </div>
+        <div
+          className=" mt-4 self-center text-xl sm:text-s text-gray-800"
+        >
+          Enter your credentials to access your account
+        </div>
 
         <div className="mt-2">
-            <form action="#">
+          <form action="#">
             <div className="flex flex-col mb-4">
-                <label
-                    htmlFor="email"
-<<<<<<< HEAD
-                    className="sign-label text-s tracking-wide"
-=======
-                    className="sign-label text-s tracking-wide mb-2"
->>>>>>> e1b40d7e3ebe59ebe78a96828cfeaeafa4edcde6
-                >
+              <label
+                htmlFor="email"
+                className="sign-label text-s tracking-wide"
+              >
                 Email Address:
-                </label>
+              </label>
               <div className="relative">
                 <div
-                    className=" inline-flex items-center justify-center absolute left-0 top-0 h-full w-10 text-gray-400" >
-                <i className="fas fa-at text-blue-500"></i>
+                  className=" inline-flex items-center justify-center absolute left-0 top-0 h-full w-10 text-gray-400"
+                >
+                  <i className="fas fa-at text-blue-500" />
                 </div>
 
                 <input
-                    id="email"
-                    type="email"
-                    name="email"
-                    value={email}
-                    onChange={e => setEmail(e.target.value)}
-                    className="signin-input text-sm placeholder-gray-500 pr-4 rounded-2xl border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400"
-                    placeholder="Enter your email"
+                  id="email"
+                  type="email"
+                  name="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="signin-input text-sm placeholder-gray-500 pr-4 rounded-2xl border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400"
+                  placeholder="Enter your email"
                 />
               </div>
             </div>
             <div className="flex flex-col mb-6">
               <label
-                    htmlFor="password"
-<<<<<<< HEAD
-                    className="sign-label text-s tracking-wide">
-=======
-                    className="sign-label text-s tracking-wide mb-2">
->>>>>>> e1b40d7e3ebe59ebe78a96828cfeaeafa4edcde6
+                htmlFor="password"
+                className="sign-label text-s tracking-wide"
+              >
                 Password:
-            </label>
+              </label>
               <div className="relative">
                 <div
                   className=" inline-flex items-center justify-center
@@ -129,18 +125,18 @@ export function SignInForm() {
                     w-10
                     text-gray-400"
                 >
-                <span>
-                    <i className="fas fa-lock text-blue-500"></i>
-                    </span>
+                  <span>
+                    <i className="fas fa-lock text-blue-500" />
+                  </span>
                 </div>
 
                 <input
-                    id="password"
-                    type="password"
-                    name="password"
-                    value={password}
-                    onChange={e => setPassword(e.target.value)}
-                    className="
+                  id="password"
+                  type="password"
+                  name="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="
                     signin-input
                     text-sm
                     placeholder-gray-500
@@ -149,7 +145,7 @@ export function SignInForm() {
                     w-full
                     py-2
                     focus:outline-none focus:border-blue-400"
-                    placeholder="Enter your password"
+                  placeholder="Enter your password"
                 />
               </div>
             </div>
@@ -174,7 +170,7 @@ export function SignInForm() {
                     transition
                     duration-150
                     ease-in"
-                >
+              >
                 <span className="mr-2 uppercase">Sign In</span>
                 <span>
                   <svg
@@ -192,8 +188,8 @@ export function SignInForm() {
                   </svg>
                 </span>
               </button>
-             </div>
-             <OAuth2Login
+            </div>
+            <OAuth2Login
               buttonText="Continue with facebook"
               authorizationUrl="https://www.facebook.com/dialog/oauth"
               responseType="token"
@@ -218,14 +214,14 @@ export function SignInForm() {
                     transition
                     duration-150
                     ease-in"
-                />
+            />
           </form>
         </div>
         {
           error ? <div className="flex justify-center"><span className="errorMsg">Email or password are incorrect</span></div> : null
         }
-          </div>
-          <div className="flex justify-center items-center mt-6">
+      </div>
+      <div className="flex justify-center items-center mt-6">
         <div
           href="#"
           target="_blank"
@@ -239,11 +235,12 @@ export function SignInForm() {
         >
           <span className="ml-2">
             You don't have an account?
-            <a href="/join" className="text-s ml-2 text-blue-500 font-semibold">Register now</a></span>
-            </div>
-          </div>
+            <a href="/join" className="text-s ml-2 text-blue-500 font-semibold">Register now</a>
+          </span>
         </div>
-    );
+      </div>
+    </div>
+  );
 }
 
-export default SignInForm
+export default SignInForm;

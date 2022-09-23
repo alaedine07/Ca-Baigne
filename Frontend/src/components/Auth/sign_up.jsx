@@ -1,72 +1,76 @@
-import React from "react";
-import axios from "axios";
-import { useState } from "react";
+import React, { useState } from 'react';
+import axios from 'axios';
 import OAuth2Login from 'react-simple-oauth2-login';
 import './sign_up.css';
 
 export function SignUpForm() {
+  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState(false);
 
-    const [email, setEmail] = useState("");
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
-    const [error, setError] = useState(false);
-
-    async function onSuccess(res) {
-      console.log(res);
-      const accessToken = res.access_token;
-      console.log(accessToken);
-      const result = await fetch(`https://graph.facebook.com/me?fields=id,name,email,picture&access_token=${accessToken}`);
-      const profileData = await result.json()
-      const { id, name, email } = profileData
-      const avatar = profileData.picture.data.url
-      axios.post(process.env.API_BASE_URL + 'api/v1/auth/facebookregistration', {
+  async function onSuccess(res) {
+    console.log(res);
+    const accessToken = res.access_token;
+    console.log(accessToken);
+    const result = await fetch(`https://graph.facebook.com/me?fields=id,name,email,picture&access_token=${accessToken}`);
+    const profileData = await result.json();
+    const { id, name, email } = profileData;
+    const avatar = profileData.picture.data.url;
+    axios.post(
+      `${process.env.API_BASE_URL}api/v1/auth/facebookregistration`,
+      {
         userName: name,
-        id: id,
-        email: email,
-        imageURL: avatar
+        id,
+        email,
+        imageURL: avatar,
       },
       {
         headers: {
-          "Content-type": "application/json"
-        }
-      }).then(res => {
-        console.log(res)
-      }).catch(err => {
-        console.log(err);
-      })
-    }
-
-    function onFailure(res) {
+          'Content-type': 'application/json',
+        },
+      },
+    ).then((res) => {
       console.log(res);
-    }
+    }).catch((err) => {
+      console.log(err);
+    });
+  }
 
-    function createUser(event) {
-      event.preventDefault();
-      axios.post(process.env.API_BASE_URL + 'api/v1/user/newuser/', {
-        email: email,
+  function onFailure(res) {
+    console.log(res);
+  }
+
+  function createUser(event) {
+    event.preventDefault();
+    axios.post(
+      `${process.env.API_BASE_URL}api/v1/user/newuser/`,
+      {
+        email,
         userName: username,
-        hashedPassword: password
+        hashedPassword: password,
       },
       {
         headers: {
-          "Content-type": "application/json"
-        }
+          'Content-type': 'application/json',
+        },
+      },
+    ).then(() => {
+      const Domain = window.location.origin;
+      const URL = `${Domain}/login`;
+      window.location.replace(URL);
+    }).catch((error) => {
+      if (error.response) {
+        setError(true);
       }
-      ).then(() => {
-        const Domain = window.location.origin;
-        const URL = Domain + '/login';
-        window.location.replace(URL);
-      }).catch(function (error) {
-        if (error.response) {
-          setError(true);
-        }
-      })
-    }
-    return (
-        <div
-            className="min-h-screen flex flex-col items-center justify-center bg-gray-100">
-        <div
-            className="
+    });
+  }
+  return (
+    <div
+      className="min-h-screen flex flex-col items-center justify-center bg-gray-100"
+    >
+      <div
+        className="
             flex flex-col
             bg-white
             shadow-md
@@ -78,38 +82,40 @@ export function SignUpForm() {
             rounded-3xl
             w-50
             max-w-md"
-        >
+      >
         <div
-            className="
+          className="
             font-medium
             self-center
             mb-2
             text-xl
             sm:text-3xl
-            text-gray-800">
-            Join us
+            text-gray-800"
+        >
+          Join us
         </div>
         <div
-            className="
+          className="
             self-center
             text-xl
             sm:text-sm
-            text-gray-800">
-            Fill this form to create an account
+            text-gray-800"
+        >
+          Fill this form to create an account
         </div>
 
         <div className="mt-1">
-            <form action="#">
+          <form action="#">
             <div className="flex flex-col mb-3">
-                <label
-                    htmlFor="email"
-                    className=" signup-label mb-2 text-s tracking-wide text-dark-600"
-                >
+              <label
+                htmlFor="email"
+                className=" signup-label mb-2 text-s tracking-wide text-dark-600"
+              >
                 E-Mail Address:
-                </label>
+              </label>
               <div className="relative">
                 <div
-                    className="
+                  className="
                         inline-flex
                         items-center
                         justify-center
@@ -120,16 +126,16 @@ export function SignUpForm() {
                         w-10
                         text-gray-400"
                 >
-                <i className="fas fa-at text-blue-500"></i>
+                  <i className="fas fa-at text-blue-500" />
                 </div>
 
                 <input
-                    id="email"
-                    type="email"
-                    name="email"
-                    value={email}
-                    onChange={e => setEmail(e.target.value)}
-                    className="
+                  id="email"
+                  type="email"
+                  name="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="
                     signup-ipnut
                     text-sm
                     placeholder-gray-500
@@ -139,21 +145,21 @@ export function SignUpForm() {
                     w-full
                     py-2
                     focus:outline-none focus:border-blue-400"
-                    placeholder="Enter your email"
+                  placeholder="Enter your email"
                 />
               </div>
             </div>
             <div className="flex flex-col mb-3">
-                <label
-                    htmlFor="firstName"
-                    className="signup-label mb-2 text-s tracking-wide text-gray-600"
-                >
+              <label
+                htmlFor="firstName"
+                className="signup-label mb-2 text-s tracking-wide text-gray-600"
+              >
                 Username:
-                </label>
+              </label>
               <div className="relative">
                 <div
-                    className="
-                        
+                  className="
+
                         inline-flex
                         items-center
                         justify-center
@@ -164,40 +170,41 @@ export function SignUpForm() {
                         w-10
                         text-gray-400"
                 >
-                <i className="fas fa-user text-blue-500"></i>
+                  <i className="fas fa-user text-blue-500" />
                 </div>
 
                 <input
-                    id="firstName"
-                    type="text"
-                    name="firstName"
-                    value={username}
-                    onChange={e => setUsername(e.target.value)}
-                    className="
+                  id="firstName"
+                  type="text"
+                  name="firstName"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  className="
                     signup-ipnut
                     text-sm
                     placeholder-gray-500
-                    
+
                     pr-4
                     rounded-2xl
                     border border-gray-400
                     w-full
                     py-2
                     focus:outline-none focus:border-blue-400"
-                    placeholder="Enter your first name"
+                  placeholder="Enter your first name"
                 />
               </div>
             </div>
             <div className="flex flex-col mb-5">
               <label
-                    htmlFor="password"
-                    className="signup-label mb-2 text-s tracking-wide text-gray-600">
+                htmlFor="password"
+                className="signup-label mb-2 text-s tracking-wide text-gray-600"
+              >
                 Password:
               </label>
               <div className="relative ">
                 <div
                   className="
-                  
+
                     inline-flex
                     items-center
                     justify-center
@@ -208,18 +215,18 @@ export function SignUpForm() {
                     w-10
                     text-gray-400"
                 >
-                <span>
-                    <i className="fas fa-lock text-blue-500"></i>
-                    </span>
+                  <span>
+                    <i className="fas fa-lock text-blue-500" />
+                  </span>
                 </div>
 
                 <input
-                    id="password"
-                    type="password"
-                    name="password"
-                    value={password}
-                    onChange={e => setPassword(e.target.value)}
-                    className="
+                  id="password"
+                  type="password"
+                  name="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="
                     signup-ipnut
                     text-sm
                     placeholder-gray-500
@@ -229,7 +236,7 @@ export function SignUpForm() {
                     w-full
                     py-2
                     focus:outline-none focus:border-blue-400"
-                    placeholder="Enter your password"
+                  placeholder="Enter your password"
                 />
               </div>
             </div>
@@ -254,7 +261,7 @@ export function SignUpForm() {
                     transition
                     duration-150
                     ease-in"
-                >
+              >
                 <span className="mr-2 uppercase">Sign Up</span>
                 <span>
                   <svg
@@ -298,7 +305,7 @@ export function SignUpForm() {
                     transition
                     duration-150
                     ease-in"
-                />
+            />
           </form>
         </div>
         {
@@ -317,18 +324,20 @@ export function SignUpForm() {
             text-s text-center
           "
         >
-          <span className="ml-2"
-            >Already have an account?
+          <span className="ml-2">
+            Already have an account?
             <a
               href="/login"
               className="text-s ml-2 text-blue-500 font-semibold"
-              >Login now</a
             >
-            </span>
+              Login now
+            </a
+            >
+          </span>
         </div>
       </div>
     </div>
-    );
+  );
 }
 
-export default SignUpForm
+export default SignUpForm;

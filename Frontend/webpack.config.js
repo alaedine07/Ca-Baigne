@@ -1,6 +1,7 @@
 const path = require("path");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const ESLintPlugin = require('eslint-webpack-plugin');
 const webpack = require('webpack')
 require('dotenv').config({ path: '.env' });
 
@@ -30,9 +31,7 @@ module.exports = {
             {
                 test: /\.(js|jsx)$/,
                 exclude: /node_modules/,
-                use: {
-                    loader: 'babel-loader'
-                }
+                use: [ 'babel-loader' ]
             },
             {
                 test: /\.(png|svg|jpg|jpeg|gif)$/i,
@@ -60,6 +59,9 @@ module.exports = {
             filename: "index.css",
             chunkFilename: "index.css"
           }),
+        new ESLintPlugin({
+            extensions: ['.js', '.jsx']
+        }),
         new webpack.DefinePlugin({
             "process.env": JSON.stringify(process.env),
         }),
