@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 import axios from "axios";
 import jwt_decode from 'jwt-decode';
 import Dark from '../Darkmode/Darkmode';
-
+import logo from '../../Assets/Images/logo.png'
 import './Navbar.css';
 
 const Navbar = (props) => {
@@ -45,8 +45,8 @@ const Navbar = (props) => {
     
     <nav className="navbar navbar-expand-lg navbar-mainbg">
       
-    <NavLink className="navbar-brand navbar-logo" to="/" >
-        <img className='logo-image' src={require('../../Assets/Images/logo.png')}></img>
+      <NavLink className="navbar-brand navbar-logo" to="/" >
+        <img className='logo-image' src={logo}></img>
       </NavLink>
       <button 
         className="navbar-toggler"
