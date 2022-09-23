@@ -44,10 +44,9 @@ const Navbar = (props) => {
     <>
     
     <nav className="navbar navbar-expand-lg navbar-mainbg">
-      
-      <NavLink className="navbar-brand navbar-logo" to="/" >
+      <div className="navbar-brand navbar-logo" to="/" >
         <img className='logo-image' src={logo}></img>
-      </NavLink>
+      </div>
       <button 
         className="navbar-toggler"
         onClick={ function(){
