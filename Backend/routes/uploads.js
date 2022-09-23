@@ -1,6 +1,7 @@
 const router = require('express').Router()
 const uploadController = require('../controllers/UploadsController');
 const beachController = require('../controllers/BeachController');
+const authcontroller = require('../controllers/authcontroller');
 const path = require('path');
 const multer = require('multer');
 
@@ -43,7 +44,7 @@ router.post('/userUploads', user_upload.single('file'), uploadController.uploadU
 router.post('/azureblopuploaduser', uploadController.azureblobuploaduser);
 
 // upload beach image to azure storage container
-router.post('/azureblopuploadbeach', beachController.addNewBeach);
+router.post('/azureblopuploadbeach', authcontroller.verifyUserIsAdmin, beachController.addNewBeach);
 
 
 module.exports = router;

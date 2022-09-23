@@ -21,3 +21,15 @@ exports.login = async (req, res) => {
       res.status(500).send('Email or password are incorrect')
     }
   }
+
+exports.verifyUserIsAdmin = (req, res) => {
+  const token = req.headers['authorization'].split(" ")[1];
+  if (!token || token === "") {
+    return res.status(500).send('User not allowed')
+  }
+  const decoded = jwt.decode(token, process.env.ACCESS_TOKEN_SECRET);
+  if (decoded.isAdmin !== true) {
+    return res.status(500).send('method not allowed');
+  }
+  next();
+}
