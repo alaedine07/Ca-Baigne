@@ -22,14 +22,16 @@ exports.login = async (req, res) => {
     }
   }
 
-exports.verifyUserIsAdmin = (req, res) => {
+exports.verifyUserIsAdmin = (req, res, next) => {
   const token = req.headers['authorization'].split(" ")[1];
+  console.log(token);
   if (!token || token === "") {
     return res.status(500).send('User not allowed')
   }
   const decoded = jwt.decode(token, process.env.ACCESS_TOKEN_SECRET);
-  if (decoded.isAdmin !== true) {
-    return res.status(500).send('method not allowed');
+  console.log(decoded);
+  if (decoded.is_admin !== true) {
+    return res.status(500).send('User not allowed');
   }
   next();
 }
