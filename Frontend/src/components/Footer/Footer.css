@@ -5,22 +5,40 @@
     padding: 0.5rem;
     font-size: 25px;
     font-weight: bold;
-    background-color: rgba(255, 241, 240, 0.479);
+    background-color: rgba(177, 201, 199, 0.877);
     position: inherit;
     
 }
+.footer-logo {
+    padding-left: 0.5rem;
+    width: 5%;
+  }
+  
+  .logo-image {
+    width: 100%;
+  }
 
 .footer-icons {
     display: flex;
     align-items: center;
     gap: 1rem;
+    color: rgba(17, 16, 16, 0.781);
 }
 
 .footer-rights {
     font-weight: bold !important;
     font-size: 16px;
-    color: rgb(0, 0, 0);
+    color: rgba(17, 16, 16, 0.534) !important;
 }
-.footer-logo {
-    width: 50%;
-}
+
+
+ @media screen and (max-width: 767px) {
+    .footer-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .footer-logo {
+        width: 18%;
+      }
+} 

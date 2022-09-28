@@ -25,3 +25,12 @@ html, body {
         min-height: 85.7vh !important;
     }
 }
+@media screen and (max-width: 767px) {
+    html, body {
+        font-family: 'Roboto', sans-serif;
+        height: 100%;
+        margin: 0;
+        width: 100%;
+    }
+
+}

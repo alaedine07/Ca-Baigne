@@ -142,30 +142,94 @@ main {
       color: black;
     }
     .profile {
-      background: none;
-      background-color: #1a202cd3;
+      position: relative;
+      z-index: 1;
+      background: inherit;
+      background: url('../../Assets/Images/background-image.jpg');
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
       height: 100vh;
     }
+
+    .profile:before {
+      content: "";
+      position: absolute;
+      background: inherit;
+      z-index: -1;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      filter: blur(10px);
+      filter: brightness(0.3);
+      // box-shadow: 6px 6px 6px rgb(192, 189, 184) ;
+    }
+
     .hero-section {
-      background: none;
-      background-color: #1a202cd3;
+      position: relative;
+      z-index: 1;
+      background: inherit;
+      background: url('../../Assets/Images/background-image.jpg');
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      
+    }
+    .hero-section:before {
+      content: "";
+      position: absolute;
+      background: inherit;
+      z-index: -1;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      filter: blur(10px);
+      filter: brightness(0.3);
       // box-shadow: 6px 6px 6px rgb(192, 189, 184) ;
     }
     .pinned-section {
-      background-color: #1a202cd3;
+      background-color: rgb(52 61 69);
       // box-shadow: 6px 6px 6px rgb(192, 189, 184) ;
     }
+    
     .beachResults {
       background-color: #1a202cd3;
       // box-shadow: 6px 6px 6px rgb(145, 141, 138) ;
   }
     .contact-us-section {
-      background: none;
-      background-color: #1a202cd3;
+      position: relative;
+      z-index: 1;
+      background: inherit;
+      background: url('../../Assets/Images/contact-us.jpg');
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+
+    .contact-us-section:before {
+      content: "";
+      position: absolute;
+      background: inherit;
+      z-index: -1;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      filter: blur(10px);
+      filter: brightness(0.3);
     }
 
     .footer-container {
-      color: white !important;
-      background: none;
+      background-color: rgba(52, 61, 69, 0.856);
+    }
+
+    .footer-rights {
+      color: wheat !important;
+    }
+
+    .footer-icons {
+      color: wheat !important;
     }
 } 

@@ -15,13 +15,21 @@
 }
 .sign-label {
     color: rgb(43, 43, 43) !important;
+    font-size: 100% !important;
 }
 
 .signin-input {
     padding-left: 2rem;
-    width: 400px !important;
+    width: 100% !important;
 }
 
 .signin-container {
     font-family: 'Roboto', sans-serif;
+}
+
+.signin-button {
+    background-color: rgb(68, 133, 155) !important;
+}
+.register-text {
+    color: rgb(68, 133, 155) !important;
 }

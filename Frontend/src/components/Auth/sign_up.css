@@ -11,8 +11,17 @@
 
 .signup-ipnut {
     padding-left: 2rem;
-    width: 350px !important;
+    width: 100% !important;
 }
 .signup-label {
     color: black !important;
+    font-size: 100% !important;
+}
+
+.signup-button {
+    background-color: rgb(68, 133, 155) !important;
+}
+
+.login-text {
+    color: rgb(68, 133, 155) !important;
 }

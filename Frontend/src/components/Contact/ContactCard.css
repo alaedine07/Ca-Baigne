@@ -12,13 +12,15 @@ body, html {
 	min-height: 92.3vh !important;
 	padding-top: 4.5rem !important;
 	padding-bottom: 2.5rem !important;
+	padding-left: 1rem;
 	display: flex;
 	justify-content: center;
+
 }
 
 
   .contact-card {
-	width: 40rem;
+	width: 40%;
 	height: 20rem;
 	box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .2); 
 	border-radius: 5px;
@@ -28,7 +30,6 @@ body, html {
 	overflow: hidden;
 	display: flex;
 	flex-direction: column;
-	align-items: center;
 	height: 90%;
 	background-color: rgba(2, 34, 56, 0.473);
 	
@@ -50,29 +51,25 @@ body, html {
 
 .contact-header {
 	font-weight: bold !important;
-	font-size: 30px !important;
+	font-size: 25px !important;
 	font-family: 'Roboto', sans-serif;
 	margin-top: 30px;
 	color: rgb(238, 228, 228);
-
+	text-align: center;
     padding-top: 15px;
+}
+
+.contact-form {
+	padding: 2rem;
 }
 
 .credentials {
 	display: flex;
 	gap: 1rem;
-	justify-content: center;
 }
 
 .credentials input {
-	width: 250px;
-}
-
-form{
-    margin: 16px;
-	display: flex;
-    flex-direction: column;
-    align-items: center;
+	width: 100%;
 }
 
 .contact-label, .contact-input, .contact-textarea {
@@ -80,8 +77,8 @@ form{
 }
 
 .contact-input, .contact-textarea{
-	padding: 16px !important;
-	width: 519px;
+	padding: 10px !important;
+	width: 90%;
 	height: 40px;
 	font-family: 'Sniglet', cursive;
 	font-size: 1em;
@@ -94,15 +91,18 @@ form{
 }
 
 .contact-textarea{
+	width: 100%;
 	height: 100px;	
 	resize: none !important; 
 	overflow: auto;
 }
 
 .contact-input[type="submit"]{
-	background-color: rgb(255, 255, 255);
-	color: rgb(58 58 58);
+	font-family: 'Roboto', sans-serif;
+	background-color: rgba(90, 65, 45, 0.678);
+	color: rgb(248, 240, 240);
 	height: 40px;
+	width: 100%;
 	cursor: pointer;
 	margin-top: 30px;
 	font-size: 20px;
@@ -111,11 +111,11 @@ form{
 }
 
 .contact-label {
+	align-self: flex-start;
 	color: rgb(238, 230, 230) !important;
-	font-size: 16px;
+	font-size: 13px !important;
 	margin-top: 20px;
 	margin-bottom: 5px;
-	padding-left: 10px;
 	font-weight: bold
 }
 
@@ -136,4 +136,40 @@ form{
 
 .notification-message {
 	color: rgb(255, 251, 251);
+}
+
+@media screen and (max-width: 767px) {
+	.contact-card {
+		width: 70%;
+		height: 50%;
+		
+	  }
+	.contact-header {
+		font-size: 20px !important;
+	}
+	.credentials input {
+		width: 100%;
+	}
+
+	.contact-label {
+		font-size: 14px !important;
+	}
+
+	.contact-input, .contact-textarea{
+		width: 85%;
+		height: 40px;
+	}
+	.contact-textarea{
+		width: 100%;
+		height: 100%;	
+		resize: none !important; 
+		overflow: auto;
+	}
+
+	.contact-input[type="submit"] {
+		font-size: 16px;
+	}
+	.contact-input[type="submit"]{
+		width: 100%;
+	}
 }

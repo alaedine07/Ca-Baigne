@@ -43,8 +43,8 @@ const Contact = () => {
         <header> 
           <h1 className="contact-header">Contact us</h1>
         </header>
-        <div id="form">
-        <form ref={form} id="waterform" method="post" action="" onSubmit={sendEmail}>
+        <div className="contact-form" id="form">
+        <form  ref={form} id="waterform" method="post" action="" onSubmit={sendEmail}>
           <div className="credentials">
             <div className="formgroup" id="name-form">
                 <label className="contact-label" htmlFor="name" placeholder="Enter your name">Your name</label>

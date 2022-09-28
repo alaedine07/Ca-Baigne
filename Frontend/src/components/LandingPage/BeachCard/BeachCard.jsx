@@ -182,7 +182,7 @@ function BeachCard(props) {
                 </div>
                 <p>{weatherDescription}</p>
                 </li>
-                <li key={uuidv4()} className="list-group-item text-dark"><span className='card-list-title'>Beach state :</span> {getFlag(props.beachData.latitude, props.beachData.longitude) && beachState === "green"
+                <li key={uuidv4()} className="list-group-item text-dark"><span className='card-list-title'>Beach state : </span> {getFlag(props.beachData.latitude, props.beachData.longitude) && beachState === "green"
             ?
             <> 
               <i className="green-flag fas fa-solid fa-flag"> Green flag</i>
@@ -193,7 +193,7 @@ function BeachCard(props) {
              ?
             <>
               <i className="orange-flag fas fa-solid fa-flag"> Orange flag</i>
-              <p style={{color: 'yellow'}}>Medium hazard ~ Ocean conditions are rough (moderate surf and/or currents).</p>
+              <p>Medium hazard ~ Ocean conditions are rough (moderate surf and/or currents).</p>
             </>
             : 
             <>

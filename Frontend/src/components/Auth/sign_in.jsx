@@ -41,11 +41,11 @@ export function SignInForm() {
               Welcome Back
           </div>
           <div
-              className=" mt-4 self-center text-xl sm:text-s text-gray-800">
+              className=" mt-4 self-center text-l sm:text-s text-gray-800">
               Enter your credentials to access your account
           </div>
 
-        <div className="mt-2">
+        <div className="mt-4">
             <form action="#">
             <div className="flex flex-col mb-4">
                 <label
@@ -117,6 +117,7 @@ export function SignInForm() {
                 type="submit"
                 onClick={loginUser}
                 className="
+                    signin-button
                     flex
                     mt-2
                     items-center
@@ -171,7 +172,7 @@ export function SignInForm() {
         >
           <span className="ml-2">
             You don't have an account?
-            <a href="/join" className="text-s ml-2 text-blue-500 font-semibold">Register now</a></span>
+            <a href="/join" className="register-text text-s ml-2 text-blue-500 font-semibold">Register now</a></span>
         </div>
           </div>
         </div>

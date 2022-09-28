@@ -173,16 +173,14 @@ function SearchBox() {
     <div className="hero-section">
       
       <Header token={token}/>
-      <div className="searchbox-container"> 
       <h2 className="header-text">Find your perfect beach</h2>
       <Container className="content" style={divStyle}>
       <div className="searchbox-row">
-        <div className="">
-              <div className="searchbox-row align-items-end">
+              <div className="searchbox-row">
                   <div className="form-group col-md-4">
                   <label className="label mb-2 fw-bold">Governorate</label>
                   <select id='select' name="location" className="form-control" onClick={locationName? getGovernorateBeaches : null} onChange={Handlelocation} value={locationName}>
-                    <option hidden>--Select Governorate--</option>
+                    <option hidden>----- Select Governorate -----</option>
                     <option>Tunis</option>
                     <option>Bizerte</option>
                     <option>Nabeul</option>
@@ -192,7 +190,7 @@ function SearchBox() {
                 <div className="form-group col-md-4">
                 <label className="label mb-2 fw-bold">Beach</label>
                 <select id ='select' name="beach" className="form-control" onChange={Handlebeach} value={beachName}>
-                    <option hidden>--Select Beach--</option>
+                    <option hidden>----- Select Beach -----</option>
                     {
                       governorateArray.map(beach => <option key={beach.id}>{beach.name}</option>)
                     }
@@ -200,8 +198,7 @@ function SearchBox() {
                 </div>
 
                 <div className="form-group col-md-2 mt-4">              
-                <button type="submit" className="btn btn-success mt-2" style={btnStyle} onClick={handleSubmit}>Submit</button>               
-                </div>
+                <button type="submit" className="submit-btn btn btn-success mt-2" style={btnStyle} onClick={handleSubmit}>Submit</button>               
               </div>
         </div>
       </div>
@@ -209,6 +206,8 @@ function SearchBox() {
       
     </div>
       </Container>
+      
+
       {pinnedArray.length && !result && !results
        ?
         <div className="arrow">
@@ -220,8 +219,6 @@ function SearchBox() {
        : 
         null
       }
-      </div>
-      
         
     </div>
     <div ref={ref}></div>
@@ -263,7 +260,7 @@ const divStyle = {
   paddingBottom: '4rem'
 };
 const btnStyle = {
-  backgroundColor: '#198754'
+  backgroundColor: '#198754',
 }
 
 export default SearchBox;

@@ -13,8 +13,9 @@ export function Home() {
         </div>
         <div className="contact-us-section">
             <Contactpage />
-            <Footer />
+            
         </div>
+        <Footer />
         </>
     )
 }
