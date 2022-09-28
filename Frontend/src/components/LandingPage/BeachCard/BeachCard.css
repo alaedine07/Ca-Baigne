@@ -65,7 +65,7 @@
   .image-button {
       position: absolute;
       top: 5.5rem;
-      left: 37%;
+      left: 30%;
       width: 150px;
       padding: 10px 20px;
       text-align: center;
@@ -79,7 +79,7 @@
   .image-button a {
       color: white;
   }
-  
+
   .overflow:hover .image-button {
       opacity: 1 !important;
       z-index: 1;
