@@ -82,6 +82,10 @@ function BeachResults(props) {
               loop
               className='myswiper'
               breakpoints={{
+                300: {
+                  // width: 450,
+                  slidesPerView: 1,
+                },
                 400: {
                   // width: 450,
                   slidesPerView: 1,
