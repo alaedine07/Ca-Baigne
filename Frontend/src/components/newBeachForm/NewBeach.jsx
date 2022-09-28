@@ -17,7 +17,9 @@ export function NewBeachForm() {
     const [file, setFile] = useState();
     const [fileName, setFileName] = useState("");
 
-    const amenities = ['Parking', 'Hiking Spot', 'Volleyball field',];
+    const amenities = ['Parking', 'Hiking Spot', 'Volleyball field',
+    'Easy access', 'Free entrance', 'Very crowded',
+    'Crowded in season', 'Soccer field', 'Restaurants & Cafes'];
 
     function addOrRemove(item) {
         const newAmenities = [...amenitie];
@@ -109,14 +111,17 @@ export function NewBeachForm() {
                             </div>
                             <div className="newbeach-section-two">
                                 <label className="newbeach-label">Select amenities</label>
-                                    {amenities.map((item, id) => {
-                                        return <>
-                                        <div className="checkBox-options" key={id}>
-                                            <input type="checkbox" className="MyCheckBox" onClick={() => addOrRemove(item)}/>
-                                            <label htmlFor="checkBoxDescription" className="checkBoxDescription" > {item} </label>
-                                        </div>
-                                        </>
-                                    })}
+                                    <div className="amenities-section">
+                                        {amenities.map((item, id) => {
+                                            return <>
+                                            <div className="checkBox-options" key={id}>
+                                                <input type="checkbox" className="MyCheckBox" onClick={() => addOrRemove(item)}/>
+                                                <label htmlFor="checkBoxDescription" className="checkBoxDescription" > {item} </label>
+                                            </div>
+                                            </>
+                                        })}
+                                    </div>
+                                    
                                 <label className="newbeach-label">Add image</label>
                                 <input type="file" onChange={saveFile}/>
                                 <button className="newbeach-button" onClick={uploadData}>Upload</button>

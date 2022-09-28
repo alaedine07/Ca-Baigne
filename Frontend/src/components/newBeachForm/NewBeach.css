@@ -1,4 +1,3 @@
-
 .newbeach-page {
     background: url('../../Assets/Images/background-image.jpg');
     background-position: center;
@@ -92,6 +91,7 @@
 
 .checkBox-options {
     display: flex;
+
     gap: 1rem;
 
 }
@@ -114,4 +114,10 @@
     display: flex;
     flex-direction: column;
     width: 50%;
+}
+
+.amenities-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
 }

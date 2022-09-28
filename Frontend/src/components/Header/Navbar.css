@@ -10,24 +10,23 @@ i {
 }
 
 .navbar {
-  align-items: flex-start !important;
-  padding-top: 5px !important;
   gap: 1rem;
+
 }
 
 .navbar-logo {
-  position: relative;
-  top: -35px;
-  padding: 0;
-  color: rgb(255, 255, 255);
-  pointer-events: none;
-  margin: 0;
+  padding-left: 0.5rem;
+  width: 5%;
 }
 
 .logo-image {
-  width: 70%;
+  width: 100%;
 }
 
+.navbar-nav {
+  display: flex;
+  align-items: center;
+}
 
 .navbar-mainbg {
   
@@ -111,4 +110,10 @@ nav.fill .navbar-nav .nav-item .nav-link:after {
 }
 .navbar .navbar-nav .nav-item .nav-link:hover:after {
   width: 100%;
+}
+
+@media screen and (max-width: 767px) {
+  .navbar-logo {
+    width: 15%;
+  }
 }

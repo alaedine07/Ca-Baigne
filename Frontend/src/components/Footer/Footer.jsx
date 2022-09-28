@@ -1,22 +1,16 @@
 import React from 'react';
 import { CDBIcon } from 'cdbreact';
+import logo from '../../Assets/Images/logo.png'
 import './Footer.css'
 
 const Footer = () => {
   return (
     <footer>
       <div className='footer-container'>
-        <div>
-          <a href="/" className="d-flex align-items-center pl-5 text-dark">
-            <img
-            className='footer-logo'
-              alt="logo"
-              src={require('../../Assets/Images/logo.png')}
-              />
-              
-          </a>
-        </div>
-        <div>
+      <div className="footer-logo" to="/" >
+        <img className='logo-image' src={logo}></img>
+      </div>
+        <div className='footer-rights'>
           <small>&copy; Ça baigne, 2022. All rights reserved.</small>
         </div>
         <div className='footer-icons'>

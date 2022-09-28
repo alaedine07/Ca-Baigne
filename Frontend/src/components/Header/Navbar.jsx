@@ -104,8 +104,9 @@ const Navbar = (props) => {
 else {
   return (
     <nav className="navbar navbar-expand-lg navbar-mainbg">
-    <NavLink className="navbar-brand navbar-logo" to="/">
-      </NavLink>
+      <div className="navbar-brand navbar-logo" to="/" >
+        <img className='logo-image' src={logo}></img>
+      </div>
       <button 
         className="navbar-toggler"
         onClick={ function(){

@@ -10,12 +10,13 @@
     height: 100% !important;
     display: flex;
     justify-content: center;
-    height: 89.9vh !important;
+    height: 88.9vh !important;
 }
 
 .profile-form {
     display: flex !important;
     flex-direction: column !important;
+    align-items: center;
     gap: 5px !important;
     max-width: 100%;
     margin: auto;
@@ -51,8 +52,8 @@
 .update-container {
     margin-top: 2rem;
     padding-bottom: 8.8rem;
-    width: 35rem;
-    height: 32rem;
+    width: 32rem;
+    height: 29rem;
 	box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.541); 
 	border-radius: 5px;
 	position: relative;

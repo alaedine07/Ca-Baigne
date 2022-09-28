@@ -68,7 +68,7 @@ export function SignUpForm() {
             Fill this form to create an account
         </div>
 
-        <div className="mt-1">
+        <div className="mt-4">
             <form action="#">
             <div className="flex flex-col mb-3">
                 <label
@@ -209,6 +209,7 @@ export function SignUpForm() {
                 type="submit"
                 onClick={createUser}
                 className="
+                signup-button
                     flex
                     mt-2
                     items-center
@@ -265,7 +266,7 @@ export function SignUpForm() {
             >Already have an account?
             <a
               href="/login"
-              className="text-s ml-2 text-blue-500 font-semibold"
+              className=" login-text text-s ml-2 text-blue-500 font-semibold"
               >Login now</a
             >
             </span>
