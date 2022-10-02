@@ -33,6 +33,9 @@
   .f {
       width: 100%;
   }
+  .fav {
+      width: 40vw;
+  }
   .pin {
       position: absolute;
       right: 15px;
