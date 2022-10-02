@@ -81,7 +81,7 @@ function BeachCard(props) {
 
   return (
     <>
-    <div  className='f p-5' >
+    <div  className='fav p-5' >
       <div className="beach-card card bg-dark text-white" >
         {checkLogin() && 
         <>
